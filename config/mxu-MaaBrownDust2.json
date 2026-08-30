@@ -100,9 +100,9 @@
         }
       ],
       "preAction": {
-        "enabled": false,
-        "program": "C:\\Neowiz\\Browndust2\\Browndust2_10000001\\BrownDust II.exe",
-        "args": "",
+        "enabled": true,
+        "program": "cmd",
+        "args": "/c start browndust2:games/10000002?usn=0",
         "waitForExit": false
       }
     }
