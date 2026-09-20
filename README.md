@@ -108,9 +108,10 @@ _✨ 《棕色尘埃2》PC 端日常自动化小助手 ✨_
 
 ### 关于 Mirror酱（MirrorChyan）
 
-**本项目已正式接入 [Mirror酱](https://mirrorchyan.com)，资源 ID：`Maa-Assistant-Browndust2`。**
+**本项目已正式接入 [Mirror酱](https://mirrorchyan.com/zh/projects?rid=Maa-Assistant-Browndust2)，资源 ID：`Maa-Assistant-Browndust2`。**
 
 - 软件内置更新：MXU「设置 → 更新」分区已启用。在 Mirror酱 官网为本项目购买 CDK 后填入其中，即可使用 Mirror酱的高速下载与自动更新。
+- 🚀 **Mirror酱 项目页**：<https://mirrorchyan.com/zh/projects?rid=Maa-Assistant-Browndust2> —— 已购 CDK 的用户可在此页快速下载 / 更新。
 - 双渠道并存：**不购买 CDK 也完全不影响使用** —— [GitHub Releases](https://github.com/alkaidjin/Maa-Assistant-Browndust2/releases) 永久免费下载，`launcher.bat` / `BD2MAA-Updater.ps1` 的版本检测与自动更新照常工作，两条渠道互不冲突。
 - ⚠️ **购买 CDK 时认准资源 ID `Maa-Assistant-Browndust2`**：Mirror酱上另有一个与本项目**名称相似、但毫无关系**的第三方项目 —— 名称 `MaaBD2`、资源 ID `MFABD2`、仓库 [sunyink/MFABD2](https://github.com/sunyink/MFABD2)。
   它**不是本项目**（本项目仓库为 `alkaidjin/Maa-Assistant-Browndust2`），为其购买的 CDK 与本项目无关、也无法用于本项目。
