@@ -28,6 +28,12 @@
 #   ... -NoBundle         skip the git bundle (~150 MB)
 #   ... -Keep 3           how many older backups to retain (default 5)
 #
+# Cloud upload: this script never talks to a network drive provider itself.
+# Point -OutDir (or the MABD2_BACKUP_DIR environment variable, which the
+# double-click entry sets) at a folder that the Quark client auto-backs up,
+# and the client uploads every new timestamp folder on its own -- this script
+# never touches your credentials.
+#
 # OutDir MUST live outside the project folder: the release packager walks the
 # whole working tree, so a backup dropped inside it would end up in the user
 # zip. The script refuses to run in that case.
@@ -59,6 +65,19 @@ if (-not (Test-Path -LiteralPath (Join-Path $rootFull 'interface.json'))) {
     exit 1
 }
 
+# Resolve the output folder. Order matters:
+#   1. -OutDir parameter (the scheduled tasks pass it explicitly)
+#   2. MABD2_BACKUP_DIR in the process environment (inherited from a fresh shell)
+#   3. MABD2_BACKUP_DIR in HKCU:\Environment -- needed because Explorer does not
+#      pick up a newly set user variable until it restarts, and a double-clicked
+#      .bat is spawned by Explorer. Reading the registry directly makes the
+#      double-click entry trustworthy.
+#   4. default: a folder next to the project
+if (-not $OutDir) { $OutDir = $env:MABD2_BACKUP_DIR }
+if (-not $OutDir) {
+    $reg = Get-ItemProperty -Path 'HKCU:\Environment' -Name 'MABD2_BACKUP_DIR' -ErrorAction SilentlyContinue
+    if ($reg) { $OutDir = $reg.MABD2_BACKUP_DIR }
+}
 if (-not $OutDir) { $OutDir = Join-Path (Split-Path -Parent $rootFull) 'MABd2-Maintainer-Backup' }
 $outFull = [System.IO.Path]::GetFullPath($OutDir)
 

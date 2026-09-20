@@ -69,6 +69,7 @@ EXCLUDE_FILES = {
     '打包发布包.bat',
     '备份维护版.bat',
     'tools/backup_maintainer.ps1',
+    'tools/install_backup_task.ps1',
     # ---- v26.09.8 起：非维护者不需要的文件（用户侧无用，且 start.py 写死了作者本机游戏路径）----
     'agent/start.bat', 'agent/start.py',   # agent 开发辅助脚本（写死 C:\Neowiz\... 本机游戏路径）
     'tools/make_icon.py',                  # 生成 mxu.ico / mxu_icon.png 的开发脚本
