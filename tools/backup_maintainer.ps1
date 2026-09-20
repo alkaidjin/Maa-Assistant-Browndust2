@@ -94,8 +94,14 @@ if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
     exit 1
 }
 
+# A full run and a local-only run are counted separately at retention time, so
+# the folder name carries the kind. Without it, six days of tiny local folders
+# would push the weekly full backup out of a shared keep window and delete it.
+$kind = 'full'
+if ($NoBundle -and $NoRuntime) { $kind = 'local' }
+
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-$dest  = Join-Path $outFull $stamp
+$dest  = Join-Path $outFull "$kind-$stamp"
 New-Item -ItemType Directory -Path $dest -Force | Out-Null
 
 Write-Host "[i] project : $rootFull"
@@ -222,14 +228,31 @@ $manifestPath = Join-Path $dest 'README-restore.txt'
 $manifest | Out-File -FilePath $manifestPath -Encoding ascii
 
 # ---- retention: drop older backups we created ourselves -------------------
-$stale = @(Get-ChildItem -LiteralPath $outFull -Directory -ErrorAction SilentlyContinue |
-           Where-Object { $_.Name -match '^\d{8}-\d{6}$' } |
-           Sort-Object Name -Descending | Select-Object -Skip $Keep)
-foreach ($d in $stale) {
-    Remove-Item -LiteralPath $d.FullName -Recurse -Force -ErrorAction SilentlyContinue
+# Counted per kind. Anything that is not '-' + <stamp> is left alone, so a
+# folder a human put there is never swept away by an unattended run.
+function Get-BackupFolders {
+    param([string]$Dir, [string]$Kind)
+    $found = New-Object System.Collections.Generic.List[object]
+    foreach ($d in (Get-ChildItem -LiteralPath $Dir -Directory -ErrorAction SilentlyContinue)) {
+        $key = $null
+        if ($d.Name -match '^(full|local)-(\d{8}-\d{6})$') {
+            if ($Matches[1] -eq $Kind) { $key = $Matches[2] }
+        } elseif ($d.Name -match '^(\d{8}-\d{6})$') {
+            # folders from before the full-/local- prefix: always full backups
+            if ($Kind -eq 'full') { $key = $Matches[1] }
+        }
+        if ($key) { $found.Add([pscustomobject]@{ Path = $d.FullName; Key = $key }) }
+    }
+    return $found
+}
+
+$mine  = @(Get-BackupFolders -Dir $outFull -Kind $kind)
+$stale = @($mine | Sort-Object Key -Descending | Select-Object -Skip $Keep)
+foreach ($s in $stale) {
+    Remove-Item -LiteralPath $s.Path -Recurse -Force -ErrorAction SilentlyContinue
 }
 if ($stale.Count -gt 0) {
-    Write-Host "[i] removed $($stale.Count) older backup folder(s), kept newest $Keep"
+    Write-Host "[i] removed $($stale.Count) older '$kind' backup folder(s), kept newest $Keep"
 }
 
 # ---- summary -------------------------------------------------------------

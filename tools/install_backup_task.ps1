@@ -7,6 +7,12 @@
 #   MABd2-Backup-Daily     every day   local-only state (~1 MB, seconds)
 #   MABd2-Backup-Weekly    weekly      full run: + git bundle + mxu.exe/OCR
 #
+# Both run hidden (no console window) and at below-normal priority: they fire
+# at 07:00, when the game script is already driving the machine, so the backup
+# must yield CPU and disk to it. The two jobs are 30 minutes apart on purpose:
+# they share one settings object with MultipleInstances=IgnoreNew, so a trigger
+# collision would silently swallow the later one.
+#
 # Why Task Scheduler and not some app-level scheduler: a backup must not
 # depend on another program being open. Task Scheduler runs even when nothing
 # else is, and it runs as you -- so the Quark client, already running in your
@@ -15,7 +21,7 @@
 # Usage:
 #   powershell -NoProfile -ExecutionPolicy Bypass -File tools\install_backup_task.ps1
 #   ... -BackupDir "D:\QuarkAutoBackup\MABd2"   folder the Quark client backs up
-#   ... -DailyTime 21:30  -WeeklyDay Sunday -WeeklyTime 21:45
+#   ... -DailyTime 07:00  -WeeklyDay Sunday -WeeklyTime 07:30
 #   ... -Action Status      show whether the jobs exist and their last result
 #   ... -Action Uninstall   remove both jobs
 #
@@ -26,9 +32,9 @@ param(
     [ValidateSet('Install', 'Uninstall', 'Status')]
     [string]$Action = 'Install',
     [string]$BackupDir,
-    [string]$DailyTime = '20:00',
+    [string]$DailyTime = '07:00',
     [string]$WeeklyDay = 'Sunday',
-    [string]$WeeklyTime = '20:30',
+    [string]$WeeklyTime = '07:30',
     [int]$DailyKeep = 10,
     [int]$WeeklyKeep = 6,
     [string]$Root
@@ -74,7 +80,10 @@ if (-not (Test-Path -LiteralPath $ps1)) {
     exit 1
 }
 
-$base = "-NoProfile -ExecutionPolicy Bypass -File `"$ps1`""
+# -NonInteractive: no prompt may ever block an unattended run.
+# -WindowStyle Hidden: powershell.exe hides the console it creates, so nothing
+# flashes on screen at 07:00 while the game script is running.
+$base = "-NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$ps1`""
 if ($BackupDir) {
     $bd = [System.IO.Path]::GetFullPath($BackupDir)
     $base += " -OutDir `"$bd`""
@@ -83,8 +92,9 @@ if ($BackupDir) {
     Write-Host "[i] backup dir : default (project parent)\MABd2-Maintainer-Backup"
 }
 
+# Priority 5 = below normal: the backup yields to the game script.
 $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -MultipleInstances IgnoreNew `
-            -ExecutionTimeLimit (New-TimeSpan -Minutes 45) `
+            -ExecutionTimeLimit (New-TimeSpan -Minutes 45) -Priority 5 `
             -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
 
 $dailyAction  = New-ScheduledTaskAction -Execute 'powershell.exe' -WorkingDirectory $Root `
