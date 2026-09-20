@@ -52,11 +52,10 @@ updates/
 # local, machine-specific files
 *.lnk
 
-# 本机开发 / 调试辅助脚本（不入仓库，也不入发布包；与 tools/build_release_zip.py 的 EXCLUDE_FILES 对应）
-agent/start.bat
-agent/start.py
-tools/make_icon.py
-tools/apply_icon.ps1
-# 打包器的双击入口：写死「本机解释器候选路径」，只对作者这台机器有意义。
-# 工具本体 tools/build_release_zip.py 是入仓库的，任何维护者 clone 后都能直接 python 跑它。
-打包发布包.bat
+# 维护者自用工具（agent 辅助脚本、图标工具、打包器 / 备份器的双击入口）
+# 2026-09-20 起 **改为入库**：这些文件此前既不在仓库、也不在用户包，属于「本地一丢就
+# 彻底找不回」的真空区。它们含本机路径，只对作者这台机器有意义，但正因如此更需要版本
+# 备份 —— 仓库是 public，介意暴露本机路径时请自行取舍。
+# 注意：「进不进仓库」与「进不进用户包」是两套独立机制。入库后它们仍**不会**进发布包，
+# 由 tools/build_release_zip.py 的 EXCLUDE_FILES 负责排除。
+# 备份策略见 tools/backup_maintainer.ps1（双击「备份维护版.bat」）。

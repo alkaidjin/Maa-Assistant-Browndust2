@@ -64,8 +64,11 @@ EXCLUDE_DIRS  = {'.git', '.workbuddy', 'cache', 'config', 'debug', 'updates', '_
 # 按包内相对路径匹配
 EXCLUDE_FILES = {
     'MaaBd2.lnk', 'updater_cache.json', 'tools/build_release_zip.py',
-    # 打包器自身的双击入口：纯维护者工具，用户侧毫无用处（还会暴露本机解释器路径）
+    # 打包器 / 备份器的双击入口与本体：纯维护者工具，用户侧毫无用处
+    # （还会暴露本机解释器路径）。它们**入仓库**，但绝不进用户包。
     '打包发布包.bat',
+    '备份维护版.bat',
+    'tools/backup_maintainer.ps1',
     # ---- v26.09.8 起：非维护者不需要的文件（用户侧无用，且 start.py 写死了作者本机游戏路径）----
     'agent/start.bat', 'agent/start.py',   # agent 开发辅助脚本（写死 C:\Neowiz\... 本机游戏路径）
     'tools/make_icon.py',                  # 生成 mxu.ico / mxu_icon.png 的开发脚本
