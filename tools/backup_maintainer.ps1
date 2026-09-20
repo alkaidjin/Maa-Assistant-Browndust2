@@ -13,7 +13,7 @@
 # Produced per run, into  <OutDir>\<yyyyMMdd-HHmmss>\ :
 #   MABd2-repo-<stamp>.bundle     full git history, scalable/standalone clone
 #   MABd2-runtime-<stamp>.zip     mxu.exe + resource\model\ocr
-#   MABd2-local-<stamp>.zip       config\, .workbuddy\, cache\_gatetest, cache\bili_watch
+#   MABd2-local-<stamp>.zip       config\, .workbuddy\, cache\_gatetest, cache\old
 #   README-restore.txt            manifest + restore steps
 #
 # Restore on any machine:
@@ -195,7 +195,7 @@ if (-not $NoRuntime) {
 # ---- 3) local-only state -------------------------------------------------
 $step++
 $localItems = @()
-foreach ($rel in @('config', '.workbuddy', 'cache\_gatetest', 'cache\bili_watch', 'cache\old')) {
+foreach ($rel in @('config', '.workbuddy', 'cache\_gatetest', 'cache\old')) {
     $p = Join-Path $rootFull $rel
     if (Test-Path -LiteralPath $p) { $localItems += $p }
 }

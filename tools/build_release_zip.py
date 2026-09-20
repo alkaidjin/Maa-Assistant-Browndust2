@@ -54,10 +54,7 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EXCLUDE_DIRS  = {'.git', '.workbuddy', 'cache', 'config', 'debug', 'updates', '_stage',
                  # GitHub Actions 配置（PR#3 引入的 mirrorchyan_release*.yml）：只在仓库侧
                  # 生效，用户包里毫无用处，纯属冗余文件。
-                 '.github',
-                 # 维护者运维工具（B站评论区监控）：只服务于作者，用户侧无用，且会暴露作者的
-                 # 视频/账号信息。整目录排除，新增脚本无需再改这里。
-                 'bili_watch'}
+                 '.github'}
 # 注意：EXCLUDE_DIRS 是**按目录名**（不是按相对路径）匹配的 —— 任何层级下叫这些名字的
 # 目录都会被整体跳过。当前无副作用；但若将来在 resource/ 等目录下新建名为 config / cache /
 # debug 的**合法**子目录，会被静默吞掉、不进包。新增此类目录名时请先确认这里。
