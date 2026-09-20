@@ -8,6 +8,7 @@
     "icon": "misc/MaaEnd-Tiny.png",
     "github": "https://github.com/alkaidjin/Maa-Assistant-Browndust2",
     "mirrorchyan_rid": "Maa-Assistant-Browndust2",
+    "mirrorchyan_multiplatform": true,
     "languages": {
         "zh_cn": "misc/locales/zh_cn.json",
         "zh_tw": "misc/locales/zh_tw.json",
