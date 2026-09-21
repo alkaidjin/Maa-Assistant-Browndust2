@@ -6,12 +6,15 @@
 #   1. 软件开启时自动检测 GitHub Releases 是否有新版本。
 #   2. 发现新版本弹出选择对话框（含版本号与更新日志）。20 秒无操作自动跳过更新并进入软件，防止无人值守时卡在窗口。
 #   3. 用户选“一键更新”：前台显示下载进度 -> 下载 -> 自动覆盖旧版本。
-#      （更新时会保留用户的 config/ 配置：已有配置不覆盖，仅新增缺失的默认配置）
+#      （更新时会保留用户的 config/ 配置：已有配置不覆盖，仅新增缺失的默认配置；
+#        更新完还会按 retired_files.json 删掉旧版遗留的说明文档 / 教学视频）
 #   4. 用户选“暂不更新”、或已是最新、或检测失败：直接启动 mxu.exe。
 #
-# 启动时的“家务”（都在 Launch-Mxu 里，失败静默、不阻断启动）：
-#   自愈 launcher.bat 的编码 / 恢复 mxu.exe 图标 /
-#   重建 MaaBd2.lnk / 精简并清理 debug 日志。
+# 启动时的“家务”（全部失败静默、不阻断启动）：
+#   - 主流程一开始：清理旧版遗留的说明文档与教学视频（retired_files.json 清单，幂等，
+#     任何分支都会执行到；开发树存在 .git 时整体跳过）
+#   - Launch-Mxu 里：自愈 launcher.bat 的编码 / 恢复 mxu.exe 图标 /
+#     重建 MaaBd2.lnk / 精简并清理 debug 日志
 #
 # 用法：
 #   .\BD2MAA-Updater.ps1            # 正常启动（检测更新 -> 弹窗 -> 启动 mxu）
@@ -525,6 +528,50 @@ function Copy-Update($src, $dst, $cfgRef) {
     }
 }
 
+# ----------------------------------------------------------------------------
+# 清理「退休文件」：旧版随包派发、如今已改名 / 删除的说明文档与教学视频
+# ----------------------------------------------------------------------------
+# 动机：Copy-Update 只做「覆盖 + 新增」，从不删除。于是文档一旦改名（例：v26.09.7 的
+# 四张注意事项图 → 合并成 PDF；v26.09.11 的 PDF → DOCX、教学视频换名），老用户目录里
+# 就会新旧两份并存：既占体积，又让人不知道该看哪一份。
+# 清单由随包派发的 retired_files.json 驱动 —— 更新完成后读到的自然就是新版清单。
+# 安全边界（任何一条不满足就跳过该项）：
+#   * 只删清单里的**显式相对路径**；含 .. 或绝对路径一律跳过（防目录穿越）
+#   * 跳过受保护目录（config/，见 updater_config.json 的 protected_dirs）
+#   * 清单文件缺失 / 解析失败：静默跳过，绝不阻断启动
+#   * **存在 .git 的开发树整体跳过** —— 维护者本机的仓库里还有别的文件，
+#     不能让它在这儿误删东西（用户包内不含 .git，所以对用户端无影响）
+function Remove-RetiredFiles($base, $cfgRef) {
+    if (Test-Path (Join-Path $base '.git')) { return }
+
+    $listFile = Join-Path $base 'retired_files.json'
+    if (-not (Test-Path $listFile)) { return }
+
+    try {
+        $j = Get-Content $listFile -Raw -Encoding UTF8 | ConvertFrom-Json
+    } catch { return }
+    if (-not $j -or -not $j.files) { return }
+
+    $protected = $cfgRef['protected_dirs']
+    foreach ($item in $j.files) {
+        $rel = ([string]$item).Replace('\', '/').TrimStart('/')
+        if (-not $rel -or $rel.Contains('..')) { continue }
+
+        $low = $rel.ToLower()
+        $skip = $false
+        foreach ($p in $protected) {
+            $pl = $p.Replace('\', '/').TrimEnd('/').ToLower()
+            if ($low -eq $pl -or $low.StartsWith("$pl/")) { $skip = $true; break }
+        }
+        if ($skip) { continue }
+
+        $full = Join-Path $base ($rel.Replace('/', '\'))
+        if (Test-Path -LiteralPath $full -PathType Leaf) {
+            Remove-Item -LiteralPath $full -Force -ErrorAction SilentlyContinue
+        }
+    }
+}
+
 function ReInject-XLaunch($base) {
     $p = Join-Path $base 'interface.json'
     if (-not (Test-Path $p)) { return }
@@ -711,6 +758,9 @@ function Launch-Mxu {
 try {
     $cache = Read-Cache
     $current = Read-CurrentVersion
+    # 清理旧版遗留的说明文档 / 教学视频（幂等、静默）。放在主流程最前面：
+    # 之后的每个分支（-Test / 无网络 / 不更新 / 更新）都能覆盖到。
+    Remove-RetiredFiles $BASE $cfg
 
     $iv = [timespan]::FromHours($cfg['check_interval_hours']).Ticks
     $needCheck = $Force -or $Demo -or $Test -or ((Get-Date).Ticks - $cache.last_check_ts) -gt $iv
@@ -791,6 +841,9 @@ try {
         $srcRoot = Find-ProjectRoot $tmp
         Copy-Update $srcRoot $BASE $cfg
         ReInject-XLaunch $BASE
+        # 更新完成后立刻清理旧版遗留文件：retired_files.json 也刚被覆盖成新版，
+        # 所以这一步用的就是本次发布的最新清单（清单之外的旧文件不动）。
+        Remove-RetiredFiles $BASE $cfg
     } catch {
         # 注意：$dest 会在 finally 里被清掉，所以这里不要再让用户"手动解压该文件"。
         [System.Windows.Forms.MessageBox]::Show(

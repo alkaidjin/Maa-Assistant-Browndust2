@@ -75,19 +75,31 @@ EXCLUDE_FILES = {
     # 所以这两项会连同嵌套的 git 元数据一起排除（如 resource/model/.gitignore，
     # 其内容只是 "ocr"，与根 .gitignore:29 重复）。这是预期行为 —— 用户包里不该有 git 元数据。
     '.gitattributes', '.gitignore',
-    # 注意事项 1/2/3/4 已合并为「重要！注意事项！！使用前必看！！！.pdf」（v26.09.7 起）；
-    # 旧文件名保留在排除表，避免 collect() 把它们重复收进包
-    '注意事项1-----使用前必看！！！.txt',
-    '注意事项2-----任务流程推荐排序.png',
-    '注意事项3——地图吸收召集的天赋技能配置图示.png',
-    '注意事项4——游戏操作设置中关于方向键的设置！！.png',
-    # v26.09.11 起：注意事项文档改由「重要！注意事项！！使用前必看！！！.docx」随包派发
-    # （原作者用 WPS 直接编辑，用户端也能直接打开/复制文字）。.pdf 只留在项目里作为
-    # 上游源件，不再进包 —— 两者同内容，同时派发等于让包白胖 ~4 MB。
-    # ⚠️ 改这里必须同步 REQUIRED_FILES（上面）与 README 里的相对链接。
-    '重要！注意事项！！使用前必看！！！.pdf',
+    # ---- v26.09.11 起：旧版遗留文件（改名 / 下架的老文档、老视频）不再在这里逐条维护 ----
+    # 它们全部由 retired_files.json 兜底排除（见下方 `EXCLUDE_FILES |= RETIRED_FILES`）：
+    # 那份清单与启动器的「清理旧版遗留文件」逻辑**同源**，一处维护、两边生效。
+    # 历史条目（现已由清单覆盖）：注意事项1/2/3/4 四件套、旧 PDF、旧 DOCX、旧教学视频、
+    # github地址.txt。新增退役文件时只改 retired_files.json，别再往这里抄名字。
 }
 EXCLUDE_EXT   = {'.lnk', '.tmp', '.pyc'}
+
+
+def load_retired(base):
+    """读 retired_files.json → 旧版遗留文件名集合（文件缺失 / 损坏时返回空集）。
+
+    清单里的都是「以前发给过用户、现在不再派发」的文件。它们一旦被恢复、或在本机留了
+    副本，重新收进包就是双重错误：既白占体积，又会在用户端被启动器按同一份清单立刻删掉。
+    与启动器同源，避免「排除表 / 清理清单」两处手工维护走偏。"""
+    try:
+        with open(os.path.join(base, 'retired_files.json'), 'rb') as f:
+            data = json.loads(f.read().decode('utf-8-sig'))
+        return {str(x).replace('\\', '/') for x in (data.get('files') or [])}
+    except Exception:
+        return set()
+
+
+RETIRED_FILES = load_retired(BASE)
+EXCLUDE_FILES |= RETIRED_FILES
 
 # ---- 必备清单（verify 逐项检查，缺一项即打包失败）----
 # 原则：凡是「启动器运行时硬依赖」或「MXU 直接按路径读取」的文件，都必须在这里。
@@ -96,10 +108,13 @@ REQUIRED_FILES = [
     # 基础入口 / 版本 / 授权
     'interface.json', 'updater_config.json', 'version.json', 'launcher.bat',
     'BD2MAA-Updater.ps1', 'mxu.exe', 'mxu.ico', 'mxu_icon.png', 'LICENSE', 'README.md',
-    '更新功能说明.md', '重要！注意事项！！使用前必看！！！.docx',
-    # v26.09.7 起：Verlog + 教学视频也跟着入包（用户私维护，不要 gitignore）
+    '更新功能说明.md', '#请务必打开此文档查阅#含使用方式以及常见问题解答.docx',
+    # 旧版遗留文件清理清单：启动器按它删掉改名 / 下架的老文档与老视频（v26.09.11 起）
+    'retired_files.json',
+    # v26.09.7 起：Verlog + 教学视频也跟着入包（用户私维护，不要 gitignore）；
+    # v26.09.11 起文档与视频一并改名（带 `#…#` 前后缀，用户打开软件目录就能注意到）
     'Verlog.xlsx',
-    '重要教学！！使用软件打开游戏并设定游戏分辨率教程 .mp4',
+    '#使用本软件自动打开游戏并设定游戏分辨率的教学视频# .mp4',
     # LGPL-3.0 履约：MaaFramework 的许可证全文必须随包派发（源自上游 release zip 的 LICENSE.md）
     'maafw/LICENSE.md',
 
@@ -332,6 +347,66 @@ def check_bat_crlf(base):
             % (rel, why))
 
 
+def check_retired(base):
+    """校验 retired_files.json —— 「旧版遗留文件」的清理清单。
+
+    启动器（BD2MAA-Updater.ps1 的 Remove-RetiredFiles）每次启动、以及每次自动更新完成后
+    都会按这份清单从用户目录里删文件。所以**清单写错 = 用户磁盘被删错**，四条铁律：
+
+      [R1] 清单里的路径**不得存在于磁盘** —— 否则就是「一边派发、一边删除」，用户更新完
+           会立刻少一个文件。（它们本来就不会进包：`EXCLUDE_FILES |= RETIRED_FILES`
+           已把整份清单兜底排除，所以 [R1] 检查的是磁盘，而不是包内。）
+      [R2] 必须能在 git 历史里检出「曾经被添加过」—— 挡住拼错文件名。
+           拼错的路径 R1 会因为「文件不存在」而误判通过，只有历史能证伪。
+      [R3] 若仍被 git 跟踪（HEAD 里还有），给个提醒：仓库里留着这份文件，别人 clone 后
+           会带着它；维护者本机则由启动器的「存在 .git 就跳过」逻辑兜住，不会被误删。
+    """
+    p = os.path.join(base, 'retired_files.json')
+    if not os.path.exists(p):
+        log('[W] retired_files.json 不存在 —— 启动器没法清理旧版遗留的说明文档 / 视频；发布前补上')
+        return []
+    try:
+        with open(p, 'rb') as f:
+            data = json.loads(f.read().decode('utf-8-sig'))
+    except Exception as e:
+        log('[!] retired_files.json 解析失败：%s' % e)
+        return ['retired_files.json 解析失败']
+
+    rels = [str(x).replace('\\', '/') for x in (data.get('files') or [])]
+    shipped = {r for _, r in collect(base)}
+    problems = []
+    log('  retired_files.json：%d 项（启动器会从用户目录里删掉这些）' % len(rels))
+    for rel in rels:
+        why = []
+        if os.path.exists(os.path.join(base, rel)):
+            why.append('磁盘上仍存在 → 会一边派发一边删除')
+        if rel in shipped:
+            why.append('仍在打包清单里')
+        rc, out = _git(base, 'log', '--all', '--diff-filter=A', '--format=%h', '--', rel)
+        if rc != 0 or not out.strip():
+            why.append('git 历史里查不到 → 疑似拼错文件名')
+        rc2, out2 = _git(base, 'ls-files', '--error-unmatch', '--', rel)
+        if rc2 == 0:
+            log('    [W] %s：仓库里仍跟踪着这份文件（维护者本机由启动器的 .git 判断跳过；'
+                '别人 clone 后会带着它）' % rel)
+        if why:
+            problems.append((rel, '；'.join(why)))
+            log('    [!] %s：%s' % (rel, '；'.join(why)))
+        else:
+            log('    OK  %s' % rel)
+    return problems
+
+
+def _git(base, *args):
+    """跑一条只读 git 命令，返回 (exitcode, stdout)。git 不存在时返回 (1, '')。"""
+    try:
+        r = subprocess.run(['git', '-C', base] + list(args),
+                           stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        return r.returncode, r.stdout.decode('utf-8', 'replace')
+    except Exception:
+        return 1, ''
+
+
 def prompt_version(current, head_v):
     """交互式询问版本号（仅在 stdin 是 TTY 时调用）。
        无效输入会循环追问；空回车返回 None（视为取消）。"""
@@ -461,6 +536,22 @@ def verify(path, version):
         if leaked:
             ok = False
 
+        # [V9] 退休清单里的旧文件不得出现在包内 —— 否则用户更新完立刻被启动器删掉，
+        # 等于白占一次下载体积（同时也是 check_retired [R1] 的产物侧复核）。
+        retired, hit = [], []
+        if 'retired_files.json' in names:
+            try:
+                retired = [str(x).replace('\\', '/') for x in
+                           (json.loads(z.read('retired_files.json').decode('utf-8-sig'))
+                            .get('files') or [])]
+            except Exception as e:
+                log('[V9] retired_files.json 读不出来：%s' % e)
+                ok = False
+            hit = [r for r in retired if r in names]
+        log('[V9] 退休清单（%d 项）撞车 = %s' % (len(retired), hit if hit else '无'))
+        if hit:
+            ok = False
+
         nonascii = [x for x in names if any(ord(c) > 127 for c in x)]
         bad_flag = [x for x in nonascii if not (z.getinfo(x).flag_bits & 0x800)]
         log('[V6] 中文名条目 = %d，缺 UTF-8 标志位 = %s'
@@ -544,6 +635,7 @@ def main():
     check_version_json(BASE)
     check_verlog(BASE, version)
     check_bat_crlf(BASE)
+    check_retired(BASE)
 
     if args.dry_run:
         log('[dry-run] 已打印计划，未执行任何写入')
