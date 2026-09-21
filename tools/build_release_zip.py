@@ -81,6 +81,11 @@ EXCLUDE_FILES = {
     '注意事项2-----任务流程推荐排序.png',
     '注意事项3——地图吸收召集的天赋技能配置图示.png',
     '注意事项4——游戏操作设置中关于方向键的设置！！.png',
+    # v26.09.11 起：注意事项文档改由「重要！注意事项！！使用前必看！！！.docx」随包派发
+    # （原作者用 WPS 直接编辑，用户端也能直接打开/复制文字）。.pdf 只留在项目里作为
+    # 上游源件，不再进包 —— 两者同内容，同时派发等于让包白胖 ~4 MB。
+    # ⚠️ 改这里必须同步 REQUIRED_FILES（上面）与 README 里的相对链接。
+    '重要！注意事项！！使用前必看！！！.pdf',
 }
 EXCLUDE_EXT   = {'.lnk', '.tmp', '.pyc'}
 
@@ -91,7 +96,7 @@ REQUIRED_FILES = [
     # 基础入口 / 版本 / 授权
     'interface.json', 'updater_config.json', 'version.json', 'launcher.bat',
     'BD2MAA-Updater.ps1', 'mxu.exe', 'mxu.ico', 'mxu_icon.png', 'LICENSE', 'README.md',
-    '更新功能说明.md', '重要！注意事项！！使用前必看！！！.pdf',
+    '更新功能说明.md', '重要！注意事项！！使用前必看！！！.docx',
     # v26.09.7 起：Verlog + 教学视频也跟着入包（用户私维护，不要 gitignore）
     'Verlog.xlsx',
     '重要教学！！使用软件打开游戏并设定游戏分辨率教程 .mp4',
