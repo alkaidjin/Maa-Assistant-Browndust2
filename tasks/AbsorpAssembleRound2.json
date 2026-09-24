@@ -1,0 +1,107 @@
+{
+    "task": [
+        {
+            "name": "资源吸收和召集次轮",
+            "label": "次轮资源吸收和召集",
+            "entry": "AbsorpAssembleRound2Schedule",
+            "description": "资源吸收和召集的次轮 — 剧情卡带S1-5、S15及C4的吸收、召集和压制奖励",
+            "controller": [
+                "Win32",
+                "Win32-Window",
+                "Win32-Front"
+            ],
+            "option": [
+                "AbsorpAssembleRound2Schedule"
+            ]
+        }
+    ],
+    "option": {
+        "AbsorpAssembleRound2Schedule": {
+            "type": "checkbox",
+            "label": "执行周期(游戏时间)",
+            "description": "勾选这个任务要在哪几天执行（可多选），默认周二。\n⚠️ 必须与「首轮资源吸收和召集」错开：不要和它勾同一天（它默认周一）。框架不做跨任务校验，同一天只会真的跑两遍。",
+            "default_case": [
+                "AbsorpAssembleRound2ScheduleTuesday"
+            ],
+            "cases": [
+                {
+                    "name": "AbsorpAssembleRound2ScheduleMonday",
+                    "label": "周一",
+                    "pipeline_override": {
+                        "AbsorpAssembleRound2ScheduleEnabled": {
+                            "attach": {
+                                "monday": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "AbsorpAssembleRound2ScheduleTuesday",
+                    "label": "周二",
+                    "pipeline_override": {
+                        "AbsorpAssembleRound2ScheduleEnabled": {
+                            "attach": {
+                                "tuesday": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "AbsorpAssembleRound2ScheduleWednesday",
+                    "label": "周三",
+                    "pipeline_override": {
+                        "AbsorpAssembleRound2ScheduleEnabled": {
+                            "attach": {
+                                "wednesday": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "AbsorpAssembleRound2ScheduleThursday",
+                    "label": "周四",
+                    "pipeline_override": {
+                        "AbsorpAssembleRound2ScheduleEnabled": {
+                            "attach": {
+                                "thursday": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "AbsorpAssembleRound2ScheduleFriday",
+                    "label": "周五",
+                    "pipeline_override": {
+                        "AbsorpAssembleRound2ScheduleEnabled": {
+                            "attach": {
+                                "friday": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "AbsorpAssembleRound2ScheduleSaturday",
+                    "label": "周六",
+                    "pipeline_override": {
+                        "AbsorpAssembleRound2ScheduleEnabled": {
+                            "attach": {
+                                "saturday": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "AbsorpAssembleRound2ScheduleSunday",
+                    "label": "周日",
+                    "pipeline_override": {
+                        "AbsorpAssembleRound2ScheduleEnabled": {
+                            "attach": {
+                                "sunday": true
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

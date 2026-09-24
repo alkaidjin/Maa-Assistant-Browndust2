@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1788948551852,
+            "lastSyncTime": 1790240473243,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\BD2MAA\\resource\\pipeline\\EvilCastle.json",
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\EvilCastle.json",
             "savedViewport": {
-                "x": -260,
-                "y": -5070,
-                "zoom": 1.32
+                "x": 138,
+                "y": -576,
+                "zoom": 0.33
             },
             "filename": "EvilCastle",
-            "version": "v1.9.3"
+            "version": "v1.10.1"
         }
     },
     "$__mpe_external_StartGame_EvilCastle": {
@@ -203,7 +203,9 @@
                     70,
                     40
                 ],
-                "template": "MAX",
+                "expected": [
+                    "MAX"
+                ],
                 "threshold": 0.6
             }
         },
@@ -289,12 +291,13 @@
         "repeat": 2,
         "repeat_delay": 1500,
         "next": [
-            "MoveCastle"
+            "MoveCastle",
+            "SEARONEVENT_EC"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1581,
-                "y": 3996
+                "x": 1542,
+                "y": 3858
             }
         }
     },
@@ -431,8 +434,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1932,
-                "y": 3607
+                "x": 1974,
+                "y": 3408
             }
         }
     },
@@ -477,6 +480,38 @@
             }
         }
     },
+    "SEARONEVENT_EC": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    799,
+                    545,
+                    123,
+                    29
+                ],
+                "expected": [
+                    "奖励",
+                    "已发",
+                    "放至",
+                    "背包"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 2,
+        "next": [
+            "MoveCastle"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1837,
+                "y": 3994
+            }
+        }
+    },
     "StartCastle": {
         "next": [
             "EnterOperating_EC",
@@ -490,6 +525,7 @@
         }
     },
     "TowerChooseLevel": {
+        "timeout": 5000,
         "next": [
             "TowerLevel10",
             "TowerLevel9",
@@ -502,10 +538,13 @@
             "TowerLevel2",
             "TowerLevel1"
         ],
+        "on_error": [
+            "StartGame"
+        ],
         "$__mpe_code": {
             "position": {
-                "x": 1932,
-                "y": 1628
+                "x": 1159,
+                "y": 2505
             }
         }
     },

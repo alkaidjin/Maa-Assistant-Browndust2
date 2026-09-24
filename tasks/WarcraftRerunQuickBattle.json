@@ -1,0 +1,16 @@
+{
+    "task": [
+        {
+            "name": "回归赛季魔兽快速战斗",
+            "label": "回归赛季魔兽快速战斗",
+            "entry": "StartWarcraftRerunQuickBattle",
+            "description": "魔兽追踪者「回归赛季（Rerun Season）」的快速战斗",
+            "controller": [
+                "Win32",
+                "Win32-Window",
+                "Win32-Front"
+            ]
+        }
+    ],
+    "option": {}
+}

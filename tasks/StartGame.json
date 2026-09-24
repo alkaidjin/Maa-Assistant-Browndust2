@@ -4,7 +4,7 @@
             "name": "进入游戏",
             "label": "进入游戏-必选",
             "entry": "StartGame",
-            "description": "推荐无条件开启并前置此任务进入游戏"
+            "description": "必须勾选并前置此任务"
         }
     ],
     "option": {}

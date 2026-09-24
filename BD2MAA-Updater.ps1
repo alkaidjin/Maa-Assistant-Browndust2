@@ -8,7 +8,16 @@
 #   3. 用户选“一键更新”：前台显示下载进度 -> 下载 -> 自动覆盖旧版本。
 #      （更新时会保留用户的 config/ 配置：已有配置不覆盖，仅新增缺失的默认配置；
 #        更新完还会按 retired_files.json 删掉旧版遗留的说明文档 / 教学视频）
+#      更新全程有三道校验，任何一道不过都不会说“更新完成”：
+#        [装前] 解压出来的包内 interface.json 版本号必须等于 release 的 tag，且必须含 mxu.exe；
+#        [装中] 逐文件重试 3 次；失败的**具体文件名**会被列出来（不再是一个笼统的报错）；
+#        [装后] 复核磁盘上的 interface.json 版本号 == tag，且关键文件都在。
+#      另外：更新前若 mxu.exe / go-service.exe 还在运行，会先提示关闭它们
+#      （被占用的文件覆盖会失败，那正是“更新完版本号却没变/装了一半”的根因）。
 #   4. 用户选“暂不更新”、或已是最新、或检测失败：直接启动 mxu.exe。
+#
+# 最新版本的取法（v26.09.11 起）：先取 /releases/latest；若它还没有可用的 .zip
+#   （刚建 release、资产还在上传），退回到最近若干 release 里“版本最高且有可用 zip”的那个。
 #
 # 启动时的“家务”（全部失败静默、不阻断启动）：
 #   - 主流程一开始：清理旧版遗留的说明文档与教学视频（retired_files.json 清单，幂等，
@@ -21,12 +30,14 @@
 #   .\BD2MAA-Updater.ps1 -Force     # 忽略缓存，强制重新检测
 #   .\BD2MAA-Updater.ps1 -Demo      # 演示弹窗（即使已最新也弹）
 #   .\BD2MAA-Updater.ps1 -Test      # 仅打印信息，不弹窗、不启动、不下载
+#   .\BD2MAA-Updater.ps1 -Repair    # 修复模式：不管版本是否相同，重新下载最新包并覆盖安装
 # =============================================================================
 
 param(
     [switch]$Demo,
     [switch]$Force,
-    [switch]$Test
+    [switch]$Test,
+    [switch]$Repair
 )
 
 Add-Type -AssemblyName System.Windows.Forms
@@ -174,6 +185,34 @@ function Select-Asset($assets, $cfgRef) {
     $sorted = @($cands | Sort-Object -Descending score)
     if ($sorted.Count -gt 0) { return $sorted[0].asset }
     return $null
+}
+
+function Get-ReleaseList($repo, $count = 15) {
+    $url = "https://api.github.com/repos/$repo/releases?per_page=$count"
+    return Invoke-RestMethod -Uri $url `
+        -Headers @{ 'User-Agent' = 'BD2MAA-Updater'; 'Accept' = 'application/vnd.github+json' } `
+        -TimeoutSec 15
+}
+
+function Select-NewestReleaseWithAsset($repo, $cfgRef, $tryLatest) {
+    # 返回 @{ release; asset } —— 保证 asset 一定存在，取不到则 $null。
+    # 先认 /releases/latest（通常这里就命中）；它没有可用 zip 时（刚建 release、资产还在上传，
+    # 实测 v26.09.4 差 25 分钟、v26.09.7 差 3.5 小时），退回到列表里版本最高且有可用 zip 的那个。
+    if ($tryLatest) {
+        $a = Select-Asset $tryLatest.assets $cfgRef
+        if ($a) { return @{ release = $tryLatest; asset = $a } }
+    }
+    try { $list = Get-ReleaseList $repo } catch { return $null }
+    $best = $null
+    foreach ($r in $list) {
+        if ($r.draft -or $r.prerelease) { continue }
+        $a = Select-Asset $r.assets $cfgRef
+        if (-not $a) { continue }
+        if (-not $best -or (Compare-Version $r.tag_name $best.release.tag_name) -gt 0) {
+            $best = @{ release = $r; asset = $a }
+        }
+    }
+    return $best
 }
 
 function Find-ProjectRoot($base) {
@@ -487,12 +526,16 @@ function Start-Download($urls, $dest, $totalBytes) {
 # 更新：解压 + 选择性覆盖（保留 config/ 已有文件）
 # ----------------------------------------------------------------------------
 function Copy-Update($src, $dst, $cfgRef) {
+    # 返回失败清单（相对路径数组）。**不再中途 throw** —— 一个文件被占用/被杀软拦，
+    # 其余文件照样覆盖完：这样不会再出现「更新到一半、版本号却没变」这种最难查的状态。
+    # 每个文件最多试 3 次（杀软/索引器常常只锁住几百毫秒）。
     $protected = $cfgRef['protected_dirs']
     # 大文件（>=1 MB）走"先 .new 再 Move-Item"的原子覆盖；小文件直接 Copy-Item。
     # 这样中途断电 / 磁盘满时，mxu.exe 这类二进制不会被写到一半。
     $atomicThreshold = 1MB
-    Get-ChildItem -Path $src -Recurse -File | ForEach-Object {
-        $full = $_.FullName
+    $failed = @()
+    foreach ($f in (Get-ChildItem -Path $src -Recurse -File)) {
+        $full = $f.FullName
         $rel  = $full.Substring($src.Length).TrimStart('\', '/')
         $relNorm = $rel.Replace('\', '/').ToLower()
         $target = Join-Path $dst $rel
@@ -509,23 +552,109 @@ function Copy-Update($src, $dst, $cfgRef) {
         if ($isProtected) {
             # 仅新增不存在的默认配置；已有用户配置不覆盖
             if (-not (Test-Path $target)) { Copy-Item $full $target -Force }
-            return
+            continue
         }
 
-        if ($_.Length -ge $atomicThreshold) {
-            # 原子覆盖：写到 .new，再 rename。失败时清理 .new 不留垃圾。
-            $tmp = "$target.new"
+        $tmp = "$target.new"
+        for ($try = 1; $try -le 3; $try++) {
             try {
-                Copy-Item $full $tmp -Force
-                Move-Item -LiteralPath $tmp -Destination $target -Force
+                if ($f.Length -ge $atomicThreshold) {
+                    # 原子覆盖：写到 .new，再 rename。失败时清理 .new 不留垃圾。
+                    Copy-Item $full $tmp -Force
+                    Move-Item -LiteralPath $tmp -Destination $target -Force
+                } else {
+                    Copy-Item $full $target -Force
+                }
+                break
             } catch {
                 Remove-Item -LiteralPath $tmp -Force -ErrorAction SilentlyContinue
-                throw
+                if ($try -eq 3) {
+                    $failed += $rel
+                } else {
+                    Start-Sleep -Milliseconds 600
+                }
             }
-        } else {
-            Copy-Item $full $target -Force
         }
     }
+    return $failed
+}
+
+function Test-PackageIdentity($srcRoot, $tagName) {
+    # 装前校验：解压出来的这包，到底是不是 release 说的那个版本？
+    # 为什么必须查：发布资产可能在 release 建立几分钟后才传上去（甚至事后被替换），
+    # 用户若拿到「上一个版本改名过来的包」，装完就会出现“升级了但版本号没变”。
+    # 这里宁可拒绝安装并让他重新下载，也不要把一个身份不符的包覆盖进软件目录。
+    $res = @{ ok = $true; inner = ''; why = '' }
+    $ifp = Join-Path $srcRoot 'interface.json'
+    if (-not (Test-Path $ifp)) {
+        $res.ok = $false; $res.why = '压缩包里没有 interface.json'
+        return $res
+    }
+    try {
+        $res.inner = [string]((Get-Content $ifp -Raw -Encoding UTF8 | ConvertFrom-Json).version)
+    } catch {
+        $res.ok = $false; $res.why = '包内 interface.json 解析失败'
+        return $res
+    }
+    if (-not (Test-Path (Join-Path $srcRoot 'mxu.exe'))) {
+        $res.ok = $false; $res.why = '压缩包里没有 mxu.exe（包不完整）'
+        return $res
+    }
+    if ((Compare-Version $res.inner $tagName) -ne 0) {
+        $res.ok = $false
+        $res.why = "包内版本号是 $($res.inner)，与发布号 $tagName 不一致"
+        return $res
+    }
+    return $res
+}
+
+function Test-InstalledVersion($base, $tagName) {
+    # 装后复核：磁盘上的版本号与关键文件是否真的就位（"更新完成"这四个字必须有证据支撑）。
+    $problems = @()
+    $now = Read-CurrentVersion
+    if ($now -ne $tagName) {
+        $problems += "界面读到的版本号仍是 $now（期望 $tagName）"
+    }
+    foreach ($rel in @('mxu.exe', 'interface.json', 'launcher.bat', 'BD2MAA-Updater.ps1')) {
+        if (-not (Test-Path (Join-Path $base $rel))) { $problems += "缺少 $rel" }
+    }
+    return $problems
+}
+
+function Stop-RunningMxu {
+    # 更新前先关掉软件，否则：
+    #   mxu.exe 被运行中的进程占用 → 覆盖失败；
+    #   agent\go-service.exe 由 MXU 拉起、同样被占用 → 覆盖失败。
+    # 被占用时的覆盖失败正是「更新完版本号却没变 / 装了一半」最现实的原因。
+    $names = @('mxu', 'go-service')
+    $running = @()
+    foreach ($n in $names) { $running += @(Get-Process -Name $n -ErrorAction SilentlyContinue) }
+    if ($running.Count -eq 0) { return $true }
+
+    $r = [System.Windows.Forms.MessageBox]::Show(
+        ("检测到软件正在运行。`n`n更新需要先关闭它 —— 程序文件被占用时覆盖会失败，`n" +
+         "那正是「更新完版本号却没变 / 只装了一半」的常见原因。`n`n" +
+         "点「确定」= 自动关闭并继续更新`n点「取消」= 暂不更新（本次不覆盖任何文件）"),
+        'BD2MAA · 更新前需要先关闭软件', 'OKCancel', 'Warning')
+    if ($r -ne 'OK') { return $false }
+
+    foreach ($p in $running) { try { $p.CloseMainWindow() | Out-Null } catch { } }
+    $deadline = (Get-Date).AddSeconds(8)
+    while ((Get-Date) -lt $deadline) {
+        $left = @()
+        foreach ($n in $names) { $left += @(Get-Process -Name $n -ErrorAction SilentlyContinue) }
+        if ($left.Count -eq 0) { break }
+        Start-Sleep -Milliseconds 400
+    }
+    foreach ($n in $names) {
+        foreach ($p in @(Get-Process -Name $n -ErrorAction SilentlyContinue)) {
+            try { Stop-Process -Id $p.Id -Force -ErrorAction Stop } catch { }
+        }
+    }
+    Start-Sleep -Milliseconds 800
+    $left = 0
+    foreach ($n in $names) { $left += @(Get-Process -Name $n -ErrorAction SilentlyContinue).Count }
+    return ($left -eq 0)
 }
 
 # ----------------------------------------------------------------------------
@@ -763,17 +892,22 @@ try {
     Remove-RetiredFiles $BASE $cfg
 
     $iv = [timespan]::FromHours($cfg['check_interval_hours']).Ticks
-    $needCheck = $Force -or $Demo -or $Test -or ((Get-Date).Ticks - $cache.last_check_ts) -gt $iv
+    $needCheck = $Force -or $Demo -or $Test -or $Repair -or ((Get-Date).Ticks - $cache.last_check_ts) -gt $iv
 
     $release = $null
+    $asset = $null
     if ($needCheck) {
         try {
             $release = Get-LatestRelease $cfg['repo']
+            # latest 必须真的带可用 zip 才认；否则回退到「版本最高且有可用 zip」的 release
+            $pick = Select-NewestReleaseWithAsset $cfg['repo'] $cfg $release
+            if ($pick) { $release = $pick.release; $asset = $pick.asset }
             $cache.last_check_ts = (Get-Date).Ticks
             $cache.latest_tag = $release.tag_name
             Save-Cache $cache
         } catch {
             $release = $null
+            $asset = $null
         }
     }
 
@@ -782,12 +916,11 @@ try {
         Write-Host ("当前版本 (interface.json): {0}" -f $current)
         if ($release) {
             Write-Host ("GitHub 最新版本: {0}" -f $release.tag_name)
-        $asset = Select-Asset $release.assets $cfg
-        if ($asset) {
-            Write-Host ("选定资源: {0} ({1} bytes)" -f $asset.name, $asset.size)
+            if ($asset) {
+                Write-Host ("选定资源: {0} ({1} bytes)" -f $asset.name, $asset.size)
                 Write-Host ("下载地址: {0}" -f $asset.browser_download_url)
             } else {
-                Write-Host "选定资源: 无（将回退到发布页）"
+                Write-Host "选定资源: 无（该 release 还没有可用 zip，将回退到发布页）"
             }
             Write-Host ("需更新: {0}" -f ((Compare-Version $release.tag_name $current) -gt 0))
         } else {
@@ -801,21 +934,34 @@ try {
 
     $hasUpdate = (Compare-Version $release.tag_name $current) -gt 0
     if ($Demo) { $hasUpdate = $true }
+    if ($Repair) {
+        $ask = [System.Windows.Forms.MessageBox]::Show(
+            ("修复模式：将重新下载并覆盖安装 $($release.tag_name)（当前 $current）。`n`n" +
+             "用途：上一次更新只装了一半、或感觉文件没更新时，用它把整个软件目录按该版本重装一遍。`n" +
+             "config/ 里的用户配置不会被覆盖。`n`n继续？"),
+            'BD2MAA · 修复安装', 'OKCancel', 'Question')
+        if ($ask -ne 'OK') { Launch-Mxu; return }
+        $hasUpdate = $true
+    }
 
     if (-not $hasUpdate) { Launch-Mxu; return }
 
-    $doUpdate = Show-UpdateDialog $release $current
-    if (-not $doUpdate) { Launch-Mxu; return }
-
-    # 用户选择更新 ----------------------------------------------------------
-    $asset = Select-Asset $release.assets $cfg
+    # 新版本已发布但资产还没传完（实测可能差几分钟到几小时）：明确告知，不要静默跳过
     if (-not $asset) {
         [System.Windows.Forms.MessageBox]::Show(
-            "未在新版本中找到合适的压缩包资源，请前往发布页手动下载。", "更新", 'OK', 'Information')
+            ("$($release.tag_name) 这个版本还没有可用的压缩包（发布资产可能还在上传）。`n`n" +
+             "你可以稍后再启动一次本软件；也可以点「确定」前往发布页手动下载。"),
+            '更新 · 暂无可下载的包', 'OKCancel', 'Information') | Out-Null
         Start-Process $release.html_url
         Launch-Mxu
         return
     }
+
+    $doUpdate = Show-UpdateDialog $release $current
+    if (-not $doUpdate) { Launch-Mxu; return }
+
+    # 更新前先关掉正在运行的软件：进程占用文件会让覆盖失败，产出“更新完版本号却没变”的半截状态
+    if (-not (Stop-RunningMxu)) { Launch-Mxu; return }
 
     $ddir = Join-Path $BASE $cfg['download_dir']
     New-Item -ItemType Directory -Path $ddir -Force | Out-Null
@@ -834,21 +980,46 @@ try {
         return
     }
 
-    # 解压 + 选择性覆盖
+    # 解压 + 校验包身份 + 选择性覆盖 + 装后复核
     $tmp = Join-Path $env:TEMP ("BD2MAA_update_" + [guid]::NewGuid().ToString('N'))
+    $problems = @()
     try {
         Expand-Archive -Path $dest -DestinationPath $tmp -Force
         $srcRoot = Find-ProjectRoot $tmp
-        Copy-Update $srcRoot $BASE $cfg
+
+        # [装前] 包的身份必须对得上：包内 interface.json 版本 == release 的 tag，且含 mxu.exe
+        $pkg = Test-PackageIdentity $srcRoot $release.tag_name
+        if (-not $pkg.ok) {
+            [System.Windows.Forms.MessageBox]::Show(
+                ("这次下载到的包身份不符：$($pkg.why)。`n`n" +
+                 "已取消覆盖，你的软件目录一个字都没动。`n" +
+                 "多见于「该 release 的压缩包正在被替换 / 刚上传」—— 稍后再启动一次本软件重试即可；`n" +
+                 "也可以点「确定」前往发布页手动下载。"),
+                '更新 · 包身份不符', 'OKCancel', 'Warning') | Out-Null
+            Start-Process $release.html_url
+            Launch-Mxu
+            return
+        }
+
+        $fail = @(Copy-Update $srcRoot $BASE $cfg)
         ReInject-XLaunch $BASE
         # 更新完成后立刻清理旧版遗留文件：retired_files.json 也刚被覆盖成新版，
         # 所以这一步用的就是本次发布的最新清单（清单之外的旧文件不动）。
         Remove-RetiredFiles $BASE $cfg
+
+        # [装后] 复核：磁盘上的版本号与关键文件是否真的就位
+        $problems = @(Test-InstalledVersion $BASE $release.tag_name)
+        if ($fail.Count -gt 0) {
+            $problems = @('以下文件未能覆盖（多半被杀毒软件或其它程序占用）：' + ($fail -join '、')) + $problems
+        }
     } catch {
         # 注意：$dest 会在 finally 里被清掉，所以这里不要再让用户"手动解压该文件"。
         [System.Windows.Forms.MessageBox]::Show(
-            ("解压或覆盖失败：{0}`n`n下载的压缩包可能不完整。可重新启动 launcher.bat 再试一次（会自动切换下载源），或前往发布页手动下载：`n{1}" -f $_.Exception.Message, $release.html_url),
-            "更新失败", 'OK', 'Error')
+            ("解压或覆盖失败：{0}`n`n可重新启动 launcher.bat 再试一次（会自动切换下载源）；`n" +
+             "若反复出现，请先关闭软件（mxu.exe）与杀毒软件的实时防护，再用 `"launcher.bat -Repair`" 重新下载；`n" +
+             "也可以点「确定」前往发布页手动下载：{1}" -f $_.Exception.Message, $release.html_url),
+            "更新失败", 'OKCancel', 'Error') | Out-Null
+        Start-Process $release.html_url
         Launch-Mxu
         return
     } finally {
@@ -856,8 +1027,17 @@ try {
         Remove-Item $dest -Force -ErrorAction SilentlyContinue
     }
 
-    [System.Windows.Forms.MessageBox]::Show(
-        "更新完成！已应用新版本，你的 config/ 配置已保留。", "更新完成", 'OK', 'Information')
+    if ($problems.Count -gt 0) {
+        [System.Windows.Forms.MessageBox]::Show(
+            ("更新没有完整完成（本次目标是 $($release.tag_name)）：`n`n - " + ($problems -join "`n - ") +
+             "`n`n建议：1) 先关闭本软件与杀毒软件的实时防护；2) 运行 `"launcher.bat -Repair`" 重新下载并覆盖；`n" +
+             "3) 仍不行就前往发布页手动下载压缩包，解压到本软件目录覆盖。"),
+            '更新未完成', 'OK', 'Error')
+    } else {
+        [System.Windows.Forms.MessageBox]::Show(
+            ("更新完成！已应用到 $($release.tag_name)，你的 config/ 配置已保留。"),
+            "更新完成", 'OK', 'Information')
+    }
     Launch-Mxu
 
 } catch {

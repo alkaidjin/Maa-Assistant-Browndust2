@@ -2,7 +2,7 @@
     "interface_version": 2,
     "name": "MaaBrownDust2",
     "description": "MaaBrownDust2",
-    "version": "v26.09.10",
+    "version": "v26.09.11",
     "license": "misc/LICENSE_SHORT.md",
     "welcome": "README.md",
     "icon": "misc/MaaEnd-Tiny.png",
@@ -74,29 +74,37 @@
             ]
         }
     ],
-    "agent": {
-        "child_exec": "agent/go-service",
-        "child_args": [],
-        "timeout": 15000,
-        "identifier": "mxu_browndust",
-        "auto_reconnect": true
-    },
+    "agent": [
+        {
+            "child_exec": "agent/go-service",
+            "child_args": [],
+            "timeout": 15000,
+            "identifier": "mxu_browndust",
+            "auto_reconnect": true
+        },
+        {
+            "child_exec": "agent/rock-picker",
+            "child_args": [],
+            "timeout": 15000,
+            "identifier": "mxu_browndust_rock",
+            "auto_reconnect": true
+        }
+    ],
     "task": [],
     "import": [
         "tasks/StartGame.json",
         "tasks/Draw.json",
-        "tasks/Sociaty.json",
-        "tasks/Operate.json",
+        "tasks/DailyRoutine.json",
         "tasks/PVP.json",
-        "tasks/Square.json",
         "tasks/HuntingArea.json",
         "tasks/Bag.json",
         "tasks/Warcraft.json",
+        "tasks/WarcraftRerunQuickBattle.json",
         "tasks/EvilCastle.json",
-        "tasks/EventReward.json",
-        "tasks/Dailyrewards.json",
+        "tasks/RewardRoutine.json",
+        "tasks/WarcraftShop.json",
         "tasks/AbsorpAssemble.json",
-        "tasks/WarcraftShop.json"
+        "tasks/AbsorpAssembleRound2.json"
     ],
     "x_launch": {
         "launcher": "launcher.bat",

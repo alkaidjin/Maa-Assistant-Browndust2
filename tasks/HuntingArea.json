@@ -48,7 +48,14 @@
                     "pipeline_override":{
                         "GetRock":{
                             "next":["DarkRock",
-                                "GetRock"]}}}
+                                "GetRock"]}}},
+                {
+                    "name":"AutoLeastRock",
+                    "label":"自动：刷数量最少的圣石",
+                    "pipeline_override":{
+                        "GetRock":{
+                            "next":["PickLeastRock"],
+                            "timeout":8000}}}
                     ]
                      },
         "ChooseWood":{

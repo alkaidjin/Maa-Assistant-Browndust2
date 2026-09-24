@@ -3,46 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1789639877402,
+            "lastSyncTime": 1790097375844,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\HuntingArea.json",
             "savedViewport": {
-                "x": -3634,
-                "y": 246,
-                "zoom": 0.95
+                "x": -753,
+                "y": 232,
+                "zoom": 0.33
             },
             "filename": "HuntingArea",
             "version": "v1.10.1"
-        }
-    },
-    "ChooseWorO_Swipe": {
-        "action": {
-            "type": "Swipe",
-            "param": {
-                "begin": [
-                    589,
-                    193
-                ],
-                "end": [
-                    [
-                        589,
-                        595
-                    ]
-                ],
-                "end_hold": [
-                    1000
-                ]
-            }
-        },
-        "next": [
-            "WoodHunt"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 4689,
-                "y": 97
-            }
         }
     },
     "$__mpe_external_StartGame_HuntingArea": {
@@ -89,14 +60,56 @@
         }
     },
     "ChooseWorO": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    103,
+                    296,
+                    26,
+                    27
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 1000,
         "post_delay": 1500,
         "next": [
             "ChooseWorO_Swipe"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 4576,
-                "y": -207
+                "x": 4489,
+                "y": -216
+            }
+        }
+    },
+    "ChooseWorO_Swipe": {
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    589,
+                    193
+                ],
+                "end": [
+                    [
+                        589,
+                        595
+                    ]
+                ],
+                "end_hold": [
+                    1000
+                ]
+            }
+        },
+        "next": [
+            "WoodHunt"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4689,
+                "y": 97
             }
         }
     },
@@ -294,7 +307,8 @@
                     35
                 ],
                 "expected": [
-                    "圣石洞穴"
+                    "圣石",
+                    "洞穴"
                 ],
                 "threshold": 0.6
             }
@@ -302,6 +316,8 @@
         "action": {
             "type": "Click"
         },
+        "repeat": 2,
+        "repeat_delay": 1000,
         "post_delay": 1500,
         "next": [
             "WaterRock",
@@ -612,6 +628,77 @@
             }
         }
     },
+    "PickLeastRock": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "LeastRockPicker",
+                "custom_recognition_param": {
+                    "attempts": 3,
+                    "interval_ms": 600,
+                    "rows": [
+                        {
+                            "label": "火",
+                            "node": "FireRock",
+                            "roi": [
+                                1136,
+                                56,
+                                55,
+                                20
+                            ]
+                        },
+                        {
+                            "label": "水",
+                            "node": "WaterRock",
+                            "roi": [
+                                1136,
+                                84,
+                                55,
+                                20
+                            ]
+                        },
+                        {
+                            "label": "风",
+                            "node": "WindRock",
+                            "roi": [
+                                1136,
+                                112,
+                                55,
+                                20
+                            ]
+                        },
+                        {
+                            "label": "光",
+                            "node": "LightRock",
+                            "roi": [
+                                1136,
+                                140,
+                                55,
+                                20
+                            ]
+                        },
+                        {
+                            "label": "暗",
+                            "node": "DarkRock",
+                            "roi": [
+                                1136,
+                                168,
+                                55,
+                                20
+                            ]
+                        }
+                    ],
+                    "settle_ms": 800
+                }
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 3074,
+                "y": 466
+            }
+        }
+    },
     "REWARD": {
         "recognition": {
             "type": "TemplateMatch",
@@ -683,8 +770,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 4447,
-                "y": 173
+                "x": 4454,
+                "y": 196
             }
         }
     },

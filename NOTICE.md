@@ -39,10 +39,10 @@
 ### 版本固定
 本仓库当前锁定的 MaaFramework 版本为 `v5.13.0`。升级到新版本时需要同步维护两处：
 
-1. 本文件上方表格中的版本号（以及 `更新功能说明.md` 第十一节的对照表）；
+1. 本文件上方表格中的版本号（版本指纹核对方法见 [`更新功能说明.md`](更新功能说明.md) 第十一节）；
 2. **`version.json`** —— 它记录包内依赖指纹（`maafw` / `mxu` 各自的上游 tag），是打包器 `tools/build_release_zip.py` 在发布计划阶段校验的对象（`check_version_json()` 会提示版本是否与磁盘实际一致，但**不会自动改写**，需要人工确认）。
 
-历史版本备份放在 `cache/backup_<版本>/`（如 `cache/backup_v26.09.6/` 是 v5.7.0-alpha.2 + MXU v1.13.1 的旧运行时）。注意 `cache/` 目录**不随发布包派发**。
+历史版本备份放在 `cache/backup_<版本>/`。注意 `cache/` 目录**不随发布包派发**（升级与回滚步骤见 [`更新功能说明.md`](更新功能说明.md) 第十一节）。
 
 ---
 
@@ -63,7 +63,7 @@ MXU 与本项目**均为 AGPL-3.0**，因此在 §13 「Remote Network Interacti
 ### 启动器交互
 本项目通过 `launcher.bat` → `BD2MAA-Updater.ps1` **自动拉起** `mxu.exe`：先检查 GitHub Releases 是否有新版本（可一键下载覆盖），再做启动前的「家务」（自愈 `launcher.bat` 编码、按需重写 `mxu.exe` 图标、重建 `MaaBd2.lnk`、精简并清理 `debug/` 日志），最后启动 `mxu.exe`。
 
-**启动器不会修改你的 `config/mxu-<project>.json`。** v26.09.6 曾为绕过 MXU 早期版本的 `savedDevice.windowName` 守卫而注入 `savedDevice.windowName` / `preAction.waitForExit`，该逻辑已在 v26.09.7（随 MXU v2.5.3 升级）**整体移除**——上游守卫改为 `shouldWaitAfterPreActions = !!controller`，不再依赖这两个字段。详见 `更新功能说明.md` 第十、十一节。
+**启动器不会修改你的 `config/`**（唯一的例外是更新覆盖完成后给 `interface.json` 补一个纯说明性的 `x_launch` 字段，MXU 会忽略未知字段）。启动器的用法、命令行参数与全部「家务」细节见 [`更新功能说明.md`](更新功能说明.md)。
 
 ---
 
@@ -183,4 +183,4 @@ git clone https://github.com/MistEO/MXU.git
 
 ---
 
-最后更新：2026-09-20
+最后更新：2026-09-24

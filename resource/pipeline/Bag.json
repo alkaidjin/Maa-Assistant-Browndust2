@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1788949035527,
+            "lastSyncTime": 1789918068001,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\BD2MAA\\resource\\pipeline\\Bag.json",
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Bag.json",
             "savedViewport": {
-                "x": -5322,
-                "y": -1087,
-                "zoom": 1.5
+                "x": -2604,
+                "y": -761,
+                "zoom": 1
             },
             "filename": "Bag",
-            "version": "v1.9.3"
+            "version": "v1.10.1"
         }
     },
     "$__mpe_external_StartGame_Bag": {
@@ -427,12 +427,14 @@
             }
         },
         "next": [
-            "IntensifyChoose18"
+            "IntensifyChoose18",
+            "IntensifyChoose19",
+            "IntensifyChoose20"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3327,
-                "y": 855
+                "x": 3299,
+                "y": 851
             }
         }
     },
@@ -680,6 +682,58 @@
             "position": {
                 "x": 2998,
                 "y": 1307
+            }
+        }
+    },
+    "IntensifyChoose19": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    473,
+                    93,
+                    684,
+                    561
+                ],
+                "expected": [
+                    "19"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 3578,
+                "y": 1095
+            }
+        }
+    },
+    "IntensifyChoose20": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    473,
+                    93,
+                    684,
+                    561
+                ],
+                "expected": [
+                    "20"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 3580,
+                "y": 1324
             }
         }
     }

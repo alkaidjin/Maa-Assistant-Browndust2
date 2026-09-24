@@ -1,0 +1,16 @@
+{
+    "task": [
+        {
+            "name": "奖励一键领取",
+            "label": "奖励一键领取（日常奖励+活动奖励）",
+            "entry": "StartRewardRoutine",
+            "description": "一条链依次完成：日常奖励领取（每日任务 → 通行证 → 邮箱全部领取）→ 活动奖励领取（主页活动 → 转盘等）。\n本任务已取代原「日常奖励领取」「活动奖励领取」两个任务",
+            "controller": [
+                "Win32",
+                "Win32-Window",
+                "Win32-Front"
+            ]
+        }
+    ],
+    "option": {}
+}

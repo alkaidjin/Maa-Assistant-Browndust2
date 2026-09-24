@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1789717847919,
+            "lastSyncTime": 1790181091027,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\PVP.json",
             "savedViewport": {
-                "x": 45,
-                "y": 308,
-                "zoom": 0.5
+                "x": -2415,
+                "y": 217,
+                "zoom": 1.5
             },
             "filename": "PVP",
             "version": "v1.10.1"
@@ -219,7 +219,7 @@
         "post_delay": 2000,
         "next": [
             "CorrectFirst",
-            "GetDaily",
+            "GetDaily_1",
             "MovePVP"
         ],
         "$__mpe_code": {
@@ -287,15 +287,16 @@
                 ]
             }
         },
-        "post_delay": 2500,
+        "repeat": 2,
+        "post_delay": 5000,
         "next": [
             "EnterRestaurant_2",
             "EnterOperating_2"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 21,
-                "y": 239
+                "x": -304,
+                "y": 198
             }
         }
     },
@@ -358,14 +359,15 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 10000,
+        "timeout": 10000,
         "next": [
-            "CHooseCrad"
+            "CHooseCrad",
+            "魔兽赛季奖励确认_2"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 266,
-                "y": 232
+                "x": -41,
+                "y": 203
             }
         }
     },
@@ -467,7 +469,7 @@
             }
         }
     },
-    "GetDaily": {
+    "GetDaily_1": {
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -642,7 +644,7 @@
         "post_delay": 2500,
         "next": [
             "PVPWaiting",
-            "GetDaily",
+            "GetDaily_1",
             "MovePVP",
             "SeasonReward",
             "CorrectFirst"
@@ -706,7 +708,7 @@
         },
         "post_delay": 1500,
         "next": [
-            "GetDaily",
+            "GetDaily_1",
             "MovePVP",
             "SeasonReward",
             "CorrectFirst"
@@ -758,21 +760,24 @@
                     50,
                     21
                 ],
-                "template": "MAX",
+                "expected": [
+                    "MAX"
+                ],
                 "threshold": 0.6
             }
         },
         "action": {
             "type": "Click"
         },
+        "post_delay": 1500,
         "next": [
             "PVPBegin",
             "SetMax"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3686,
-                "y": 419
+                "x": 3820,
+                "y": 94
             }
         }
     },
@@ -785,8 +790,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": -286,
-                "y": -12
+                "x": -595,
+                "y": -28
             }
         }
     },
@@ -910,6 +915,7 @@
                 ]
             }
         },
+        "post_delay": 1500,
         "next": [
             "SetMax"
         ],
@@ -947,6 +953,45 @@
             "position": {
                 "x": 3033,
                 "y": 108
+            }
+        }
+    },
+    "魔兽赛季奖励确认_2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    725,
+                    180,
+                    254,
+                    52
+                ],
+                "expected": [
+                    "魔兽",
+                    "追踪",
+                    "赛季",
+                    "奖励"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    836,
+                    556,
+                    20,
+                    8
+                ]
+            }
+        },
+        "next": [
+            "CHooseCrad"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 258,
+                "y": 420
             }
         }
     },

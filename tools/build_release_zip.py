@@ -54,7 +54,10 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EXCLUDE_DIRS  = {'.git', '.workbuddy', 'cache', 'config', 'debug', 'updates', '_stage',
                  # GitHub Actions 配置（PR#3 引入的 mirrorchyan_release*.yml）：只在仓库侧
                  # 生效，用户包里毫无用处，纯属冗余文件。
-                 '.github'}
+                 '.github',
+                 # 第二个 agent（圣石洞穴「刷数量最少的石头」）的 Go 源码：与 agent/go-service.exe
+                 # 同级的 `.exe` 才是运行件（见 REQUIRED_FILES），源码只入仓库、不进用户包。
+                 'rock-picker'}
 # 注意：EXCLUDE_DIRS 是**按目录名**（不是按相对路径）匹配的 —— 任何层级下叫这些名字的
 # 目录都会被整体跳过。当前无副作用；但若将来在 resource/ 等目录下新建名为 config / cache /
 # debug 的**合法**子目录，会被静默吞掉、不进包。新增此类目录名时请先确认这里。
@@ -125,6 +128,10 @@ REQUIRED_FILES = [
     'tools/clean_logs.ps1',     # README 推荐用户手动执行的日志清理工具
     # agent：周门禁 / 自定义识别 / 自定义动作全靠它，agent.child_exec = agent/go-service
     'agent/go-service.exe',
+    # 第二个 agent（PI v2 的 agent 支持对象数组，MXU 2.5.3 逐个启动）：
+    # 狩猎场-圣石洞穴「自动刷数量最少的圣石」用的自定义识别器 LeastRockPicker。
+    # child_exec = agent/rock-picker（CreateProcess 自动补 .exe）。
+    'agent/rock-picker.exe',
     # MXU 直接按 interface.json 的路径读取：icon / license / languages
     'misc/MaaEnd-Tiny.png',
     'misc/LICENSE_SHORT.md',
@@ -134,12 +141,34 @@ REQUIRED_FILES = [
     'locales/go-service/zh_cn.json', 'locales/go-service/zh_tw.json',
     'locales/go-service/en_us.json', 'locales/go-service/ja_jp.json',
     'locales/go-service/ko_kr.json',
+    # go-service 的告警 HTML 模板（v26.09.11 起）：它按
+    # locales/go-service/HTML/<name>.html 读取，读到就直接渲染成提示。
+    # 缺文件时 i18n.RenderHTML 只在 go-service.log 留一行 warn —— 分辨率守护
+    # 明明把任务 PostStop 掉了，用户却看不到任何原因，只当「任务莫名结束」。
+    # 已随包的 3 个 = 本项目真正会触发的 tasker 级模板：
+    #   aspect-ratio-warning  分辨率不符（守护，任务启动即被掐）
+    #   process-warning       检测到黑名单进程
+    #   task-failed-feedback  任务失败时的反馈引导
+    # 其余模板（essencefilter-* / autostockpile-* / dijiangrewards-* / interruptible-sleep-*）
+    # 属 MaaEnd「终末地」专属，本项目不触发，故不随包。
+    'locales/go-service/HTML/aspect-ratio-warning.html',
+    'locales/go-service/HTML/process-warning.html',
+    'locales/go-service/HTML/task-failed-feedback.html',
+    # 新任务引用的模板图（v26.09.11 新增，被 pipeline 引用、必须随包）。
+    # 之所以显式列在这里：REQUIRED_DIRS 只检查「目录非空」，缺具体图片不会被发现；
+    # 而打包器是 os.walk 读磁盘，本机有图就能出包 —— 别人 clone 出来会打出「缺图却不报错」的坏包。
+    'resource/image/Absorb/C4.png', 'resource/image/Absorb/S1.png', 'resource/image/Absorb/S2.png',
+    'resource/image/Absorb/S3.png', 'resource/image/Absorb/S4.png', 'resource/image/Absorb/S5.png',
+    'resource/image/Absorb/S15.png',
+    'resource/image/Sociaty/GONGHUI3.png',
+    'resource/image/Warcraft/LVDown.png', 'resource/image/Warcraft/LVUP.png',
     # OCR 推理模型（README 第 4 节声明随 release zip 派发；仓库因体积不追踪）
     'resource/model/ocr/det.onnx', 'resource/model/ocr/rec.onnx', 'resource/model/ocr/keys.txt',
     # 核心运行库（mxu.exe 依赖；整目录 maafw/ 其余文件由 REQUIRED_DIRS 兜底）
     'maafw/MaaFramework.dll',
 ]
-REQUIRED_DIRS = ['agent/', 'maafw/', 'misc/', 'tasks/', 'resource/', 'tools/', 'locales/']
+REQUIRED_DIRS = ['agent/', 'maafw/', 'misc/', 'tasks/', 'resource/', 'tools/', 'locales/',
+                 'locales/go-service/HTML/']
 
 VERSION_RE = re.compile(r'^v\d+\.\d+\.\d+$')
 

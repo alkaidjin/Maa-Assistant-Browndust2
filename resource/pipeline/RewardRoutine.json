@@ -1,0 +1,1044 @@
+{
+    "$__mpe_config_RewardRoutine": {
+        "$__mpe_code": {
+            "prefix": "",
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 1790241766914,
+            "isModifiedExternally": false,
+            "isDeleted": false,
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\RewardRoutine.json",
+            "savedViewport": {
+                "x": 396,
+                "y": -181,
+                "zoom": 0.57
+            },
+            "filename": "RewardRoutine",
+            "version": "v1.10.1"
+        }
+    },
+    "$__mpe_external_StartGame_RewardRoutine": {
+        "$__mpe_code": {
+            "position": {
+                "x": 3900,
+                "y": 0
+            }
+        }
+    },
+    "ActivityTask": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    217,
+                    177,
+                    135,
+                    370
+                ],
+                "expected": [
+                    "Pickup活动任务",
+                    "成长任务",
+                    "助力任务",
+                    "活动任务",
+                    "活动兑换所",
+                    "转盘",
+                    "骰子游戏"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "GetAllrewards",
+            "ExChange100_1",
+            "免费次数",
+            "RollTheDice"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 341,
+                "y": 470
+            }
+        }
+    },
+    "AllGat": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1091,
+                    658,
+                    68,
+                    25
+                ],
+                "expected": [
+                    "全部领取"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "next": [
+            "RewardStage2_Event"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4420,
+                "y": 0
+            }
+        }
+    },
+    "EVENTSWIPE": {
+        "max_hit": 10,
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    282,
+                    384
+                ],
+                "end": [
+                    [
+                        280,
+                        307
+                    ]
+                ],
+                "end_hold": [
+                    1000
+                ]
+            }
+        },
+        "timeout": 5000,
+        "$__mpe_code": {
+            "position": {
+                "x": 1726,
+                "y": 808
+            }
+        }
+    },
+    "EnterMail": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1043,
+                    10,
+                    59,
+                    58
+                ],
+                "template": "Mail/Mail.png",
+                "threshold": [
+                    0.7
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "AllGat"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4160,
+                "y": 0
+            }
+        }
+    },
+    "EnterMission": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    429,
+                    663,
+                    49,
+                    44
+                ],
+                "expected": "任务",
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "MissionMark",
+            "StartPassport"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 780,
+                "y": 0
+            }
+        }
+    },
+    "EnterPassport": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1070,
+                    180,
+                    80,
+                    40
+                ],
+                "expected": "通行证",
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "next": [
+            "PassportClick1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2080,
+                "y": 0
+            }
+        }
+    },
+    "EventMain": {
+        "max_hit": 8,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    142,
+                    2,
+                    105,
+                    67
+                ],
+                "template": [
+                    "Event/EventMain.png"
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "timeout": 8000,
+        "next": [
+            "ActivityTask"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -105,
+                "y": 577
+            }
+        }
+    },
+    "EventReward": {
+        "next": [
+            "InEvent",
+            "[JumpBack]StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 520,
+                "y": 260
+            }
+        }
+    },
+    "EventRewardDone": {
+        "$__mpe_code": {
+            "position": {
+                "x": 3550,
+                "y": 743
+            }
+        }
+    },
+    "ExChange100_1": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    559,
+                    488,
+                    68,
+                    21
+                ],
+                "expected": [
+                    "兑换",
+                    "100次"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "timeout": 6000,
+        "next": [
+            "ExChangeSure_1",
+            "EVENTSWIPE"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 652,
+                "y": 849
+            }
+        }
+    },
+    "ExChangeSure_1": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    679,
+                    397,
+                    35,
+                    21
+                ],
+                "expected": [
+                    "确认"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 5000,
+        "next": [
+            "RewardSure_3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 977,
+                "y": 827
+            }
+        }
+    },
+    "GetAllrewards": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    933,
+                    483,
+                    122,
+                    62
+                ],
+                "expected": [
+                    "全部领取",
+                    "全部解锁"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 2,
+        "repeat_delay": 200,
+        "post_delay": 5000,
+        "timeout": 10000,
+        "next": [
+            "RewardSure_1",
+            "EVENTSWIPE"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 647,
+                "y": 447
+            }
+        }
+    },
+    "InEvent": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    566,
+                    630,
+                    61,
+                    64
+                ],
+                "template": [
+                    "Event/InEvent.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 3000,
+        "timeout": 10000,
+        "next": [
+            "[JumpBack]感叹号检测",
+            "[JumpBack]无感叹号时滑动再检测"
+        ],
+        "on_error": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -1005,
+                "y": 556
+            }
+        }
+    },
+    "MissionBack": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    530,
+                    640,
+                    200,
+                    40
+                ],
+                "expected": [
+                    "点击",
+                    "画面",
+                    "即可",
+                    "返回"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1000,
+        "next": [
+            "MissionBack",
+            "MissionMark",
+            "StartPassport"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1560,
+                "y": 0
+            }
+        }
+    },
+    "MissionMark": {
+        "max_hit": 3,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    260,
+                    70,
+                    50,
+                    150
+                ],
+                "template": "Mission/ExclamationMark.png",
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "全部获得"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1289,
+                "y": -34
+            }
+        }
+    },
+    "PassportClick1": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1040,
+                    429,
+                    45,
+                    49
+                ],
+                "template": [
+                    "Passport/PassMission.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "PassportClick2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2340,
+                "y": 0
+            }
+        }
+    },
+    "PassportClick2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    924,
+                    497,
+                    69,
+                    27
+                ],
+                "expected": "全部获得",
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 2,
+        "repeat_delay": 1000,
+        "post_delay": 2000,
+        "next": [
+            "PassportClick3",
+            "ToPassport2",
+            "ToPassport3",
+            "ToPassport4",
+            "StartMail"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2600,
+                "y": 0
+            }
+        }
+    },
+    "PassportClick3": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    530,
+                    640,
+                    200,
+                    40
+                ],
+                "expected": [
+                    "点击",
+                    "画面",
+                    "即可",
+                    "返回"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1000,
+        "next": [
+            "PassportClick3",
+            "ToPassport2",
+            "ToPassport3",
+            "ToPassport4",
+            "StartMail"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2860,
+                "y": 0
+            }
+        }
+    },
+    "RewardStage1_Daily": {
+        "next": [
+            "StartMission"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 260,
+                "y": 0
+            }
+        }
+    },
+    "RewardStage2_Event": {
+        "next": [
+            "EventReward"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 260,
+                "y": 260
+            }
+        }
+    },
+    "RewardSure_1": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    561,
+                    185,
+                    160,
+                    89
+                ],
+                "template": [
+                    "Hunt/REWARD.png"
+                ]
+            }
+        },
+        "pre_delay": 1000,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    632,
+                    589
+                ]
+            }
+        },
+        "timeout": 5000,
+        "next": [
+            "EVENTSWIPE"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1344,
+                "y": 441
+            }
+        }
+    },
+    "RewardSure_2": {
+        "max_hit": 3,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    561,
+                    185,
+                    160,
+                    89
+                ],
+                "template": [
+                    "Hunt/REWARD.png"
+                ]
+            }
+        },
+        "pre_delay": 1500,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    62,
+                    384,
+                    -116,
+                    -40
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "next": [
+            "代币次数"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1332,
+                "y": 1252
+            }
+        }
+    },
+    "RewardSure_3": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    561,
+                    185,
+                    160,
+                    89
+                ],
+                "template": [
+                    "Hunt/REWARD.png"
+                ]
+            }
+        },
+        "pre_delay": 2000,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    632,
+                    589
+                ]
+            }
+        },
+        "timeout": 6000,
+        "next": [
+            "ExChange100_1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1349,
+                "y": 837
+            }
+        }
+    },
+    "RollTheDice": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    995,
+                    471,
+                    66,
+                    22
+                ],
+                "expected": [
+                    "自动",
+                    "进行"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1032,
+                    511
+                ]
+            }
+        },
+        "post_delay": 30000,
+        "next": [
+            "EVENTSWIPE"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 665,
+                "y": 1490
+            }
+        }
+    },
+    "StartMail": {
+        "next": [
+            "EnterMail",
+            "[JumpBack]StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3900,
+                "y": 0
+            }
+        }
+    },
+    "StartMission": {
+        "next": [
+            "EnterMission",
+            "[JumpBack]StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 520,
+                "y": 0
+            }
+        }
+    },
+    "StartPassport": {
+        "next": [
+            "EnterPassport",
+            "[JumpBack]StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1820,
+                "y": 0
+            }
+        }
+    },
+    "StartRewardRoutine": {
+        "next": [
+            "RewardStage1_Daily"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "ToPassport2": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    215,
+                    293,
+                    102,
+                    24
+                ],
+                "expected": [
+                    "特别",
+                    "赛季",
+                    "通行证"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    271,
+                    277,
+                    17,
+                    10
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 1000,
+        "next": [
+            "PassportClick1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3120,
+                "y": 0
+            }
+        }
+    },
+    "ToPassport3": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    214,
+                    364,
+                    134,
+                    22
+                ],
+                "expected": [
+                    "特别",
+                    "赛季",
+                    "通行证",
+                    "角色"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    265,
+                    350,
+                    24,
+                    13
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 1000,
+        "next": [
+            "PassportClick1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3362,
+                "y": -18
+            }
+        }
+    },
+    "ToPassport4": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    213,
+                    432,
+                    138,
+                    28
+                ],
+                "expected": [
+                    "赛季",
+                    "通行证"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    274,
+                    421,
+                    20,
+                    7
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 1000,
+        "next": [
+            "PassportClick1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3640,
+                "y": -10
+            }
+        }
+    },
+    "代币次数": {
+        "max_hit": 3,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    945,
+                    490,
+                    97,
+                    49
+                ],
+                "expected": [
+                    "旋转",
+                    "7次",
+                    "10次"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 5000,
+        "next": [
+            "RewardSure_2",
+            "EVENTSWIPE"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 946,
+                "y": 1152
+            }
+        }
+    },
+    "免费次数": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    819,
+                    513,
+                    59,
+                    21
+                ],
+                "expected": [
+                    "1次免费"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 5000,
+        "next": [
+            "RewardSure_2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 653,
+                "y": 1187
+            }
+        }
+    },
+    "全部获得": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1085,
+                    660,
+                    75,
+                    20
+                ],
+                "expected": "全部获得",
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "next": [
+            "MissionBack"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1300,
+                "y": 0
+            }
+        }
+    },
+    "感叹号检测": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    327,
+                    185,
+                    23,
+                    343
+                ],
+                "template": [
+                    "Event/ERTIP.png"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.6
+                ]
+            }
+        },
+        "next": [
+            "EventMain"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -438,
+                "y": 563
+            }
+        }
+    },
+    "无感叹号时滑动再检测": {
+        "max_hit": 3,
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    280,
+                    531
+                ],
+                "end": [
+                    [
+                        280,
+                        200
+                    ]
+                ],
+                "end_hold": [
+                    1000
+                ]
+            }
+        },
+        "timeout": 5000,
+        "next": [
+            "感叹号检测",
+            "无感叹号时滑动再检测"
+        ],
+        "on_error": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -714,
+                "y": 829
+            }
+        }
+    }
+}

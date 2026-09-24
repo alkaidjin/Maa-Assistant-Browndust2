@@ -1,0 +1,746 @@
+{
+    "$__mpe_config_DailyRoutine": {
+        "$__mpe_code": {
+            "prefix": "",
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 1790253749676,
+            "isModifiedExternally": false,
+            "isDeleted": false,
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\DailyRoutine.json",
+            "savedViewport": {
+                "x": 286,
+                "y": 393,
+                "zoom": 0.87
+            },
+            "filename": "DailyRoutine",
+            "version": "v1.10.1"
+        }
+    },
+    "$__mpe_external_StartGame_DailyRoutine": {
+        "$__mpe_code": {
+            "position": {
+                "x": 3380,
+                "y": 0
+            }
+        }
+    },
+    "CHooseCrad_2": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    217,
+                    72,
+                    71,
+                    61
+                ],
+                "template": [
+                    "Absorb/P.png"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.6
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "EnterSquare",
+            "CHooseCrad_2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 796,
+                "y": 937
+            }
+        }
+    },
+    "ClickMyHouse": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    70,
+                    110,
+                    78,
+                    39
+                ],
+                "expected": [
+                    "我的小屋",
+                    "我的",
+                    "小屋"
+                ],
+                "threshold": 0.5
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    110,
+                    102
+                ]
+            }
+        },
+        "post_delay": 5000,
+        "next": [
+            "ClickMyHouse",
+            "MyhouseBack"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 780,
+                "y": 260
+            }
+        }
+    },
+    "ClickSecond": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    141,
+                    2,
+                    131,
+                    69
+                ],
+                "template": [
+                    "Sociaty/GONGHUI.png"
+                ]
+            }
+        },
+        "pre_delay": 2000,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    110,
+                    33,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 3000,
+        "next": [
+            "StartOperate"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 809,
+                "y": -362
+            }
+        }
+    },
+    "EnterOperating": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    75,
+                    185,
+                    70,
+                    40
+                ],
+                "expected": [
+                    "经营",
+                    "管理"
+                ],
+                "threshold": 0.5
+            }
+        },
+        "pre_delay": 1500,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    110,
+                    181
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 200,
+        "post_delay": 2500,
+        "next": [
+            "GetWithOneClick",
+            "EnterOperating"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1300,
+                "y": 260
+            }
+        }
+    },
+    "EnterOperating_3": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    75,
+                    185,
+                    70,
+                    40
+                ],
+                "expected": [
+                    "经营",
+                    "管理"
+                ],
+                "threshold": 0.5
+            }
+        },
+        "pre_delay": 1500,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    110,
+                    181
+                ]
+            }
+        },
+        "post_delay": 2500,
+        "next": [
+            "EnterRestaurant_3",
+            "EnterOperating_3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 260,
+                "y": 1040
+            }
+        }
+    },
+    "EnterRestaurant": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    738,
+                    159,
+                    84,
+                    55
+                ],
+                "expected": [
+                    "立刻前往",
+                    "立刻",
+                    "前往"
+                ],
+                "threshold": 0.4
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "timeout": 10000,
+        "next": [
+            "EnterRestaurant",
+            "FrequentCaller"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2080,
+                "y": 260
+            }
+        }
+    },
+    "EnterRestaurant_3": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    738,
+                    159,
+                    84,
+                    55
+                ],
+                "expected": [
+                    "立刻前往",
+                    "立刻",
+                    "前往"
+                ],
+                "threshold": 0.4
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 10000,
+        "next": [
+            "CHooseCrad_2",
+            "[JumpBack]魔兽赛季奖励确认_1",
+            "EnterRestaurant_3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 520,
+                "y": 1040
+            }
+        }
+    },
+    "EnterSquare": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    152,
+                    604,
+                    131,
+                    81
+                ],
+                "template": [
+                    "Square/TheSquare3.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    35,
+                    7,
+                    -71,
+                    -32
+                ]
+            }
+        },
+        "timeout": 15000,
+        "next": [
+            "MoveSquare"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1041,
+                "y": 1200
+            }
+        }
+    },
+    "FrequentCaller": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    80,
+                    23,
+                    114,
+                    36
+                ],
+                "template": [
+                    "Operate/RES.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    183,
+                    196
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 1500,
+        "next": [
+            "StartSquare"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2340,
+                "y": 267
+            }
+        }
+    },
+    "GetDaily_3": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    900,
+                    555,
+                    85,
+                    85
+                ],
+                "template": "PVP/GetDaily.png",
+                "green_mask": true,
+                "threshold": 0.8
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "GetSquare",
+            "GetDaily_3",
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1300,
+                "y": 780
+            }
+        }
+    },
+    "GetSquare": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    910,
+                    560,
+                    70,
+                    70
+                ],
+                "template": "Square/Get.png",
+                "green_mask": true,
+                "threshold": 0.8
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "GetDaily_3",
+            "GetSquare",
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1040,
+                "y": 780
+            }
+        }
+    },
+    "GetWithOneClick": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    693,
+                    499,
+                    64,
+                    85
+                ],
+                "expected": [
+                    "一键",
+                    "获得"
+                ],
+                "threshold": 0.5
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "next": [
+            "OperateClick",
+            "EnterRestaurant"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1560,
+                "y": 260
+            }
+        }
+    },
+    "InSociaty_1": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    214,
+                    77,
+                    53,
+                    66
+                ],
+                "template": [
+                    "Sociaty/GONGHUI2.png"
+                ],
+                "green_mask": true
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    240,
+                    100
+                ]
+            }
+        },
+        "repeat": 2,
+        "post_delay": 3000,
+        "next": [
+            "ClickSecond",
+            "InSociaty_1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 373,
+                "y": -422
+            }
+        }
+    },
+    "InSociaty_2": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    204,
+                    119,
+                    76,
+                    23
+                ],
+                "expected": [
+                    "公会",
+                    "联合战"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    240,
+                    100
+                ]
+            }
+        },
+        "repeat": 2,
+        "post_delay": 3000,
+        "next": [
+            "ClickSecond",
+            "InSociaty_2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 52,
+                "y": -124
+            }
+        }
+    },
+    "InSociaty_3": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "Sociaty/GONGHUI3.png"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.6
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    240,
+                    100
+                ]
+            }
+        },
+        "repeat": 2,
+        "post_delay": 3000,
+        "next": [
+            "ClickSecond"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 56,
+                "y": -679
+            }
+        }
+    },
+    "MoveSquare": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1022,
+                    125,
+                    45,
+                    100
+                ],
+                "template": [
+                    "Square/DAYgift.png"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.6
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    54,
+                    20,
+                    -16,
+                    -39
+                ]
+            }
+        },
+        "post_delay": 7500,
+        "next": [
+            "GetSquare",
+            "GetDaily_3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1300,
+                "y": 1254
+            }
+        }
+    },
+    "MyhouseBack": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    99,
+                    8,
+                    43,
+                    48
+                ],
+                "template": "Operate/back.png",
+                "threshold": 0.5
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 5000,
+        "next": [
+            "EnterOperating",
+            "[JumpBack]StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1040,
+                "y": 260
+            }
+        }
+    },
+    "OperateClick": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    566,
+                    640,
+                    136,
+                    37
+                ],
+                "expected": [
+                    "点击",
+                    "画面",
+                    "即可",
+                    "返回"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "OperateClick",
+            "EnterRestaurant"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1820,
+                "y": 260
+            }
+        }
+    },
+    "StartOperate": {
+        "next": [
+            "ClickMyHouse",
+            "[JumpBack]StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 520,
+                "y": 260
+            }
+        }
+    },
+    "StartSociaty": {
+        "next": [
+            "InSociaty_2",
+            "InSociaty_1",
+            "InSociaty_3",
+            "[JumpBack]StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -256,
+                "y": -371
+            }
+        }
+    },
+    "StartSquare": {
+        "next": [
+            "CHooseCrad_2",
+            "EnterOperating_3",
+            "[JumpBack]StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 520,
+                "y": 780
+            }
+        }
+    },
+    "魔兽赛季奖励确认_1": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    725,
+                    180,
+                    254,
+                    52
+                ],
+                "expected": [
+                    "魔兽",
+                    "追踪",
+                    "赛季",
+                    "奖励"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    836,
+                    556,
+                    20,
+                    8
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 1300,
+                "y": 1040
+            }
+        }
+    }
+}
