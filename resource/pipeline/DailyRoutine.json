@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790253749676,
+            "lastSyncTime": 1790299541115,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\DailyRoutine.json",
             "savedViewport": {
-                "x": 286,
-                "y": 393,
-                "zoom": 0.87
+                "x": 153,
+                "y": 58,
+                "zoom": 0.57
             },
             "filename": "DailyRoutine",
             "version": "v1.10.1"
@@ -19,8 +19,8 @@
     "$__mpe_external_StartGame_DailyRoutine": {
         "$__mpe_code": {
             "position": {
-                "x": 3380,
-                "y": 0
+                "x": 3169,
+                "y": 453
             }
         }
     },
@@ -316,8 +316,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1041,
-                "y": 1200
+                "x": 1049,
+                "y": 1205
             }
         }
     },
@@ -358,6 +358,7 @@
         }
     },
     "GetDaily_3": {
+        "max_hit": 1,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -378,13 +379,12 @@
         "post_delay": 1500,
         "next": [
             "GetSquare",
-            "GetDaily_3",
-            "StartGame"
+            "GetDaily_3"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1300,
-                "y": 780
+                "x": 1310,
+                "y": 761
             }
         }
     },
@@ -409,13 +409,12 @@
         "post_delay": 1500,
         "next": [
             "GetDaily_3",
-            "GetSquare",
-            "StartGame"
+            "GetSquare"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1040,
-                "y": 780
+                "x": 1664,
+                "y": 812
             }
         }
     },
@@ -565,6 +564,7 @@
         }
     },
     "MoveSquare": {
+        "max_hit": 1,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -601,8 +601,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1300,
-                "y": 1254
+                "x": 1299,
+                "y": 1260
             }
         }
     },
@@ -738,8 +738,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 1300,
-                "y": 1040
+                "x": 1052,
+                "y": 967
             }
         }
     }

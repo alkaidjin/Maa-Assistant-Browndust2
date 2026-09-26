@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790240162849,
+            "lastSyncTime": 1790389827225,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\WarcraftRerunQuickBattle.json",
+            "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\WarcraftRerunQuickBattle.json",
             "savedViewport": {
-                "x": 1291,
-                "y": 830,
-                "zoom": 1.15
+                "x": 1428,
+                "y": 883,
+                "zoom": 1
             },
             "filename": "WarcraftRerunQuickBattle",
-            "version": "v1.10.1"
+            "version": "v2.0.0"
         }
     },
     "$__mpe_external_StartGame_WarcraftRerunQuickBattle": {
@@ -35,6 +35,7 @@
                     23
                 ],
                 "expected": [
+                    "回归赛季",
                     "回归",
                     "赛季"
                 ]
@@ -43,6 +44,8 @@
         "action": {
             "type": "Click"
         },
+        "repeat": 2,
+        "post_delay": 3000,
         "next": [
             "RerunQuickBattle",
             "LVdown"
@@ -51,151 +54,6 @@
             "position": {
                 "x": -1114,
                 "y": -432
-            }
-        }
-    },
-    "QuickBattleBegin": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    683,
-                    505,
-                    63,
-                    47
-                ],
-                "expected": [
-                    "确认"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_delay": 1500,
-        "next": [
-            "WarcraftRerunReward"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": -381,
-                "y": -374
-            }
-        }
-    },
-    "RerunQuickBattle": {
-        "max_hit": 2,
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    817,
-                    644,
-                    73,
-                    34
-                ],
-                "expected": [
-                    "快速",
-                    "战斗"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "next": [
-            "QuickBattleBegin",
-            "LVdown"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": -638,
-                "y": -412
-            }
-        }
-    },
-    "StartWarcraftRerunQuickBattle": {
-        "desc": "回归赛季魔兽快速战斗 · 入口（占位，等 MPE 补链路）",
-        "$note": "把真正的链路写进本节点的 next（当前为空 = 任务会立刻正常结束、什么都不做）。本节点是 tasks/WarcraftRerunQuickBattle.json 的 entry，改名的话记得同步 tasks 那边。",
-        "next": [
-            "InWarcraftRerun",
-            "[JumpBack]StartGame"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": -1370,
-                "y": -429
-            }
-        }
-    },
-    "WarcraftRerunReward": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    568,
-                    191,
-                    146,
-                    59
-                ],
-                "template": [
-                    "Hunt/REWARD.png"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    637,
-                    567
-                ]
-            }
-        },
-        "next": [
-            "StartGame"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": -125,
-                "y": -455
-            }
-        }
-    },
-    "LVdown": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    900,
-                    82,
-                    45,
-                    41
-                ],
-                "template": [
-                    "Warcraft/LVDown.png"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    922,
-                    102,
-                    1,
-                    1
-                ]
-            }
-        },
-        "next": [
-            "KillComplete",
-            "LVdown"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": -815,
-                "y": -782
             }
         }
     },
@@ -258,6 +116,152 @@
             "position": {
                 "x": -306,
                 "y": -787
+            }
+        }
+    },
+    "LVdown": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    900,
+                    82,
+                    45,
+                    41
+                ],
+                "template": [
+                    "Warcraft/LVDown.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    922,
+                    102,
+                    1,
+                    1
+                ]
+            }
+        },
+        "next": [
+            "KillComplete",
+            "LVdown"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -815,
+                "y": -782
+            }
+        }
+    },
+    "QuickBattleBegin": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    683,
+                    505,
+                    63,
+                    47
+                ],
+                "expected": [
+                    "确认"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "WarcraftRerunReward"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -419,
+                "y": -392
+            }
+        }
+    },
+    "RerunQuickBattle": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    817,
+                    644,
+                    73,
+                    34
+                ],
+                "expected": [
+                    "快速",
+                    "战斗"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "next": [
+            "QuickBattleBegin",
+            "LVdown"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -722,
+                "y": -397
+            }
+        }
+    },
+    "StartWarcraftRerunQuickBattle": {
+        "desc": "回归赛季魔兽快速战斗 · 入口（占位，等 MPE 补链路）",
+        "$note": "把真正的链路写进本节点的 next（当前为空 = 任务会立刻正常结束、什么都不做）。本节点是 tasks/WarcraftRerunQuickBattle.json 的 entry，改名的话记得同步 tasks 那边。",
+        "next": [
+            "InWarcraftRerun",
+            "[JumpBack]StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -1370,
+                "y": -429
+            }
+        }
+    },
+    "WarcraftRerunReward": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    568,
+                    191,
+                    146,
+                    59
+                ],
+                "template": [
+                    "Hunt/REWARD.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    637,
+                    567
+                ]
+            }
+        },
+        "next": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -125,
+                "y": -455
             }
         }
     }

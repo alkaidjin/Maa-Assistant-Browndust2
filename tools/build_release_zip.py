@@ -74,6 +74,10 @@ EXCLUDE_FILES = {
     'agent/start.bat', 'agent/start.py',   # agent 开发辅助脚本（写死 C:\Neowiz\... 本机游戏路径）
     'tools/make_icon.py',                  # 生成 mxu.ico / mxu_icon.png 的开发脚本
     'tools/apply_icon.ps1',                # 手动打图标工具（启动器内联 Apply-ExeIcon，不依赖它）
+    # MaaPipelineEditor（MPE）Desktop v2.0.0 在项目根生成的编辑器清单：里面全是
+    # 编辑器自身二进制的下载 URL 与 sha256，运行时（MXU / MaaFramework）根本不读它。
+    # 它既不该进用户包，也不该进仓库 —— 每位维护者装不同版本 MPE 就会变。
+    'm2.json',
     # 仓库元数据：collect() 对 EXCLUDE_FILES 是「相对路径 或 文件名」双匹配，
     # 所以这两项会连同嵌套的 git 元数据一起排除（如 resource/model/.gitignore，
     # 其内容只是 "ocr"，与根 .gitignore:29 重复）。这是预期行为 —— 用户包里不该有 git 元数据。
@@ -161,6 +165,8 @@ REQUIRED_FILES = [
     'resource/image/Absorb/S3.png', 'resource/image/Absorb/S4.png', 'resource/image/Absorb/S5.png',
     'resource/image/Absorb/S15.png',
     'resource/image/Sociaty/GONGHUI3.png',
+    # v26.09.12 新增：PVP「镜中之战」改从广场直接点入口，靠这张图定位入口按钮。
+    'resource/image/Square/PP.png',
     'resource/image/Warcraft/LVDown.png', 'resource/image/Warcraft/LVUP.png',
     # OCR 推理模型（README 第 4 节声明随 release zip 派发；仓库因体积不追踪）
     'resource/model/ocr/det.onnx', 'resource/model/ocr/rec.onnx', 'resource/model/ocr/keys.txt',

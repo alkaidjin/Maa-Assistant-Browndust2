@@ -16,6 +16,12 @@
 #      （被占用的文件覆盖会失败，那正是“更新完版本号却没变/装了一半”的根因）。
 #   4. 用户选“暂不更新”、或已是最新、或检测失败：直接启动 mxu.exe。
 #
+# 可回溯性（v26.09.11+）：更新全程写 debug/updater.log（BASE / 当前版本 / 缓存状态 /
+#   选中的 release 与资产 / 逐个下载源的结果与字节数 / 包身份校验 / 覆盖失败文件清单 /
+#   装前装后版本号 / 最终结论）。用户报「更新完版本号没变」时，让他把这份日志发回来即可定位。
+# 连不上 GitHub 时**不再完全静默**：日志会记下原因，并（最多每天一次）弹一条提示说明
+#   「本次没有做任何更新，当前仍是 vX」，附发布页入口。
+#
 # 最新版本的取法（v26.09.11 起）：先取 /releases/latest；若它还没有可用的 .zip
 #   （刚建 release、资产还在上传），退回到最近若干 release 里“版本最高且有可用 zip”的那个。
 #
@@ -101,8 +107,43 @@ if (Test-Path $CONFIG_FILE) {
 }
 
 # ----------------------------------------------------------------------------
+# TLS：GitHub 早已强制 TLS 1.2。老机器上的 Windows PowerShell 5.1 默认只开 Ssl3|Tls，
+#   不显式打开 Tls12 会直接连不上 api.github.com —— 表现为「更新检查毫无动静、版本号
+#   永远停在旧版」，而旧代码把这种失败静默吞掉了。这里只做「补开」，不动其它协议位。
+# ----------------------------------------------------------------------------
+try {
+    [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+} catch {
+    try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 } catch { }
+}
+
+# ----------------------------------------------------------------------------
 # 工具函数
 # ----------------------------------------------------------------------------
+function Write-UpdaterLog($msg) {
+    # 更新全程落盘（debug/updater.log）。为什么必须写：用户报「更新完版本号没变」时，
+    # 弹窗本来是唯一线索，可静默分支根本不弹窗 —— 没有日志就只能靠猜。
+    # 日志会被 Invoke-LogCleanup 按 log_retention_days 自然淘汰（持续追加所以时间戳常新）；
+    # 任何写失败都绝不阻断启动。
+    try {
+        $lf = Join-Path $BASE 'debug\updater.log'
+        $dir = Split-Path -Parent $lf
+        if (-not (Test-Path -LiteralPath $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
+        Add-Content -LiteralPath $lf -Value ('[{0}] {1}' -f (Get-Date -Format 'yyyy-MM-dd HH:mm:ss'), $msg) -Encoding UTF8 -ErrorAction Stop
+    } catch { }
+}
+
+function Initialize-UpdaterLog {
+    # 启动时做一次体积裁剪（>512 KB 只留最后 300 行），避免长期挂着把磁盘写满。
+    try {
+        $lf = Join-Path $BASE 'debug\updater.log'
+        if ((Test-Path -LiteralPath $lf) -and ((Get-Item -LiteralPath $lf).Length -gt 512KB)) {
+            $keep = @('...（日志已裁剪，仅保留最近 300 行）') + @(Get-Content -LiteralPath $lf -Tail 300 -ErrorAction Stop)
+            Set-Content -LiteralPath $lf -Value $keep -Encoding UTF8 -ErrorAction Stop
+        }
+    } catch { }
+}
+
 function Read-CurrentVersion {
     if (Test-Path $INTERFACE) {
         try {
@@ -462,6 +503,9 @@ function Start-DownloadOne($url, $dest, $totalBytes) {
     return $null
 }
 
+# 备注：单个源的下载结果由 Start-Download 统一记录（含实际字节数与校验结论），
+# 这里不再重复写日志 —— 避免一次下载产生两行互相矛盾的口径。
+
 # 校验下载结果是否是"完整且可解压的 zip"。
 # 为什么需要：部分 GitHub 加速镜像对失效直链会返回 HTTP 206/200 + text/html 的几 KB 错误页，
 #   WebClient 不会抛异常 —— 会被误判为"下载成功"，直到 Expand-Archive 才炸（报
@@ -507,13 +551,21 @@ function Start-Download($urls, $dest, $totalBytes) {
         $u = $list[$i]
         # 切下一个源前先清残留，避免 .new 的竞争
         if (Test-Path -LiteralPath $dest) { Remove-Item -LiteralPath $dest -Force -ErrorAction SilentlyContinue }
+        Write-UpdaterLog ('尝试下载源 [' + ($i + 1) + '/' + $list.Count + ']: ' + $u)
         $err = Start-DownloadOne $u $dest $totalBytes
         if (-not $err) {
             # 下载完成 ≠ 内容正确：镜像可能返回 HTML 错误页。校验通过才算成功，
             # 否则清掉残留、记下原因、继续尝试下一个源。
-            if (Test-ValidZip $dest $totalBytes) { return $null }
+            $gotBytes = 0
+            try { $gotBytes = (Get-Item -LiteralPath $dest).Length } catch { }
+            Write-UpdaterLog ('  下载返回成功，实际 ' + $gotBytes + ' bytes（期望 ' + $totalBytes + '）')
+            if (Test-ValidZip $dest $totalBytes) {
+                Write-UpdaterLog ('  校验通过（字节数 + zip 格式）')
+                return $null
+            }
             $err = ('文件校验失败（字节数或 zip 格式不符，源可能返回了错误页）')
         }
+        Write-UpdaterLog ('  该源失败: ' + $err)
         $lastErr = $err
         if (Test-Path -LiteralPath $dest) { Remove-Item -LiteralPath $dest -Force -ErrorAction SilentlyContinue }
         # 最后一源（官方）失败就不必继续
@@ -885,14 +937,21 @@ function Launch-Mxu {
 # 主流程
 # ----------------------------------------------------------------------------
 try {
+    Initialize-UpdaterLog
     $cache = Read-Cache
     $current = Read-CurrentVersion
+    Write-UpdaterLog ('==== 启动器启动 ==== 参数=[' + (($PSBoundParameters.Keys | ForEach-Object { '-' + $_ }) -join ' ') + '] PS=' + $PSVersionTable.PSVersion.ToString())
+    Write-UpdaterLog ('BASE=' + $BASE)
+    Write-UpdaterLog ('当前版本=' + $current + '  缓存 latest_tag=' + $cache.latest_tag)
     # 清理旧版遗留的说明文档 / 教学视频（幂等、静默）。放在主流程最前面：
     # 之后的每个分支（-Test / 无网络 / 不更新 / 更新）都能覆盖到。
     Remove-RetiredFiles $BASE $cfg
 
     $iv = [timespan]::FromHours($cfg['check_interval_hours']).Ticks
     $needCheck = $Force -or $Demo -or $Test -or $Repair -or ((Get-Date).Ticks - $cache.last_check_ts) -gt $iv
+    $minsSince = 0
+    try { $minsSince = [int](((Get-Date).Ticks - [int64]$cache.last_check_ts) / [timespan]::TicksPerMinute) } catch { }
+    Write-UpdaterLog ('needCheck=' + $needCheck + '（距上次检查 ' + $minsSince + ' 分钟 / 间隔 ' + $cfg['check_interval_hours'] + ' 小时）')
 
     $release = $null
     $asset = $null
@@ -905,13 +964,19 @@ try {
             $cache.last_check_ts = (Get-Date).Ticks
             $cache.latest_tag = $release.tag_name
             Save-Cache $cache
+            Write-UpdaterLog ('检测到 release=' + $release.tag_name + '  资产=' + $(if ($asset) { $asset.name + ' (' + $asset.size + ' bytes)' } else { '无可用 zip' }))
         } catch {
             $release = $null
             $asset = $null
+            Write-UpdaterLog ('[失败] 版本检测异常: ' + $_.Exception.Message)
+            if ($_.Exception.Message -match '403|429|rate limit|禁止|禁止访问') {
+                Write-UpdaterLog ('[提示] 疑似 GitHub API 未认证限流（60 次/小时/IP）或被网络策略拦截')
+            }
         }
     }
 
     if ($Test) {
+        Write-UpdaterLog ('-Test 模式：只打印不动作')
         Write-Host "== BD2MAA Updater 逻辑自检 =="
         Write-Host ("当前版本 (interface.json): {0}" -f $current)
         if ($release) {
@@ -929,10 +994,31 @@ try {
         return
     }
 
-    # 无法检测更新：直接进入软件
-    if (-not $release) { Launch-Mxu; return }
+    # 无法检测更新：以前完全静默（用户会以为"更新过了、但版本号没变"）。
+    # 现在至少留证据，并在"确实跑了检测却失败"时明确告知（同一天只打扰一次）。
+    if (-not $release) {
+        Write-UpdaterLog ('未取到版本信息 → 直接以旧版本启动（当前 ' + $current + '）；本次没有做任何更新')
+        if ($needCheck) {
+            $lastNotify = 0
+            try { $lastNotify = [int64]$cache.last_notify_ts } catch { $lastNotify = 0 }
+            if (((Get-Date).Ticks - $lastNotify) -gt [timespan]::FromHours(24).Ticks) {
+                $cache.last_notify_ts = (Get-Date).Ticks
+                Save-Cache $cache
+                $r = [System.Windows.Forms.MessageBox]::Show(
+                    ("没能连上 GitHub 检查更新（网络不可达 / 被限流 / 需要代理）。`n`n" +
+                     "本次没有做任何更新，你现在的版本仍是 $current。`n`n" +
+                     "点「确定」= 前往发布页手动下载`n点「取消」= 直接打开软件"),
+                    'BD2MAA · 未能检查更新', 'OKCancel', 'Warning')
+                if ($r -eq 'OK') { Start-Process ('https://github.com/' + $cfg['repo'] + '/releases/latest') }
+                Write-UpdaterLog ('已提示用户"未能检查更新"')
+            }
+        }
+        Launch-Mxu
+        return
+    }
 
     $hasUpdate = (Compare-Version $release.tag_name $current) -gt 0
+    Write-UpdaterLog ('版本比较: 最新=' + $release.tag_name + ' 当前=' + $current + ' → hasUpdate=' + $hasUpdate)
     if ($Demo) { $hasUpdate = $true }
     if ($Repair) {
         $ask = [System.Windows.Forms.MessageBox]::Show(
@@ -958,10 +1044,15 @@ try {
     }
 
     $doUpdate = Show-UpdateDialog $release $current
+    Write-UpdaterLog ('更新弹窗结果: ' + $(if ($doUpdate) { '用户点了「一键更新」' } else { '跳过（点了「暂不更新」或 20 秒无操作自动关闭）' }))
     if (-not $doUpdate) { Launch-Mxu; return }
 
     # 更新前先关掉正在运行的软件：进程占用文件会让覆盖失败，产出“更新完版本号却没变”的半截状态
-    if (-not (Stop-RunningMxu)) { Launch-Mxu; return }
+    if (-not (Stop-RunningMxu)) {
+        Write-UpdaterLog ('用户拒绝了"关闭软件后再更新" → 取消更新，本次不覆盖任何文件')
+        Launch-Mxu
+        return
+    }
 
     $ddir = Join-Path $BASE $cfg['download_dir']
     New-Item -ItemType Directory -Path $ddir -Force | Out-Null
@@ -969,8 +1060,11 @@ try {
 
     # 生成候选下载 URL：配置的镜像前缀按顺序尝试，官方原 URL 放最后兜底
     $urls = ConvertTo-DownloadUrls $asset.browser_download_url $cfg
+    Write-UpdaterLog ('下载目标: ' + $dest + '  期望字节数=' + ([int]($asset.size)))
+    Write-UpdaterLog ('候选下载源 ' + @($urls).Count + ' 个: ' + ((@($urls) | ForEach-Object { Shorten-Url $_ }) -join ' | '))
     $err = Start-Download $urls $dest ([int]($asset.size))
     if ($err) {
+        Write-UpdaterLog ('[失败] 所有下载源均未成功: ' + $err)
         [System.Windows.Forms.MessageBox]::Show(
             ("下载失败：{0}`n请前往发布页手动下载。" -f $err), "更新失败", 'OK', 'Error')
         Start-Process $release.html_url
@@ -984,11 +1078,15 @@ try {
     $tmp = Join-Path $env:TEMP ("BD2MAA_update_" + [guid]::NewGuid().ToString('N'))
     $problems = @()
     try {
+        Write-UpdaterLog ('解压到: ' + $tmp)
         Expand-Archive -Path $dest -DestinationPath $tmp -Force
         $srcRoot = Find-ProjectRoot $tmp
+        $pkgCount = @(Get-ChildItem -Path $srcRoot -Recurse -File -ErrorAction SilentlyContinue).Count
+        Write-UpdaterLog ('解压完成，包根=' + $srcRoot + '，文件数=' + $pkgCount)
 
         # [装前] 包的身份必须对得上：包内 interface.json 版本 == release 的 tag，且含 mxu.exe
         $pkg = Test-PackageIdentity $srcRoot $release.tag_name
+        Write-UpdaterLog ('[装前] 包身份校验: ok=' + $pkg.ok + ' 包内版本=' + $pkg.inner + ' 期望=' + $release.tag_name + $(if (-not $pkg.ok) { ' 原因=' + $pkg.why } else { '' }))
         if (-not $pkg.ok) {
             [System.Windows.Forms.MessageBox]::Show(
                 ("这次下载到的包身份不符：$($pkg.why)。`n`n" +
@@ -1002,6 +1100,7 @@ try {
         }
 
         $fail = @(Copy-Update $srcRoot $BASE $cfg)
+        Write-UpdaterLog ('覆盖完成，失败文件 ' + $fail.Count + ' 个' + $(if ($fail.Count -gt 0) { ': ' + ($fail -join '、') } else { '' }))
         ReInject-XLaunch $BASE
         # 更新完成后立刻清理旧版遗留文件：retired_files.json 也刚被覆盖成新版，
         # 所以这一步用的就是本次发布的最新清单（清单之外的旧文件不动）。
@@ -1009,15 +1108,20 @@ try {
 
         # [装后] 复核：磁盘上的版本号与关键文件是否真的就位
         $problems = @(Test-InstalledVersion $BASE $release.tag_name)
+        Write-UpdaterLog ('[装后] 复核: 磁盘版本=' + (Read-CurrentVersion) + ' 期望=' + $release.tag_name + ' 问题数=' + $problems.Count + $(if ($problems.Count -gt 0) { ': ' + ($problems -join ' / ') } else { '' }))
         if ($fail.Count -gt 0) {
             $problems = @('以下文件未能覆盖（多半被杀毒软件或其它程序占用）：' + ($fail -join '、')) + $problems
         }
     } catch {
+        Write-UpdaterLog ('[失败] 解压或覆盖阶段异常: ' + $_.Exception.Message)
+        Write-UpdaterLog ('  位置: 第 ' + $_.InvocationInfo.ScriptLineNumber + ' 行 :: ' + ($_.InvocationInfo.Line -replace "`r?`n", ' '))
         # 注意：$dest 会在 finally 里被清掉，所以这里不要再让用户"手动解压该文件"。
         [System.Windows.Forms.MessageBox]::Show(
-            ("解压或覆盖失败：{0}`n`n可重新启动 launcher.bat 再试一次（会自动切换下载源）；`n" +
+            # 注意：多段字符串拼接后再 -f，必须把整个拼接括起来 —— `-f` 优先级高于 `+`，
+            # 不括就只格式化最后一段，前面的 {0} 会原样显示成 "{0}"（本行就是踩过这个坑改的）。
+            (("解压或覆盖失败：{0}`n`n可重新启动 launcher.bat 再试一次（会自动切换下载源）；`n" +
              "若反复出现，请先关闭软件（mxu.exe）与杀毒软件的实时防护，再用 `"launcher.bat -Repair`" 重新下载；`n" +
-             "也可以点「确定」前往发布页手动下载：{1}" -f $_.Exception.Message, $release.html_url),
+             "也可以点「确定」前往发布页手动下载：{1}") -f $_.Exception.Message, $release.html_url),
             "更新失败", 'OKCancel', 'Error') | Out-Null
         Start-Process $release.html_url
         Launch-Mxu
@@ -1028,12 +1132,14 @@ try {
     }
 
     if ($problems.Count -gt 0) {
+        Write-UpdaterLog ('[结论] 更新未完成（目标 ' + $release.tag_name + '）：' + ($problems -join ' / '))
         [System.Windows.Forms.MessageBox]::Show(
             ("更新没有完整完成（本次目标是 $($release.tag_name)）：`n`n - " + ($problems -join "`n - ") +
              "`n`n建议：1) 先关闭本软件与杀毒软件的实时防护；2) 运行 `"launcher.bat -Repair`" 重新下载并覆盖；`n" +
              "3) 仍不行就前往发布页手动下载压缩包，解压到本软件目录覆盖。"),
             '更新未完成', 'OK', 'Error')
     } else {
+        Write-UpdaterLog ('[结论] 更新完成，已应用到 ' + $release.tag_name)
         [System.Windows.Forms.MessageBox]::Show(
             ("更新完成！已应用到 $($release.tag_name)，你的 config/ 配置已保留。"),
             "更新完成", 'OK', 'Information')
@@ -1041,7 +1147,19 @@ try {
     Launch-Mxu
 
 } catch {
-    # 任何异常都不应阻断用户进入软件
+    # 任何异常都不应阻断用户进入软件。
+    # 但**绝不能再静默**：旧版这里什么都不说，用户看到的就是"跑了更新、版本号却没变"，
+    # 本人也无从排查。现在写日志 + 给一条明确提示。
+    try {
+        Write-UpdaterLog ('[严重] 主流程未捕获异常: ' + $_.Exception.Message)
+        Write-UpdaterLog ('  位置: 第 ' + $_.InvocationInfo.ScriptLineNumber + ' 行 :: ' + ($_.InvocationInfo.Line -replace "`r?`n", ' '))
+        Write-UpdaterLog ('  当前版本=' + (Read-CurrentVersion) + '（若与最新版不一致，说明本次更新并未生效）')
+        [System.Windows.Forms.MessageBox]::Show(
+            (("启动器在检查 / 更新过程中出错了，本次可能没有完成更新。`n`n" +
+             "错误：{0}`n`n当前版本仍是 {1}。详细信息已写入 debug\updater.log。`n`n" +
+             "可以重新运行 launcher.bat 再试一次；也可用 `"launcher.bat -Repair`" 重新下载并覆盖。") -f $_.Exception.Message, (Read-CurrentVersion)),
+            'BD2MAA · 启动器出错', 'OK', 'Warning')
+    } catch { }
     try { Launch-Mxu } catch { }
 }
 

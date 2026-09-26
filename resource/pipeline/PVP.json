@@ -3,24 +3,24 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790181091027,
+            "lastSyncTime": 1790389222241,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\PVP.json",
             "savedViewport": {
-                "x": -2415,
-                "y": 217,
-                "zoom": 1.5
+                "x": 668,
+                "y": 182,
+                "zoom": 1
             },
             "filename": "PVP",
-            "version": "v1.10.1"
+            "version": "v2.0.0"
         }
     },
     "$__mpe_external_StartGame_PVP": {
         "$__mpe_code": {
             "position": {
-                "x": 128,
-                "y": -96
+                "x": 54,
+                "y": -250
             }
         }
     },
@@ -126,8 +126,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 510,
-                "y": 250
+                "x": 469,
+                "y": 272
             }
         }
     },
@@ -167,6 +167,7 @@
         }
     },
     "ClickAuto": {
+        "max_hit": 2,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -189,13 +190,15 @@
                 ]
             }
         },
+        "post_delay": 1500,
         "next": [
-            "SetFree"
+            "SetFree",
+            "ClickAuto"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2233,
-                "y": 744
+                "x": 2214,
+                "y": 535
             }
         }
     },
@@ -283,7 +286,9 @@
             "param": {
                 "target": [
                     110,
-                    181
+                    170,
+                    1,
+                    1
                 ]
             }
         },
@@ -295,8 +300,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": -304,
-                "y": 198
+                "x": -363,
+                "y": 228
             }
         }
     },
@@ -357,8 +362,17 @@
             }
         },
         "action": {
-            "type": "Click"
+            "type": "Click",
+            "param": {
+                "target": [
+                    774,
+                    187,
+                    1,
+                    1
+                ]
+            }
         },
+        "repeat": 2,
         "timeout": 10000,
         "next": [
             "CHooseCrad",
@@ -366,8 +380,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": -41,
-                "y": 203
+                "x": -87,
+                "y": 296
             }
         }
     },
@@ -382,9 +396,9 @@
                     33
                 ],
                 "expected": [
-                    "游戏卡带",
-                    "玩法游戏",
-                    "战斗玩法",
+                    "卡带",
+                    "游戏",
+                    "玩法",
                     "战斗"
                 ]
             }
@@ -393,15 +407,14 @@
             "type": "Click"
         },
         "repeat": 2,
-        "repeat_delay": 1500,
         "next": [
             "EnterPVP",
             "FightGameCard"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 748,
-                "y": 242
+                "x": 739,
+                "y": 218
             }
         }
     },
@@ -560,14 +573,15 @@
                 "end_hold": 1000
             }
         },
+        "post_delay": 3000,
         "next": [
             "ClickAuto",
             "MovePVP"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2216,
-                "y": 481
+                "x": 1937,
+                "y": 398
             }
         }
     },
@@ -745,8 +759,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2517,
-                "y": 625
+                "x": 2500,
+                "y": 528
             }
         }
     },
@@ -783,8 +797,7 @@
     },
     "StartPVP": {
         "next": [
-            "MovePVP",
-            "CHooseCrad",
+            "广场跳转镜中之战",
             "EnterOperating_2",
             "[JumpBack]StartGame"
         ],
@@ -926,6 +939,43 @@
             }
         }
     },
+    "广场跳转镜中之战": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    484,
+                    620,
+                    87,
+                    100
+                ],
+                "template": [
+                    "Square/PP.png"
+                ],
+                "green_mask": true
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    528,
+                    666,
+                    1,
+                    1
+                ]
+            }
+        },
+        "next": [
+            "FightGameCard"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 174,
+                "y": -92
+            }
+        }
+    },
     "消耗MIN": {
         "recognition": {
             "type": "OCR",
@@ -990,8 +1040,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 258,
-                "y": 420
+                "x": 191,
+                "y": 456
             }
         }
     },
