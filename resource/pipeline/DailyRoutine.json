@@ -3,24 +3,24 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790299541115,
+            "lastSyncTime": 1790555126561,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\DailyRoutine.json",
+            "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\DailyRoutine.json",
             "savedViewport": {
-                "x": 153,
-                "y": 58,
-                "zoom": 0.57
+                "x": -567,
+                "y": -576,
+                "zoom": 0.76
             },
             "filename": "DailyRoutine",
-            "version": "v1.10.1"
+            "version": "v2.0.3"
         }
     },
     "$__mpe_external_StartGame_DailyRoutine": {
         "$__mpe_code": {
             "position": {
-                "x": 3169,
-                "y": 453
+                "x": 2269,
+                "y": 1038
             }
         }
     },
@@ -310,14 +310,17 @@
                 ]
             }
         },
-        "timeout": 15000,
+        "timeout": 12000,
         "next": [
             "MoveSquare"
         ],
+        "on_error": [
+            "SquareEnd"
+        ],
         "$__mpe_code": {
             "position": {
-                "x": 1049,
-                "y": 1205
+                "x": 1059,
+                "y": 1257
             }
         }
     },
@@ -379,7 +382,8 @@
         "post_delay": 1500,
         "next": [
             "GetSquare",
-            "GetDaily_3"
+            "GetDaily_3",
+            "SquareEnd"
         ],
         "$__mpe_code": {
             "position": {
@@ -409,7 +413,8 @@
         "post_delay": 1500,
         "next": [
             "GetDaily_3",
-            "GetSquare"
+            "GetSquare",
+            "SquareEnd"
         ],
         "$__mpe_code": {
             "position": {
@@ -601,8 +606,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1299,
-                "y": 1260
+                "x": 1351,
+                "y": 1245
             }
         }
     },
@@ -665,6 +670,14 @@
             "position": {
                 "x": 1820,
                 "y": 260
+            }
+        }
+    },
+    "SquareEnd": {
+        "$__mpe_code": {
+            "position": {
+                "x": 1843,
+                "y": 1337
             }
         }
     },

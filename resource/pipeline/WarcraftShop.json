@@ -3,24 +3,24 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1789718922082,
+            "lastSyncTime": 1790557679078,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\WarcraftShop.json",
+            "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\WarcraftShop.json",
             "savedViewport": {
-                "x": -2467,
-                "y": 63,
-                "zoom": 0.87
+                "x": -2702,
+                "y": -418,
+                "zoom": 0.66
             },
             "filename": "WarcraftShop",
-            "version": "v1.10.1"
+            "version": "v2.0.3"
         }
     },
     "$__mpe_external_StartGame_WarcraftShop": {
         "$__mpe_code": {
             "position": {
-                "x": 3488,
-                "y": -67
+                "x": 5720,
+                "y": 1301
             }
         }
     },
@@ -49,7 +49,9 @@
             "param": {
                 "target_offset": [
                     36,
-                    35
+                    35,
+                    -83,
+                    -120
                 ]
             }
         },
@@ -86,7 +88,9 @@
             "param": {
                 "target_offset": [
                     26,
-                    27
+                    28,
+                    -66,
+                    -116
                 ]
             }
         },
@@ -121,8 +125,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 5948,
-                "y": 217
+                "x": 6021,
+                "y": 153
             }
         }
     },
@@ -299,8 +303,10 @@
             "type": "Click",
             "param": {
                 "target_offset": [
-                    24,
-                    23
+                    33,
+                    27,
+                    -64,
+                    -114
                 ]
             }
         },
@@ -340,7 +346,9 @@
             "param": {
                 "target_offset": [
                     28,
-                    28
+                    28,
+                    -67,
+                    -115
                 ]
             }
         },
@@ -447,7 +455,9 @@
             "param": {
                 "target_offset": [
                     24,
-                    24
+                    24,
+                    -68,
+                    -115
                 ]
             }
         },
@@ -487,7 +497,9 @@
             "param": {
                 "target_offset": [
                     28,
-                    28
+                    28,
+                    -68,
+                    -115
                 ]
             }
         },
@@ -527,7 +539,9 @@
             "param": {
                 "target_offset": [
                     24,
-                    20
+                    20,
+                    -71,
+                    -117
                 ]
             }
         },
@@ -567,7 +581,9 @@
             "param": {
                 "target_offset": [
                     33,
-                    33
+                    33,
+                    -69,
+                    -118
                 ]
             }
         },
@@ -577,8 +593,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 4964,
-                "y": -437
+                "x": 4965,
+                "y": -523
             }
         }
     },
@@ -607,7 +623,9 @@
             "param": {
                 "target_offset": [
                     30,
-                    23
+                    23,
+                    -89,
+                    -113
                 ]
             }
         },
@@ -826,8 +844,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5619,
-                "y": 196
+                "x": 5650,
+                "y": 143
             }
         }
     },
@@ -856,7 +874,9 @@
             "param": {
                 "target_offset": [
                     35,
-                    35
+                    35,
+                    -76,
+                    -116
                 ]
             }
         },
@@ -896,7 +916,9 @@
             "param": {
                 "target_offset": [
                     27,
-                    27
+                    27,
+                    -65,
+                    -118
                 ]
             }
         },
@@ -984,9 +1006,12 @@
     },
     "WarcraftShopBuyLeft": {
         "desc": "剩余代币购买不限量物品选择",
-        "timeout": 10000,
+        "timeout": 5000,
         "next": [
             "WarcraftShopDone"
+        ],
+        "on_error": [
+            "StartGame"
         ],
         "$__mpe_code": {
             "position": {
@@ -1116,8 +1141,10 @@
             "type": "Click",
             "param": {
                 "target_offset": [
-                    30,
-                    32
+                    34,
+                    31,
+                    -68,
+                    -119
                 ]
             }
         },

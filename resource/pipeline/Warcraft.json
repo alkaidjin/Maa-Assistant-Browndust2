@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1789868814889,
+            "lastSyncTime": 1790492183418,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Warcraft.json",
+            "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\Warcraft.json",
             "savedViewport": {
-                "x": -2700,
-                "y": -570,
-                "zoom": 1.25
+                "x": -992,
+                "y": 40,
+                "zoom": 0.82
             },
             "filename": "Warcraft",
-            "version": "v1.10.1"
+            "version": "v2.0.1"
         }
     },
     "$__mpe_external_StartGame_Warcraft": {
@@ -43,8 +43,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 2291,
-                "y": -147
+                "x": 2882,
+                "y": -77
             }
         }
     },
@@ -288,7 +288,6 @@
         }
     },
     "WarcraftBattleChoose": {
-        "max_hit": 2,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -316,11 +315,11 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "repeat": 2,
+        "repeat_delay": 1000,
+        "post_delay": 1500,
         "next": [
-            "WarcraftBattleChoose",
-            "WarcraftQuickBattle",
-            "返回活动主页2"
+            "WarcraftQuickBattle"
         ],
         "$__mpe_code": {
             "position": {
@@ -443,13 +442,15 @@
         "action": {
             "type": "Click"
         },
+        "post_delay": 1500,
         "next": [
-            "WarcraftSetMax"
+            "WarcraftSetMax",
+            "活动AP已使用_1"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1129,
-                "y": 409
+                "x": 1126,
+                "y": 332
             }
         }
     },
@@ -772,12 +773,13 @@
             "type": "Click"
         },
         "next": [
-            "战斗倍率MAX"
+            "战斗倍率MAX",
+            "活动AP已使用_1"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 573,
-                "y": -133
+                "x": 548,
+                "y": -131
             }
         }
     },
@@ -805,7 +807,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "WarcraftQuickBattle",
             "返回活动主页1"
@@ -934,6 +936,45 @@
             "position": {
                 "x": 251,
                 "y": -159
+            }
+        }
+    },
+    "活动AP已使用_1": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    575,
+                    245,
+                    126,
+                    40
+                ],
+                "expected": [
+                    "活动AP不足",
+                    "AP不足",
+                    "活动AP"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    584,
+                    460,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "next": [
+            "返回活动主页2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1486,
+                "y": 242
             }
         }
     }

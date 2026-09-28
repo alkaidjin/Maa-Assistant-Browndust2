@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790187033990,
+            "lastSyncTime": 1790494998683,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\AbsorpAssembleRound2.json",
+            "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\AbsorpAssembleRound2.json",
             "savedViewport": {
-                "x": 371,
-                "y": -261,
-                "zoom": 0.57
+                "x": 1533,
+                "y": -3791,
+                "zoom": 1.25
             },
             "filename": "AbsorpAssembleRound2",
-            "version": "v1.10.1"
+            "version": "v2.0.1"
         }
     },
     "$__mpe_external_StartGame_AbsorpAssembleRound2": {
@@ -196,8 +196,8 @@
             "type": "Click",
             "param": {
                 "target_offset": [
-                    30,
-                    14,
+                    31,
+                    13,
                     -73,
                     -33
                 ]
@@ -389,9 +389,9 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    768,
+                    551,
                     610,
-                    458,
+                    673,
                     78
                 ],
                 "template": [
@@ -407,8 +407,8 @@
             "type": "Click",
             "param": {
                 "target_offset": [
-                    26,
-                    14,
+                    24,
+                    12,
                     -68,
                     -29
                 ]
@@ -658,8 +658,10 @@
             "type": "Click",
             "param": {
                 "target_offset": [
-                    34,
-                    15
+                    24,
+                    16,
+                    -67,
+                    -29
                 ]
             }
         },
@@ -738,10 +740,10 @@
             "type": "Click",
             "param": {
                 "target_offset": [
-                    23,
+                    25,
                     12,
-                    -69,
-                    -34
+                    -68,
+                    -33
                 ]
             }
         },
@@ -754,8 +756,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": -480,
-                "y": 1473
+                "x": -481,
+                "y": 1426
             }
         }
     },
@@ -823,7 +825,7 @@
                     23,
                     12,
                     -69,
-                    -34
+                    -28
                 ]
             }
         },
@@ -902,9 +904,9 @@
             "type": "Click",
             "param": {
                 "target_offset": [
-                    23,
-                    12,
-                    -69,
+                    35,
+                    14,
+                    -73,
                     -34
                 ]
             }
@@ -918,8 +920,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": -494,
-                "y": 2268
+                "x": -497,
+                "y": 2250
             }
         }
     },
@@ -984,9 +986,9 @@
             "type": "Click",
             "param": {
                 "target_offset": [
-                    23,
-                    12,
-                    -69,
+                    28,
+                    15,
+                    -74,
                     -34
                 ]
             }
@@ -1424,8 +1426,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": -794,
-                "y": 1470
+                "x": -867,
+                "y": 1416
             }
         }
     },

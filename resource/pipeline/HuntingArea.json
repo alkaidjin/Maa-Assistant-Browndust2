@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790097375844,
+            "lastSyncTime": 1790561370223,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\HuntingArea.json",
+            "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\HuntingArea.json",
             "savedViewport": {
-                "x": -753,
-                "y": 232,
-                "zoom": 0.33
+                "x": -5854,
+                "y": 39,
+                "zoom": 0.87
             },
             "filename": "HuntingArea",
-            "version": "v1.10.1"
+            "version": "v2.0.3"
         }
     },
     "$__mpe_external_StartGame_HuntingArea": {
@@ -153,7 +153,10 @@
                     65,
                     26
                 ],
-                "expected": "快速狩猎",
+                "expected": [
+                    "快速狩猎",
+                    "快速狩"
+                ],
                 "threshold": 0.5
             }
         },
@@ -188,7 +191,10 @@
                     95,
                     35
                 ],
-                "expected": "快速狩猎",
+                "expected": [
+                    "快速狩猎",
+                    "快速狩"
+                ],
                 "threshold": 0.6
             }
         },
@@ -218,7 +224,8 @@
                     33
                 ],
                 "expected": [
-                    "快速狩猎"
+                    "快速狩猎",
+                    "快速狩"
                 ],
                 "threshold": 0.6
             }
@@ -248,7 +255,10 @@
                     95,
                     35
                 ],
-                "expected": "快速狩猎",
+                "expected": [
+                    "快速狩猎",
+                    "快速狩"
+                ],
                 "threshold": 0.6
             }
         },

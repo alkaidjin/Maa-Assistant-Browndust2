@@ -3,134 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790391552718,
+            "lastSyncTime": 1790561281139,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\RewardRoutine.json",
             "savedViewport": {
-                "x": 278,
-                "y": -1038,
-                "zoom": 2.3
+                "x": -280,
+                "y": -100,
+                "zoom": 0.87
             },
             "filename": "RewardRoutine",
-            "version": "v2.0.0"
-        }
-    },
-    "ActivityTask_2": {
-        "max_hit": 8,
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    215,
-                    266,
-                    134,
-                    90
-                ],
-                "expected": [
-                    "Pickup活动任务",
-                    "成长任务",
-                    "助力任务",
-                    "活动任务",
-                    "活动兑换所",
-                    "转盘",
-                    "骰子游戏"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_delay": 1500,
-        "next": [
-            "GetAllrewards",
-            "ExChange100_1",
-            "免费次数",
-            "RollTheDice"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": -29,
-                "y": 637
-            }
-        }
-    },
-    "ActivityTask_3": {
-        "max_hit": 5,
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    215,
-                    326,
-                    134,
-                    90
-                ],
-                "expected": [
-                    "Pickup活动任务",
-                    "成长任务",
-                    "助力任务",
-                    "活动任务",
-                    "活动兑换所",
-                    "转盘",
-                    "骰子游戏"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_delay": 1500,
-        "next": [
-            "GetAllrewards",
-            "ExChange100_1",
-            "免费次数",
-            "RollTheDice"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": -29,
-                "y": 786
-            }
-        }
-    },
-    "ActivityTask_4": {
-        "max_hit": 3,
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    215,
-                    386,
-                    134,
-                    90
-                ],
-                "expected": [
-                    "Pickup活动任务",
-                    "成长任务",
-                    "助力任务",
-                    "活动任务",
-                    "活动兑换所",
-                    "转盘",
-                    "骰子游戏"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_delay": 1500,
-        "next": [
-            "GetAllrewards",
-            "ExChange100_1",
-            "免费次数",
-            "RollTheDice"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": -27,
-                "y": 945
-            }
+            "version": "v2.0.3"
         }
     },
     "$__mpe_external_StartGame_RewardRoutine": {
@@ -138,45 +21,6 @@
             "position": {
                 "x": 2471,
                 "y": 1006
-            }
-        }
-    },
-    "ActivityTask_1": {
-        "max_hit": 8,
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    215,
-                    176,
-                    134,
-                    90
-                ],
-                "expected": [
-                    "Pickup活动任务",
-                    "成长任务",
-                    "助力任务",
-                    "活动任务",
-                    "活动兑换所",
-                    "转盘",
-                    "骰子游戏"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_delay": 1500,
-        "next": [
-            "GetAllrewards",
-            "ExChange100_1",
-            "免费次数",
-            "RollTheDice"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": -31,
-                "y": 491
             }
         }
     },
@@ -417,8 +261,10 @@
                     62
                 ],
                 "expected": [
-                    "全部领取",
-                    "全部解锁"
+                    "全部",
+                    "领取",
+                    "解锁",
+                    "全部领"
                 ]
             }
         },
@@ -435,8 +281,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 647,
-                "y": 447
+                "x": 644,
+                "y": 442
             }
         }
     },
@@ -461,17 +307,17 @@
         "post_delay": 3000,
         "timeout": 10000,
         "next": [
-            "[JumpBack]感叹号检测",
-            "[JumpBack]往下滑动再检测",
-            "[JumpBack]往上滑动再检测"
+            "[JumpBack]检测感叹号",
+            "[JumpBack]往下滑动",
+            "[JumpBack]往上滑动"
         ],
         "on_error": [
             "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": -1460,
-                "y": 538
+                "x": -1301,
+                "y": 425
             }
         }
     },
@@ -797,7 +643,7 @@
                 ]
             }
         },
-        "post_delay": 30000,
+        "post_delay": 25000,
         "next": [
             "EVENTSWIPE"
         ],
@@ -809,14 +655,41 @@
         }
     },
     "StartMail": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    188,
+                    21,
+                    69,
+                    26
+                ],
+                "expected": [
+                    "通行证"
+                ]
+            }
+        },
+        "pre_delay": 1000,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    115,
+                    30,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 1500,
         "next": [
             "EnterMail",
             "[JumpBack]StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3955,
-                "y": 152
+                "x": 3864,
+                "y": 21
             }
         }
     },
@@ -867,9 +740,7 @@
                     24
                 ],
                 "expected": [
-                    "特别",
-                    "赛季",
-                    "通行证"
+                    "赛季通行证"
                 ]
             }
         },
@@ -877,10 +748,10 @@
             "type": "Click",
             "param": {
                 "target": [
-                    271,
-                    277,
-                    17,
-                    10
+                    280,
+                    283,
+                    1,
+                    1
                 ]
             }
         },
@@ -891,8 +762,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3120,
-                "y": 0
+                "x": 3113,
+                "y": -6
             }
         }
     },
@@ -908,10 +779,8 @@
                     22
                 ],
                 "expected": [
-                    "特别",
-                    "赛季",
-                    "通行证",
-                    "角色"
+                    "赛季通行证",
+                    "角色通行证"
                 ]
             }
         },
@@ -919,10 +788,10 @@
             "type": "Click",
             "param": {
                 "target": [
-                    265,
-                    350,
-                    24,
-                    13
+                    286,
+                    354,
+                    1,
+                    1
                 ]
             }
         },
@@ -933,8 +802,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3362,
-                "y": -18
+                "x": 3365,
+                "y": -6
             }
         }
     },
@@ -959,10 +828,10 @@
             "type": "Click",
             "param": {
                 "target": [
-                    274,
-                    421,
-                    20,
-                    7
+                    282,
+                    425,
+                    1,
+                    1
                 ]
             }
         },
@@ -973,8 +842,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3640,
-                "y": -10
+                "x": 3610,
+                "y": -7
             }
         }
     },
@@ -1063,77 +932,13 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1300,
-                "y": 0
+                "x": 1185,
+                "y": -307
             }
         }
     },
-    "感叹号检测": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    334,
-                    177,
-                    15,
-                    370
-                ],
-                "template": [
-                    "Event/ERTIP.png"
-                ],
-                "green_mask": true,
-                "threshold": [
-                    0.6
-                ]
-            }
-        },
-        "next": [
-            "ActivityTask_1",
-            "ActivityTask_2",
-            "ActivityTask_3",
-            "ActivityTask_4"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": -419,
-                "y": 529
-            }
-        }
-    },
-    "往下滑动再检测": {
-        "max_hit": 4,
-        "action": {
-            "type": "Swipe",
-            "param": {
-                "begin": [
-                    280,
-                    530
-                ],
-                "end": [
-                    [
-                        280,
-                        350
-                    ]
-                ],
-                "end_hold": [
-                    1000
-                ]
-            }
-        },
-        "timeout": 5000,
-        "next": [
-            "[JumpBack]感叹号检测",
-            "往下滑动再检测"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": -962,
-                "y": 287
-            }
-        }
-    },
-    "往上滑动再检测": {
-        "max_hit": 4,
+    "往上滑动": {
+        "max_hit": 3,
         "action": {
             "type": "Swipe",
             "param": {
@@ -1153,14 +958,80 @@
             }
         },
         "timeout": 5000,
+        "$__mpe_code": {
+            "position": {
+                "x": -616,
+                "y": 998
+            }
+        }
+    },
+    "往下滑动": {
+        "max_hit": 3,
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    280,
+                    530
+                ],
+                "end": [
+                    [
+                        280,
+                        350
+                    ]
+                ],
+                "end_hold": [
+                    1000
+                ]
+            }
+        },
+        "timeout": 5000,
+        "$__mpe_code": {
+            "position": {
+                "x": -618,
+                "y": 671
+            }
+        }
+    },
+    "检测感叹号": {
+        "max_hit": 12,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    333,
+                    176,
+                    16,
+                    350
+                ],
+                "template": [
+                    "Event/ERTIP.png"
+                ],
+                "green_mask": true
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    -18,
+                    12,
+                    -11,
+                    -11
+                ]
+            }
+        },
+        "post_delay": 1500,
         "next": [
-            "[JumpBack]感叹号检测",
-            "往上滑动再检测"
+            "GetAllrewards",
+            "ExChange100_1",
+            "免费次数",
+            "RollTheDice"
         ],
         "$__mpe_code": {
             "position": {
-                "x": -966,
-                "y": 860
+                "x": -322,
+                "y": 485
             }
         }
     }

@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790139998193,
+            "lastSyncTime": 1790490909800,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\StartGame.json",
+            "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\StartGame.json",
             "savedViewport": {
-                "x": 1332,
-                "y": -464,
-                "zoom": 0.43
+                "x": -914,
+                "y": -2817,
+                "zoom": 0.86
             },
             "filename": "StartGame",
-            "version": "v1.10.1"
+            "version": "v2.0.1"
         }
     },
     "$__mpe_external_CorrectPVP_StartGame": {
@@ -279,23 +279,6 @@
     },
     "ImageMove": {
         "max_hit": 2,
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    360,
-                    540,
-                    120,
-                    35
-                ],
-                "expected": [
-                    "技能",
-                    "过场",
-                    "动画"
-                ],
-                "threshold": 0.5
-            }
-        },
         "action": {
             "type": "Swipe",
             "param": {
@@ -320,8 +303,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1205,
-                "y": 3457
+                "x": 1175,
+                "y": 3466
             }
         }
     },
@@ -351,8 +334,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 335,
-                "y": 4304
+                "x": 591,
+                "y": 4218
             }
         }
     },
@@ -448,8 +431,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 953,
-                "y": 3831
+                "x": 945,
+                "y": 3854
             }
         }
     },
@@ -506,8 +489,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 623,
-                "y": 3549
+                "x": 624,
+                "y": 3501
             }
         }
     },
@@ -647,6 +630,8 @@
         "action": {
             "type": "Click"
         },
+        "repeat": 2,
+        "repeat_delay": 1000,
         "post_delay": 1000,
         "next": [
             "ImageMove",
@@ -654,8 +639,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 948,
-                "y": 3513
+                "x": 904,
+                "y": 3475
             }
         }
     },
@@ -670,7 +655,7 @@
                     56
                 ],
                 "expected": [
-                    "使用",
+                    "使用快捷键",
                     "快捷键"
                 ],
                 "threshold": 0.5
@@ -712,8 +697,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1482,
-                "y": 3573
+                "x": 1451,
+                "y": 3552
             }
         }
     },

@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1788574398825,
+            "lastSyncTime": 1790556495298,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\BD2MAA\\resource\\pipeline\\Draw.json",
+            "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\Draw.json",
             "savedViewport": {
-                "x": -6,
-                "y": 501,
-                "zoom": 0.86
+                "x": -265,
+                "y": 474,
+                "zoom": 0.76
             },
             "filename": "Draw",
-            "version": "v1.9.3"
+            "version": "v2.0.3"
         }
     },
     "$__mpe_external_StartGame_Draw": {
@@ -52,8 +52,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 622,
-                "y": 26
+                "x": 607,
+                "y": 5
             }
         }
     },
@@ -76,14 +76,15 @@
         "action": {
             "type": "Click"
         },
-        "timeout": 30000,
+        "post_delay": 1500,
         "next": [
+            "AllDrawSure",
             "DrawSkip"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 913,
-                "y": 25
+                "x": 876,
+                "y": 0
             }
         }
     },
@@ -111,8 +112,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1486,
-                "y": -107
+                "x": 1475,
+                "y": -92
             }
         }
     },
@@ -130,16 +131,25 @@
             }
         },
         "action": {
-            "type": "Click"
+            "type": "Click",
+            "param": {
+                "target": [
+                    1183,
+                    39,
+                    1,
+                    1
+                ]
+            }
         },
+        "post_delay": 1500,
         "next": [
-            "DrawSkip",
-            "DrawGoBack"
+            "DrawGoBack",
+            "DrawSkip"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1184,
-                "y": 26
+                "x": 1156,
+                "y": -13
             }
         }
     },
@@ -202,8 +212,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 920,
-                "y": -570
+                "x": 644,
+                "y": -575
             }
         }
     },

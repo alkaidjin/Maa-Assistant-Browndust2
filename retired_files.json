@@ -1,8 +1,8 @@
 {
   "_readme": "旧版随包派发、如今已改名或删除的文件清单（相对软件根目录的路径）。启动器 BD2MAA-Updater.ps1 每次启动、以及每次自动更新完成后，都会按这份清单把它们从用户目录里删掉 —— 否则用户升级后会同时留着新旧两份说明文档 / 教学视频：既占体积，又让人不知道该看哪一份。",
-  "_rules": "只放「以前发给过用户、现在不再派发」的文件。新版本里要改某个随包文件的名字、或下架某个随包文件时，只需把旧名字加到这里 —— 打包器会读同一份清单自动排除（tools/build_release_zip.py 的 EXCLUDE_FILES |= load_retired），不必再手工抄进排除表。只删清单里的显式相对路径，不动 config/ 等受保护目录，也不会碰用户自己加的文件；开发树（存在 .git）整体跳过。",
-  "_caution": "例外：如果被下架的是「会被 MaaFramework 当管线加载」的文件（resource/pipeline/*.json），就不能只靠本清单 —— 更新器只覆盖不删除，老用户目录里那份旧文件会一直加载着，一旦它与新文件存在同名节点，框架会直接判定整个资源加载失败（日志 key already exists）。这种情况要改为「发一个同名的空壳文件」覆盖过去（例：v26.09.11 的 Dailyrewards/EventReward/Operate/Sociaty/Square.json，内容只剩 $ 前缀注释键），等下个版本老用户目录里已是空壳、再登记删除。tasks/*.json 只由 interface.json 的 import 驱动、不参与管线加载，不在这个例外里。",
-  "_updated": "2026-09-23",
+  "_rules": "只放「以前发给过用户、现在不再派发」的文件。新版本里要改某个随包文件的名字、或下架某个随包文件时，只需把旧名字加到这里 —— 打包器会读同一份清单自动排除（tools/build_release_zip.py 的 EXCLUDE_FILES |= load_retired），不必再手工抄进排除表。只删清单里的显式相对路径，不动 config/ 等受保护目录，也不会碰用户自己加的文件；开发树（存在 .git）整体跳过。`files` 里的条目会一直生效（幂等，删过就跳过）；只想让它在某个版本生效一次，改用 `versioned_files`。",
+  "_caution": "例外：如果被下架的是「会被 MaaFramework 当管线加载」的文件（resource/pipeline/*.json），就不能只靠本清单 —— 更新器只覆盖不删除，老用户目录里那份旧文件会一直加载着，一旦它与新文件存在同名节点，框架会直接判定整个资源加载失败（日志 key already exists）。这种情况要改为「发一个同名的空壳文件」覆盖过去，等下个版本老用户目录里已是空壳、再登记删除 —— v26.09.11 的 Dailyrewards/EventReward/Operate/Sociaty/Square.json 就是这么做的（发空壳），本轮的 versioned_files.v26.09.13 是第二步（收壳）。tasks/*.json 只由 interface.json 的 import 驱动、不参与管线加载，不在这个例外里。",
+  "_updated": "2026-09-28",
   "files": [
     "github地址.txt",
     "注意事项1-----使用前必看！！！.txt",
@@ -21,5 +21,15 @@
     "tasks/Operate.json",
     "tasks/Sociaty.json",
     "tasks/Square.json"
-  ]
+  ],
+  "_versioned_readme": "`versioned_files` 是「只在指定版本生效一次」的一次性清理：键 = 软件版本号（写满，如 v26.09.13），值 = 相对路径数组。启动器把自己当前的 interface.json 版本号与键比对，**相等才清理**；对不上就整段跳过。适合用在「这一版刚换掉、下一版之后用户不可能再有这个文件」的场景 —— 条目不必像 files 那样长期挂着。版本号写错（比如和实际发布的版本对不上）没有任何破坏性，只会让清理不发生：文件继续躺在用户目录里，下一版再补。打包器同样把这里所有版本的文件都兜底排除出发布包（EXCLUDE_FILES |= load_retired）。",
+  "versioned_files": {
+    "v26.09.13": [
+      "resource/pipeline/Dailyrewards.json",
+      "resource/pipeline/EventReward.json",
+      "resource/pipeline/Operate.json",
+      "resource/pipeline/Sociaty.json",
+      "resource/pipeline/Square.json"
+    ]
+  }
 }

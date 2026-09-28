@@ -78,6 +78,9 @@ EXCLUDE_FILES = {
     # 编辑器自身二进制的下载 URL 与 sha256，运行时（MXU / MaaFramework）根本不读它。
     # 它既不该进用户包，也不该进仓库 —— 每位维护者装不同版本 MPE 就会变。
     'm2.json',
+    # 本地导出的资源压缩包（resource/ 目录的临时打包产物）：20 MB 且运行时根本不读它，
+    # 只会出现在维护者的工作区里。2026-09-28 发现它差点被 os.walk 扫进 v26.09.13 包体。
+    'resource.zip',
     # 仓库元数据：collect() 对 EXCLUDE_FILES 是「相对路径 或 文件名」双匹配，
     # 所以这两项会连同嵌套的 git 元数据一起排除（如 resource/model/.gitignore，
     # 其内容只是 "ocr"，与根 .gitignore:29 重复）。这是预期行为 —— 用户包里不该有 git 元数据。
@@ -94,15 +97,27 @@ EXCLUDE_EXT   = {'.lnk', '.tmp', '.pyc'}
 def load_retired(base):
     """读 retired_files.json → 旧版遗留文件名集合（文件缺失 / 损坏时返回空集）。
 
+    (
     清单里的都是「以前发给过用户、现在不再派发」的文件。它们一旦被恢复、或在本机留了
     副本，重新收进包就是双重错误：既白占体积，又会在用户端被启动器按同一份清单立刻删掉。
-    与启动器同源，避免「排除表 / 清理清单」两处手工维护走偏。"""
+    与启动器同源，避免「排除表 / 清理清单」两处手工维护走偏。
+
+    两个字段都要收：`files`（启动器每次都按它清理）+ `versioned_files`（只在指定版本
+    生效一次）。排除表里不区分它们 —— 只要迟早要被删，就不该再进包。"""
     try:
         with open(os.path.join(base, 'retired_files.json'), 'rb') as f:
             data = json.loads(f.read().decode('utf-8-sig'))
-        return {str(x).replace('\\', '/') for x in (data.get('files') or [])}
     except Exception:
         return set()
+
+    rels = {str(x).replace('\\', '/') for x in (data.get('files') or [])}
+    vfiles = data.get('versioned_files') or {}
+    if isinstance(vfiles, dict):
+        for key, items in vfiles.items():
+            if str(key).startswith('_'):      # _ 开头的是说明字段，不是版本号
+                continue
+            rels |= {str(x).replace('\\', '/') for x in (items or [])}
+    return rels
 
 
 RETIRED_FILES = load_retired(BASE)
@@ -382,7 +397,7 @@ def check_bat_crlf(base):
             % (rel, why))
 
 
-def check_retired(base):
+def check_retired(base, version=None):
     """校验 retired_files.json —— 「旧版遗留文件」的清理清单。
 
     启动器（BD2MAA-Updater.ps1 的 Remove-RetiredFiles）每次启动、以及每次自动更新完成后
@@ -395,7 +410,10 @@ def check_retired(base):
            拼错的路径 R1 会因为「文件不存在」而误判通过，只有历史能证伪。
       [R3] 若仍被 git 跟踪（HEAD 里还有），给个提醒：仓库里留着这份文件，别人 clone 后
            会带着它；维护者本机则由启动器的「存在 .git 就跳过」逻辑兜住，不会被误删。
-    """
+
+      [R4] versioned_files 的**版本键必须对得上本次发布的目标版本**。启动器只在自己读到
+           的 interface.json 版本号与键相等时才清理，键写错（比如发布到了别的版本号）
+           不会删错任何东西，但清理会静默失效 —— 老文件继续留在用户目录里。"""
     p = os.path.join(base, 'retired_files.json')
     if not os.path.exists(p):
         log('[W] retired_files.json 不存在 —— 启动器没法清理旧版遗留的说明文档 / 视频；发布前补上')
@@ -408,9 +426,20 @@ def check_retired(base):
         return ['retired_files.json 解析失败']
 
     rels = [str(x).replace('\\', '/') for x in (data.get('files') or [])]
+    vfiles = data.get('versioned_files') or {}
+    vgroups = {}
+    if isinstance(vfiles, dict):
+        for key, items in vfiles.items():
+            if str(key).startswith('_'):
+                continue
+            paths = [str(x).replace('\\', '/') for x in (items or [])]
+            vgroups[str(key)] = paths
+            rels += paths
     shipped = {r for _, r in collect(base)}
     problems = []
-    log('  retired_files.json：%d 项（启动器会从用户目录里删掉这些）' % len(rels))
+    log('  retired_files.json：常驻 %d 项%s（启动器会从用户目录里删掉这些）'
+        % (len(rels) - sum(len(v) for v in vgroups.values()),
+           ''.join(' + %s 一次性 %d 项' % (k, len(v)) for k, v in sorted(vgroups.items()))))
     for rel in rels:
         why = []
         if os.path.exists(os.path.join(base, rel)):
@@ -429,6 +458,15 @@ def check_retired(base):
             log('    [!] %s：%s' % (rel, '；'.join(why)))
         else:
             log('    OK  %s' % rel)
+
+    # [R4] 一次性清理的版本键必须与本次发布的目标版本对得上，否则启动器一律跳过
+    if vgroups:
+        if version and version in vgroups:
+            log('    OK  一次性清理 %s：版本键与本次发布目标一致，装完会在用户端生效' % version)
+        elif version:
+            log('    [W] versioned_files 里没有键等于本次目标版本 %s（现有：%s）'
+                ' —— 这批清理在用户端不会触发，老文件会留在磁盘上'
+                % (version, '、'.join(sorted(vgroups)) or '无'))
     return problems
 
 
@@ -576,9 +614,14 @@ def verify(path, version):
         retired, hit = [], []
         if 'retired_files.json' in names:
             try:
-                retired = [str(x).replace('\\', '/') for x in
-                           (json.loads(z.read('retired_files.json').decode('utf-8-sig'))
-                            .get('files') or [])]
+                # files（常驻）+ versioned_files.<版本>（一次性）都不能出现在包内
+                rdata = json.loads(z.read('retired_files.json').decode('utf-8-sig'))
+                retired = [str(x).replace('\\', '/') for x in (rdata.get('files') or [])]
+                _vf = rdata.get('versioned_files') or {}
+                if isinstance(_vf, dict):
+                    for _k, _items in _vf.items():
+                        if not str(_k).startswith('_'):
+                            retired += [str(x).replace('\\', '/') for x in (_items or [])]
             except Exception as e:
                 log('[V9] retired_files.json 读不出来：%s' % e)
                 ok = False
@@ -670,7 +713,7 @@ def main():
     check_version_json(BASE)
     check_verlog(BASE, version)
     check_bat_crlf(BASE)
-    check_retired(BASE)
+    check_retired(BASE, version)
 
     if args.dry_run:
         log('[dry-run] 已打印计划，未执行任何写入')

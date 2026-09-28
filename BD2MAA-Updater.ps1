@@ -603,19 +603,25 @@ function Copy-Update($src, $dst, $cfgRef) {
 
         if ($isProtected) {
             # 仅新增不存在的默认配置；已有用户配置不覆盖
-            if (-not (Test-Path $target)) { Copy-Item $full $target -Force }
+            if (-not (Test-Path -LiteralPath $target)) {
+                try { Copy-Item -LiteralPath $full -Destination $target -Force -ErrorAction Stop } catch { }
+            }
             continue
         }
 
         $tmp = "$target.new"
         for ($try = 1; $try -le 3; $try++) {
             try {
+                # -ErrorAction Stop 是**必须的**：Copy-Item / Move-Item 写失败时抛的是
+                # 非终止错误，不加它根本进不了 catch —— 于是"mxu.exe 没覆盖成功"会被
+                # 一路当成成功，最后弹出"更新完成"，而用户手上其实是半截安装。
+                # （这正是「更新完版本号没变 / 只装了一半」最难查的一类成因。）
                 if ($f.Length -ge $atomicThreshold) {
                     # 原子覆盖：写到 .new，再 rename。失败时清理 .new 不留垃圾。
-                    Copy-Item $full $tmp -Force
-                    Move-Item -LiteralPath $tmp -Destination $target -Force
+                    Copy-Item -LiteralPath $full -Destination $tmp -Force -ErrorAction Stop
+                    Move-Item -LiteralPath $tmp -Destination $target -Force -ErrorAction Stop
                 } else {
-                    Copy-Item $full $target -Force
+                    Copy-Item -LiteralPath $full -Destination $target -Force -ErrorAction Stop
                 }
                 break
             } catch {
@@ -716,39 +722,106 @@ function Stop-RunningMxu {
 # 四张注意事项图 → 合并成 PDF；v26.09.11 的 PDF → DOCX、教学视频换名），老用户目录里
 # 就会新旧两份并存：既占体积，又让人不知道该看哪一份。
 # 清单由随包派发的 retired_files.json 驱动 —— 更新完成后读到的自然就是新版清单。
+# 清单有两个字段：
+#   * files            —— 永久条目，每次都按它清理（幂等，删过就跳过）
+#   * versioned_files  —— 只在指定版本生效一次：键是版本号（如 v26.09.13），只有当前
+#                         interface.json 版本号与键**相等**时才清理。给「这一版刚把某个
+#                         文件换掉、之后不可能再出现」的场景用，避免条目长期挂着。
 # 安全边界（任何一条不满足就跳过该项）：
 #   * 只删清单里的**显式相对路径**；含 .. 或绝对路径一律跳过（防目录穿越）
 #   * 跳过受保护目录（config/，见 updater_config.json 的 protected_dirs）
 #   * 清单文件缺失 / 解析失败：静默跳过，绝不阻断启动
 #   * **存在 .git 的开发树整体跳过** —— 维护者本机的仓库里还有别的文件，
 #     不能让它在这儿误删东西（用户包内不含 .git，所以对用户端无影响）
-function Remove-RetiredFiles($base, $cfgRef) {
-    if (Test-Path (Join-Path $base '.git')) { return }
-
-    $listFile = Join-Path $base 'retired_files.json'
-    if (-not (Test-Path $listFile)) { return }
-
+#   * 删掉的每一条都写 debug/updater.log，便于回溯「我的 xx 文件怎么没了」
+function Remove-RetiredFiles($base, $cfgRef, $ver) {
+    # 整段兜底：清理只是"卫生工作"，任何意外都绝不能把用户挡在软件门外，
+    # 更不能让异常冒泡到主流程的 catch（那会被误报成"更新失败"）。
     try {
-        $j = Get-Content $listFile -Raw -Encoding UTF8 | ConvertFrom-Json
-    } catch { return }
-    if (-not $j -or -not $j.files) { return }
+        if (Test-Path (Join-Path $base '.git')) { return }
 
-    $protected = $cfgRef['protected_dirs']
-    foreach ($item in $j.files) {
-        $rel = ([string]$item).Replace('\', '/').TrimStart('/')
-        if (-not $rel -or $rel.Contains('..')) { continue }
+        $listFile = Join-Path $base 'retired_files.json'
+        if (-not (Test-Path $listFile)) { return }
 
-        $low = $rel.ToLower()
-        $skip = $false
-        foreach ($p in $protected) {
-            $pl = $p.Replace('\', '/').TrimEnd('/').ToLower()
-            if ($low -eq $pl -or $low.StartsWith("$pl/")) { $skip = $true; break }
+        try {
+            $j = Get-Content $listFile -Raw -Encoding UTF8 | ConvertFrom-Json
+        } catch {
+            try { Write-UpdaterLog ('[retired] 清单解析失败，本次不清理: ' + $listFile) } catch { }
+            return
         }
-        if ($skip) { continue }
+        if (-not $j) { return }
 
-        $full = Join-Path $base ($rel.Replace('/', '\'))
-        if (Test-Path -LiteralPath $full -PathType Leaf) {
-            Remove-Item -LiteralPath $full -Force -ErrorAction SilentlyContinue
+        $protected = $cfgRef['protected_dirs']
+
+        Remove-RetiredList -base $base -items $j.files -protected $protected
+        if ($j.versioned_files -and $ver) {
+            foreach ($prop in $j.versioned_files.PSObject.Properties) {
+                $want = [string]$prop.Name
+                if ($want.StartsWith('_')) { continue }          # _ 开头的是说明字段，不是版本号
+                try { if ((Compare-Version $ver $want) -ne 0) { continue } } catch { continue }
+                Remove-RetiredList -base $base -items $prop.Value -protected $protected
+            }
+        }
+    } catch {
+        try { Write-UpdaterLog ('[retired] 清理阶段异常（已跳过，不影响启动）: ' + $_.Exception.Message) } catch { }
+    }
+}
+
+function Remove-RetiredList($base, $items, $protected) {
+    if (-not $items) { return }
+
+    # 越界防线用的基准目录：规范化一次，后面每个条目都拿它比对。
+    $baseFull = ''
+    try { $baseFull = ([System.IO.Path]::GetFullPath($base)).TrimEnd('\', '/') } catch { return }
+
+    foreach ($item in $items) {
+        # 逐项兜底：一条清单把某个文件锁住 / 路径畸形，不能连累其它条目，更不能中断启动。
+        try {
+            $rel = ([string]$item).Replace('\', '/').TrimStart('/')
+            if (-not $rel) { continue }
+
+            # --- 越界防线（三重，任一命中即跳过） ---
+            if ($rel.Contains('..')) { continue }                                  # 目录穿越
+            if ($rel -match '^[A-Za-z]:') { continue }                             # 盘符绝对路径
+            if ($rel.StartsWith('\\') -or $rel.StartsWith('//')) { continue }      # UNC / 网络路径
+
+            $low = $rel.ToLower()
+            $skip = $false
+            foreach ($p in $protected) {
+                $pl = ([string]$p).Replace('\', '/').TrimEnd('/').ToLower()
+                if ($pl -and ($low -eq $pl -or $low.StartsWith("$pl/"))) { $skip = $true; break }
+            }
+            if ($skip) { continue }
+
+            $full = Join-Path $base ($rel.Replace('/', '\'))
+
+            # 最后一道：规范化后必须真的落在软件根目录之内（吃掉任何拼接花招）
+            try {
+                $resolved = [System.IO.Path]::GetFullPath($full)
+                if (-not $resolved.StartsWith($baseFull + '\', [StringComparison]::OrdinalIgnoreCase)) {
+                    Write-UpdaterLog ('[retired] 跳过越界路径: ' + $rel)
+                    continue
+                }
+            } catch { continue }
+
+            if (Test-Path -LiteralPath $full -PathType Leaf) {
+                Remove-Item -LiteralPath $full -Force -ErrorAction SilentlyContinue
+                if (Test-Path -LiteralPath $full -PathType Leaf) {
+                    # 删不掉多半是被占用（杀软 / 索引器 / 正在运行的程序）。
+                    # 这里**不重试也不报错**：遗留文件只是占地方，重试反而拖慢启动。
+                    Write-UpdaterLog ('[retired] 删除失败（多半被占用）: ' + $rel)
+                } else {
+                    Write-UpdaterLog ('[retired] 已删除旧版遗留文件: ' + $rel)
+                }
+            }
+        } catch {
+            # 走到这里说明这一步抛了异常（典型：文件正被杀软 / 索引器 / 运行中的程序占用，
+            # 连 Test-Path / Remove-Item 都会抛）。同样只记不拦 —— 一个文件删不掉，
+            # 后果只是它继续留在磁盘上，绝不能因此不让用户进软件。
+            try {
+                Write-UpdaterLog ('[retired] 删除失败（多半被占用，已跳过该项）: ' + $item +
+                                  ' :: ' + $_.Exception.Message)
+            } catch { }
         }
     }
 }
@@ -764,7 +837,12 @@ function ReInject-XLaunch($base) {
                 auto_update = '软件启动时通过 launcher.bat 检测 GitHub 新版本并弹窗提示，支持一键下载（仅下载、不覆盖本地 config/resource 配置）'
                 note        = '为保证用户获得新版本自动检测与更新弹窗，请引导用户使用 launcher.bat 而非直接双击 mxu.exe；x_ 前缀字段为扩展约定，MXU 会忽略未知字段。'
             })
-            $d | ConvertTo-Json -Depth 10 | Set-Content $p -Encoding UTF8
+            # 必须用 UTF8Encoding($false) 写：**不能带 BOM**。
+            # Windows PowerShell 5.1 的 Set-Content -Encoding UTF8 一律写 BOM，而
+            # MaaFramework / MXU 的 JSON 解析器遇到开头的 EF BB BF 会直接判定解析失败
+            # （表现为"资源加载失败 / 任务列表空"）。这里改用 .NET 显式指定无 BOM。
+            $json = $d | ConvertTo-Json -Depth 10
+            [System.IO.File]::WriteAllText($p, $json, (New-Object System.Text.UTF8Encoding($false)))
         }
     } catch { }
 }
@@ -945,7 +1023,8 @@ try {
     Write-UpdaterLog ('当前版本=' + $current + '  缓存 latest_tag=' + $cache.latest_tag)
     # 清理旧版遗留的说明文档 / 教学视频（幂等、静默）。放在主流程最前面：
     # 之后的每个分支（-Test / 无网络 / 不更新 / 更新）都能覆盖到。
-    Remove-RetiredFiles $BASE $cfg
+    # 第三个参数是当前版本号，供清单里的 versioned_files（只在指定版本生效）比对。
+    Remove-RetiredFiles $BASE $cfg $current
 
     $iv = [timespan]::FromHours($cfg['check_interval_hours']).Ticks
     $needCheck = $Force -or $Demo -or $Test -or $Repair -or ((Get-Date).Ticks - $cache.last_check_ts) -gt $iv
@@ -1034,6 +1113,8 @@ try {
 
     # 新版本已发布但资产还没传完（实测可能差几分钟到几小时）：明确告知，不要静默跳过
     if (-not $asset) {
+        # 也写一条日志：这个分支以前什么都不留，用户事后问"为什么没更新"时无从查起。
+        Write-UpdaterLog ('[提示] ' + $release.tag_name + ' 还没有可用 zip 资产 → 本次不更新，直接启动（当前 ' + $current + '）')
         [System.Windows.Forms.MessageBox]::Show(
             ("$($release.tag_name) 这个版本还没有可用的压缩包（发布资产可能还在上传）。`n`n" +
              "你可以稍后再启动一次本软件；也可以点「确定」前往发布页手动下载。"),
@@ -1079,7 +1160,7 @@ try {
     $problems = @()
     try {
         Write-UpdaterLog ('解压到: ' + $tmp)
-        Expand-Archive -Path $dest -DestinationPath $tmp -Force
+        Expand-Archive -Path $dest -DestinationPath $tmp -Force -ErrorAction Stop
         $srcRoot = Find-ProjectRoot $tmp
         $pkgCount = @(Get-ChildItem -Path $srcRoot -Recurse -File -ErrorAction SilentlyContinue).Count
         Write-UpdaterLog ('解压完成，包根=' + $srcRoot + '，文件数=' + $pkgCount)
@@ -1104,7 +1185,9 @@ try {
         ReInject-XLaunch $BASE
         # 更新完成后立刻清理旧版遗留文件：retired_files.json 也刚被覆盖成新版，
         # 所以这一步用的就是本次发布的最新清单（清单之外的旧文件不动）。
-        Remove-RetiredFiles $BASE $cfg
+        # 此处必须用**装好之后**的版本号（interface.json 刚被覆盖）：只有它等于
+        # versioned_files 里写的版本时，那批一次性清理才会发生。
+        Remove-RetiredFiles $BASE $cfg (Read-CurrentVersion)
 
         # [装后] 复核：磁盘上的版本号与关键文件是否真的就位
         $problems = @(Test-InstalledVersion $BASE $release.tag_name)
