@@ -9,7 +9,7 @@
 | 3 | [MaaEnd/MaaEnd](https://github.com/MaaEnd/MaaEnd) | **AGPL-3.0** | 最初提供**工程骨架**（目录约定、`interface.json` 结构、多语言键）；该仓库是《明日方舟：终末地》工具，**不含《棕色尘埃2》任何内容** |
 | 4 | [essinn-1/maa-assistant](https://github.com/essinn-1/maa-assistant) | **AGPL-3.0** | **本项目的直接上游**：《棕色尘埃2》PC 端早期适配、最初一批 pipeline 编排与图像素材 |
 | 5 | [PaddlePaddle/PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR)（PP-OCRv5 移动端）| **Apache-2.0** | OCR 模型（`resource/model/ocr/det.onnx`、`rec.onnx`、`keys.txt`） |
-| 6 | [electron/rcedit](https://github.com/electron/rcedit)（v2.0.0）| **MIT** | 启动器给 `mxu.exe` 写图标的附加工具（`tools/rcedit-x64.exe`） |
+| 6 | [electron/rcedit](https://github.com/electron/rcedit)（v2.0.0）| **MIT** | 维护者给 `MaaBd2.exe` 写图标的附加工具（`data/maintainer/tools/rcedit-x64.exe`，**只入仓库、不随 release zip 派发**） |
 
 ---
 
@@ -31,9 +31,9 @@
 1. **本项目自身（`BD2MAA`）**采用 **AGPL-3.0**；LGPL 允许与 AGPL 组合发行（AGPL-3.0 §13 / LGPL-3.0 §3「Compatibility with other licenses」）
 2. **MaaFramework 库的源码**可在其官方仓库获取（链接见上表）；LGPL-3.0 完整条款文本同样由上游维护，见 [MaaFramework LICENSE.md](https://github.com/MaaXYZ/MaaFramework/blob/main/LICENSE.md)
 3. **重新链接能力**：如果你想替换或更新 MaaFramework 版本，只需：
-   - 关闭 `mxu.exe`
+   - 关闭 `MaaBd2.exe`
    - 用对应平台、对应主版本号的 `MAA-<platform>-v<version>.zip` 解压并覆盖 `maafw/` 目录（**仅替换 `*.dll/*.node/*.exe`**；保留 `MaaAgentBinary/` 与 `plugins/` 子目录中你不想覆盖的文件）
-   - 重新启动 `launcher.bat`
+   - 重新启动 `MaaBd2.exe`
 4. **工程加密 / 闭源修改**：本项目对 MaaFramework 库的源码**未做任何修改**，因此 LGPL §6 的「提供源码供用户重新链接」义务不存在
 
 ### 版本固定
@@ -52,7 +52,7 @@
 提供桌面 GUI（Tauri / 前端 TypeScript）、设备连接管理、实例配置读写、GitHub Release 检测与下载、`maafw` 子进程（`go-service.exe`）的拉起。
 
 ### 在本项目中的位置
-单二进制：根目录 `mxu.exe`（v2.5.3）
+单二进制：根目录 `MaaBd2.exe`（MXU v2.5.3 内核，v26.09.14 起改名并固化图标）
 
 ### AGPL 履约
 MXU 与本项目**均为 AGPL-3.0**，因此在 §13 「Remote Network Interaction」的范围内：
@@ -60,10 +60,11 @@ MXU 与本项目**均为 AGPL-3.0**，因此在 §13 「Remote Network Interacti
 1. 本项目以及任何衍生项目若对外提供服务（提供 MXU 前端访问能力），必须同时**完整公开所运行的、与 MXU 相关的全部源代码**，包括任何自定修改
 2. MXU 自身的修改若已合并到上游，则「Relicensing」条款不单独适用
 
-### 启动器交互
-本项目通过 `launcher.bat` → `BD2MAA-Updater.ps1` **自动拉起** `mxu.exe`：先检查 GitHub Releases 是否有新版本（可一键下载覆盖），再做启动前的「家务」（自愈 `launcher.bat` 编码、按需重写 `mxu.exe` 图标、重建 `MaaBd2.lnk`、精简并清理 `debug/` 日志），最后启动 `mxu.exe`。
+### 启动与更新
+用户直接运行 `MaaBd2.exe`（MXU 前端）打开软件；更新走 **MXU 自带的软件内更新**（「设置 - 更新」），
+无需任何外置启动器 —— v26.09.14 起原先的 `launcher.bat` / `BD2MAA-Updater.ps1` 已退役并停止派发。
 
-**启动器不会修改你的 `config/`**（唯一的例外是更新覆盖完成后给 `interface.json` 补一个纯说明性的 `x_launch` 字段，MXU 会忽略未知字段）。启动器的用法、命令行参数与全部「家务」细节见 [`更新功能说明.md`](更新功能说明.md)。
+**更新不会修改你的 `config/`**（该目录根本不在发布包里）。用法与故障排查见 [`更新功能说明.md`](更新功能说明.md)。
 
 ---
 
@@ -73,7 +74,7 @@ MXU 与本项目**均为 AGPL-3.0**，因此在 §13 「Remote Network Interacti
 MaaEnd 是《明日方舟：终末地》的自动化工程。**它本身不包含《棕色尘埃2》的任何任务定义、pipeline 或图像素材**；
 本项目的棕2 内容全部来自下一节 `essinn-1/maa-assistant`。
 
-本项目从 MaaEnd 继承的是**工程骨架**：目录约定（`resource/pipeline/`、`tasks/`）、`interface.json` 的
+本项目从 MaaEnd 继承的是**工程骨架**：目录约定（`resource/pipeline/`、`tasks/`，现住 `data/` 下）、`interface.json` 的
 ProjectInterface v2 结构、多语言键的组织方式，以及 `misc/MaaEnd-Tiny.png` 等少量占位资源。
 
 ### 继承路径
@@ -97,7 +98,7 @@ MaaEnd（工程骨架）
 
 ### 用途
 **本项目最直接的上游。** `essinn-1/maa-assistant` 是把 MaaEnd 骨架改造成「《棕色尘埃2》PC 端自动化」的早期工程。
-本项目使用的**最初一批任务定义与 pipeline 编排**（`resource/pipeline/*.json` 的早期形态、`tasks/*.json`，
+本项目使用的**最初一批任务定义与 pipeline 编排**（`resource/pipeline/*.json` 的早期形态、`tasks/*.json`，现均在 `data/` 下，
 以及「资源吸收 / 召集」「PVP 入口」「EvilCastle 塔」「快速狩猎」「魔兽追踪者」等棕2 各系统入口）
 与**初始图像素材**，均来自该仓库。
 
@@ -143,12 +144,12 @@ MaaEnd（工程骨架）
 ## 6. electron/rcedit — MIT
 
 ### 用途
-启动器在启动时给 `mxu.exe` 写入图标（`launcher.bat` → `BD2MAA-Updater.ps1` 的 `Apply-ExeIcon`），
-使快捷方式与任务栏显示 `mxu.ico`；MXU 自更新替换 `mxu.exe` 后由启动器自动补写，无需用户手动操作。
+给 `MaaBd2.exe` 写入项目图标（v26.09.14 起图标已固化，且打包器每次打包前自动复核补打；
+`data/maintainer/tools/apply_icon.ps1` 是手动兜底）。普通用户不需要它。
 
 ### 在本项目中的位置
-- 二进制：`tools/rcedit-x64.exe`（v2.0.0，GitHub, Inc 官方预编译 x64 构建）
-- 随仓库跟踪，并随 release zip 派发；调用点为 `BD2MAA-Updater.ps1` 的 `Apply-ExeIcon`
+- 二进制：`maintainer/tools/rcedit-x64.exe`（v2.0.0，GitHub, Inc 官方预编译 x64 构建）
+- **只随仓库跟踪，不随 release zip 派发**；调用点为 `maintainer/tools/apply_icon.ps1`
 
 ### MIT 履约
 MIT 许可要求保留版权声明与许可声明。本项目以**未经修改**的官方预编译二进制形式再分发，
@@ -158,7 +159,7 @@ MIT 许可要求保留版权声明与许可声明。本项目以**未经修改**
 
 ## 附录：复现 / 重新链接清单
 
-如果你想从源码重建本项目的 `maafw/` / `mxu.exe`：
+如果你想从源码重建本项目的 `maafw/` / `MaaBd2.exe`（MXU 前端）：
 
 ### MaaFramework（LGPL）
 ```bash
@@ -171,7 +172,7 @@ curl -L -O https://github.com/MaaXYZ/MaaFramework/releases/download/v5.13.0/MAA-
 ```bash
 git clone https://github.com/MistEO/MXU.git
 # 按 MXU 仓库 README 中 AGPL 源的编译说明构建
-# 替换 <BD2MAA>/mxu.exe
+# 替换 <BD2MAA>/MaaBd2.exe
 ```
 
 ### PaddleOCR（Apache-2.0）

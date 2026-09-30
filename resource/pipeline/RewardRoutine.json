@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790561281139,
+            "lastSyncTime": 1790642474868,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\RewardRoutine.json",
             "savedViewport": {
-                "x": -280,
-                "y": -100,
-                "zoom": 0.87
+                "x": 1073,
+                "y": -102,
+                "zoom": 0.76
             },
             "filename": "RewardRoutine",
             "version": "v2.0.3"
@@ -19,8 +19,8 @@
     "$__mpe_external_StartGame_RewardRoutine": {
         "$__mpe_code": {
             "position": {
-                "x": 2471,
-                "y": 1006
+                "x": 2450,
+                "y": 1220
             }
         }
     },
@@ -209,7 +209,6 @@
             "type": "Click"
         },
         "post_delay": 1500,
-        "timeout": 6000,
         "next": [
             "ExChangeSure_1",
             "EVENTSWIPE"
@@ -246,7 +245,7 @@
         "$__mpe_code": {
             "position": {
                 "x": 977,
-                "y": 827
+                "y": 845
             }
         }
     },
@@ -309,9 +308,7 @@
         "next": [
             "[JumpBack]检测感叹号",
             "[JumpBack]往下滑动",
-            "[JumpBack]往上滑动"
-        ],
-        "on_error": [
+            "[JumpBack]往上滑动",
             "StartGame"
         ],
         "$__mpe_code": {
@@ -597,7 +594,7 @@
                 ]
             }
         },
-        "pre_delay": 2000,
+        "pre_delay": 5000,
         "action": {
             "type": "Click",
             "param": {
@@ -607,14 +604,13 @@
                 ]
             }
         },
-        "timeout": 6000,
         "next": [
             "ExChange100_1"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1349,
-                "y": 837
+                "x": 1340,
+                "y": 840
             }
         }
     },
@@ -960,13 +956,13 @@
         "timeout": 5000,
         "$__mpe_code": {
             "position": {
-                "x": -616,
-                "y": 998
+                "x": -723,
+                "y": 946
             }
         }
     },
     "往下滑动": {
-        "max_hit": 3,
+        "max_hit": 4,
         "action": {
             "type": "Swipe",
             "param": {
@@ -988,8 +984,8 @@
         "timeout": 5000,
         "$__mpe_code": {
             "position": {
-                "x": -618,
-                "y": 671
+                "x": -724,
+                "y": 555
             }
         }
     },

@@ -105,10 +105,5 @@
         "tasks/WarcraftShop.json",
         "tasks/AbsorpAssemble.json",
         "tasks/AbsorpAssembleRound2.json"
-    ],
-    "x_launch": {
-        "launcher": "launcher.bat",
-        "auto_update": "软件启动时通过 launcher.bat 检测 GitHub 新版本并弹窗提示（20 秒无操作自动跳过更新并启动软件，防止无人值守卡窗），支持一键下载（仅下载、不覆盖本地 config/resource 配置）",
-        "note": "为保证用户获得新版本自动检测与更新弹窗，请引导用户使用 launcher.bat 而非直接双击 mxu.exe；x_ 前缀字段为扩展约定，MXU 会忽略未知字段。"
-    }
+    ]
 }

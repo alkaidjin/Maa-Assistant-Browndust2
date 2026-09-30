@@ -18,6 +18,13 @@ mxu-*.log
 *.cache
 cache/
 
+# ⚠️ 例外：MaaBd2.exe 是**主程序本体**，v26.09.14 起随仓库跟踪（用户要求入库）。
+# 它 31 MB（GitHub 单文件上限 100 MB），且自带固化图标 —— 不入库的话 clone 出来的
+# 仓库跑不起来，别人也没法复现「图标已固化」这个状态。其余 *.exe（go-service /
+# rock-picker / rcedit）仍然靠 release 或各自渠道获得。
+# ⚠️ 顺序要求：这条必须写在 `*.exe` 之后（gitignore 后面的规则覆盖前面的）。
+!MaaBd2.exe
+
 # 系统文件
 .DS_Store
 Thumbs.db
@@ -27,6 +34,8 @@ Thumbs.db
 config/
 
 # 大模型文件（如果用 Git LFS 或单独下载）
+# v26.09.14 最终布局：resource/ 留在根目录（MXU 按 interface.json 的 ./resource 找它），
+# OCR 模型跟着留在 resource/model/ocr/；它只随 Release 的 zip 派发，仓库不追踪（约 20 MB）。
 resource/model/ocr/
 
 # 运行时文件

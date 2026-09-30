@@ -1,0 +1,16 @@
+{
+    "repo": "alkaidjin/Maa-Assistant-Browndust2",
+    "check_interval_hours": 6,
+    "asset_keywords_include": ["MABd2"],
+    "asset_keywords_exclude": ["source code", "src", "debug", "linux", "macos", "darwin"],
+    "download_dir": "updates",
+    "log_retention_days": 7,
+    "log_compact": true,
+    "log_compact_keep_recognition": false,
+    "_doc_mirror_url_prefixes": "国内访问 GitHub Releases 普遍被严重限速（实测最低 10 KB/s）。updater 会按顺序尝试列表里的镜像前缀，最后回退到官方原 URL。镜像下载完成后会做完整性校验（字节数 + zip 格式），不合格会自动切换下一个源。留空数组 [] 关闭镜像只用官方源。修改后下次启动检测更新时生效。",
+    "_doc_mirror_history": "2026-09-11 实测：ghps.cc 已失效（对 release 直链返回 4181 字节 HTML 错误页，HTTP 却是 206，会导致下载到假 zip）；mirror.ghproxy.com 连接超时。二者已从默认列表移除。ghfast.top / gh-proxy.com 正常。",
+    "mirror_url_prefixes": [
+        "https://ghfast.top",
+        "https://gh-proxy.com"
+    ]
+}
