@@ -40,9 +40,9 @@
         {
             "path": "agent/go-service.exe",
             "source": "tracked",
-            "sha256": "69658425e242c4e3653875193b89342c120d03cfff83cc946450a2748c60146a",
-            "size": 16595456,
-            "note": "MaaEnd 64fac11 黑盒基线；第 6 点裁剪源码入仓后将以新构建替换并更新本哈希"
+            "sha256": "89158ed2165ce836f0e7627282330162461fd8309fd70ea62645baa089e7a2a3",
+            "size": 8796160,
+            "note": "第 6 点裁剪 fork 后的白盒构建（源码 data/maintainer/agent/go-service，version bd2-fd6ed7b），替换原 MaaEnd 64fac11 黑盒基线"
         },
         {
             "path": "maafw/DirectML.dll",
