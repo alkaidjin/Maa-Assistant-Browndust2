@@ -5,34 +5,52 @@
             "label": "镜中之战PVP",
             "entry": "StartPVP",
             "description": "使用每日免费鸡尾酒",
-            "option":["设置鸡尾酒倍数"]
+            "option": [
+                "设置鸡尾酒倍数"
+            ]
         }
     ],
-    "option": {"设置鸡尾酒倍数":{
-           "type":"select",
-           "label":"请选择鲜血鸡尾酒的消耗倍数",
-           "des":"",
-           "default_case":"40倍",
-           "cases":[
-{                   "name":"1倍",
-                    "label":"1倍",
-                    "pipeline_override":{
-                        "消耗MIN":{
-                            "next":[
-                                "1倍"]}}},
-{                   "name":"10倍",
-                    "label":"10倍",
-                    "pipeline_override":{
-                        "消耗MIN":{
-                            "next":[
-                                "10倍"]}}},
-{                  "name":"40倍",
-                    "label":"40倍",
-                    "pipeline_override":{
-                        "消耗MIN":{
-                            "next":[
-                                "40倍"]}}}
-]
-}
-}
+    "option": {
+        "设置鸡尾酒倍数": {
+            "type": "select",
+            "label": "请选择鲜血鸡尾酒的消耗倍数",
+            "des": "",
+            "default_case": "40倍",
+            "cases": [
+                {
+                    "name": "1倍",
+                    "label": "1倍",
+                    "pipeline_override": {
+                        "消耗MIN": {
+                            "next": [
+                                "1倍"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "10倍",
+                    "label": "10倍",
+                    "pipeline_override": {
+                        "消耗MIN": {
+                            "next": [
+                                "10倍"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "40倍",
+                    "label": "40倍",
+                    "pipeline_override": {
+                        "消耗MIN": {
+                            "next": [
+                                "40倍"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    }
 }
