@@ -10,11 +10,7 @@
     "mirrorchyan_rid": "Maa-Assistant-Browndust2",
     "mirrorchyan_multiplatform": true,
     "languages": {
-        "zh_cn": "misc/locales/zh_cn.json",
-        "zh_tw": "misc/locales/zh_tw.json",
-        "en_us": "misc/locales/en_us.json",
-        "ja_jp": "misc/locales/ja_jp.json",
-        "ko_kr": "misc/locales/ko_kr.json"
+        "zh_cn": "misc/locales/zh_cn.json"
     },
     "controller": [
         {

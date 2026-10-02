@@ -317,8 +317,9 @@ REQUIRED_FILES = [
     # MXU 直接按 interface.json 的路径读取：icon / license / languages
     'misc/MaaEnd-Tiny.png',
     'misc/LICENSE_SHORT.md',
-    'misc/locales/zh_cn.json', 'misc/locales/zh_tw.json', 'misc/locales/en_us.json',
-    'misc/locales/ja_jp.json', 'misc/locales/ko_kr.json',
+    # v26.09.14 起界面仅声明简体中文（任务文案本来就是中文硬编码，其余 4 份
+    # locale 只有 7 个键、长期无人维护）；go-service 守护页的 5 语言在下段保留。
+    'misc/locales/zh_cn.json',
     # agent(go-service) 的 i18n 文案：缺失时 MXU 焦点提示会显示原始 key
     'locales/go-service/zh_cn.json', 'locales/go-service/zh_tw.json',
     'locales/go-service/en_us.json', 'locales/go-service/ja_jp.json',

@@ -1,9 +1,0 @@
-{
-    "resource.CN.label": "官服",
-    "resource.Global.label": "國際服 (Global/EN)",
-    "controller.Win32.label": "電腦端",
-    "controller.Win32-Window.label": "電腦端-備選",
-    "controller.Win32-Front.label": "電腦端-前台",
-    "controller.ADB.label": "安卓端",
-    "contact.file": "misc/locales/CONTACT/CONTACT.zh_tw.md"
-}
