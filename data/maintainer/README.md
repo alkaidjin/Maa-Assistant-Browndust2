@@ -56,7 +56,7 @@ MXU 的软件内更新（`apply_full_update`）走**全量覆盖**：它遍历�
 # 打包（无参 → 交互式询问版本号；会同步所有版本锚点）
 python data/maintainer/tools/build_release_zip.py
 python data/maintainer/tools/build_release_zip.py --dry-run        # 只看要做什么
-python data/maintainer/tools/build_release_zip.py --no-bump --out data/cache/_pkgtest/x.zip v26.09.14
+python data/maintainer/tools/build_release_zip.py --no-bump --out cache/_pkgtest/x.zip v26.09.14
 ```
 > 🖱️ **双击打包入口 = `tools/build_release_zip.bat`**（v26.09.14 重建，与 .py 同目录）。
 > 它自己找解释器（`.venvs\py313` → WorkBuddy 托管解释器 → `%LOCALAPPDATA%` → `where python`
