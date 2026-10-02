@@ -72,8 +72,11 @@ REM Stamp main.Version with the git short SHA (falls back to "dev").
 set "GSVER=dev"
 for /f %%S in ('git rev-parse --short HEAD 2^>nul') do set "GSVER=bd2-%%S"
 
-echo [i] gofmt
-"%GOBINDIR%gofmt.exe" -l -w . >nul 2>&1
+echo [i] gofmt (only files that actually need it, to avoid touching mtimes)
+for /f "delims=" %%F in ('"%GOBINDIR%gofmt.exe" -l . 2^>nul') do (
+    echo     formatting %%F
+    "%GOBINDIR%gofmt.exe" -w "%%F"
+)
 echo [i] vet
 "%GOEXE%" vet ./...
 if errorlevel 1 goto :fail
