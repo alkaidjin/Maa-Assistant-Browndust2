@@ -97,6 +97,9 @@ EXCLUDE_DIRS  = {'.git', '.workbuddy', 'cache', 'config', 'debug', 'updates', '_
                  # v26.09.14 起它住在 data/maintainer/agent/ 下，本条是护栏 —— 万一有人把它挪回
                  # agent/，仍然不会被扫进包。
                  'rock-picker',
+                 # 第三个 agent（钓鱼小游戏 FishingMinigame）的 Go 源码，同上：
+                 # 只有 agent/fishing.exe 进包，源码只入仓库。
+                 'fishing',
                  # ⚠️ 维护者档案目录（打包器 / 备份器 / 图标工具 / 开发辅助脚本 / 退役件存档）。
                  # 整目录一次排除：它里面既有本机路径，也**绝不能**出现在用户包里。
                  # 更关键的理由见文件头「双击入口」处的说明 —— MXU 全量更新会整目录换掉
@@ -307,6 +310,10 @@ REQUIRED_FILES = [
     # 狩猎场-圣石洞穴「自动刷数量最少的圣石」用的自定义识别器 LeastRockPicker。
     # child_exec = agent/rock-picker（CreateProcess 自动补 .exe）。
     'agent/rock-picker.exe',
+    # 第三个 agent：钓鱼小游戏。提供 custom action FishingMinigame
+    # （resource/pipeline/AutoFishing.json 的 Fishing_Minigame 节点）。
+    # child_exec = agent/fishing（CreateProcess 自动补 .exe）。
+    'agent/fishing.exe',
     # MXU 直接按 interface.json 的路径读取：icon / license / languages
     'misc/MaaEnd-Tiny.png',
     'misc/LICENSE_SHORT.md',

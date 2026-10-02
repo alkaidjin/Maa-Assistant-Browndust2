@@ -1,0 +1,733 @@
+{
+    "task": [
+        {
+            "name": "自动钓鱼（测试版）",
+            "label": "自动钓鱼（测试版）",
+            "entry": "AutoFishing_Start",
+            "description": "请在游戏主界面或码头界面开始任务! \n请尽量使用大师之作、命运之丝和泰坦征服者这类弱点命中判定区域扩大数值高的钓鱼竿，以增加弱点判定命中率!\n脚本调试用鱼竿为黑曜之楔",
+            "option": [
+                "FishingSpot",
+                "FishingCount"
+            ]
+        }
+    ],
+    "option": {
+        "FishingSpot": {
+            "type": "select",
+            "label": "选择钓鱼地区",
+            "des": "选择钓鱼地区",
+            "default_case": "Lake",
+            "cases": [
+                {
+                    "name": "Lake",
+                    "label": "烟波湖",
+                    "pipeline_override": {
+                        "Fishing_MapChoose": {
+                            "next": [
+                                "Fishing_MistyLake"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Shallow",
+                    "label": "浅岸",
+                    "pipeline_override": {
+                        "Fishing_MapChoose": {
+                            "next": [
+                                "Fishing_ShallowCoastalWaters"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Frost",
+                    "label": "寒霜海峡",
+                    "pipeline_override": {
+                        "Fishing_MapChoose": {
+                            "next": [
+                                "AutoFish_EnterSpot_Frost"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Atlantis",
+                    "label": "亚特兰蒂斯",
+                    "pipeline_override": {
+                        "Fishing_MapChoose": {
+                            "next": [
+                                "Fishing_Atlantis"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "AbyssalMaw",
+                    "label": "深渊巨口",
+                    "pipeline_override": {
+                        "Fishing_MapChoose": {
+                            "next": [
+                                "Fishing_AbyssalMaw_Swipe"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "SkyIsland",
+                    "label": "天空岛",
+                    "pipeline_override": {
+                        "Fishing_MapChoose": {
+                            "next": [
+                                "Fishing_SkyIsland_Swipe"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "FishingCount": {
+            "type": "select",
+            "label": "钓鱼次数",
+            "des": "完成多少次小游戏后收尾卖鱼（每次小游戏=一次抛竿，成败都计数）",
+            "default_case": "C30",
+            "cases": [
+                {
+                    "name": "C10",
+                    "label": "10 次",
+                    "pipeline_override": {
+                        "Fishing_Minigame": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "FishingMinigame",
+                                    "custom_action_param": {
+                                        "mode": "auto",
+                                        "max_count": 10,
+                                        "max_seconds": 1200,
+                                        "max_no_bar": 3,
+                                        "judge": {
+                                            "x": 640,
+                                            "y": 360,
+                                            "key": 0
+                                        },
+                                        "bar": {
+                                            "roi": [
+                                                500,
+                                                618,
+                                                350,
+                                                30
+                                            ],
+                                            "min_col_hits": 2,
+                                            "min_zone_width": 8,
+                                            "padding_left": 30,
+                                            "padding_right": 25,
+                                            "cursor_min_hits": 28,
+                                            "zone_gap": 12
+                                        },
+                                        "colors": {
+                                            "cursor": {
+                                                "h": [
+                                                    0,
+                                                    360
+                                                ],
+                                                "s": [
+                                                    0,
+                                                    60
+                                                ],
+                                                "v": [
+                                                    200,
+                                                    255
+                                                ]
+                                            },
+                                            "blue": {
+                                                "h": [
+                                                    190,
+                                                    220
+                                                ],
+                                                "s": [
+                                                    60,
+                                                    255
+                                                ],
+                                                "v": [
+                                                    190,
+                                                    255
+                                                ]
+                                            },
+                                            "yellow": {
+                                                "h": [
+                                                    35,
+                                                    70
+                                                ],
+                                                "s": [
+                                                    90,
+                                                    255
+                                                ],
+                                                "v": [
+                                                    140,
+                                                    255
+                                                ]
+                                            },
+                                            "green": {
+                                                "h": [
+                                                    130,
+                                                    180
+                                                ],
+                                                "s": [
+                                                    80,
+                                                    255
+                                                ],
+                                                "v": [
+                                                    90,
+                                                    255
+                                                ]
+                                            }
+                                        },
+                                        "timing": {
+                                            "poll_ms": 8,
+                                            "input_comp_ms": 100,
+                                            "wait_cap_ms": 5000,
+                                            "bar_wait_ms": 5000,
+                                            "end_invalid_frames": 8,
+                                            "reset_ms": 200,
+                                            "minigame_ms": 20000,
+                                            "max_vel_samples": 4,
+                                            "max_vel": 0.45,
+                                            "yellow_max_wait_ms": 600,
+                                            "yellow_extra_ms": 300,
+                                            "blue_aim_ratio": 0.5,
+                                            "yellow_aim_ratio": 0.15
+                                        },
+                                        "settle": {
+                                            "enabled": true,
+                                            "x": 640,
+                                            "y": 647,
+                                            "delay_ms": 1200,
+                                            "clicks": 8,
+                                            "interval_ms": 350
+                                        },
+                                        "next": {
+                                            "node": "Fishing_Minigame",
+                                            "cast": "AutoFish_Space",
+                                            "finish": "AutoFish_Finish"
+                                        },
+                                        "log_samples": false,
+                                        "dump_colors": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "C30",
+                    "label": "30 次",
+                    "pipeline_override": {
+                        "Fishing_Minigame": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "FishingMinigame",
+                                    "custom_action_param": {
+                                        "mode": "auto",
+                                        "max_count": 30,
+                                        "max_seconds": 3600,
+                                        "max_no_bar": 3,
+                                        "judge": {
+                                            "x": 640,
+                                            "y": 360,
+                                            "key": 0
+                                        },
+                                        "bar": {
+                                            "roi": [
+                                                500,
+                                                618,
+                                                350,
+                                                30
+                                            ],
+                                            "min_col_hits": 2,
+                                            "min_zone_width": 8,
+                                            "padding_left": 30,
+                                            "padding_right": 25,
+                                            "cursor_min_hits": 28,
+                                            "zone_gap": 12
+                                        },
+                                        "colors": {
+                                            "cursor": {
+                                                "h": [
+                                                    0,
+                                                    360
+                                                ],
+                                                "s": [
+                                                    0,
+                                                    60
+                                                ],
+                                                "v": [
+                                                    200,
+                                                    255
+                                                ]
+                                            },
+                                            "blue": {
+                                                "h": [
+                                                    190,
+                                                    220
+                                                ],
+                                                "s": [
+                                                    60,
+                                                    255
+                                                ],
+                                                "v": [
+                                                    190,
+                                                    255
+                                                ]
+                                            },
+                                            "yellow": {
+                                                "h": [
+                                                    35,
+                                                    70
+                                                ],
+                                                "s": [
+                                                    90,
+                                                    255
+                                                ],
+                                                "v": [
+                                                    140,
+                                                    255
+                                                ]
+                                            },
+                                            "green": {
+                                                "h": [
+                                                    130,
+                                                    180
+                                                ],
+                                                "s": [
+                                                    80,
+                                                    255
+                                                ],
+                                                "v": [
+                                                    90,
+                                                    255
+                                                ]
+                                            }
+                                        },
+                                        "timing": {
+                                            "poll_ms": 8,
+                                            "input_comp_ms": 100,
+                                            "wait_cap_ms": 5000,
+                                            "bar_wait_ms": 5000,
+                                            "end_invalid_frames": 8,
+                                            "reset_ms": 200,
+                                            "minigame_ms": 20000,
+                                            "max_vel_samples": 4,
+                                            "max_vel": 0.45,
+                                            "yellow_max_wait_ms": 600,
+                                            "yellow_extra_ms": 300,
+                                            "blue_aim_ratio": 0.5,
+                                            "yellow_aim_ratio": 0.15
+                                        },
+                                        "settle": {
+                                            "enabled": true,
+                                            "x": 640,
+                                            "y": 647,
+                                            "delay_ms": 1200,
+                                            "clicks": 8,
+                                            "interval_ms": 350
+                                        },
+                                        "next": {
+                                            "node": "Fishing_Minigame",
+                                            "cast": "AutoFish_Space",
+                                            "finish": "AutoFish_Finish"
+                                        },
+                                        "log_samples": false,
+                                        "dump_colors": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "C50",
+                    "label": "50 次",
+                    "pipeline_override": {
+                        "Fishing_Minigame": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "FishingMinigame",
+                                    "custom_action_param": {
+                                        "mode": "auto",
+                                        "max_count": 50,
+                                        "max_seconds": 5400,
+                                        "max_no_bar": 3,
+                                        "judge": {
+                                            "x": 640,
+                                            "y": 360,
+                                            "key": 0
+                                        },
+                                        "bar": {
+                                            "roi": [
+                                                500,
+                                                618,
+                                                350,
+                                                30
+                                            ],
+                                            "min_col_hits": 2,
+                                            "min_zone_width": 8,
+                                            "padding_left": 30,
+                                            "padding_right": 25,
+                                            "cursor_min_hits": 28,
+                                            "zone_gap": 12
+                                        },
+                                        "colors": {
+                                            "cursor": {
+                                                "h": [
+                                                    0,
+                                                    360
+                                                ],
+                                                "s": [
+                                                    0,
+                                                    60
+                                                ],
+                                                "v": [
+                                                    200,
+                                                    255
+                                                ]
+                                            },
+                                            "blue": {
+                                                "h": [
+                                                    190,
+                                                    220
+                                                ],
+                                                "s": [
+                                                    60,
+                                                    255
+                                                ],
+                                                "v": [
+                                                    190,
+                                                    255
+                                                ]
+                                            },
+                                            "yellow": {
+                                                "h": [
+                                                    35,
+                                                    70
+                                                ],
+                                                "s": [
+                                                    90,
+                                                    255
+                                                ],
+                                                "v": [
+                                                    140,
+                                                    255
+                                                ]
+                                            },
+                                            "green": {
+                                                "h": [
+                                                    130,
+                                                    180
+                                                ],
+                                                "s": [
+                                                    80,
+                                                    255
+                                                ],
+                                                "v": [
+                                                    90,
+                                                    255
+                                                ]
+                                            }
+                                        },
+                                        "timing": {
+                                            "poll_ms": 8,
+                                            "input_comp_ms": 100,
+                                            "wait_cap_ms": 5000,
+                                            "bar_wait_ms": 5000,
+                                            "end_invalid_frames": 8,
+                                            "reset_ms": 200,
+                                            "minigame_ms": 20000,
+                                            "max_vel_samples": 4,
+                                            "max_vel": 0.45,
+                                            "yellow_max_wait_ms": 600,
+                                            "yellow_extra_ms": 300,
+                                            "blue_aim_ratio": 0.5,
+                                            "yellow_aim_ratio": 0.15
+                                        },
+                                        "settle": {
+                                            "enabled": true,
+                                            "x": 640,
+                                            "y": 647,
+                                            "delay_ms": 1200,
+                                            "clicks": 8,
+                                            "interval_ms": 350
+                                        },
+                                        "next": {
+                                            "node": "Fishing_Minigame",
+                                            "cast": "AutoFish_Space",
+                                            "finish": "AutoFish_Finish"
+                                        },
+                                        "log_samples": false,
+                                        "dump_colors": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "C100",
+                    "label": "100 次",
+                    "pipeline_override": {
+                        "Fishing_Minigame": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "FishingMinigame",
+                                    "custom_action_param": {
+                                        "mode": "auto",
+                                        "max_count": 100,
+                                        "max_seconds": 7200,
+                                        "max_no_bar": 3,
+                                        "judge": {
+                                            "x": 640,
+                                            "y": 360,
+                                            "key": 0
+                                        },
+                                        "bar": {
+                                            "roi": [
+                                                500,
+                                                618,
+                                                350,
+                                                30
+                                            ],
+                                            "min_col_hits": 2,
+                                            "min_zone_width": 8,
+                                            "padding_left": 30,
+                                            "padding_right": 25,
+                                            "cursor_min_hits": 28,
+                                            "zone_gap": 12
+                                        },
+                                        "colors": {
+                                            "cursor": {
+                                                "h": [
+                                                    0,
+                                                    360
+                                                ],
+                                                "s": [
+                                                    0,
+                                                    60
+                                                ],
+                                                "v": [
+                                                    200,
+                                                    255
+                                                ]
+                                            },
+                                            "blue": {
+                                                "h": [
+                                                    190,
+                                                    220
+                                                ],
+                                                "s": [
+                                                    60,
+                                                    255
+                                                ],
+                                                "v": [
+                                                    190,
+                                                    255
+                                                ]
+                                            },
+                                            "yellow": {
+                                                "h": [
+                                                    35,
+                                                    70
+                                                ],
+                                                "s": [
+                                                    90,
+                                                    255
+                                                ],
+                                                "v": [
+                                                    140,
+                                                    255
+                                                ]
+                                            },
+                                            "green": {
+                                                "h": [
+                                                    130,
+                                                    180
+                                                ],
+                                                "s": [
+                                                    80,
+                                                    255
+                                                ],
+                                                "v": [
+                                                    90,
+                                                    255
+                                                ]
+                                            }
+                                        },
+                                        "timing": {
+                                            "poll_ms": 8,
+                                            "input_comp_ms": 100,
+                                            "wait_cap_ms": 5000,
+                                            "bar_wait_ms": 5000,
+                                            "end_invalid_frames": 8,
+                                            "reset_ms": 200,
+                                            "minigame_ms": 20000,
+                                            "max_vel_samples": 4,
+                                            "max_vel": 0.45,
+                                            "yellow_max_wait_ms": 600,
+                                            "yellow_extra_ms": 300,
+                                            "blue_aim_ratio": 0.5,
+                                            "yellow_aim_ratio": 0.15
+                                        },
+                                        "settle": {
+                                            "enabled": true,
+                                            "x": 640,
+                                            "y": 647,
+                                            "delay_ms": 1200,
+                                            "clicks": 8,
+                                            "interval_ms": 350
+                                        },
+                                        "next": {
+                                            "node": "Fishing_Minigame",
+                                            "cast": "AutoFish_Space",
+                                            "finish": "AutoFish_Finish"
+                                        },
+                                        "log_samples": false,
+                                        "dump_colors": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "C200",
+                    "label": "200 次",
+                    "pipeline_override": {
+                        "Fishing_Minigame": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "FishingMinigame",
+                                    "custom_action_param": {
+                                        "mode": "auto",
+                                        "max_count": 200,
+                                        "max_seconds": 14400,
+                                        "max_no_bar": 3,
+                                        "judge": {
+                                            "x": 640,
+                                            "y": 360,
+                                            "key": 0
+                                        },
+                                        "bar": {
+                                            "roi": [
+                                                500,
+                                                618,
+                                                350,
+                                                30
+                                            ],
+                                            "min_col_hits": 2,
+                                            "min_zone_width": 8,
+                                            "padding_left": 30,
+                                            "padding_right": 25,
+                                            "cursor_min_hits": 28,
+                                            "zone_gap": 12
+                                        },
+                                        "colors": {
+                                            "cursor": {
+                                                "h": [
+                                                    0,
+                                                    360
+                                                ],
+                                                "s": [
+                                                    0,
+                                                    60
+                                                ],
+                                                "v": [
+                                                    200,
+                                                    255
+                                                ]
+                                            },
+                                            "blue": {
+                                                "h": [
+                                                    190,
+                                                    220
+                                                ],
+                                                "s": [
+                                                    60,
+                                                    255
+                                                ],
+                                                "v": [
+                                                    190,
+                                                    255
+                                                ]
+                                            },
+                                            "yellow": {
+                                                "h": [
+                                                    35,
+                                                    70
+                                                ],
+                                                "s": [
+                                                    90,
+                                                    255
+                                                ],
+                                                "v": [
+                                                    140,
+                                                    255
+                                                ]
+                                            },
+                                            "green": {
+                                                "h": [
+                                                    130,
+                                                    180
+                                                ],
+                                                "s": [
+                                                    80,
+                                                    255
+                                                ],
+                                                "v": [
+                                                    90,
+                                                    255
+                                                ]
+                                            }
+                                        },
+                                        "timing": {
+                                            "poll_ms": 8,
+                                            "input_comp_ms": 100,
+                                            "wait_cap_ms": 5000,
+                                            "bar_wait_ms": 5000,
+                                            "end_invalid_frames": 8,
+                                            "reset_ms": 200,
+                                            "minigame_ms": 20000,
+                                            "max_vel_samples": 4,
+                                            "max_vel": 0.45,
+                                            "yellow_max_wait_ms": 600,
+                                            "yellow_extra_ms": 300,
+                                            "blue_aim_ratio": 0.5,
+                                            "yellow_aim_ratio": 0.15
+                                        },
+                                        "settle": {
+                                            "enabled": true,
+                                            "x": 640,
+                                            "y": 647,
+                                            "delay_ms": 1200,
+                                            "clicks": 8,
+                                            "interval_ms": 350
+                                        },
+                                        "next": {
+                                            "node": "Fishing_Minigame",
+                                            "cast": "AutoFish_Space",
+                                            "finish": "AutoFish_Finish"
+                                        },
+                                        "log_samples": false,
+                                        "dump_colors": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

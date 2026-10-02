@@ -1,0 +1,1326 @@
+{
+    "$__mpe_config_AutoFishing": {
+        "$__mpe_code": {
+            "prefix": "",
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 1790908661081,
+            "isModifiedExternally": false,
+            "isDeleted": false,
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\AutoFishing.json",
+            "savedViewport": {
+                "x": -2463,
+                "y": -485,
+                "zoom": 1
+            },
+            "filename": "AutoFishing",
+            "version": "v2.0.6"
+        }
+    },
+    "$__mpe_external_StartGame_AutoFishing": {
+        "$__mpe_code": {
+            "position": {
+                "x": 6967,
+                "y": 286
+            }
+        }
+    },
+    "AutoFishEnd_1": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    152,
+                    93,
+                    56,
+                    18
+                ],
+                "expected": [
+                    "使用",
+                    "时间"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1199,
+                    39,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 1000,
+        "next": [
+            "AutoFishEnd_2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5919,
+                "y": -60
+            }
+        }
+    },
+    "AutoFishEnd_2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    667,
+                    403,
+                    92,
+                    57
+                ],
+                "expected": [
+                    "确认"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 6275,
+                "y": -5
+            }
+        }
+    },
+    "AutoFish_EnterSpot_Frost": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    371,
+                    204,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 1000,
+        "focus": "寒霜海峡钓点",
+        "next": [
+            "AutoFishing_Depart"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1662,
+                "y": 853
+            }
+        }
+    },
+    "AutoFish_Finish": {
+        "post_delay": 500,
+        "focus": "钓鱼次数已达标：收尾，前往卖鱼",
+        "next": [
+            "SellFish_1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -4,
+                "y": -255
+            }
+        }
+    },
+    "AutoFish_Space": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1112,
+                    549,
+                    96,
+                    92
+                ],
+                "template": [
+                    "Fish/FISHSPACE.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "LongPress",
+            "param": {
+                "target": [
+                    1160,
+                    596,
+                    1,
+                    1
+                ],
+                "duration": 450
+            }
+        },
+        "focus": "",
+        "next": [
+            "UpFish",
+            "包满卖鱼",
+            "AutoFish_Space"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2921,
+                "y": 799
+            }
+        }
+    },
+    "AutoFishingEnter_1": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    75,
+                    185,
+                    70,
+                    40
+                ],
+                "expected": [
+                    "经营",
+                    "管理"
+                ],
+                "threshold": 0.5
+            }
+        },
+        "pre_delay": 1000,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    110,
+                    170,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "post_delay": 4000,
+        "focus": "",
+        "next": [
+            "AutoFishingEnter_2",
+            "AutoFishingEnter_1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 308,
+                "y": 223
+            }
+        }
+    },
+    "AutoFishingEnter_2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    705,
+                    269,
+                    144,
+                    52
+                ],
+                "expected": [
+                    "立刻",
+                    "前往"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "pre_delay": 1500,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    781,
+                    295,
+                    1,
+                    1
+                ]
+            }
+        },
+        "focus": "",
+        "next": [
+            "AutoFishingEnter_wait"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 583,
+                "y": 224
+            }
+        }
+    },
+    "AutoFishingEnter_Map": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1123,
+                    663,
+                    101,
+                    33
+                ],
+                "expected": [
+                    "开始",
+                    "钓鱼"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1000,
+        "focus": "",
+        "next": [
+            "AutoFishingEnter_Map",
+            "Fishing_MapChoose"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1174,
+                "y": 220
+            }
+        }
+    },
+    "AutoFishingEnter_wait": {
+        "max_hit": 4,
+        "post_delay": 3000,
+        "timeout": 5000,
+        "next": [
+            "AutoFishingEnter_Map",
+            "AutoFishingEnter_wait"
+        ],
+        "on_error": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 870,
+                "y": 220
+            }
+        }
+    },
+    "AutoFishing_Depart": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1050,
+                    646,
+                    108,
+                    71
+                ],
+                "expected": [
+                    "启航"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 800,
+        "focus": "",
+        "next": [
+            "AutoFishing_Depart_Wait"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2145,
+                "y": 456
+            }
+        }
+    },
+    "AutoFishing_Depart_Wait": {
+        "post_delay": 2500,
+        "next": [
+            "AutoFishing_Move",
+            "AutoFishing_Depart_Wait"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2428,
+                "y": 459
+            }
+        }
+    },
+    "AutoFishing_Move": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    144,
+                    85,
+                    69,
+                    32
+                ],
+                "expected": [
+                    "使用",
+                    "时间"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "pre_delay": 1000,
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    193,
+                    598,
+                    1,
+                    1
+                ],
+                "end": [
+                    [
+                        193,
+                        647,
+                        1,
+                        1
+                    ]
+                ],
+                "end_hold": [
+                    1500
+                ]
+            }
+        },
+        "focus": "",
+        "next": [
+            "AutoFish_Space"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2687,
+                "y": 446
+            }
+        }
+    },
+    "AutoFishing_Start": {
+        "focus": "入口：先回主界面清弹窗，再打开经营管理",
+        "next": [
+            "AutoFishingEnter_1",
+            "AutoFishingEnter_Map",
+            "AutoFishing_Move",
+            "[JumpBack]StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -7,
+                "y": 233
+            }
+        }
+    },
+    "Fishing_AbyssalMaw": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    275,
+                    334,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 1000,
+        "next": [
+            "AutoFishing_Depart"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2469,
+                "y": 142
+            }
+        }
+    },
+    "Fishing_AbyssalMaw_Swipe": {
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    212,
+                    364,
+                    1,
+                    1
+                ],
+                "end": [
+                    [
+                        536,
+                        364,
+                        1,
+                        1
+                    ]
+                ],
+                "end_hold": [
+                    500
+                ]
+            }
+        },
+        "next": [
+            "Fishing_AbyssalMaw"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2218,
+                "y": 145
+            }
+        }
+    },
+    "Fishing_Atlantis": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    141,
+                    538,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 1000,
+        "next": [
+            "AutoFishing_Depart"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1942,
+                "y": 137
+            }
+        }
+    },
+    "Fishing_MapChoose": {
+        "focus": "",
+        "$__mpe_code": {
+            "position": {
+                "x": 1429,
+                "y": 410
+            }
+        }
+    },
+    "Fishing_Minigame": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "FishingMinigame",
+                "custom_action_param": {
+                    "bar": {
+                        "cursor_min_hits": 28,
+                        "min_col_hits": 2,
+                        "min_zone_width": 8,
+                        "padding_left": 30,
+                        "padding_right": 25,
+                        "roi": [
+                            500,
+                            618,
+                            350,
+                            30
+                        ],
+                        "zone_gap": 12
+                    },
+                    "colors": {
+                        "blue": {
+                            "h": [
+                                190,
+                                220
+                            ],
+                            "s": [
+                                60,
+                                255
+                            ],
+                            "v": [
+                                190,
+                                255
+                            ]
+                        },
+                        "cursor": {
+                            "h": [
+                                0,
+                                360
+                            ],
+                            "s": [
+                                0,
+                                60
+                            ],
+                            "v": [
+                                200,
+                                255
+                            ]
+                        },
+                        "green": {
+                            "h": [
+                                130,
+                                180
+                            ],
+                            "s": [
+                                80,
+                                255
+                            ],
+                            "v": [
+                                90,
+                                255
+                            ]
+                        },
+                        "yellow": {
+                            "h": [
+                                35,
+                                70
+                            ],
+                            "s": [
+                                90,
+                                255
+                            ],
+                            "v": [
+                                140,
+                                255
+                            ]
+                        }
+                    },
+                    "dump_colors": false,
+                    "judge": {
+                        "key": 0,
+                        "x": 640,
+                        "y": 360
+                    },
+                    "log_samples": false,
+                    "max_count": 30,
+                    "max_no_bar": 3,
+                    "max_seconds": 3600,
+                    "mode": "auto",
+                    "next": {
+                        "cast": "AutoFish_Space",
+                        "finish": "AutoFish_Finish",
+                        "node": "Fishing_Minigame"
+                    },
+                    "settle": {
+                        "clicks": 8,
+                        "delay_ms": 1200,
+                        "enabled": true,
+                        "interval_ms": 350,
+                        "x": 640,
+                        "y": 647
+                    },
+                    "timing": {
+                        "bar_wait_ms": 5000,
+                        "blue_aim_ratio": 0.5,
+                        "end_invalid_frames": 8,
+                        "input_comp_ms": 100,
+                        "max_vel": 0.45,
+                        "max_vel_samples": 4,
+                        "minigame_ms": 20000,
+                        "poll_ms": 8,
+                        "reset_ms": 200,
+                        "wait_cap_ms": 5000,
+                        "yellow_aim_ratio": 0.15,
+                        "yellow_extra_ms": 300,
+                        "yellow_max_wait_ms": 600
+                    }
+                }
+            }
+        },
+        "post_delay": 500,
+        "focus": "",
+        "next": [
+            "AutoFish_Space"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3496,
+                "y": 640
+            }
+        }
+    },
+    "Fishing_MistyLake": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    521,
+                    553,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 1000,
+        "focus": "烟波湖钓点",
+        "next": [
+            "AutoFishing_Depart"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1661,
+                "y": 523
+            }
+        }
+    },
+    "Fishing_ShallowCoastalWaters": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    491,
+                    394,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 1000,
+        "focus": "浅岸钓点",
+        "next": [
+            "AutoFishing_Depart"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1658,
+                "y": 140
+            }
+        }
+    },
+    "Fishing_SkyIsland": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    135,
+                    476,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 1000,
+        "next": [
+            "AutoFishing_Depart"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2242,
+                "y": 827
+            }
+        }
+    },
+    "Fishing_SkyIsland_Swipe": {
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    212,
+                    364,
+                    1,
+                    1
+                ],
+                "end": [
+                    [
+                        536,
+                        364,
+                        1,
+                        1
+                    ]
+                ],
+                "end_hold": [
+                    500
+                ]
+            }
+        },
+        "next": [
+            "Fishing_SkyIsland"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1974,
+                "y": 825
+            }
+        }
+    },
+    "SellAllFish_1": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1005,
+                    653,
+                    85,
+                    38
+                ],
+                "expected": [
+                    "全选"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1062,
+                    670,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 1000,
+        "focus": "",
+        "next": [
+            "SellAllFish_2",
+            "SellAllFish_1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4788,
+                "y": 567
+            }
+        }
+    },
+    "SellAllFish_2": {
+        "recognition": {
+            "type": "ColorMatch",
+            "param": {
+                "roi": [
+                    1055,
+                    666,
+                    11,
+                    10
+                ],
+                "method": 40,
+                "lower": [
+                    [
+                        106,
+                        73,
+                        255
+                    ]
+                ],
+                "upper": [
+                    [
+                        106,
+                        73,
+                        255
+                    ]
+                ],
+                "count": 5
+            }
+        },
+        "focus": "",
+        "next": [
+            "SellAllFish_Sure_1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5057,
+                "y": 564
+            }
+        }
+    },
+    "SellAllFish_Sure_1": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1144,
+                    636,
+                    65,
+                    67
+                ],
+                "template": [
+                    "Fish/SELLALLFISHSURE.png"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "focus": "",
+        "next": [
+            "SellAllFish_Sure_2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5378,
+                "y": 553
+            }
+        }
+    },
+    "SellAllFish_Sure_2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    665,
+                    406,
+                    104,
+                    44
+                ],
+                "expected": [
+                    "确认"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "next": [
+            "SellFishEnd_1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5663,
+                "y": 560
+            }
+        }
+    },
+    "SellFishClick_1": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1038,
+                    642,
+                    164,
+                    56
+                ],
+                "expected": [
+                    "出售",
+                    "一键"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "focus": "",
+        "next": [
+            "SellAllFish_1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4489,
+                "y": 569
+            }
+        }
+    },
+    "SellFishEnd_1": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    82,
+                    4,
+                    64,
+                    57
+                ],
+                "template": [
+                    "Fish/BACK_FISH.png"
+                ],
+                "threshold": [
+                    0.7
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "focus": "出售完成后点击左上角返回图标（需截图 Fish/back.png）",
+        "next": [
+            "AutoFishEnd_1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5616,
+                "y": -23
+            }
+        }
+    },
+    "SellFish_1": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    894,
+                    19,
+                    46,
+                    56
+                ],
+                "template": [
+                    "Fish/SELL1.png"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.7
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    916,
+                    46
+                ]
+            }
+        },
+        "repeat": 2,
+        "post_delay": 1500,
+        "focus": "",
+        "next": [
+            "SellFishClick_1",
+            "SellNothingFish",
+            "SellFish_1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3845,
+                "y": 388
+            }
+        }
+    },
+    "SellNothingFish": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    599,
+                    415,
+                    206,
+                    73
+                ],
+                "expected": [
+                    "没有可出售的道具",
+                    "没有可出售",
+                    "出售的道具"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "focus": "",
+        "next": [
+            "SellFishEnd_1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4461,
+                "y": 257
+            }
+        }
+    },
+    "UpFish": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    554,
+                    163,
+                    171,
+                    111
+                ],
+                "template": [
+                    "Fish/FISHUP.png"
+                ],
+                "green_mask": true
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1156,
+                    595,
+                    1,
+                    1
+                ]
+            }
+        },
+        "focus": "",
+        "next": [
+            "Fishing_Minigame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3174,
+                "y": 430
+            }
+        }
+    },
+    "包满卖鱼": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    552,
+                    86,
+                    166,
+                    88
+                ],
+                "expected": [
+                    "背包已满",
+                    "清理背包",
+                    "背包",
+                    "请清理",
+                    "已满"
+                ]
+            }
+        },
+        "post_delay": 2000,
+        "next": [
+            "SellFish_3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3213,
+                "y": 1061
+            }
+        }
+    },
+    "SellAllFish_3": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1005,
+                    653,
+                    85,
+                    38
+                ],
+                "expected": [
+                    "全选"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1061,
+                    670,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 1000,
+        "focus": "",
+        "next": [
+            "SellAllFish_4"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4212,
+                "y": 1108
+            }
+        }
+    },
+    "SellAllFish_4": {
+        "recognition": {
+            "type": "ColorMatch",
+            "param": {
+                "roi": [
+                    1055,
+                    666,
+                    11,
+                    10
+                ],
+                "method": 40,
+                "lower": [
+                    [
+                        106,
+                        73,
+                        255
+                    ]
+                ],
+                "upper": [
+                    [
+                        106,
+                        73,
+                        255
+                    ]
+                ],
+                "count": 5
+            }
+        },
+        "focus": "",
+        "next": [
+            "SellAllFish_Sure_3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4516,
+                "y": 1090
+            }
+        }
+    },
+    "SellAllFish_Sure_3": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1144,
+                    636,
+                    65,
+                    67
+                ],
+                "template": [
+                    "Fish/SELLALLFISHSURE.png"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "focus": "",
+        "next": [
+            "SellAllFish_Sure_4"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4804,
+                "y": 1099
+            }
+        }
+    },
+    "SellAllFish_Sure_4": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    665,
+                    406,
+                    104,
+                    44
+                ],
+                "expected": [
+                    "确认"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "next": [
+            "SellFishEnd_2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5087,
+                "y": 1109
+            }
+        }
+    },
+    "SellFishClick_2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1038,
+                    642,
+                    164,
+                    56
+                ],
+                "expected": [
+                    "一键",
+                    "出售"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "focus": "",
+        "next": [
+            "SellAllFish_3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3879,
+                "y": 1079
+            }
+        }
+    },
+    "SellFishEnd_2": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    82,
+                    4,
+                    64,
+                    57
+                ],
+                "template": [
+                    "Fish/BACK_FISH.png"
+                ],
+                "threshold": [
+                    0.7
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "focus": "",
+        "next": [
+            "AutoFish_Space"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5363,
+                "y": 1109
+            }
+        }
+    },
+    "SellFish_3": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    894,
+                    19,
+                    46,
+                    56
+                ],
+                "template": [
+                    "Fish/SELL1.png"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.7
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    916,
+                    46
+                ]
+            }
+        },
+        "repeat": 2,
+        "post_delay": 1500,
+        "focus": "",
+        "next": [
+            "SellFishClick_2",
+            "SellFish_3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3543,
+                "y": 1061
+            }
+        }
+    }
+}

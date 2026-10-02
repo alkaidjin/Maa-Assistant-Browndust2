@@ -88,6 +88,13 @@
             "timeout": 15000,
             "identifier": "mxu_browndust_rock",
             "auto_reconnect": true
+        },
+        {
+            "child_exec": "agent/fishing",
+            "child_args": [],
+            "timeout": 15000,
+            "identifier": "mxu_browndust_fishing",
+            "auto_reconnect": true
         }
     ],
     "task": [],
@@ -104,6 +111,7 @@
         "tasks/RewardRoutine.json",
         "tasks/WarcraftShop.json",
         "tasks/AbsorpAssemble.json",
-        "tasks/AbsorpAssembleRound2.json"
+        "tasks/AbsorpAssembleRound2.json",
+        "tasks/AutoFishing.json"
     ]
 }
