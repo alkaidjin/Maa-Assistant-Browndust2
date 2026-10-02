@@ -203,10 +203,20 @@ P2 现在**两份并存**：主工作区未 commit 的工作区改动 + 本分�
 - [x] **丢弃本地 apply** —— `git checkout -- resource/pipeline/AutoFishing.json`，
   确认 `max_hit` 消失、**自己删的 `max_seconds` 仍保留**（两者是不同节点，互不影响）。
 - [x] **claim 提交** —— `0686b13`，工作区干净。
-- [ ] **等主控 commit + push** —— 截至 16:30 主工作区仍是
-  `M resource/pipeline/AutoFishing.json`、HEAD `bddbc55`，尚未提交。
-- [ ] **主控 push 后我执行** —— `git fetch origin && git rebase origin/main`，
-  再跑一遍全量复验（悬空 / 重名 / 缺图 / filePath）。
+- [x] **主控 commit + push** —— 主工作区 `b2300e3`「fix: AutoFishing_Depart_Wait 加 max_hit
+  兜底，避免必中自环永久挂起」，已到 origin/main。
+- [x] **rebase 取官方版** —— `git fetch origin && git rebase origin/main`，**零冲突**（与预演一致）。
+  我的 3 个 commit 重放到 `b2300e3` 之上：`2475902` / `330b59c` / `1c2049b`。
+
+**rebase 后全量复验（全部通过）**：
+
+| 检查 | 结果 |
+|---|---|
+| 两边改动并存 | ✅ `max_hit: 4`（主控 P2）+ 无 `max_seconds`（我的 P1-B） |
+| 节点数 / 悬空 / 重名 / 缺图 | ✅ 41 节点；全局 466 节点无悬空、无重名、无缺图 |
+| import 注册 | ✅ 14 个齐全 |
+| `$__mpe_code.filePath` 污染 | ✅ 0（未被染成 wt 路径） |
+| 门控自检 | ✅ 我的 6 个改动文件**不含** `interface.json` 等任何全局注册表 |
 
 **预演已做（零冲突）**：临时分支模拟「他的 P2 先落 → cherry-pick 我的 `926ade3`」成功。
 原因：MPE 重排只搬动了 7 个 `SellFish*` / `SellAllFish_*` 节点，而我删 `max_seconds` 的位置
@@ -225,6 +235,7 @@ P2 现在**两份并存**：主工作区未 commit 的工作区改动 + 本分�
 - ✅ **已 commit `926ade3`**（6 文件，+426/−9）：P1-B 删 `max_seconds`×6、P3 修 README、
   `param.go` 加废弃注释、报告与 claim 入库。未 push。
 
-- **2026-10-02 16:30**：MPE↔worktree 同步调研 + P2 同步。产出：§1.2、§5-建议6、§6.1/§6.2。
-  ✅ **已 commit `0686b13`**（claim 补记同步约定 + 预演结论）。
-  P2 按方案 A 处理：本地 apply 已丢弃，等主控 commit+push 后 rebase 取官方版（见 §6.2）。
+- **2026-10-02 16:45**：MPE↔worktree 同步调研 + P2 同步。产出：§1.2、§5-建议6、§6.1/§6.2。
+  ✅ 已 rebase 到 `b2300e3`（P2 官方版），零冲突，全量复验通过。
+  本分支 3 个 commit：`2475902`（P1-B 删死参数）/ `330b59c` / `1c2049b`（同步约定与进度）。
+  **未 push** —— 等主控指示（分支从未 push 过，需要时可直接 push，无需 --force）。
