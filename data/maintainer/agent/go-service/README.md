@@ -67,7 +67,10 @@ i18n 文案**不 embed**，运行时从磁盘 `locales/go-service/*.json` 读取
 ## 5. 构建
 
 双击 `build.bat`（需要 Go 1.25.x；查找顺序：`GOROOT` → `PATH` →
-`<仓>\cache\_gotool\go`）。产物直接写到仓库根 `agent/go-service.exe`，
+`<仓>\cache\_gotool\go` → **沿父目录扫描同级仓库的 `cache\_gotool\go`**）。
+末一级是 worktree 场景：worktree 自己的 `cache\` 几乎是空的，工具链实际装在
+主工作区（如 `F:\MABd2v26.09.5\cache\_gotool`），此时 GOPATH/GOMODCACHE/GOCACHE
+也自动跟随到主工作区。产物写到仓库根 `agent/go-service.exe`，
 `main.Version` 注入 `bd2-<git短SHA>`。
 
 ```bat

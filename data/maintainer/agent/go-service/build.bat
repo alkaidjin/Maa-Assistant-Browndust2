@@ -8,32 +8,57 @@ REM
 REM  Requires Go 1.25.x. Lookup order:
 REM    1. GOROOT environment variable
 REM    2. go.exe on PATH
-REM    3. <repo>\cache\_gotool\go   (the maintainer's local toolchain)
+REM    3. <repo>\cache\_gotool\go   (main checkout case)
+REM    4. cache\_gotool\go inside a sibling checkout found by walking up
+REM       from this repo (git worktree case: the toolchain lives in the
+REM       main workspace and the worktree's own cache\ is nearly empty)
 REM
 REM  The source lives in this folder but is NOT shipped to users;
 REM  only the compiled agent/go-service.exe is. See README.md here.
 REM ===================================================================
-setlocal
+setlocal EnableExtensions EnableDelayedExpansion
 cd /d "%~dp0"
 
-set "REPO=%~dp0..\..\.."
+REM This script lives at <repo>\data\maintainer\agent\go-service\ -> four levels up.
+pushd "%~dp0..\..\..\.." >nul
+set "REPO=%CD%\"
+popd >nul
 set "GOEXE="
 set "GOBINDIR="
-set "LOCALGO=%REPO%\cache\_gotool\go"
+set "TOOLCACHE="
 
 if defined GOROOT if exist "%GOROOT%\bin\go.exe" set "GOEXE=%GOROOT%\bin\go.exe"
 if not defined GOEXE for %%I in (go.exe) do if not "%%~$PATH:I"=="" set "GOEXE=%%~$PATH:I"
-if not defined GOEXE if exist "%LOCALGO%\bin\go.exe" set "GOEXE=%LOCALGO%\bin\go.exe"
+
+REM Step 3: toolchain inside this checkout.
+if exist "%REPO%\cache\_gotool\go\bin\go.exe" set "TOOLCACHE=%REPO%"
+
+REM Step 4: worktree fallback - scan immediate children of each ancestor
+REM directory (max 6 levels) for another checkout carrying the toolchain.
+if not defined TOOLCACHE (
+    set "SCAN=%REPO%"
+    for /l %%L in (1,1,6) do (
+        for /d %%D in ("!SCAN!..\*") do (
+            if exist "%%~fD\cache\_gotool\go\bin\go.exe" if not defined TOOLCACHE set "TOOLCACHE=%%~fD"
+        )
+        set "SCAN=!SCAN!..\"
+    )
+)
+if defined TOOLCACHE if not defined GOEXE set "GOEXE=!TOOLCACHE!\cache\_gotool\go\bin\go.exe"
 
 if not defined GOEXE goto :nogo
 for %%A in ("%GOEXE%") do set "GOBINDIR=%%~dpA"
 echo [i] go: %GOEXE%
 
-set "USELOCAL="
-if /I "%GOEXE%"=="%LOCALGO%\bin\go.exe" set "USELOCAL=1"
-if defined USELOCAL set "GOPATH=%REPO%\cache\_gotool\gopath"
-if defined USELOCAL set "GOMODCACHE=%REPO%\cache\_gotool\gopath\pkg\mod"
-if defined USELOCAL set "GOCACHE=%REPO%\cache\_gotool\gopath\build-cache"
+REM When using a cache-rooted toolchain, GOPATH/GOMODCACHE/GOCACHE must
+REM live next to that toolchain tree (the main workspace in worktree mode),
+REM not in the current (worktree) checkout.
+if defined TOOLCACHE if /I "%GOEXE%"=="%TOOLCACHE%\cache\_gotool\go\bin\go.exe" (
+    echo [i] tool cache root: %TOOLCACHE%
+    set "GOPATH=!TOOLCACHE!\cache\_gotool\gopath"
+    set "GOMODCACHE=!TOOLCACHE!\cache\_gotool\gopath\pkg\mod"
+    set "GOCACHE=!TOOLCACHE!\cache\_gotool\gopath\build-cache"
+)
 
 if not defined GOPROXY set "GOPROXY=https://goproxy.cn,direct"
 set "GOSUMDB=off"
@@ -64,8 +89,12 @@ pause
 exit /b 0
 
 :nogo
-echo [x] Go toolchain not found.
-echo     Install Go 1.25.x, or set GOROOT, or unpack it to cache\_gotool\go
+echo [x] Go toolchain not found. Looked in:
+echo       1. GOROOT env (%GOROOT%)
+echo       2. go.exe on PATH
+echo       3. %REPO%\cache\_gotool\go
+echo       4. sibling checkouts via parent-directory scan (worktree mode)
+echo     Install Go 1.25.x, set GOROOT, or unpack the toolchain to cache\_gotool\go
 pause
 exit /b 1
 
