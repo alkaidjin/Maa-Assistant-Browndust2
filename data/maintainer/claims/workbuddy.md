@@ -238,4 +238,9 @@ P2 现在**两份并存**：主工作区未 commit 的工作区改动 + 本分�
 - **2026-10-02 16:45**：MPE↔worktree 同步调研 + P2 同步。产出：§1.2、§5-建议6、§6.1/§6.2。
   ✅ 已 rebase 到 `b2300e3`（P2 官方版），零冲突，全量复验通过。
   本分支 3 个 commit：`2475902`（P1-B 删死参数）/ `330b59c` / `1c2049b`（同步约定与进度）。
-  **未 push** —— 等主控指示（分支从未 push 过，需要时可直接 push，无需 --force）。
+  ✅ **已 push**（主控 2026-10-02 授权「可自行 push 分支，只要不 push main」）：
+  `origin/agent/workbuddy-workspace` @ `8d01a32`，已设 upstream 追踪。
+  **main 未动**（仍为 `b2300e3`）；refspec 显式写成
+  `agent/workbuddy-workspace:agent/workbuddy-workspace`，避免误推。
+  push 前扫描：真敏感项 0（无用户名/备份落点/凭据/venv），
+  仅含 9 处本机工作区路径（claim 的必要内容，公开无害）。
