@@ -33,6 +33,24 @@
 
 顺带修了 P3（README `dump_colors` 默认值 true→false），改动一行，已在报告中标注。
 
+### 1.2 补记：P2 已用 patch 同步进本分支（2026-10-02 16:05）
+
+主控在主工作区的 P2 改动**当时仍未 commit/push**（`M resource/pipeline/AutoFishing.json`），
+本分支 rebase 拿不到。改用应急通道同步（**只读主工作区，不改它**）：
+
+```bat
+cd /d F:\MABd2v26.09.5 && git diff -- resource/pipeline/AutoFishing.json > F:\tmp\mpe_sync.patch
+cd /d F:\MABd2-wt\workbuddy-workspace && git apply --check F:\tmp\mpe_sync.patch && git apply F:\tmp\mpe_sync.patch
+```
+
+⚠️ 主控这次 MPE 保存**不止 P2**：还含 MPE 自动**节点重排**（7 个 `SellFish*` /
+`SellAllFish_*` 节点从文件末尾整体搬到字母序位置）+ `lastSyncTime` / `savedViewport` /
+`position` 元数据刷新。所以 diff 是 **248 增 / 247 删**，肉眼像大改，实际业务改动只有
+`AutoFishing_Depart_Wait` 加了一行 `max_hit: 4`。
+
+应用后复验：41 节点、`max_hit:4` 到位、`max_seconds` 残留 0、无悬空、无跨文件重名、
+无模板缺失、`filePath` 未被染成 wt 路径。**未 commit**（等主控定 P2 归属，见 §6）。
+
 ---
 
 ## 2. 基线体检结论（已完成，无需重做）
@@ -142,11 +160,43 @@ exe 二进制里只出现 1 次 = struct tag）。**任何地方都不要再写�
 → 判据：看到 `$__mpe_code.filePath` 指向别的 worktree → MPE 打开的可能不是你想要的那份；
   该文件字段**不影响框架加载**，但会误导人。仓库 public，此字段已公开主工作区路径（无害但需知情）。
 
+### 建议 6：新增 §5-xx —— MPE 与 worktree 的同步约定（2026-10-02 实测）
+
+**实测架构**：MPE 2.0.5/2.0.6 = `MPE Desktop`(launcher) + `mpelb`(LocalBridge) + 网页前端。
+
+| 事实 | 证据 | 含义 |
+|---|---|---|
+| LocalBridge **单实例** | `mpelb service --help` 原文「查询或停止**唯一的** LocalBridge 服务」；`%APPDATA%\MaaPipelineEditor\management\service.lock` | **不能同时连两个 worktree**，除非手动换端口且前端也要跟着配 |
+| root 来自 CLI | 日志「运行目录: F:\MABd2v26.09.5 (来源: cli)」；`mpelb --root / --interface / --port` | 换目录 = 重启 LocalBridge |
+| MPE Desktop 记工作区 | `%APPDATA%\site.codax.mpe.desktop\settings.json` 的 `projects[]` + `selectedProject`（当前只有主工作区一项），`hideLauncher: true` 所以双击直接进上次项目 | 加一项 + `hideLauncher:false` 即可每次启动选项目 |
+| 前端状态带绝对路径 | `diagnostics-session.json` 的 `opened_files[].filePath` 全是 `F:\MABd2v26.09.5\...` | 切过去要重开文件 |
+
+**建议口径**：
+- **别让 MPE 直连 worktree**。MPE 固定绑主工作区，改动一律走 git（`commit → push → wt rebase`；
+  反向 `wt push → 主工作区 merge`，前端 `fileAutoReload: true` 会自动刷新，不用重启 MPE）。
+- **wt 里禁止用 MPE 保存**。一旦保存，`$__mpe_code.filePath` 会被改写成 wt 路径，
+  与 main 冲突，且 14 个 pipeline 全中招。
+- **MPE 保存会重排节点**（实测：改 1 个字段 → 248 增/247 删）。review 时先看
+  `git diff --stat` 是否被重排淹没，必要时用 `git diff --ignore-all-space -w` 或
+  直接比对节点内容而非行序。
+- **应急通道**（改动未 commit 时）：`git diff -- <file> > patch` + 在 wt `git apply`，
+  只读源端、不改源端。已实测可干净应用（不同节点的改动互不冲突）。
+
 ---
 
 ## 6. 需要主控施加的全局变更
 
 - （暂无。任务确认后如需改 `interface.json` 等注册表，在此登记，交主控在合并时统一施加。）
+
+### 6.1 待主控定夺：P2 的归属
+
+P2 现在**两份并存**：主工作区未 commit 的工作区改动 + 本分支已 apply 的同一改动。
+两者内容相同 → 若两边都 commit，将来 rebase 时 git 按 patch-id 会**自动去重/跳过**，
+不会真冲突。但仍建议主控二选一：
+
+- **A（推荐）**：主工作区 commit + push → 我这边 `git checkout -- resource/pipeline/AutoFishing.json`
+  丢弃本地 apply，再 `git rebase origin/main` 拿官方版本。
+- **B**：我这边 commit 到 `agent/workbuddy-workspace`，主工作区那份由主控自行 commit（rebase 会自动去重）。
 
 ---
 
@@ -157,4 +207,9 @@ exe 二进制里只出现 1 次 = struct tag）。**任何地方都不要再写�
   通过 12 项 / 查出 P1 死参数、P2 挂起风险、P3 文档错、P4 观察项各 1。
   修复与否待主控裁决（见 §1.1）。
 - 未实机（需抢 `F:\MABd2-wt\_RIG_BUSY`）。
-- **未 commit** —— 等主控指示。
+- ✅ **已 commit `926ade3`**（6 文件，+426/−9）：P1-B 删 `max_seconds`×6、P3 修 README、
+  `param.go` 加废弃注释、报告与 claim 入库。未 push。
+
+- **2026-10-02 16:05**：MPE↔worktree 同步调研 + P2 应急同步（详见 §1.2 / §5 建议 6）。
+  产出：本 claim 新增 §1.2、§5-建议6、§6.1。
+  **未 commit**（等主控定 P2 归属，见 §6.1）。
