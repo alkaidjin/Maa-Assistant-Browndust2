@@ -3,24 +3,32 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790389827225,
+            "lastSyncTime": 1790818020308,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\WarcraftRerunQuickBattle.json",
             "savedViewport": {
-                "x": 1428,
-                "y": 883,
-                "zoom": 1
+                "x": 2527,
+                "y": 1187,
+                "zoom": 1.32
             },
             "filename": "WarcraftRerunQuickBattle",
-            "version": "v2.0.0"
+            "version": "v2.0.5"
+        }
+    },
+    "$__mpe_external_EnterGame_WarcraftRerunQuickBattle": {
+        "$__mpe_code": {
+            "position": {
+                "x": -1154,
+                "y": -229
+            }
         }
     },
     "$__mpe_external_StartGame_WarcraftRerunQuickBattle": {
         "$__mpe_code": {
             "position": {
-                "x": -719,
-                "y": -79
+                "x": -757,
+                "y": 53
             }
         }
     },
@@ -52,8 +60,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": -1114,
-                "y": -432
+                "x": -1163,
+                "y": -562
             }
         }
     },
@@ -219,15 +227,18 @@
     },
     "StartWarcraftRerunQuickBattle": {
         "desc": "回归赛季魔兽快速战斗 · 入口（占位，等 MPE 补链路）",
+        "post_delay": 2000,
+        "timeout": 8000,
         "$note": "把真正的链路写进本节点的 next（当前为空 = 任务会立刻正常结束、什么都不做）。本节点是 tasks/WarcraftRerunQuickBattle.json 的 entry，改名的话记得同步 tasks 那边。",
         "next": [
             "InWarcraftRerun",
+            "EnterGame",
             "[JumpBack]StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": -1370,
-                "y": -429
+                "x": -1736,
+                "y": -458
             }
         }
     },

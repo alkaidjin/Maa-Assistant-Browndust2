@@ -3,24 +3,24 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790492183418,
+            "lastSyncTime": 1790913141864,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\Warcraft.json",
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Warcraft.json",
             "savedViewport": {
-                "x": -992,
-                "y": 40,
-                "zoom": 0.82
+                "x": -3074,
+                "y": 106,
+                "zoom": 0.72
             },
             "filename": "Warcraft",
-            "version": "v2.0.1"
+            "version": "v2.0.6"
         }
     },
     "$__mpe_external_StartGame_Warcraft": {
         "$__mpe_code": {
             "position": {
-                "x": 3182,
-                "y": 331
+                "x": 6290,
+                "y": -194
             }
         }
     },
@@ -137,8 +137,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2960,
-                "y": 563
+                "x": 3076,
+                "y": 350
             }
         }
     },
@@ -166,13 +166,11 @@
                 ]
             }
         },
-        "next": [
-            "StartGame"
-        ],
+        "post_delay": 2000,
         "$__mpe_code": {
             "position": {
-                "x": 3220,
-                "y": 563
+                "x": 3377,
+                "y": 313
             }
         }
     },
@@ -181,10 +179,10 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    700,
-                    533,
-                    42,
-                    43
+                    692,
+                    523,
+                    33,
+                    50
                 ],
                 "template": [
                     "Warcraft/FH2.png"
@@ -205,8 +203,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2418,
-                "y": 469
+                "x": 2404,
+                "y": 176
             }
         }
     },
@@ -215,10 +213,10 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    570,
-                    534,
-                    27,
-                    29
+                    565,
+                    528,
+                    35,
+                    49
                 ],
                 "template": [
                     "Warcraft/FH2.png"
@@ -239,8 +237,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2422,
-                "y": 923
+                "x": 2400,
+                "y": 612
             }
         }
     },
@@ -265,12 +263,13 @@
         },
         "post_delay": 1500,
         "next": [
-            "FiendHunterBegin"
+            "FiendHunterBegin",
+            "快速战斗等级纠错"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2697,
-                "y": 564
+                "x": 2729,
+                "y": 405
             }
         }
     },
@@ -430,12 +429,15 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    740,
-                    640,
-                    120,
-                    40
+                    687,
+                    644,
+                    153,
+                    35
                 ],
-                "expected": "快速战斗",
+                "expected": [
+                    "快速",
+                    "战斗"
+                ],
                 "threshold": 0.8
             }
         },
@@ -529,8 +531,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1111,
-                "y": -129
+                "x": 1108,
+                "y": -152
             }
         }
     },
@@ -559,6 +561,43 @@
             "position": {
                 "x": 828,
                 "y": -132
+            }
+        }
+    },
+    "NextWarCLV": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    717,
+                    138,
+                    95,
+                    37
+                ],
+                "expected": [
+                    "完成讨伐"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1025,
+                    101,
+                    1,
+                    1
+                ]
+            }
+        },
+        "next": [
+            "NextWarCLV",
+            "QuickFiendHunter"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3226,
+                "y": 661
             }
         }
     },
@@ -728,6 +767,45 @@
             }
         }
     },
+    "活动AP已使用_1": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    575,
+                    245,
+                    126,
+                    40
+                ],
+                "expected": [
+                    "活动AP不足",
+                    "AP不足",
+                    "活动AP"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    584,
+                    460,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "next": [
+            "返回活动主页2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1503,
+                "y": 189
+            }
+        }
+    },
     "自动战斗保持": {
         "recognition": {
             "type": "OCR",
@@ -739,18 +817,20 @@
                     35
                 ],
                 "expected": [
-                    "自动战斗"
+                    "自动",
+                    "战斗"
                 ]
             }
         },
-        "timeout": 240000,
+        "post_delay": 10000,
         "next": [
-            "返回战斗关表"
+            "返回战斗关表",
+            "自动战斗保持"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1384,
-                "y": -137
+                "x": 1390,
+                "y": -161
             }
         }
     },
@@ -765,7 +845,8 @@
                     65
                 ],
                 "expected": [
-                    "自动战斗"
+                    "自动",
+                    "战斗"
                 ]
             }
         },
@@ -814,8 +895,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1666,
-                "y": -143
+                "x": 1677,
+                "y": -175
             }
         }
     },
@@ -894,8 +975,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2136,
-                "y": 468
+                "x": 2103,
+                "y": 307
             }
         }
     },
@@ -939,20 +1020,48 @@
             }
         }
     },
-    "活动AP已使用_1": {
+    "快速战斗等级纠错": {
         "recognition": {
             "type": "OCR",
             "param": {
                 "roi": [
-                    575,
-                    245,
-                    126,
-                    40
+                    474,
+                    117,
+                    310,
+                    54
                 ],
                 "expected": [
-                    "活动AP不足",
-                    "AP不足",
-                    "活动AP"
+                    "只能在",
+                    "挑战的等级",
+                    "进行快速战斗",
+                    "正在进行挑战"
+                ]
+            }
+        },
+        "post_delay": 5000,
+        "next": [
+            "NextWarCLV",
+            "BackWarCLV"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2945,
+                "y": 748
+            }
+        }
+    },
+    "BackWarCLV": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    738,
+                    150,
+                    10,
+                    13
+                ],
+                "expected": [
+                    "0"
                 ]
             }
         },
@@ -960,8 +1069,60 @@
             "type": "Click",
             "param": {
                 "target": [
-                    584,
-                    460,
+                    923,
+                    102,
+                    1,
+                    1
+                ]
+            }
+        },
+        "next": [
+            "BackWarCLV",
+            "QuickFiendHunter"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3225,
+                "y": 948
+            }
+        }
+    },
+    "摆了模式": {
+        "timeout": 5000,
+        "next": [
+            "检测到完成讨伐"
+        ],
+        "on_error": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3655,
+                "y": 379
+            }
+        }
+    },
+    "检测到完成讨伐": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    736,
+                    148,
+                    64,
+                    18
+                ],
+                "expected": [
+                    "完成讨伐"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1025,
+                    102,
                     1,
                     1
                 ]
@@ -969,12 +1130,404 @@
         },
         "post_delay": 1500,
         "next": [
-            "返回活动主页2"
+            "炸弹人已就位",
+            "编辑队伍"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1486,
-                "y": 242
+                "x": 3926,
+                "y": 350
+            }
+        }
+    },
+    "编辑队伍": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    573,
+                    618,
+                    118,
+                    80
+                ],
+                "expected": [
+                    "编辑",
+                    "队伍"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 3000,
+        "next": [
+            "更换阵容",
+            "编辑队伍"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4188,
+                "y": 599
+            }
+        }
+    },
+    "更换阵容": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1107,
+                    646,
+                    61,
+                    59
+                ],
+                "expected": [
+                    "更换"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 2,
+        "repeat_delay": 500,
+        "next": [
+            "撤下队伍1角色"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4452,
+                "y": 350
+            }
+        }
+    },
+    "撤下队伍1角色": {
+        "max_hit": 6,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    153,
+                    221,
+                    27,
+                    27
+                ],
+                "template": [
+                    "Warcraft/Deleterole.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "撤下队伍1角色",
+            "撤下队伍2角色",
+            "切换火系角色"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4721,
+                "y": 314
+            }
+        }
+    },
+    "撤下队伍2角色": {
+        "max_hit": 6,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    152,
+                    354,
+                    28,
+                    27
+                ],
+                "template": [
+                    "Warcraft/Deleterole.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "撤下队伍2角色",
+            "撤下队伍3角色",
+            "切换火系角色"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5027,
+                "y": 113
+            }
+        }
+    },
+    "撤下队伍3角色": {
+        "max_hit": 6,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    150,
+                    486,
+                    30,
+                    28
+                ],
+                "template": [
+                    "Warcraft/Deleterole.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "撤下队伍3角色",
+            "切换火系角色"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5368,
+                "y": 136
+            }
+        }
+    },
+    "切换火系角色": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    653,
+                    8,
+                    47,
+                    48
+                ],
+                "template": [
+                    "Warcraft/FIRE.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "换上炸弹人"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5018,
+                "y": 593
+            }
+        }
+    },
+    "换上炸弹人": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "Warcraft/BOOMMAN.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "确认阵容"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5291,
+                "y": 599
+            }
+        }
+    },
+    "确认阵容": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1104,
+                    650,
+                    69,
+                    54
+                ],
+                "expected": [
+                    "确认"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "返回魔兽挑战"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5555,
+                "y": 600
+            }
+        }
+    },
+    "返回魔兽挑战": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    187,
+                    17,
+                    92,
+                    36
+                ],
+                "expected": [
+                    "编辑队伍"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    110,
+                    33,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 3000,
+        "next": [
+            "魔兽_去战斗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5825,
+                "y": 598
+            }
+        }
+    },
+    "魔兽_去战斗": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1040,
+                    609,
+                    79,
+                    92
+                ],
+                "expected": [
+                    "去战斗"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 2,
+        "post_delay": 3000,
+        "next": [
+            "魔兽_自动战斗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 6103,
+                "y": 594
+            }
+        }
+    },
+    "魔兽_自动战斗": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "Warcraft/AutoFight.png"
+                ],
+                "threshold": [
+                    0.5
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1061,
+                    35,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 12000,
+        "next": [
+            "魔兽_返回"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 6381,
+                "y": 590
+            }
+        }
+    },
+    "魔兽_返回": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1108,
+                    651,
+                    72,
+                    58
+                ],
+                "expected": [
+                    "返回"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 2,
+        "post_delay": 1500,
+        "next": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 6641,
+                "y": 590
+            }
+        }
+    },
+    "炸弹人已就位": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    600,
+                    178,
+                    112,
+                    119
+                ],
+                "template": [
+                    "Warcraft/BOOMMAN2.png"
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "next": [
+            "魔兽_去战斗"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5003,
+                "y": 936
             }
         }
     }

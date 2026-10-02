@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790642474868,
+            "lastSyncTime": 1790818665979,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\RewardRoutine.json",
             "savedViewport": {
-                "x": 1073,
-                "y": -102,
-                "zoom": 0.76
+                "x": 152,
+                "y": -409,
+                "zoom": 1
             },
             "filename": "RewardRoutine",
-            "version": "v2.0.3"
+            "version": "v2.0.5"
         }
     },
     "$__mpe_external_StartGame_RewardRoutine": {
@@ -201,22 +201,26 @@
                 ],
                 "expected": [
                     "兑换",
-                    "100次"
+                    "100次",
+                    "80次",
+                    "75次",
+                    "95次"
                 ]
             }
         },
+        "pre_delay": 5000,
         "action": {
             "type": "Click"
         },
-        "post_delay": 1500,
+        "post_delay": 2000,
         "next": [
             "ExChangeSure_1",
             "EVENTSWIPE"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 652,
-                "y": 849
+                "x": 643,
+                "y": 853
             }
         }
     },
@@ -244,8 +248,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 977,
-                "y": 845
+                "x": 934,
+                "y": 666
             }
         }
     },
@@ -594,7 +598,7 @@
                 ]
             }
         },
-        "pre_delay": 5000,
+        "pre_delay": 2000,
         "action": {
             "type": "Click",
             "param": {
@@ -609,8 +613,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1340,
-                "y": 840
+                "x": 1259,
+                "y": 838
             }
         }
     },
@@ -956,8 +960,8 @@
         "timeout": 5000,
         "$__mpe_code": {
             "position": {
-                "x": -723,
-                "y": 946
+                "x": -741,
+                "y": 995
             }
         }
     },
@@ -984,13 +988,13 @@
         "timeout": 5000,
         "$__mpe_code": {
             "position": {
-                "x": -724,
-                "y": 555
+                "x": -765,
+                "y": 592
             }
         }
     },
     "检测感叹号": {
-        "max_hit": 12,
+        "max_hit": 9,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -1026,8 +1030,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": -322,
-                "y": 485
+                "x": -409,
+                "y": 319
             }
         }
     }

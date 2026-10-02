@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790389222241,
+            "lastSyncTime": 1790823466039,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\PVP.json",
+            "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\PVP.json",
             "savedViewport": {
-                "x": 668,
-                "y": 182,
-                "zoom": 1
+                "x": 1012,
+                "y": 63,
+                "zoom": 1.52
             },
             "filename": "PVP",
-            "version": "v2.0.0"
+            "version": "v2.0.5"
         }
     },
     "$__mpe_external_StartGame_PVP": {
@@ -280,7 +280,7 @@
                 "threshold": 0.5
             }
         },
-        "pre_delay": 1500,
+        "pre_delay": 1000,
         "action": {
             "type": "Click",
             "param": {
@@ -293,7 +293,7 @@
             }
         },
         "repeat": 2,
-        "post_delay": 5000,
+        "post_delay": 4000,
         "next": [
             "EnterRestaurant_2",
             "EnterOperating_2"

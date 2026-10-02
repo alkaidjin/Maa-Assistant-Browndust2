@@ -4,20 +4,20 @@
             "name": "赛季活动战斗",
             "label": "赛季活动推关和快速战斗",
             "entry": "StartWarcraft",
-            "description": "自动推关仅推荐阵容完备的玩家开启，请自行配置默认出战队伍的阵容、装备和站位！！自动战斗默认等待时间为4分钟，超时会导致任务失败！！",
-            "option":["开启自动战斗"]
+            "description": "自动推关仅推荐阵容完备的玩家开启，请自行配置默认出战队伍的阵容、装备和站位！！",
+            "option":["开启自动战斗","摆了"]
         }
     ],
             "option": {
         "开启自动战斗":{
             "type":"select",
-            "label":"请选择是否开启自动战斗",
+            "label":"请选择是否开启自动战斗推图",
             "des":"",
             "default_case":"不开启自动战斗",
             "cases":[
                 {
                     "name":"不开启自动战斗",
-                    "label":"不开启自动战斗推关",
+                    "label":"不开启自动战斗推图",
                     "pipeline_override":{
                         "是否开启自动推关":{
                             "next":[
@@ -28,11 +28,41 @@
                 },
                 {
                     "name":"开启自动战斗",
-                    "label":"开启自动战斗推关",
+                    "label":"开启自动战斗推图",
                     "pipeline_override":{
                         "是否开启自动推关":{
                             "next":[
                                 "开启"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "摆了":{
+            "type":"select",
+            "label":"请选择是否摆了（炸弹人摆烂）",
+            "des":"",
+            "default_case":"我要卷",
+            "cases":[
+                {
+                    "name":"我要卷",
+                    "label":"我要卷（任务结束，手动卷分）",
+                    "pipeline_override":{
+                        "FiendHunterReward":{
+                            "next":[
+                                "StartGame"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name":"我摆了",
+                    "label":"我摆了（换上炸弹人自爆摆烂）",
+                    "pipeline_override":{
+                        "FiendHunterReward":{
+                            "next":[
+                                "摆了模式"
                             ]
                         }
                     }
