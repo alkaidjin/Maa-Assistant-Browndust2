@@ -201,7 +201,7 @@ func (c *AspectRatioChecker) OnTaskerTask(tasker *maa.Tasker, event maa.EventSta
 			registryHeight, hErr := gamesetting.GetVideoResolutionHeight()
 			if wErr == nil && hErr == nil && registryWidth > 0 && registryHeight > 0 &&
 				(int(width) != int(registryWidth) || int(height) != int(registryHeight)) {
-				c.stopWithWarning(tasker, controllerDisplay, int(width), int(height), i18n.T("tasker.aspect_ratio_warning.requirement_ratio_window_mismatch"))
+				c.stopWithWarning(tasker, controllerDisplay, int(width), int(height), i18n.T("tasker.aspect_ratio_warning.requirement_ratio_window_mismatch", registryWidth, registryHeight))
 			} else {
 				c.stopWithWarning(tasker, controllerDisplay, int(width), int(height), i18n.T("tasker.aspect_ratio_warning.requirement_ratio"))
 			}
