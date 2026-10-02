@@ -193,11 +193,10 @@ func (c *AspectRatioChecker) OnTaskerTask(tasker *maa.Tasker, event maa.EventSta
 			Float64("target_ratio", targetRatio).
 			Str("mode", "aspect_ratio_min_resolution").
 			Msg("resolution check failed")
-		// 游戏内只能设置窗口比例，分辨率由本软件前置程序（注册表）或启动参数决定，
-		// 因此所有分支都附上两种恢复方式：用本软件启动 / 快捷方式追加窗口参数。
+		// 游戏内只能设置窗口比例，分辨率由启动参数决定；本软件前置程序
+		// 不会自动重设，需要用户在其「附加参数」中填入 Unity 窗口参数。
 		restoreLines := []string{
 			i18n.T("tasker.aspect_ratio_warning.fix_via_app"),
-			i18n.T("tasker.aspect_ratio_warning.fix_via_shortcut"),
 			i18n.T("tasker.aspect_ratio_warning.fix_no_drag"),
 		}
 		fullScreen, _ := gamesetting.GetVideoFullScreen()
