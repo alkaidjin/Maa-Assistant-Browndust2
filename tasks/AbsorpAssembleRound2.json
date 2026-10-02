@@ -4,7 +4,7 @@
             "name": "资源吸收和召集次轮",
             "label": "次轮资源吸收和召集",
             "entry": "AbsorpAssembleRound2Schedule",
-            "description": "资源吸收和召集的次轮 — 剧情卡带S1-5、S15及C4的吸收、召集和压制奖励",
+            "description": "资源吸收和召集的次轮 — 剧情卡带S1-5、S15及角色卡带C4（大逃脱）的吸收、召集和压制奖励",
             "controller": [
                 "Win32",
                 "Win32-Window",
