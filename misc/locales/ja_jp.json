@@ -1,9 +1,0 @@
-{
-    "resource.CN.label": "中国サーバー (官服)",
-    "resource.Global.label": "グローバル (Global/EN)",
-    "controller.Win32.label": "PC",
-    "controller.Win32-Window.label": "PC-代替",
-    "controller.Win32-Front.label": "PC-前面",
-    "controller.ADB.label": "Android",
-    "contact.file": "misc/locales/CONTACT/CONTACT.ja_jp.md"
-}

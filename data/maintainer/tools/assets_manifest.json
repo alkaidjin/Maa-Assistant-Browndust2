@@ -1,0 +1,69 @@
+{
+    "_updated": "2026-10-02",
+    "_doc": "Release 外移资产清单（大文件治理，第 8 点）。bootstrap_assets.py 读本表：source=release-zip 的条目从 GitHub Release 的 zip 资产中抽取补齐并做 sha256 校验（幂等）；source=tracked 的条目当前由 git 跟踪，bootstrap 不下载，仅 --verify 做基线体检。将来把大文件移出库时：1) 发布前确认该文件在 release zip 内；2) 把对应条目 source 改成 release-zip；3) 从版本库 git rm --cached 停止跟踪。历史提交不重写。",
+    "release": {
+        "repo": "alkaidjin/Maa-Assistant-Browndust2",
+        "tag": "v26.09.14",
+        "zip_asset": "MABd2v26.09.14-win-x64.zip",
+        "url_prefix_comment": "直连不通时可用 --prefix 传镜像前缀，或设 HTTPS_PROXY 环境变量；例: --prefix https://ghproxy.net/",
+        "url_prefix": ""
+    },
+    "assets": [
+        {
+            "path": "resource/model/ocr/det.onnx",
+            "source": "release-zip",
+            "sha256": "8c3b7ee97913a7942b8565669dc9acbe8846fbbaf4b63e1d7fdb339005574a33",
+            "size": 4748769,
+            "note": "PaddleOCR PP-OCRv5_mobile_det；仓库不跟踪，随 release zip 派发（既有先例）"
+        },
+        {
+            "path": "resource/model/ocr/rec.onnx",
+            "source": "release-zip",
+            "sha256": "31fb844ce3a4aaf13e4bea62ae35f43bd9a509966061980c30db9b248c542a6b",
+            "size": 16517247,
+            "note": "PaddleOCR PP-OCRv5_mobile_rec；仓库不跟踪，随 release zip 派发"
+        },
+        {
+            "path": "resource/model/ocr/keys.txt",
+            "source": "release-zip",
+            "sha256": "1ea29636956177e400af712d9782e7693f3fb25f98617bed10479d2965a836fd",
+            "size": 92395,
+            "note": "rec 模型字典（inference.yml 提取），与两个 onnx 配套"
+        },
+        {
+            "path": "MaaBd2.exe",
+            "source": "tracked",
+            "sha256": "d7cdc2625900d41de49c26ac3e8c6f7909719866e7cdf2843262abb6c862b7c1",
+            "size": 31342080,
+            "note": "MXU 改名固化版；当前仍由 git 跟踪，sha256 为 v26.09.13 基线"
+        },
+        {
+            "path": "agent/go-service.exe",
+            "source": "tracked",
+            "sha256": "89158ed2165ce836f0e7627282330162461fd8309fd70ea62645baa089e7a2a3",
+            "size": 8796160,
+            "note": "第 6 点裁剪 fork 后的白盒构建（源码 data/maintainer/agent/go-service，version bd2-fd6ed7b），替换原 MaaEnd 64fac11 黑盒基线"
+        },
+        {
+            "path": "maafw/DirectML.dll",
+            "source": "tracked",
+            "sha256": "9c9e6d822561c6c41b90e6994b3e8857cf1d66dbfb1e0c4c799c7c89b4e92da1",
+            "size": 18527776,
+            "note": "Auto 推理设备可能加载，禁止随 PRUNED_BINARIES 裁剪（见 maintainer/README 包体裁剪节）"
+        },
+        {
+            "path": "maafw/onnxruntime_maa.dll",
+            "source": "tracked",
+            "sha256": "57194b62a8c03e180ce311bbe9b2be4824b7bc95cf72a951602bb8cfa925b7f3",
+            "size": 18998272,
+            "note": "OCR 推理运行时"
+        },
+        {
+            "path": "maafw/opencv_world4_maa.dll",
+            "source": "tracked",
+            "sha256": "9912a1f359b3a94e30d738aa5ed02cdfa3d805405f88432c26bea34b16cf6f8e",
+            "size": 13624320,
+            "note": "图像识别运行时"
+        }
+    ]
+}

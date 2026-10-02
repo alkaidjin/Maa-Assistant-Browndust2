@@ -1,9 +1,0 @@
-{
-    "resource.CN.label": "CN Server (官服)",
-    "resource.Global.label": "Global (EN)",
-    "controller.Win32.label": "PC",
-    "controller.Win32-Window.label": "PC-Fallback",
-    "controller.Win32-Front.label": "PC-Foreground",
-    "controller.ADB.label": "Android",
-    "contact.file": "misc/locales/CONTACT/CONTACT.en_us.md"
-}

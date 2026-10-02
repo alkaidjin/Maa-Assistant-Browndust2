@@ -40,6 +40,8 @@ _✨ 《棕色尘埃2》PC 端日常自动化小助手 ✨_
 
 本项目承接 [essinn-1/maa-assistant](https://github.com/essinn-1/maa-assistant)（把 [MaaEnd](https://github.com/MaaEnd/MaaEnd) 骨架改造为《棕色尘埃2》PC 端自动化的早期工程）继续开发，运行在 [MaaFramework](https://github.com/MaaXYZ/MaaFramework)（v5.13）运行时之上、由 [MXU](https://github.com/MistEO/MXU)（v2.5）作为 GUI 前端，支持自动日常任务、资源收集、战斗循环等功能。
 
+> 🌐 **语言**：软件界面与任务文案**仅提供简体中文**（v26.09.14 起界面不再声明其他语种；游戏内也需设为简体中文）。go-service 守护进程的分辨率 / 进程告警页仍内置简繁英日韩 5 语言资源，那是沿用上游的运行时组件，不代表软件界面支持多语言。
+
 > **来源与致谢**：本项目建立在两层上游工作之上 —— **MaaEnd** 提供了工程骨架（目录约定、`interface.json` 结构、多语言键），**`essinn-1/maa-assistant`** 完成了《棕色尘埃2》PC 端的早期适配与最初的 pipeline / 图像素材，两者均为 AGPL-3.0。
 > 本仓库的 Git 历史**完整保留**了上游全部提交与作者署名，未作 squash、未重写历史；完整来源链与许可履约说明见 [NOTICE](NOTICE.md) 第 3、4 节。
 

@@ -100,6 +100,11 @@ EXCLUDE_DIRS  = {'.git', '.workbuddy', 'cache', 'config', 'debug', 'updates', '_
                  # 第三个 agent（钓鱼小游戏 FishingMinigame）的 Go 源码，同上：
                  # 只有 agent/fishing.exe 进包，源码只入仓库。
                  'fishing',
+                 # go-service 守护进程的裁剪 fork 源码（v26.09.14 起入仓，住在
+                 # data/maintainer/agent/go-service/，已被 'maintainer' 整目录排除）。
+                 # 本条同 rock-picker/fishing 是护栏：挪回 agent/ 也不会把源码扫进包，
+                 # 而 agent/go-service.exe 是文件，不受目录名排除影响。
+                 'go-service',
                  # ⚠️ 维护者档案目录（打包器 / 备份器 / 图标工具 / 开发辅助脚本 / 退役件存档）。
                  # 整目录一次排除：它里面既有本机路径，也**绝不能**出现在用户包里。
                  # 更关键的理由见文件头「双击入口」处的说明 —— MXU 全量更新会整目录换掉
@@ -317,8 +322,9 @@ REQUIRED_FILES = [
     # MXU 直接按 interface.json 的路径读取：icon / license / languages
     'misc/MaaEnd-Tiny.png',
     'misc/LICENSE_SHORT.md',
-    'misc/locales/zh_cn.json', 'misc/locales/zh_tw.json', 'misc/locales/en_us.json',
-    'misc/locales/ja_jp.json', 'misc/locales/ko_kr.json',
+    # v26.09.14 起界面仅声明简体中文（任务文案本来就是中文硬编码，其余 4 份
+    # locale 只有 7 个键、长期无人维护）；go-service 守护页的 5 语言在下段保留。
+    'misc/locales/zh_cn.json',
     # agent(go-service) 的 i18n 文案：缺失时 MXU 焦点提示会显示原始 key
     'locales/go-service/zh_cn.json', 'locales/go-service/zh_tw.json',
     'locales/go-service/en_us.json', 'locales/go-service/ja_jp.json',

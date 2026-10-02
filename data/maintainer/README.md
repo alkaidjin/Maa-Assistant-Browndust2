@@ -88,6 +88,45 @@ python data/maintainer/tools/build_release_zip.py --no-bump --out cache/_pkgtest
 注意：它们**没有**被写进 `changes.json` 的 `deleted`（只排除新包、不删用户磁盘上的旧副本），
 避免万一判断有误时把用户的文件也弄没。旧副本不占下载体积，只是留在磁盘上。
 
+## Release 外移资产与 bootstrap（大文件治理）
+
+### 现状（v26.09.14）
+
+- **历史不重写**：旧教学视频 / 旧 mxu.exe / 旧版 onnxruntime 等大文件仍在 Git 历史里，
+  仓库 `.git` 体积不因此次治理变小；要瘦身只能另开浅克隆方案，不在本项范围。
+- **当前 5 个 10 MiB+ 的在库二进制继续由 Git 跟踪**（合计约 94 MiB）：
+  `MaaBd2.exe`、`agent/go-service.exe`、`maafw/{DirectML,onnxruntime_maa,opencv_world4_maa}.dll`。
+  它们的 sha256 已登记进 `tools/assets_manifest.json`（`source: tracked`，仅基线体检用）。
+- **OCR 模型三件套不入库**（既有先例，约 20.4 MiB）：
+  `resource/model/ocr/{det.onnx,rec.onnx,keys.txt}`，随 Release zip 派发。
+
+### bootstrap 工具
+
+新 clone 仓库（或重建 worktree）后 OCR 模型目录是空的，用工具从已发布的 Release 包补齐：
+
+```bash
+# 双击 tools/bootstrap_assets.bat，或命令行：
+python data/maintainer/tools/bootstrap_assets.py            # 幂等补齐，已存在且 sha256 对就跳过
+python data/maintainer/tools/bootstrap_assets.py --verify   # 8 项资产全量基线体检（不下载）
+python data/maintainer/tools/bootstrap_assets.py --list     # 查看清单与本地状态
+python data/maintainer/tools/bootstrap_assets.py --force    # 强制重下
+# 直连 GitHub 不通时：
+python data/maintainer/tools/bootstrap_assets.py --prefix https://ghproxy.net/
+python data/maintainer/tools/bootstrap_assets.py --tag v26.09.14 --zip-asset MABd2v26.09.14-win-x64.zip
+```
+
+机制要点：纯标准库；发布包 zip 只下一次缓存到 `cache/_bootstrap/` 再逐项抽取；
+文件级 sha256 校验通过才原子落位（`.part` 临时文件 + rename），中断无半成品。
+2026-10-02 已用真实 Release `v26.09.13`（81.8 MiB zip）端到端验证下载/抽取/校验/幂等。
+
+### 将来把在库大文件移出库的操作步骤（规则已就位，暂不执行）
+
+1. 在 manifest 里把对应条目 `source` 从 `tracked` 改成 `release-zip`，更新版本对应
+   Release 的 tag / zip 资产名，并核对 sha256；
+2. 确认该文件确实打进发布包（`build_release_zip.py` 的 `REQUIRED_FILES`）；
+3. `git rm --cached <file>` 停止跟踪并提交（历史不动）；
+4. 老用户不受影响（文件已随包在其磁盘）；新 clone / CI 跑 bootstrap 补齐。
+
 ### 不派发的维护者文档 / 已下架资产
 
 | 项 | 处置 | 备注 |
