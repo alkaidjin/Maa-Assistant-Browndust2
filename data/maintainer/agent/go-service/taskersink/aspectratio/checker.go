@@ -193,20 +193,31 @@ func (c *AspectRatioChecker) OnTaskerTask(tasker *maa.Tasker, event maa.EventSta
 			Float64("target_ratio", targetRatio).
 			Str("mode", "aspect_ratio_min_resolution").
 			Msg("resolution check failed")
+		// 游戏内只能设置窗口比例，分辨率由本软件前置程序（注册表）或启动参数决定，
+		// 因此所有分支都附上两种恢复方式：用本软件启动 / 快捷方式追加窗口参数。
+		restoreLines := []string{
+			i18n.T("tasker.aspect_ratio_warning.fix_via_app"),
+			i18n.T("tasker.aspect_ratio_warning.fix_via_shortcut"),
+			i18n.T("tasker.aspect_ratio_warning.fix_no_drag"),
+		}
 		fullScreen, _ := gamesetting.GetVideoFullScreen()
 		if fullScreen == 1 {
-			c.stopWithWarning(tasker, controllerDisplay, int(width), int(height), i18n.T("tasker.aspect_ratio_warning.full_screen_illegal"))
+			c.stopWithWarning(tasker, controllerDisplay, int(width), int(height),
+				append([]string{i18n.T("tasker.aspect_ratio_warning.full_screen_illegal")}, restoreLines...)...)
 		} else if runtime.GOOS == "windows" {
 			registryWidth, wErr := gamesetting.GetVideoResolutionWidth()
 			registryHeight, hErr := gamesetting.GetVideoResolutionHeight()
 			if wErr == nil && hErr == nil && registryWidth > 0 && registryHeight > 0 &&
 				(int(width) != int(registryWidth) || int(height) != int(registryHeight)) {
-				c.stopWithWarning(tasker, controllerDisplay, int(width), int(height), i18n.T("tasker.aspect_ratio_warning.requirement_ratio_window_mismatch", registryWidth, registryHeight))
+				c.stopWithWarning(tasker, controllerDisplay, int(width), int(height),
+					append([]string{i18n.T("tasker.aspect_ratio_warning.requirement_ratio_window_mismatch", registryWidth, registryHeight)}, restoreLines...)...)
 			} else {
-				c.stopWithWarning(tasker, controllerDisplay, int(width), int(height), i18n.T("tasker.aspect_ratio_warning.requirement_ratio"))
+				c.stopWithWarning(tasker, controllerDisplay, int(width), int(height),
+					append([]string{i18n.T("tasker.aspect_ratio_warning.requirement_ratio")}, restoreLines...)...)
 			}
 		} else {
-			c.stopWithWarning(tasker, controllerDisplay, int(width), int(height), i18n.T("tasker.aspect_ratio_warning.requirement_ratio"))
+			c.stopWithWarning(tasker, controllerDisplay, int(width), int(height),
+				append([]string{i18n.T("tasker.aspect_ratio_warning.requirement_ratio")}, restoreLines...)...)
 		}
 		return
 	}
