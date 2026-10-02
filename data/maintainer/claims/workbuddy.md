@@ -198,6 +198,21 @@ P2 现在**两份并存**：主工作区未 commit 的工作区改动 + 本分�
   丢弃本地 apply，再 `git rebase origin/main` 拿官方版本。
 - **B**：我这边 commit 到 `agent/workbuddy-workspace`，主工作区那份由主控自行 commit（rebase 会自动去重）。
 
+### 6.2 方案 A 执行进度（2026-10-02 16:30）
+
+- [x] **丢弃本地 apply** —— `git checkout -- resource/pipeline/AutoFishing.json`，
+  确认 `max_hit` 消失、**自己删的 `max_seconds` 仍保留**（两者是不同节点，互不影响）。
+- [x] **claim 提交** —— `0686b13`，工作区干净。
+- [ ] **等主控 commit + push** —— 截至 16:30 主工作区仍是
+  `M resource/pipeline/AutoFishing.json`、HEAD `bddbc55`，尚未提交。
+- [ ] **主控 push 后我执行** —— `git fetch origin && git rebase origin/main`，
+  再跑一遍全量复验（悬空 / 重名 / 缺图 / filePath）。
+
+**预演已做（零冲突）**：临时分支模拟「他的 P2 先落 → cherry-pick 我的 `926ade3`」成功。
+原因：MPE 重排只搬动了 7 个 `SellFish*` / `SellAllFish_*` 节点，而我删 `max_seconds` 的位置
+在 `Fishing_Minigame` 节点内，**不在被搬动范围**，上下文未受影响。
+→ 判据：担心「MPE 重排 vs 文本编辑」冲突时，**先看改动是否落在被重排的节点上**即可预判。
+
 ---
 
 ## 7. 交工记录
@@ -210,6 +225,6 @@ P2 现在**两份并存**：主工作区未 commit 的工作区改动 + 本分�
 - ✅ **已 commit `926ade3`**（6 文件，+426/−9）：P1-B 删 `max_seconds`×6、P3 修 README、
   `param.go` 加废弃注释、报告与 claim 入库。未 push。
 
-- **2026-10-02 16:05**：MPE↔worktree 同步调研 + P2 应急同步（详见 §1.2 / §5 建议 6）。
-  产出：本 claim 新增 §1.2、§5-建议6、§6.1。
-  **未 commit**（等主控定 P2 归属，见 §6.1）。
+- **2026-10-02 16:30**：MPE↔worktree 同步调研 + P2 同步。产出：§1.2、§5-建议6、§6.1/§6.2。
+  ✅ **已 commit `0686b13`**（claim 补记同步约定 + 预演结论）。
+  P2 按方案 A 处理：本地 apply 已丢弃，等主控 commit+push 后 rebase 取官方版（见 §6.2）。
