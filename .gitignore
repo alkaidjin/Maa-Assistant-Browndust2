@@ -11,19 +11,14 @@ go-service.log
 maa*.log
 mxu-*.log
 
-# 大文件和编译产物
+# ─────────────────────────────────────────────────────────────
+# 编译产物：默认全部忽略，白名单显式放行（见下方「二进制白名单」）
+# ─────────────────────────────────────────────────────────────
 *.pdb
 *.exe
 *.dll
 *.cache
 cache/
-
-# ⚠️ 例外：MaaBd2.exe 是**主程序本体**，v26.09.14 起随仓库跟踪（用户要求入库）。
-# 它 31 MB（GitHub 单文件上限 100 MB），且自带固化图标 —— 不入库的话 clone 出来的
-# 仓库跑不起来，别人也没法复现「图标已固化」这个状态。其余 *.exe（go-service /
-# rock-picker / rcedit）仍然靠 release 或各自渠道获得。
-# ⚠️ 顺序要求：这条必须写在 `*.exe` 之后（gitignore 后面的规则覆盖前面的）。
-!MaaBd2.exe
 
 # 系统文件
 .DS_Store
@@ -33,14 +28,12 @@ Thumbs.db
 # 否则会冲掉每个用户的真实实例 —— maa_option.json / maa_pi_config.json 曾漏网）
 config/
 
-# 大模型文件（如果用 Git LFS 或单独下载）
-# v26.09.14 最终布局：resource/ 留在根目录（MXU 按 interface.json 的 ./resource 找它），
-# OCR 模型跟着留在 resource/model/ocr/；它只随 Release 的 zip 派发，仓库不追踪（约 20 MB）。
+# OCR 模型（约 20 MB）：不随仓库跟踪，只随 Release zip 派发；
+# clone / 新建 worktree 后由 data/maintainer/tools/bootstrap_assets.py 拉取
+# （worktree 场景也可直接 junction 主工作区，见 wt_new.bat）。
 resource/model/ocr/
 
 # 运行时文件
-*.log
-*.pdb
 *.tmp
 
 # Python 字节码缓存
@@ -53,10 +46,6 @@ updates/
 
 # Agent 工作区记忆（不属于软件本身）
 .workbuddy/
-
-# 防御性忽略：这个 0 字节文件由旧版 launcher.bat 注释里的 ">" 重定向产生（不是 MXU 的编码 bug）。
-# v26.09.7 起 launcher.bat 已改为纯 ASCII 且不含 ">"，源头已消除；规则保留，以防老目录里的残留被误提交。
-鑚姩
 
 # local, machine-specific files
 *.lnk
@@ -78,3 +67,25 @@ resource.zip
 # 注意：「进不进仓库」与「进不进用户包」是两套独立机制。入库后它们仍**不会**进发布包，
 # 由 tools/build_release_zip.py 的 EXCLUDE_FILES 负责排除。
 # 备份策略见 tools/backup_maintainer.ps1（双击「备份维护版.bat」）。
+
+# ─────────────────────────────────────────────────────────────
+# 二进制白名单（规则顺序：必须写在 *.exe / *.dll 之后，后者覆盖前者）
+# 新增需要入库的二进制时，在对应清单里补一行并注释来源；
+# 大体积二进制（≥ 10 MB）原则上不再入仓 —— 走 Release 资产 +
+# tools/bootstrap_assets.py 拉取（见 data/maintainer/README.md）。
+# ─────────────────────────────────────────────────────────────
+
+# GUI 主程序本体（自带固化图标，v26.09.14 起入库）
+!MaaBd2.exe
+
+# 三个 agent 子进程（源码分别在 data/maintainer/agent/{go-service,rock-picker,fishing}/）
+!agent/go-service.exe
+!agent/rock-picker.exe
+!agent/fishing.exe
+
+# MaaFramework 运行时：MaaPiCli + 17 个 DLL（v5.13.0，整套入库以保证 clone 可运行）
+!maafw/MaaPiCli.exe
+!maafw/*.dll
+
+# 维护者工具：PE 图标固化器（data/maintainer/tools/，不进用户包）
+!data/maintainer/tools/rcedit-x64.exe
