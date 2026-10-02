@@ -136,7 +136,6 @@ wait = |dist| / |v|
 |---|---|---|
 | `mode` | `auto` | `auto` 正常跑 / `dry_run` 只算不点 / `calibrate` 只采样、不点击 |
 | `max_count` | 30 | **整个任务**玩几轮后走 `next.finish`（每次调用算一轮） |
-| `max_seconds` | 3600 | 单次调用的墙钟上限 |
 | `max_no_bar` | 3 | 连续这么多次「进来却没等到进度条」就中止任务 |
 | `judge.x` / `judge.y` | 640 / 360 | 小游戏判定点击的位置（720P 设计空间，即窗口正中心） |
 | `judge.key` | 0 | >0 改用按键（32 = 空格），此时忽略 x/y |
@@ -170,7 +169,7 @@ wait = |dist| / |v|
 | `settle.clicks` | 8 | 共点击几次，防止单次点击被动画吃掉 |
 | `settle.interval_ms` | 350 | 每次结算点击之间的间隔 |
 | `log_samples` | false | 每帧打一行日志（很吵，仅调参用） |
-| `dump_colors` | true | 打一次进度条中线的原始 RGB/HSV |
+| `dump_colors` | false | 打一次进度条中线的原始 RGB/HSV（`calibrate` 模式强制打开） |
 
 ## 4. 三种模式怎么用
 

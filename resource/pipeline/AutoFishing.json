@@ -591,7 +591,6 @@
                     "log_samples": false,
                     "max_count": 30,
                     "max_no_bar": 3,
-                    "max_seconds": 3600,
                     "mode": "auto",
                     "next": {
                         "cast": "AutoFish_Space",

@@ -104,7 +104,6 @@
                                     "custom_action_param": {
                                         "mode": "auto",
                                         "max_count": 10,
-                                        "max_seconds": 1200,
                                         "max_no_bar": 3,
                                         "judge": {
                                             "x": 640,
@@ -231,7 +230,6 @@
                                     "custom_action_param": {
                                         "mode": "auto",
                                         "max_count": 30,
-                                        "max_seconds": 3600,
                                         "max_no_bar": 3,
                                         "judge": {
                                             "x": 640,
@@ -358,7 +356,6 @@
                                     "custom_action_param": {
                                         "mode": "auto",
                                         "max_count": 50,
-                                        "max_seconds": 5400,
                                         "max_no_bar": 3,
                                         "judge": {
                                             "x": 640,
@@ -485,7 +482,6 @@
                                     "custom_action_param": {
                                         "mode": "auto",
                                         "max_count": 100,
-                                        "max_seconds": 7200,
                                         "max_no_bar": 3,
                                         "judge": {
                                             "x": 640,
@@ -612,7 +608,6 @@
                                     "custom_action_param": {
                                         "mode": "auto",
                                         "max_count": 200,
-                                        "max_seconds": 14400,
                                         "max_no_bar": 3,
                                         "judge": {
                                             "x": 640,

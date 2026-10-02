@@ -142,7 +142,12 @@ type fishingParam struct {
 	// MaxCount is how many fish to play before redirecting to next.finish.
 	// One invocation = one fish, so this is the round cap for the whole task.
 	MaxCount int `json:"max_count"`
-	// MaxSeconds is a wall-clock budget for one invocation.
+	// MaxSeconds is DEPRECATED and NOT IMPLEMENTED.
+	//
+	// It is parsed and normalised below but is never read at run time, so
+	// putting `max_seconds` in a pipeline does nothing at all. The limits that
+	// actually apply are MaxCount, Timing.MinigameMS, Timing.BarWaitMS and
+	// MaxNoBar. Do not reintroduce this field into any JSON or README.
 	MaxSeconds float64 `json:"max_seconds"`
 	// MaxNoBar aborts the task after this many consecutive rounds in which the
 	// bar never appeared — otherwise a broken UpFish would loop forever.
