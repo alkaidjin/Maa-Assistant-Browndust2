@@ -40,9 +40,9 @@
         {
             "path": "agent/go-service.exe",
             "source": "tracked",
-            "sha256": "89158ed2165ce836f0e7627282330162461fd8309fd70ea62645baa089e7a2a3",
-            "size": 8796160,
-            "note": "第 6 点裁剪 fork 后的白盒构建（源码 data/maintainer/agent/go-service，version bd2-fd6ed7b），替换原 MaaEnd 64fac11 黑盒基线"
+            "sha256": "fcee613b095756a26146b4e990ecaa3198937820de96ec4ae5a3f05c2af690a8",
+            "size": 8966144,
+            "note": "白盒构建（源码 data/maintainer/agent/go-service，version bd2-bad7b04），新增 pretask CLI 模式与 LaunchGame 一键启动游戏"
         },
         {
             "path": "maafw/DirectML.dll",
