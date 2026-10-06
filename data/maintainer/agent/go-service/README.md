@@ -38,7 +38,7 @@
 | `pkg/resource` | resource sink | 资源路径修正 |
 
 支撑包（依赖闭包，非组件）：`pkg/{i18n,parentwatch,pienv,control,maafocus,jsonclean}`、
-`pretask/gamesetting`。共 14 个包、40 个 `.go` 文件。
+`pretask/gamesetting`。共 15 个包、44 个 `.go` 文件（含第 7 节的 pretask 运行器）。
 
 i18n 文案**不 embed**，运行时从磁盘 `locales/go-service/*.json` 读取（简繁英日韩
 5 语言的守护警告页模板，原样保留在仓库根 `locales/go-service/`）。
@@ -88,3 +88,28 @@ build.bat
 2. 按第 2 节清单更新包目录（依赖闭包用 `goimports` / `go mod tidy` 收敛）；
 3. 保持 module 名 `go-service`（与 `fishing`/`rock-picker` 的短模块名惯例一致）；
 4. 构建 + 冒烟 + 实机验证四项 sink 后，`git add -f` 替换产物。
+
+## 7. pretask CLI 模式（`--pretask`）
+
+同一 exe 的第二运行模式，对接 MXU v2.5.3+ / PI v2.7.0 的 `pretask` 协议：
+客户端按 `interface.json` 顶层 `pretask` 声明（本仓声明文件
+`tasks/pretasks/LaunchGame.json`），在**连接控制器之前**直接拉起
+`agent/go-service --pretask <Name> [args...]` 并同步等待退出。
+
+协议关键约束（`pretask/pretask.go` 顶部注释亦有说明）：
+
+- **退出码非 0 仅告警、不中止客户端启动** —— 失败原因必须写进
+  `debug/go-service.log`，用户侧看到的只是任务照常跑；
+- **stdout 被客户端丢弃** —— 不要依赖控制台输出传达信息；
+- **pretask 退出后客户端只搜一次窗、不重试** —— 因此 `launchgame`
+  拉起游戏后会自己等窗口出现且客户区尺寸连续 2 秒稳定才退出；
+- 运行时机早于 agent 宿主，**不启动 parentwatch / pienv / i18n**（父进程
+  是客户端一次性等待而非 agent 宿主，环境里没有 `PI_*` 变量）。
+
+当前注册的任务：
+
+| 任务名 | 包 | 行为 |
+|---|---|---|
+| `LaunchGame` | `pretask/launchgame` | 自动检索棕 2 安装路径（启动器注册表 → 默认路径 C..G → 卸载信息表）并以 `-screen-width 1920 -screen-height 1080 -screen-fullscreen 0` 拉起；窗口已存在或进程已运行则直接等窗放行。非 Windows 构建为空桩。 |
+
+退出码约定：成功 `0`；处理器失败 `1`；未知任务名 / 缺参 `2`。
