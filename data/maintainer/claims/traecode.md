@@ -68,3 +68,41 @@
    先例在 `build_release_zip.py` 的 `EXCLUDE_DIRS` 补**同名目录护栏**（防挪回 agent/ 泄进包）。
 2. 大文件外移/入仓变更必须同步 `assets_manifest.json` 的 source 与 sha256，
    并跑一次 `bootstrap_assets.py --verify` 作为提交前检查。
+
+---
+
+# claim 续轮（2026-10-06）：LaunchGame 一键启动游戏 pretask
+
+- **worktree**：`F:\MABd2-wt\traecode-launchgame`
+- **分支**：`agent/traecode-launchgame`
+- **基线**：`0fda9c7`（origin/main，含 workbuddy 钓鱼合并）
+
+## 任务
+
+脚本内置一键启动游戏：点开始后、客户端连接控制器前，自动检索本机棕 2 安装路径
+并以窗口化 1920x1080 拉起游戏本体；游戏已运行则直接放行、由客户端按
+class/title 搜索绑定。走 PI v2.7.0 pretask 协议（MXU v2.5.3 已支持），复用
+go-service 单二进制双模式（上游 MaaEnd main.go 的 `--pretask` CLI 分派同款）。
+
+## 改动文件范围
+
+- `data/maintainer/agent/go-service/main.go`（--pretask 分派）
+- `data/maintainer/agent/go-service/pretask/pretask.go`（新增，CLI 运行器）
+- `data/maintainer/agent/go-service/pretask/launchgame/**`（新增 3 文件）
+- `data/maintainer/agent/go-service/README.md`（文档同步）
+- `tasks/pretasks/LaunchGame.json`（新增，pretask 声明，无 option）
+- `misc/locales/zh_cn.json`（+2 键：label/description）
+- 根 `README.md`（快速开始补一条一次性引导）
+- `agent/go-service.exe`（重编替换）+ `data/maintainer/tools/assets_manifest.json`（sha256/size 同步）
+
+## 热点占用
+
+- `agent/go-service.exe`：**占用**（仅本分支重编一次，其他 worktree 冻结此文件）
+- `interface.json`：**不碰**。请求主控在合并时给 `import` 数组追加一行
+  `"tasks/pretasks/LaunchGame.json"`（JSON 片段见交工记录）
+- 不碰：`MaaBd2.exe`、`maafw/**`、`resource/**`、pipeline、`.github/**`、`build_release_zip.py`
+
+## 实机锁
+
+本轮只做"游戏已运行"快速路径的 CLI 冒烟（无侵入）；真实拉起游戏的全量
+验证矩阵由主控按串行铁律执行（场景清单见交工记录）。
