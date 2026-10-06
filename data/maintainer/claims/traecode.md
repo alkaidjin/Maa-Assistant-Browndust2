@@ -106,3 +106,40 @@ go-service 单二进制双模式（上游 MaaEnd main.go 的 `--pretask` CLI 分
 
 本轮只做"游戏已运行"快速路径的 CLI 冒烟（无侵入）；真实拉起游戏的全量
 验证矩阵由主控按串行铁律执行（场景清单见交工记录）。
+
+## 交工记录（2026-10-06 完成，5 commit）
+
+| commit | 内容 |
+|---|---|
+| `fd16441` | claim 登记（本章节上半部） |
+| `bad7b04` | go-service 源码：main.go `--pretask` 分派 + `pretask/` 运行器 + `launchgame` 三链检索/等窗状态机 + README 第 7 节 |
+| `893227b` | `tasks/pretasks/LaunchGame.json` + zh_cn 两键 + 根 README 快速开始第 4 条 |
+| `833db68` | `agent/go-service.exe`（bd2-bad7b04，8966144B）+ manifest sha256/size 同步 |
+
+验证：`go vet` 过；CLI 冒烟（游戏运行中）走 already-present 快速路径 exit 0，
+未知任务名/缺参 exit 2；`bootstrap_assets.py --verify` 8 项全过。
+
+### ⚠️ 待主控：合并时给 interface.json 的 import 数组追加一行
+
+```json
+"tasks/pretasks/LaunchGame.json"
+```
+
+### 实机验证矩阵（主控串行执行；游戏开/关之间注意串行铁律）
+
+| # | 场景 | 预期 |
+|---|---|---|
+| 1 | 游戏已开，点开始（含 LaunchGame 卡片） | pretask 秒过（already present），任务正常绑定执行 |
+| 2 | 游戏关闭、默认路径安装，点开始 | go-service 从启动器注册表命中路径，1080p 窗口化拉起，等客户区稳定后客户端搜窗接管 |
+| 3 | 拖坏窗口尺寸（如 1078×602）再点开始 | pretask 等尺寸稳定（一直是坏尺寸也照常放行），aspectratio 警告页拦截（与现状一致） |
+| 4 | 改名/移走 Neowiz 注册表键，游戏在默认路径 | 回退 default-location 链命中 |
+| 5 | 三链全部找不到（如改盘符） | exit 1，仅 warning，任务继续跑但因无窗口失败；debug/go-service.log 有三条检索链日志 |
+| 6 | 启动器卡更新页超过 120s | pretask exit 1 仅告警；游戏窗口最终出来后客户端仍能搜到 |
+| 7 | 旧「前置程序」preAction 并存 | 两者行为兼容：先 preAction 后 pretask，游戏已开则两条都秒过；引导用户停用旧卡即可 |
+
+### 已知限制（v1 基础版，拍板范围）
+
+- pretask 卡片首次需在「添加任务」面板手动添加一次（协议无 default_check）；
+- 直起 exe 绕过启动器的更新检查（与现行 preAction 填路径行为一致）；
+- 1366×768 等小屏放不下 1080p 窗口，交给 aspectratio 警告页；
+- 窗口尺寸主动救援（SetWindowPos）、路径缓存、Starter URI、MXU 上游 PR：二期。
