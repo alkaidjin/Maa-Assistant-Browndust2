@@ -4,6 +4,8 @@
 package launchgame
 
 import (
+	"encoding/json"
+	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
@@ -27,6 +29,10 @@ const (
 	stablePeriod   = 2 * time.Second
 )
 
+// rememberedPathFile 记忆上次成功启动用的游戏 exe 路径，作为所有
+// 平台检索链失败后的最后兜底（注册表被清理 / 启动器升级换键等场景）。
+var rememberedPathFile = filepath.Join("config", "launchgame.json")
+
 // Run 执行 LaunchGame pretask，返回是否成功。
 func Run(_ []string) bool {
 	// ① 游戏窗口已存在 → 客户端稍后自行搜窗绑定，直接放行。
@@ -49,11 +55,11 @@ func Run(_ []string) bool {
 			Msg("launchgame: failed to enumerate processes, try launching anyway (game has single-instance guard)")
 	}
 
-	// ③ 检索安装路径。
+	// ③ 检索安装路径（平台三链 + 记忆兜底，见 resolveGamePath）。
 	gamePath, source := resolveGamePath()
 	if gamePath == "" {
 		log.Error().
-			Msg("launchgame: game executable not found; searched Neowiz starter registry, default install locations (C..G) and uninstall entries")
+			Msg("launchgame: game executable not found; searched Neowiz starter registry, default install locations on all fixed drives, uninstall entries and remembered path in config/launchgame.json")
 		return false
 	}
 	log.Info().
@@ -74,7 +80,83 @@ func Run(_ []string) bool {
 		Msg("launchgame: game process launched")
 
 	// ⑤ 等待窗口出现且客户区尺寸稳定（期间窗口若被关掉则回到找窗步骤）。
-	return waitWindowStable()
+	if !waitWindowStable() {
+		return false
+	}
+
+	// ⑥ 只有真正拉起并等到窗口后才更新记忆路径；失败不覆盖旧记忆。
+	saveRememberedPath(gamePath)
+	return true
+}
+
+// resolveGamePath 按优先级检索游戏 exe，返回 (路径, 来源标签)：
+//  1. 平台检索链 findInstalledGame（Windows：启动器注册表 → 全部本地盘
+//     默认路径 → 卸载信息表）；
+//  2. 记忆兜底：config/launchgame.json 里上次成功启动的路径。
+func resolveGamePath() (string, string) {
+	if path, source := findInstalledGame(); path != "" {
+		return path, source
+	}
+	if path := loadRememberedPath(); path != "" {
+		log.Info().
+			Str("path", path).
+			Msg("launchgame: using remembered game path")
+		return path, "remembered-path"
+	}
+	return "", ""
+}
+
+// launchgameMemory 是 config/launchgame.json 的持久化结构。
+type launchgameMemory struct {
+	GameExe   string `json:"game_exe"`
+	UpdatedAt string `json:"updated_at,omitempty"`
+}
+
+func loadRememberedPath() string {
+	data, err := os.ReadFile(rememberedPathFile)
+	if err != nil {
+		return ""
+	}
+	var memory launchgameMemory
+	if err := json.Unmarshal(data, &memory); err != nil {
+		log.Warn().
+			Err(err).
+			Str("file", rememberedPathFile).
+			Msg("launchgame: failed to parse remembered path file, ignore")
+		return ""
+	}
+	if !isGameExe(memory.GameExe) {
+		return ""
+	}
+	return memory.GameExe
+}
+
+func saveRememberedPath(gamePath string) {
+	if err := os.MkdirAll(filepath.Dir(rememberedPathFile), 0755); err != nil {
+		log.Warn().
+			Err(err).
+			Msg("launchgame: failed to create config dir for remembered path")
+		return
+	}
+	memory := launchgameMemory{
+		GameExe:   gamePath,
+		UpdatedAt: time.Now().Format(time.RFC3339),
+	}
+	data, err := json.MarshalIndent(memory, "", "    ")
+	if err != nil {
+		return
+	}
+	if err := os.WriteFile(rememberedPathFile, data, 0644); err != nil {
+		log.Warn().
+			Err(err).
+			Str("file", rememberedPathFile).
+			Msg("launchgame: failed to save remembered game path")
+		return
+	}
+	log.Info().
+		Str("file", rememberedPathFile).
+		Str("path", gamePath).
+		Msg("launchgame: remembered game path updated")
 }
 
 // isGameRunning 按 exe 名（忽略大小写）检查游戏进程是否在运行。
@@ -157,4 +239,17 @@ func waitClientSizeStable(hwnd uintptr, deadline time.Time) bool {
 		}
 		time.Sleep(sampleInterval)
 	}
+}
+
+// isGameExe 校验候选路径存在、是文件且文件名与游戏进程名一致（忽略大小写）。
+// 平台无关（纯文件系统判断），各平台检索链与记忆兜底共用。
+func isGameExe(path string) bool {
+	if path == "" {
+		return false
+	}
+	info, err := os.Stat(path)
+	if err != nil || info.IsDir() {
+		return false
+	}
+	return strings.EqualFold(filepath.Base(path), gameProcessName)
 }

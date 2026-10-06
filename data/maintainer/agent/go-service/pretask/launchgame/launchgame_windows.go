@@ -4,7 +4,6 @@ package launchgame
 
 import (
 	"fmt"
-	"os"
 	"path/filepath"
 	"sort"
 	"strconv"
@@ -24,12 +23,18 @@ const (
 	uninstallRootWOW = `Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall`
 
 	win32DPIAwarenessContextPerMonitorAwareV2 = ^uintptr(3)
+
+	// GetDriveType 返回值。
+	driveRemovable = 2 // U 盘 / 移动硬盘（可移动介质）
+	driveFixed     = 3 // 本地固定磁盘
 )
 
-var defaultDrives = []string{"C:", "D:", "E:", "F:", "G:"}
+// fallbackDrives 仅在盘符枚举 API 不可用时兜底。
+var fallbackDrives = []string{"C:", "D:", "E:", "F:", "G:"}
 
 var (
 	win32User32                       = windows.NewLazySystemDLL("user32.dll")
+	win32Kernel32                     = windows.NewLazySystemDLL("kernel32.dll")
 	win32ProcEnumWindows              = win32User32.NewProc("EnumWindows")
 	win32ProcIsWindowVisible          = win32User32.NewProc("IsWindowVisible")
 	win32ProcGetClassNameW            = win32User32.NewProc("GetClassNameW")
@@ -37,6 +42,8 @@ var (
 	win32ProcGetClientRect            = win32User32.NewProc("GetClientRect")
 	win32ProcIsWindow                 = win32User32.NewProc("IsWindow")
 	win32ProcSetThreadDpiAwarenessCtx = win32User32.NewProc("SetThreadDpiAwarenessContext")
+	win32ProcGetLogicalDrives         = win32Kernel32.NewProc("GetLogicalDrives")
+	win32ProcGetDriveTypeW            = win32Kernel32.NewProc("GetDriveTypeW")
 )
 
 type win32Rect struct {
@@ -49,8 +56,12 @@ var (
 	enumFound uintptr
 )
 
-// resolveGamePath 依序尝试三条检索链，返回首个命中的游戏 exe 路径与来源。
-func resolveGamePath() (string, string) {
+// findInstalledGame 是 Windows 平台检索链，按优先级返回首个命中的
+// 游戏 exe 路径与来源标签：
+//  1. Neowiz 启动器注册表（安装时选的任意盘/任意目录原样记录，最可靠）；
+//  2. 全部固定/可移动盘上的默认安装路径；
+//  3. 卸载信息表（尽力兜底）。
+func findInstalledGame() (string, string) {
 	if path := fromNeowizRegistry(); path != "" {
 		return path, "neowiz-registry"
 	}
@@ -65,6 +76,7 @@ func resolveGamePath() (string, string) {
 
 // fromNeowizRegistry 读 HKCU\Software\Neowiz\Browndust2Starter\<id> 下的
 // path + execute 组合成 exe 路径；execute 缺失时按默认进程名兜底。
+// 兼容 execute 写成绝对路径的版本（此时直接使用，不再与 path 拼接）。
 func fromNeowizRegistry() string {
 	root, err := registry.OpenKey(registry.CURRENT_USER, neowizStarterKey, registry.QUERY_VALUE|registry.ENUMERATE_SUB_KEYS)
 	if err != nil {
@@ -100,7 +112,12 @@ func fromNeowizRegistry() string {
 		if err != nil || strings.TrimSpace(exe) == "" {
 			exe = gameProcessName
 		}
-		candidate := filepath.Join(dir, exe)
+		var candidate string
+		if filepath.IsAbs(exe) {
+			candidate = exe
+		} else {
+			candidate = filepath.Join(dir, exe)
+		}
 		if isGameExe(candidate) {
 			log.Info().
 				Str("id", id).
@@ -112,10 +129,46 @@ func fromNeowizRegistry() string {
 	return ""
 }
 
-// fromDefaultLocations 扫描默认安装位置（盘符 C..G）。
+// candidateDrives 枚举本机全部固定磁盘与可移动磁盘的盘符（A..Z 位图），
+// 跳过光驱 / 网络盘 / RAM 盘；不做任何递归扫描，只拼固定安装目录。
+// API 不可用时回退到 fallbackDrives。
+func candidateDrives() []string {
+	if err := win32ProcGetLogicalDrives.Find(); err != nil {
+		return fallbackDrives
+	}
+	if err := win32ProcGetDriveTypeW.Find(); err != nil {
+		return fallbackDrives
+	}
+	mask, _, _ := win32ProcGetLogicalDrives.Call()
+	if mask == 0 {
+		return fallbackDrives
+	}
+	var drives []string
+	for bit := 0; bit < 26; bit++ {
+		if mask&(1<<bit) == 0 {
+			continue
+		}
+		root := string(rune('A'+bit)) + `:\`
+		rootUTF16, err := windows.UTF16PtrFromString(root)
+		if err != nil {
+			continue
+		}
+		driveType, _, _ := win32ProcGetDriveTypeW.Call(uintptr(unsafe.Pointer(rootUTF16)))
+		if driveType != driveFixed && driveType != driveRemovable {
+			continue
+		}
+		drives = append(drives, string(rune('A'+bit))+":")
+	}
+	if len(drives) == 0 {
+		return fallbackDrives
+	}
+	return drives
+}
+
+// fromDefaultLocations 扫描每个固定/可移动盘上的默认安装位置。
 // 注意 filepath.Join("C:", ...) 会得到 "C:Neowiz" 这种盘符相对路径，必须补 `\`。
 func fromDefaultLocations() string {
-	for _, drive := range defaultDrives {
+	for _, drive := range candidateDrives() {
 		candidate := filepath.Join(drive+`\`, "Neowiz", "Browndust2", "Browndust2_10000001", gameProcessName)
 		if isGameExe(candidate) {
 			log.Info().
@@ -129,6 +182,13 @@ func fromDefaultLocations() string {
 
 // fromUninstallRegistry 扫描卸载信息表（HKCU/HKLM 各含 WOW6432Node），
 // DisplayName 含 browndust / brown dust / neowiz 的条目按三种字段取候选路径。
+//
+// 注意（2026-10-06 实测）：棕 2 游戏本体不单独登记卸载信息，卸载表里唯一
+// 匹配条目 DisplayName=Browndust2 指向的是「启动器」
+// （C:\ProgramData\Neowiz\Browndust2Starter\Browndust2Starter.exe），
+// 因此本链在标准安装形态下不会命中，只对第三方重打包 / 把本体登记进
+// 卸载表的特殊形态有意义；isGameExe 的严格文件名校验确保绝不会把
+// Browndust2Starter.exe 误当游戏本体拉起。
 func fromUninstallRegistry() string {
 	for _, hive := range []registry.Key{registry.CURRENT_USER, registry.LOCAL_MACHINE} {
 		for _, rootPath := range []string{uninstallRoot, uninstallRootWOW} {
@@ -214,18 +274,6 @@ func stripArgs(s string) string {
 		s = s[:idx]
 	}
 	return strings.TrimSpace(s)
-}
-
-// isGameExe 校验候选路径存在、是文件且文件名与游戏进程名一致（忽略大小写）。
-func isGameExe(path string) bool {
-	if path == "" {
-		return false
-	}
-	info, err := os.Stat(path)
-	if err != nil || info.IsDir() {
-		return false
-	}
-	return strings.EqualFold(filepath.Base(path), gameProcessName)
 }
 
 // numericNames 过滤出数字子键名并按数值升序（启动器按账号 id 建子键）。
