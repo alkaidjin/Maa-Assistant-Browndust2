@@ -142,4 +142,25 @@ go-service 单二进制双模式（上游 MaaEnd main.go 的 `--pretask` CLI 分
 - pretask 卡片首次需在「添加任务」面板手动添加一次（协议无 default_check）；
 - 直起 exe 绕过启动器的更新检查（与现行 preAction 填路径行为一致）；
 - 1366×768 等小屏放不下 1080p 窗口，交给 aspectratio 警告页；
-- 窗口尺寸主动救援（SetWindowPos）、路径缓存、Starter URI、MXU 上游 PR：二期。
+- 窗口尺寸主动救援（SetWindowPos）、Starter URI、MXU 上游 PR：二期。
+
+## 补强（2026-10-06，路径排查后 A+B+C+D，2 commit）
+
+实机验证（MXU 全链路，游戏开/关两场景）通过后，排查其他盘位 / 中文路径
+场景，发现并补强：
+
+| 点 | commit | 内容 |
+|---|---|---|
+| A | `403a3a4` | 默认路径链改 `GetLogicalDrives`+`GetDriveTypeW` 枚举全部固定/可移动盘（跳过光驱/网络/RAM 盘），消除硬编码 C..G 盲区 |
+| B | `403a3a4` | 注册表 `execute` 为绝对路径时直接用，不再与 `path` 拼接 |
+| C | `403a3a4` | 成功拉起后写 `config/launchgame.json` 记忆路径，平台三链全失败时兜底；失败不覆盖；文件被 .gitignore 忽略 |
+| D | `403a3a4` | 卸载表链注释：实测棕2本体不登记卸载信息，唯一匹配条目是启动器，严格文件名校验防误启动 |
+| — | `c163f52` | exe 重编（bd2-403a3a4，8972800B）+ manifest + 两份 README |
+
+验证：go vet（windows）+ GOOS=linux 交叉编译过；临时单测覆盖记忆读写
+6 分支（无文件/坏 JSON/路径不存在/中文目录命中/仅启动器名拒绝/往返）
+通过后已删除未入库；真实拉起后记忆文件写入内容正确；
+`bootstrap_assets.py --verify` 8 项全过。
+
+中文路径结论：注册表/文件/进程三环节全走 W 系列宽字符 API，中文无损
+（中文目录实机实证：进程拉起、日志写入均正常）。
