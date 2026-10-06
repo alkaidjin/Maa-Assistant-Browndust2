@@ -40,9 +40,9 @@
         {
             "path": "agent/go-service.exe",
             "source": "tracked",
-            "sha256": "fcee613b095756a26146b4e990ecaa3198937820de96ec4ae5a3f05c2af690a8",
-            "size": 8966144,
-            "note": "白盒构建（源码 data/maintainer/agent/go-service，version bd2-bad7b04），新增 pretask CLI 模式与 LaunchGame 一键启动游戏"
+            "sha256": "1624bcd48bad738a5609daaf4961b2ff9e9554eb0efd38fb9e50eb9ce86b6043",
+            "size": 8972800,
+            "note": "白盒构建（源码 data/maintainer/agent/go-service，version bd2-403a3a4），pretask CLI 模式与 LaunchGame 一键启动游戏，路径检索四级兜底（注册表/全盘符默认路径/卸载表/记忆路径）"
         },
         {
             "path": "maafw/DirectML.dll",

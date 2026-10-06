@@ -110,6 +110,6 @@ build.bat
 
 | 任务名 | 包 | 行为 |
 |---|---|---|
-| `LaunchGame` | `pretask/launchgame` | 自动检索棕 2 安装路径（启动器注册表 → 默认路径 C..G → 卸载信息表）并以 `-screen-width 1920 -screen-height 1080 -screen-fullscreen 0` 拉起；窗口已存在或进程已运行则直接等窗放行。非 Windows 构建为空桩。 |
+| `LaunchGame` | `pretask/launchgame` | 以 `-screen-width 1920 -screen-height 1080 -screen-fullscreen 0` 拉起；窗口已存在或进程已运行则直接等窗放行。路径检索四级兜底：① Neowiz 启动器注册表（任意盘/任意目录/中文路径原样记录）→ ② 全部固定/可移动盘上的默认安装路径（`GetLogicalDrives`+`GetDriveType` 枚举，非硬编码盘符）→ ③ 卸载信息表（棕2 标准安装不登记本体，此链仅对特殊打包形态有效）→ ④ 上次成功路径记忆 `config/launchgame.json`（成功拉起后写入）。非 Windows 构建为空桩（仅记忆兜底可用）。 |
 
 退出码约定：成功 `0`；处理器失败 `1`；未知任务名 / 缺参 `2`。
