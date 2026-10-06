@@ -1,0 +1,10 @@
+{
+    "pretask": {
+        "controller": ["Win32", "Win32-Window", "Win32-Front"],
+        "exec": "agent/go-service",
+        "args": ["--pretask", "LaunchGame"],
+        "name": "LaunchGame",
+        "label": "$pretask.LaunchGame.label",
+        "description": "$pretask.LaunchGame.description"
+    }
+}
