@@ -108,6 +108,7 @@
         "tasks/WarcraftShop.json",
         "tasks/AbsorpAssemble.json",
         "tasks/AbsorpAssembleRound2.json",
-        "tasks/AutoFishing.json"
+        "tasks/AutoFishing.json",
+        "tasks/pretasks/LaunchGame.json"
     ]
 }

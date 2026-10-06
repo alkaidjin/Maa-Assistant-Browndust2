@@ -119,7 +119,9 @@ go-service 单二进制双模式（上游 MaaEnd main.go 的 `--pretask` CLI 分
 验证：`go vet` 过；CLI 冒烟（游戏运行中）走 already-present 快速路径 exit 0，
 未知任务名/缺参 exit 2；`bootstrap_assets.py --verify` 8 项全过。
 
-### ⚠️ 待主控：合并时给 interface.json 的 import 数组追加一行
+### ✅ interface.json import（已在分支内补齐，主控无需再改）
+
+合并时由本分支直接带入，import 数组末尾：
 
 ```json
 "tasks/pretasks/LaunchGame.json"
