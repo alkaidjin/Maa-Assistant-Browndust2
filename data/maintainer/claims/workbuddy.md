@@ -244,3 +244,209 @@ P2 现在**两份并存**：主工作区未 commit 的工作区改动 + 本分�
   `agent/workbuddy-workspace:agent/workbuddy-workspace`，避免误推。
   push 前扫描：真敏感项 0（无用户名/备份落点/凭据/venv），
   仅含 9 处本机工作区路径（claim 的必要内容，公开无害）。
+
+---
+
+## 2. 首轮+次轮「资源吸收和召集」合并为一张卡片（2026-10-06，待主控合并）
+
+**需求**：界面上两张卡（首轮 / 次轮）合成一张，两轮各自保留周门禁，可分别选不同天；
+如能禁止选同一天更好，做不到可接受。
+
+**实现（纯 JSON，不动 go-service.exe）**
+
+| 文件 | 变更 |
+|---|---|
+| `resource/pipeline/AbsorpAssembleCombined.json` | **新增**，2 个 DirectHit 节点：`AbsorpCombinedSchedule`（next = 首轮门禁 → 次轮门禁 → End）、`AbsorpCombinedScheduleEnd` |
+| `tasks/AbsorpAssembleCombined.json` | **新增**，1 task（name 沿用「资源吸收和召集」，label 加「（首轮+次轮）」）+ 2 个 checkbox option |
+| `tasks/AbsorpAssemble.json` / `tasks/AbsorpAssembleRound2.json` | **删除**（旧卡片不再出现，option 定义迁到新文件；已备份 `cache/old/2026-10-06/tasks/`） |
+| `interface.json.import` | 两行 → `tasks/AbsorpAssembleCombined.json`（**唯一的共享文件改动，需主控施加**） |
+
+**关键设计**：不是串行串联，而是**入口分支**——两轮链各自会自己跑到结束（终点是
+`传送判定 → StartGame → 超时收尾`），串不起来；改成同一入口按序判两个门禁，
+命中哪轮就跑哪轮，都不命中直接进 End 秒结束。
+
+**同一天冲突**：首轮门禁排在次轮前面，**同一天两轮都勾 = 当天只跑首轮，次轮跳过**
+（不会跑两遍）。UI 层无法硬性互斥（checkbox 的 case 只能各自覆盖自己节点的 `attach`，
+跨节点 AND 做不到），要"看得见的提示"必须改 `ScheduleRecognition` 支持互斥字段并重编
+go-service.exe —— 未做，等主控拍板。
+
+**迁移影响（实测）**：task name 沿用「资源吸收和召集」→ 老实例里首轮的勾选（含周期）
+**自动迁移**；「资源吸收和召集次轮」被 MXU 过滤（`WARN 实例 "配置 1" 中有 1 个无效任务被移除`），
+**次轮周期需用户重选一次**（默认周二）。更新说明里要写一句。
+
+**校验**：`check_refs.py` 全通过（435 节点、0 重名、override 键 0 缺失）；
+`check_task_merge.py` 可达 137 节点、expect 全中；MXU 实启日志确认「合并了 1 个导入的 task + 2 个导入的 option」。
+
+**遗留**：旧入口节点 `AbsorpSchedule` / `AbsorpAssembleRound2Schedule`（含各自的 `*End`）
+现在无入边，成了孤岛节点，未删（模式 A 不动原文件），要清爽可在模式 B 时一并清掉。
+
+**待主控**：更新功能说明 / Verlog / 版本号（version 仍 v26.09.13，未 bump）。
+
+---
+
+## 3. 「资源吸收和召集」新增「重建天赋技能页」自选项（2026-10-06 下午）
+
+**需求**：任务卡片里加一个可选项「是否重建天赋技能页」；勾选 → 任务入口改走重建流程；
+不勾选 → 照旧执行当天门禁命中的轮次。重建流程要一个**独立 pipeline 文件**。
+
+**改动**
+
+| 文件 | 变更 |
+|---|---|
+| `resource/pipeline/RebuildTalentPage.json` | **新增**，12 个节点：入口 → 复用 `StartAbsorpAssemble` 进第七章 → `RebuildTalentOpenPage`（ClickKey Q=81）→ 探查/吸收/召集/制伏 四组 `Pick_N`(OCR) + `Slot_N`(Click) → `RebuildTalentClosePage` → End |
+| `tasks/AbsorpAssembleCombined.json` | 新增 option `AbsorpRebuildTalentPage`（checkbox 单 case，`default_case: []` = 默认不勾），case override：`AbsorpCombinedSchedule.next=["RebuildTalentPage"]` + `第七章5.next=["RebuildTalentOpenPage"]` |
+
+**为什么 selector 用 `next` 覆盖而不是改 `entry`**：`pipeline_override` 动不了 `task.entry`，
+但改入口节点的 `next` 等价（入口节点本身仍在，日志里也还能看到进的是哪条分支）。
+
+**为什么勾选后不再跑当天吸收**（不是 bug）：进卡带链的入口节点有 max_hit 配额
+（`第七章1`=2、`第七章5`=1），同一次任务里先重建再吸收会把配额吃掉 → 第二条链进不去卡带。
+要「重建完顺手吸收」得先给这两个节点在本任务的 override 里抬 max_hit，属另一个议题。
+
+**校验**（`cache/_chk_rebuild.py` 一次性脚本）
+- 勾选分支：入口可达 70 节点，重建链 11 个关键节点**全部可达**；
+  吸收侧 `AbsorpScheduleEnabled`/`AbsorpAssembleRound2ScheduleEnabled`/`GetDaily_2`/`传送阵`/`传送判定` **零泄漏** ✔
+- 默认分支：137 节点，两门禁在、重建链不在 ✔
+- `check_refs.py` 全通过（447 节点 / 0 重名 / override 键 0 缺失）；MXU 实启日志 `合并了 3 个导入的 option` ✔
+
+**⚠️ 未标定项（真机前必须做）**
+1. `RebuildTalentOpenPage` / `ClosePage` 用的是 `ClickKey` key=81（Q）。本项目三个 Win32 控制器的
+   键盘都走 `SendMessageWithCursorPos`，**此前没有任何任务用过按键动作**，Unity 收不收得到要真机确认；
+   不生效就换成点 UI 按钮（给 `Absorb/TalentEntry.png` 截图 + 识别改 TemplateMatch）。
+2. 四个 `Pick_N` 的 OCR roi 是占位大范围（[400,260,1120,620]），四个 `Slot_N` 的 target 是
+   屏幕中心 [960,540] 占位 —— **必须在 MPE 里对着实际天赋技能页标定**，否则会点到占位坐标。
+3. 若实际交互是「先点空栏再选技能」或拖拽，把 Pick/Slot 前后对调或改 Swipe，结构不变。
+
+**顺手发现**：主工作区 `interface.json` 把 `tasks/WarcraftRerunQuickBattle.json` 从 import 摘了
+（文件还在）。我这边删掉两张旧吸收卡是**真删**；如果要跟主工作区保持一致的「摘 import 不删文件」风格，
+说一声我把 `tasks/AbsorpAssemble.json` / `tasks/AbsorpAssembleRound2.json` 恢复回来即可。
+
+---
+
+## 4. 建议主控写入仓铁律：用户手改内容 = 禁区（2026-10-06）
+
+**起因**：主工作区 `interface.json`（摘掉 `tasks/WarcraftRerunQuickBattle.json` 的 import）
+与 WT 里的 `tasks/AbsorpAssembleCombined.json`（label 改「（两个轮次）」、描述精简）
+都是用户**本人手动编辑**的。
+
+**建议新增的条文（供主控直接抄进 `data/maintainer/REF-多Agent协同施工铁律.md`）**
+
+> ### ⑦ 用户手改内容 = 禁区（优先级最高，高于 ①②）
+> - 用户本人在主工作区或任一 wt 里手动编辑过的文件/字段，未经他明确许可，
+>   任何 agent **只能提醒、不得再改**（含重新格式化、批量脚本/sed 覆盖、以及解决 rebase 冲突时的覆盖）。
+> - 确实需要改 → 写进 `data/maintainer/claims/<名>.md` 或在回复里提出，等他点头。
+> - 动手前先 `git diff` 判断改动来源；**rebase 冲突涉及他手改内容 → 停下报告**，
+>   禁用 `git checkout --ours/--theirs` 静默覆盖（会无声丢掉他的编辑）。
+> - 判据不明时按"是他手改"处理 —— 猜错方向造成误改的代价远大于多问一句。
+
+**建议补进 §4 踩坑要点的一条**
+
+> - 症状：自己加完功能回头一看，用户手改的 label / 描述被覆盖回旧文案。
+>   根因：Edit/脚本按整段替换，或 rebase 冲突时 `--ours/--theirs` 一把梭。
+>   处置：编辑前 `git diff` 圈定改动范围、只替换自己需要的那一小段；改完 diff 复核他的字段还在。
+
+**我这边的自我约束（已执行）**：加 `AbsorpRebuildTalentPage` 时只动了 `task.option` 列表和
+option 段，用户改的 label（「资源吸收和召集（两个轮次）」）与精简后的描述**原样保留**，已复核。
+
+---
+
+## 5. 「重建天赋技能页」改为下拉菜单：重置后跑图 / 直接跑图（2026-10-06 傍晚，修正 §3）
+
+**需求**：用户把 option 类型改成 `select`（下拉），两条可选项：
+1. **重置天赋技能页后跑图** —— 入口走重建链，配完技能页后**收尾节点跳转跑图**，跑哪轮按周门禁定；
+2. **技能已配置直接开始跑图** —— 入口就是两个轮次的门禁节点，不符合周门禁就跳过。
+
+**关键实现改动（相对 §3 的旧 checkbox 版本）**
+
+| 项 | 旧 | 新 |
+|---|---|---|
+| option 类型 | checkbox 单 case | **select 两 case** |
+| 重建链进卡带 | 复用 `StartAbsorpAssemble` + `第七章1~5`，用 override 把 `第七章5.next` 掰到 `RebuildTalentOpenPage` | **独立副本链** `RebuildTalentEnter_1~5`（复制自 第七章1~5），不再 override 任何共享节点 |
+| 重建后去向 | 无（跑完即结束） | `RebuildTalentPageEnd.next` override → `AbsorpRebuildBackTown` → `AbsorpRunGate` → 门禁 → 跑图 |
+
+**为什么不复用第七章链（重要）**：「重置后继续跑图」= 同一次任务进两次卡带。若复用 `第七章1/2/5`，
+① 配额冲突（七1=2 / 七2=2 / 七5=1，第一次就吃掉一半甚至全部）；② `第七章4/5.next` 被 override 掰向重建后，
+跑图第二次经过时也会走进重建（next 是节点级共享的，做不到"第一次走 A、第二次走 B"）。
+副本链彻底解耦：**不需要抬任何 max_hit，也不需要 override 共享节点**。
+代价：`AbsorpAssemble.json` 的第七章链若改动，需同步这 5 个副本（已在文件 `$note` 里写明）。
+
+**新增的两个公共节点**（`resource/pipeline/AbsorpAssembleCombined.json`）
+- `AbsorpRebuildBackTown`：`BackTown` 的副本（模板 `Absorb/Back.png`），next=[AbsorpRunGate]。
+  为什么不直接改 `BackTown.next`：它的 next 是跑图链的收尾（Exploration/传送判定），改了会破坏跑图收尾。
+- `AbsorpRunGate`：与 `AbsorpCombinedSchedule` 同构的三选一门禁。为什么另开一个：
+  选 case 1 时 `AbsorpCombinedSchedule.next` 已被覆盖成 `RebuildTalentPage`，
+  收尾若指回它 = 死循环（重建 → 入口 → 重建 …）。
+
+**case 1 的 override**（只有两条，都只改 next）：
+`AbsorpCombinedSchedule.next=["RebuildTalentPage"]`、`RebuildTalentPageEnd.next=["AbsorpRebuildBackTown"]`
+**case 2 的 override**：`AbsorpCombinedSchedule.next=[首轮门禁, 次轮门禁, End]`（与默认值同，显式写出自文档）
+
+**⚠️ 我改动了用户手改的字段一处**：`default_case` 由 `[]` 改为 `"AbsorpTalentReadyRun"`（case 2）。
+理由：项目里所有 `select` 的 `default_case` 都是**字符串**（AutoFishing/HuntingArea/PVP/Warcraft… 全如此），
+`[]` 是 checkbox 的写法，select 留空可能导致 UI 无默认选中项。默认给"技能已配置直接跑图"= 保持合并前行为，老用户无感。
+（他的 `type`/`label`/`description` 一律未动。）
+
+**校验**：`check_refs.py` 全通过（454 节点 / 0 重名 / override 键 0 缺失）；
+`cache/_chk_rebuild2.py`：case1 入口可达 156（重建链 17 个 + 两门禁 + 首轮链 + 次轮链 + End 全在），
+case2 入口可达 137（重建链 0 个 ✔）；MXU 实启 `合并了 1 个导入的 task + 3 个导入的 option`，无 WARN。
+
+**遗留（同 §3）**：天赋技能页的 OCR roi、`Slot_1~4` 点击坐标仍是占位值，必须 MPE 标定；
+`ClickKey Q` 能否传进 Unity 待真机确认。另外 **UI 文案建议**（归用户定，我没改）：
+label 现在是「重建天赋技能页」，但下拉第二项是「直接跑图」，label 改成「天赋技能页 / 技能页处理」更贴切；
+description 里的「勾选后…」也建议改成「选择『重置天赋技能页后跑图』时…」。
+
+---
+
+## 6. 文案定稿 + 重置天赋页 pipeline 精简为“只留入口”（2026-10-06 傍晚，修正 §5）
+
+**用户指令**：① 文案照我 §5 的建议改；② `RebuildTalentPage.json` **只保留一个入口节点**，后续节点他自己补。
+
+**改动**
+
+| 文件 | 变更 |
+|---|---|
+| `tasks/AbsorpAssembleCombined.json` | option label「重建天赋技能页」→**「天赋技能页」**；description 重写为下拉口径（分别说明两条选项的行为）；case `AbsorpRebuildTalentPageThenRun` 的 override 删掉 `RebuildTalentPageEnd` 那条（该节点已不存在） |
+| `resource/pipeline/RebuildTalentPage.json` | **清空为只有 `RebuildTalentPage` 一个入口节点**（`next: []`）。原 `RebuildTalentEnter_1~5` / `OpenPage` / `Pick_N` / `Slot_N` / `ClosePage` / `PageEnd` 全部移除。接线方法写在入口节点的 `$note` 里 |
+| `resource/pipeline/AbsorpAssembleCombined.json` | 不动：`AbsorpRebuildBackTown`（回城）+ `AbsorpRunGate`（门禁）保留，作为用户补完链后的**接线端子** |
+
+**接线约定（写给后续接手的人）**：用户在 MPE 里补完重建链后，二选一接上跑图——
+① 把链尾收尾节点的 `next` 直接写 `["AbsorpRebuildBackTown"]`；
+② 或在 `tasks/AbsorpAssembleCombined.json` 的 case `AbsorpRebuildTalentPageThenRun` 的
+`pipeline_override` 里加 `"<他的收尾节点名>": { "next": ["AbsorpRebuildBackTown"] }`。
+**两边都写会重复跳转，只写一处。**
+入口 `$note` 里另外提醒了：若要复用 `第七章1~5`，注意 max_hit 配额（2/2/1），建议建副本。
+
+**当前功能状态**：case1（重置后跑图）**只到入口就结束**，跑图那段等用户补完链 + 接线后才生效；
+case2（技能已配置直接跑图）功能完整（137 节点，两门禁 + 首轮链 + 次轮链 + End）。
+
+**校验**：`check_refs.py` 全通过（438 节点 / 0 重名 / override 键 0 缺失 / 0 悬空引用）；
+MXU 实启 `加载导入文件: tasks/AbsorpAssembleCombined.json → 1 个导入的 task + 3 个导入的 option`，无 WARN。
+（注：MXU 启动会 auto-clear 日志，偶尔抓不到导入日志行，重开一次即可。）
+
+---
+
+## 7. 撤回「重置/重建天赋技能页」（2026-10-08）—— §3/§5/§6 整条作废
+
+**用户决定**：不做自动化重建天赋技能页了，天赋技能页由用户自己按注意事项文档配置。整条功能删除。
+
+**删除清单**
+
+| 文件 | 变更 |
+|---|---|
+| `resource/pipeline/RebuildTalentPage.json` | **整文件删除**（备份 `cache/old/2026-10-08/pipeline/`，仅本地不入仓） |
+| `resource/pipeline/AbsorpAssembleCombined.json` | 删 `AbsorpRebuildBackTown`、`AbsorpRunGate` 两节点 → 只剩 `AbsorpCombinedSchedule` + `AbsorpCombinedScheduleEnd` |
+| `tasks/AbsorpAssembleCombined.json` | 删整个 option `AbsorpRebuildTalentPage`（select 两 case）+ 从 `task[0].option` 列表移除 |
+
+**合并卡最终形态**：一张卡、两个 checkbox（首轮周期 / 次轮周期），入口
+`AbsorpCombinedSchedule` → [首轮门禁, 次轮门禁, End]。**没有任何重建相关节点残留**。
+
+**校验**：`check_refs.py` 全通过（435 节点 / 15 文件 / 0 重名 / 0 悬空引用）；
+MXU 实启 `1 个 task + 2 个 option`；旧配置值被自动丢弃并打一条
+`WARN 选项 "AbsorpRebuildTalentPage" 已不存在，已丢弃保存值`（预期，非错误）。
+
+**⚠️ 待用户决定（我没动，属他手放素材）**：`resource/image/Absorb/` 下
+`tianfuQ.png`、`tancha1~6.png`（今天 16:06–16:34 新增，全部未跟踪、当前无引用）。
+若确认不再做天赋页自动化，这些素材可一并删除；否则留着。
+
+**对主控的合并提示**：本条与 §3/§5/§6 记录的是同一功能的生与死，**以 §7 为准**。
+打包排除表若曾登记 `RebuildTalentPage.json` 需一并移除（我没查到有登记）。
