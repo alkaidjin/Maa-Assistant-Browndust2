@@ -450,3 +450,32 @@ MXU 实启 `1 个 task + 2 个 option`；旧配置值被自动丢弃并打一条
 
 **对主控的合并提示**：本条与 §3/§5/§6 记录的是同一功能的生与死，**以 §7 为准**。
 打包排除表若曾登记 `RebuildTalentPage.json` 需一并移除（我没查到有登记）。
+
+---
+
+## 8. 本轮交付（2026-10-08，已 push 到 `agent/workbuddy-workspace` @ `22c4b04`）
+
+**提交内容**（rebase 到 `b2bb60f` 后无冲突，force-with-lease 推送）：
+
+| 文件 | 变更 |
+|---|---|
+| `tasks/AbsorpAssembleCombined.json` | 新增：一张卡 + 2 个 checkbox（第一轮次 / 第二轮次执行周期） |
+| `resource/pipeline/AbsorpAssembleCombined.json` | 新增：`AbsorpCombinedSchedule`（三选一门禁）+ `AbsorpCombinedScheduleEnd` |
+| `tasks/AbsorpAssemble.json`、`tasks/AbsorpAssembleRound2.json` | 删除（真删，不是摘 import） |
+| `interface.json` | import 两行并成 `tasks/AbsorpAssembleCombined.json`（**本轮唯一的共享文件改动**） |
+| `resource/pipeline/DailyRoutine.json` | 用户在 MPE 里的改动（含 MPE 元信息：filePath/lastSyncTime/viewport + 某节点加了 `repeat: 2`） |
+
+**一致性核验（push 前全过）**
+- `check_refs.py`：435 节点 / 15 文件 / 0 跨文件重名 / 0 悬空引用 / override 键 0 缺失 / 模板图片齐全
+- `check_task_merge.py`：入口可达 137 节点，结论「未发现问题」
+- `interface.json` import 13 条 ↔ `tasks/**` 实际文件**完全对齐**（无"import 了但不存在"、无"存在但没 import"；
+  唯一不 import 的 `tasks/WarcraftRerunQuickBattle.json` 是 main 上你自己的决定，已保留）
+- 全仓扫描 `RebuildTalent` / `AbsorpRebuildBackTown` / `AbsorpRunGate` / 旧卡文件名 = 0 残留
+- MXU 实启：`1 个 task + 2 个 option`，无异常 WARN
+
+**主控合并时仍需处理（我没动，都是你的文件）**
+1. `data/retired_files.json` → 加两条 `tasks/AbsorpAssemble.json`、`tasks/AbsorpAssembleRound2.json`
+   （这两张卡随旧包派发过，登记后增量更新才会把它们清掉；不登记用户升级后会残留两个死文件）
+2. `更新功能说明.md` / `Verlog.xlsx` / 版本号（`VERSION_ANCHORS`，现仍 v26.09.13）
+3. 迁移提示写给用户：首轮勾选自动迁移，**次轮周期需重选一次**（默认周二）
+4. `resource/image/Absorb/` 下 `tianfuQ.png`、`tancha1~6.png` 保留未删（用户决定），当前无引用
