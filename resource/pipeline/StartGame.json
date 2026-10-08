@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790490909800,
+            "lastSyncTime": 1791440750521,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\StartGame.json",
+            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\StartGame.json",
             "savedViewport": {
-                "x": -914,
-                "y": -2817,
-                "zoom": 0.86
+                "x": 39,
+                "y": -6309,
+                "zoom": 1.5
             },
             "filename": "StartGame",
-            "version": "v2.0.1"
+            "version": "v2.0.6"
         }
     },
     "$__mpe_external_CorrectPVP_StartGame": {
@@ -77,8 +77,8 @@
         "post_delay": 2000,
         "$__mpe_code": {
             "position": {
-                "x": 342,
-                "y": 12
+                "x": 1011,
+                "y": 1347
             }
         }
     },
@@ -101,8 +101,8 @@
         "post_delay": 2000,
         "$__mpe_code": {
             "position": {
-                "x": 342,
-                "y": 2367
+                "x": 1013,
+                "y": 1705
             }
         }
     },
@@ -125,8 +125,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 342,
-                "y": 4704
+                "x": 1328,
+                "y": 1105
             }
         }
     },
@@ -149,8 +149,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 334,
-                "y": 2638
+                "x": 1329,
+                "y": 1335
             }
         }
     },
@@ -170,11 +170,11 @@
                 "threshold": 0.4
             }
         },
-        "post_delay": 45000,
+        "post_delay": 30000,
         "$__mpe_code": {
             "position": {
-                "x": 333,
-                "y": 5078
+                "x": 1314,
+                "y": 243
             }
         }
     },
@@ -200,8 +200,8 @@
         "post_delay": 2000,
         "$__mpe_code": {
             "position": {
-                "x": 342,
-                "y": 527
+                "x": 1313,
+                "y": -34
             }
         }
     },
@@ -220,8 +220,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 743,
-                "y": 2505
+                "x": 1305,
+                "y": -291
             }
         }
     },
@@ -246,8 +246,8 @@
         "post_delay": 2000,
         "$__mpe_code": {
             "position": {
-                "x": 758,
-                "y": 2866
+                "x": 1012,
+                "y": 3002
             }
         }
     },
@@ -272,8 +272,8 @@
         "post_delay": 2000,
         "$__mpe_code": {
             "position": {
-                "x": 342,
-                "y": 3921
+                "x": 339,
+                "y": 3874
             }
         }
     },
@@ -309,7 +309,7 @@
         }
     },
     "InShadow": {
-        "max_hit": 4,
+        "max_hit": 2,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -324,9 +324,17 @@
             }
         },
         "action": {
-            "type": "Click"
+            "type": "Click",
+            "param": {
+                "target": [
+                    1180,
+                    38,
+                    1,
+                    1
+                ]
+            }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "EnterGame",
             "Setting",
@@ -334,8 +342,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 591,
-                "y": 4218
+                "x": 344,
+                "y": 4268
             }
         }
     },
@@ -377,8 +385,8 @@
         "post_delay": 2000,
         "$__mpe_code": {
             "position": {
-                "x": 342,
-                "y": 3546
+                "x": 1014,
+                "y": 2276
             }
         }
     },
@@ -402,8 +410,8 @@
         "post_delay": 2000,
         "$__mpe_code": {
             "position": {
-                "x": 342,
-                "y": 870
+                "x": 1016,
+                "y": 1949
             }
         }
     },
@@ -425,7 +433,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "ToImage"
         ],
@@ -454,7 +462,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "ResetControlSure"
         ],
@@ -482,7 +490,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "Reset_Control",
             "ToImage"
@@ -525,8 +533,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 342,
-                "y": 1596
+                "x": 1011,
+                "y": 2604
             }
         }
     },
@@ -583,8 +591,8 @@
         "post_delay": 2000,
         "$__mpe_code": {
             "position": {
-                "x": 342,
-                "y": 2026
+                "x": 1320,
+                "y": 534
             }
         }
     },
@@ -608,8 +616,8 @@
         "post_delay": 2000,
         "$__mpe_code": {
             "position": {
-                "x": 342,
-                "y": 1245
+                "x": 1321,
+                "y": 817
             }
         }
     },
@@ -632,7 +640,7 @@
         },
         "repeat": 2,
         "repeat_delay": 1000,
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "ImageMove",
             "ToImage"
@@ -725,11 +733,11 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "$__mpe_code": {
             "position": {
-                "x": 625,
-                "y": 1594
+                "x": 1264,
+                "y": 2613
             }
         }
     }

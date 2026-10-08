@@ -3,24 +3,24 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790555126561,
+            "lastSyncTime": 1791431948233,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\DailyRoutine.json",
+            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\DailyRoutine.json",
             "savedViewport": {
-                "x": -567,
-                "y": -576,
-                "zoom": 0.76
+                "x": 66,
+                "y": 162,
+                "zoom": 0.33
             },
             "filename": "DailyRoutine",
-            "version": "v2.0.3"
+            "version": "v2.0.6"
         }
     },
     "$__mpe_external_StartGame_DailyRoutine": {
         "$__mpe_code": {
             "position": {
-                "x": 2269,
-                "y": 1038
+                "x": 2100,
+                "y": 892
             }
         }
     },
@@ -85,7 +85,7 @@
                 ]
             }
         },
-        "post_delay": 5000,
+        "post_delay": 4500,
         "next": [
             "ClickMyHouse",
             "MyhouseBack"
@@ -165,7 +165,7 @@
         },
         "repeat": 2,
         "repeat_delay": 200,
-        "post_delay": 2500,
+        "post_delay": 3000,
         "next": [
             "GetWithOneClick",
             "EnterOperating"
@@ -205,7 +205,8 @@
                 ]
             }
         },
-        "post_delay": 2500,
+        "repeat": 2,
+        "post_delay": 3000,
         "next": [
             "EnterRestaurant_3",
             "EnterOperating_3"
@@ -240,13 +241,14 @@
         },
         "timeout": 10000,
         "next": [
+            "[JumpBack]魔兽赛季奖励确认_3",
             "EnterRestaurant",
             "FrequentCaller"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2080,
-                "y": 260
+                "x": 2104,
+                "y": 243
             }
         }
     },
@@ -271,7 +273,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 10000,
+        "post_delay": 9000,
         "next": [
             "CHooseCrad_2",
             "[JumpBack]魔兽赛季奖励确认_1",
@@ -310,17 +312,14 @@
                 ]
             }
         },
-        "timeout": 12000,
+        "repeat": 2,
         "next": [
-            "MoveSquare"
-        ],
-        "on_error": [
-            "SquareEnd"
+            "Loading_Square"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1059,
-                "y": 1257
+                "x": 1034,
+                "y": 1255
             }
         }
     },
@@ -355,8 +354,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2340,
-                "y": 267
+                "x": 2496,
+                "y": 290
             }
         }
     },
@@ -568,36 +567,59 @@
             }
         }
     },
-    "MoveSquare": {
-        "max_hit": 1,
+    "Loading_Square": {
         "recognition": {
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    1022,
-                    125,
-                    45,
-                    100
+                    435,
+                    57,
+                    422,
+                    262
                 ],
                 "template": [
-                    "Square/DAYgift.png"
-                ],
-                "green_mask": true,
-                "threshold": [
-                    0.6
+                    "Square/Loading.png"
                 ]
             }
         },
-        "action": {
-            "type": "Click",
-            "param": {
-                "target_offset": [
-                    54,
-                    20,
-                    -16,
-                    -39
-                ]
+        "post_delay": 1500,
+        "next": [
+            "Loading_Square",
+            "MoveSquare"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1287,
+                "y": 1259
             }
+        }
+    },
+    "MoveSquare": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1023,
+                    141,
+                    214,
+                    99
+                ],
+                "expected": [
+                    "每日",
+                    "移动",
+                    "艾",
+                    "力",
+                    "克",
+                    "史",
+                    "温",
+                    "女"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
         },
         "post_delay": 7500,
         "next": [
@@ -606,8 +628,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1351,
-                "y": 1245
+                "x": 1572,
+                "y": 1265
             }
         }
     },
@@ -628,7 +650,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 5000,
+        "post_delay": 4500,
         "next": [
             "EnterOperating",
             "[JumpBack]StartGame"
@@ -676,8 +698,8 @@
     "SquareEnd": {
         "$__mpe_code": {
             "position": {
-                "x": 1843,
-                "y": 1337
+                "x": 2058,
+                "y": 1438
             }
         }
     },
@@ -715,8 +737,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 520,
-                "y": 780
+                "x": 271,
+                "y": 664
             }
         }
     },
@@ -753,6 +775,14 @@
             "position": {
                 "x": 1052,
                 "y": 967
+            }
+        }
+    },
+    "$__mpe_external_魔兽赛季奖励确认_3_DailyRoutine": {
+        "$__mpe_code": {
+            "position": {
+                "x": 2391,
+                "y": 140
             }
         }
     }

@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790240473243,
+            "lastSyncTime": 1791457608514,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\EvilCastle.json",
+            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\EvilCastle.json",
             "savedViewport": {
-                "x": 138,
-                "y": -576,
-                "zoom": 0.33
+                "x": -1216,
+                "y": -2555,
+                "zoom": 0.92
             },
             "filename": "EvilCastle",
-            "version": "v1.10.1"
+            "version": "v2.0.6"
         }
     },
     "$__mpe_external_StartGame_EvilCastle": {
@@ -25,6 +25,7 @@
         }
     },
     "CHooseCrad_EC": {
+        "max_hit": 2,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -97,6 +98,7 @@
         }
     },
     "CastleCorrect": {
+        "max_hit": 3,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -302,6 +304,7 @@
         }
     },
     "EnterRestaurant_EC": {
+        "max_hit": 2,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -322,7 +325,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 10000,
+        "post_delay": 9000,
         "next": [
             "CHooseCrad_EC",
             "EnterRestaurant_EC"
@@ -335,6 +338,7 @@
         }
     },
     "EnterTower": {
+        "max_hit": 2,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -358,12 +362,13 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2252,
-                "y": 3242
+                "x": 1572,
+                "y": 3070
             }
         }
     },
     "FightGameCard_EC": {
+        "max_hit": 2,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -549,6 +554,7 @@
         }
     },
     "TowerFastBattle": {
+        "max_hit": 2,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -571,8 +577,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2572,
-                "y": 1600
+                "x": 2628,
+                "y": 1593
             }
         }
     },

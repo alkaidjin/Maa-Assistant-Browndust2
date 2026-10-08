@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1789918068001,
+            "lastSyncTime": 1791269670121,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Bag.json",
+            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\Bag.json",
             "savedViewport": {
-                "x": -2604,
-                "y": -761,
+                "x": 142,
+                "y": -50,
                 "zoom": 1
             },
             "filename": "Bag",
-            "version": "v1.10.1"
+            "version": "v2.0.6"
         }
     },
     "$__mpe_external_StartGame_Bag": {
@@ -249,7 +249,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "$__mpe_code": {
             "position": {
                 "x": 2220,
@@ -359,7 +359,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "ClickAnniu",
             "关闭强化"
@@ -465,6 +465,58 @@
             }
         }
     },
+    "IntensifyChoose19": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    473,
+                    93,
+                    684,
+                    561
+                ],
+                "expected": [
+                    "19"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 3578,
+                "y": 1095
+            }
+        }
+    },
+    "IntensifyChoose20": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    473,
+                    93,
+                    684,
+                    561
+                ],
+                "expected": [
+                    "20"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 3580,
+                "y": 1324
+            }
+        }
+    },
     "IntensifyMain": {
         "recognition": {
             "type": "OCR",
@@ -528,8 +580,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 866,
-                "y": 629
+                "x": 931,
+                "y": 613
             }
         }
     },
@@ -578,7 +630,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "Analyze"
         ],
@@ -682,58 +734,6 @@
             "position": {
                 "x": 2998,
                 "y": 1307
-            }
-        }
-    },
-    "IntensifyChoose19": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    473,
-                    93,
-                    684,
-                    561
-                ],
-                "expected": [
-                    "19"
-                ],
-                "threshold": 0.6
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "$__mpe_code": {
-            "position": {
-                "x": 3578,
-                "y": 1095
-            }
-        }
-    },
-    "IntensifyChoose20": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    473,
-                    93,
-                    684,
-                    561
-                ],
-                "expected": [
-                    "20"
-                ],
-                "threshold": 0.6
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "$__mpe_code": {
-            "position": {
-                "x": 3580,
-                "y": 1324
             }
         }
     }

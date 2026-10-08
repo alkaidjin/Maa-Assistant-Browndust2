@@ -1,0 +1,105 @@
+{
+    "task": [
+        {
+            "name": "WeeklyTasks",
+            "label": "其余每周任务",
+            "entry": "WeeklyTask_Start",
+            "description": "装备制作、末日之书、小屋点赞等",
+            "controller": [
+                "Win32",
+                "Win32-Window",
+                "Win32-Front"
+            ],
+            "option": [
+                "WeeklyTaskSchedule"
+            ]
+        }
+    ],
+    "option": {
+        "WeeklyTaskSchedule": {
+            "type": "select",
+            "label": "执行星期",
+            "description": "仅在选定的星期执行本任务，一周跑一次即可",
+            "default_case": "WeeklyTaskMonday",
+            "cases": [
+                {
+                    "name": "WeeklyTaskMonday",
+                    "label": "周一",
+                    "pipeline_override": {
+                        "WeeklyTask_ScheduleEnabled": {
+                            "attach": {
+                                "monday": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "WeeklyTaskTuesday",
+                    "label": "周二",
+                    "pipeline_override": {
+                        "WeeklyTask_ScheduleEnabled": {
+                            "attach": {
+                                "tuesday": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "WeeklyTaskWednesday",
+                    "label": "周三",
+                    "pipeline_override": {
+                        "WeeklyTask_ScheduleEnabled": {
+                            "attach": {
+                                "wednesday": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "WeeklyTaskThursday",
+                    "label": "周四",
+                    "pipeline_override": {
+                        "WeeklyTask_ScheduleEnabled": {
+                            "attach": {
+                                "thursday": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "WeeklyTaskFriday",
+                    "label": "周五",
+                    "pipeline_override": {
+                        "WeeklyTask_ScheduleEnabled": {
+                            "attach": {
+                                "friday": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "WeeklyTaskSaturday",
+                    "label": "周六",
+                    "pipeline_override": {
+                        "WeeklyTask_ScheduleEnabled": {
+                            "attach": {
+                                "saturday": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "WeeklyTaskSunday",
+                    "label": "周日",
+                    "pipeline_override": {
+                        "WeeklyTask_ScheduleEnabled": {
+                            "attach": {
+                                "sunday": true
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

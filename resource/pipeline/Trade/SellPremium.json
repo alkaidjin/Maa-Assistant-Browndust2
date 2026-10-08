@@ -1,0 +1,396 @@
+{
+    "$__mpe_config_SellPremium": {
+        "$__mpe_code": {
+            "prefix": "",
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 1791452725686,
+            "isModifiedExternally": false,
+            "isDeleted": false,
+            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\Trade\\SellPremium.json",
+            "savedViewport": {
+                "x": -955,
+                "y": -127,
+                "zoom": 0.61
+            },
+            "filename": "SellPremium",
+            "version": "v2.0.6"
+        }
+    },
+    "$__mpe_external_StartGame_SellPremium": {
+        "$__mpe_code": {
+            "position": {
+                "x": 960,
+                "y": 394
+            }
+        }
+    },
+    "$__mpe_external_魔兽赛季奖励确认_3_SellPremium": {
+        "$__mpe_code": {
+            "position": {
+                "x": 1600,
+                "y": 767
+            }
+        }
+    },
+    "SP_ChooseCrad": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    217,
+                    72,
+                    71,
+                    61
+                ],
+                "template": [
+                    "Absorb/P.png"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.6
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "focus": "",
+        "next": [
+            "SP_EnterSquare"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1600,
+                "y": 907
+            }
+        }
+    },
+    "SP_EnterOperating": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    75,
+                    185,
+                    70,
+                    40
+                ],
+                "expected": [
+                    "经营",
+                    "管理"
+                ],
+                "threshold": 0.5
+            }
+        },
+        "pre_delay": 1500,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    110,
+                    170,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "post_delay": 4500,
+        "focus": "",
+        "next": [
+            "SP_EnterRestaurant"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 960,
+                "y": 827
+            }
+        }
+    },
+    "SP_EnterRestaurant": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    738,
+                    159,
+                    84,
+                    55
+                ],
+                "expected": [
+                    "立刻前往",
+                    "立刻",
+                    "前往"
+                ],
+                "threshold": 0.4
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 7500,
+        "focus": "",
+        "next": [
+            "SP_ChooseCrad",
+            "[JumpBack]魔兽赛季奖励确认_3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1280,
+                "y": 881
+            }
+        }
+    },
+    "SP_EnterSquare": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    152,
+                    604,
+                    131,
+                    81
+                ],
+                "template": [
+                    "Square/TheSquare3.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    35,
+                    7,
+                    -71,
+                    -32
+                ]
+            }
+        },
+        "repeat": 2,
+        "focus": "",
+        "next": [
+            "SP_OnSquare"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1920,
+                "y": 923
+            }
+        }
+    },
+    "SP_GOshop": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    225,
+                    216,
+                    69,
+                    49
+                ],
+                "expected": [
+                    "商店"
+                ],
+                "threshold": 0.8
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 3000,
+        "focus": "",
+        "next": [
+            "SP_ZiLuo"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2535,
+                "y": 740
+            }
+        }
+    },
+    "SP_OnSquare": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    236,
+                    84,
+                    84,
+                    45
+                ],
+                "expected": [
+                    "招募情况",
+                    "招募",
+                    "情况"
+                ],
+                "threshold": 0.8
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    193,
+                    74,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "focus": "",
+        "next": [
+            "SP_GOshop"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2225,
+                "y": 717
+            }
+        }
+    },
+    "SP_ReturnHome_1": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "TRADE/RETURNHOME.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "focus": "",
+        "next": [
+            "SP_ReturnHome_2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 320,
+                "y": 253
+            }
+        }
+    },
+    "SP_ReturnHome_2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    662,
+                    395,
+                    72,
+                    62
+                ],
+                "expected": [
+                    "关闭",
+                    "商店"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "focus": "",
+        "next": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 640,
+                "y": 263
+            }
+        }
+    },
+    "SP_ZiLuo": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    572,
+                    177,
+                    73,
+                    63
+                ],
+                "expected": [
+                    "洛",
+                    "兹"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    941,
+                    592,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 2000,
+        "focus": "",
+        "$__mpe_code": {
+            "position": {
+                "x": 2829,
+                "y": 727
+            }
+        }
+    },
+    "SellPremium_Start": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "TradeRun",
+                "custom_action_param": {
+                    "enable_buy": false,
+                    "enable_sell": true,
+                    "sell_mode": "max"
+                }
+            }
+        },
+        "focus": "出售高价品入口",
+        "next": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 278,
+                "y": -78
+            }
+        }
+    },
+    "Trade_EnterMerchant": {
+        "focus": "",
+        "next": [
+            "SP_EnterOperating",
+            "[JumpBack]StartGame",
+            "SP_OnSquare"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 618,
+                "y": 771
+            }
+        }
+    },
+    "Trade_ReturnHome": {
+        "focus": "",
+        "next": [
+            "SP_ReturnHome_1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 11,
+                "y": 225
+            }
+        }
+    }
+}

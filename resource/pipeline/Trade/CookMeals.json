@@ -1,0 +1,1066 @@
+{
+    "$__mpe_config_CookMeals": {
+        "$__mpe_code": {
+            "prefix": "",
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 1791433101145,
+            "isModifiedExternally": false,
+            "isDeleted": false,
+            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\Trade\\CookMeals.json",
+            "savedViewport": {
+                "x": 151,
+                "y": -1461,
+                "zoom": 0.57
+            },
+            "filename": "CookMeals",
+            "version": "v2.0.6"
+        }
+    },
+    "$__mpe_external_SellPremium_Start_CookMeals": {
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "$__mpe_external_StartGame_CookMeals": {
+        "$__mpe_code": {
+            "position": {
+                "x": 450,
+                "y": 2102
+            }
+        }
+    },
+    "$__mpe_external_魔兽赛季奖励确认_3_CookMeals": {
+        "$__mpe_code": {
+            "position": {
+                "x": 324,
+                "y": 2514
+            }
+        }
+    },
+    "CHooseCrad_Cook": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    217,
+                    72,
+                    71,
+                    61
+                ],
+                "template": [
+                    "Absorb/P.png"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.6
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "EnterSquare_Cook"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -504,
+                "y": 3004
+            }
+        }
+    },
+    "Ccok_Swipe": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    84,
+                    455,
+                    60,
+                    23
+                ],
+                "expected": [
+                    "天",
+                    "赋",
+                    "技",
+                    "能"
+                ]
+            }
+        },
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    1035,
+                    621,
+                    1,
+                    1
+                ],
+                "end": [
+                    [
+                        455,
+                        621,
+                        1,
+                        1
+                    ]
+                ],
+                "end_hold": [
+                    1000
+                ]
+            }
+        },
+        "post_delay": 2000,
+        "next": [
+            "Coooooooook"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 283,
+                "y": 2875
+            }
+        }
+    },
+    "CookMeals_Start": {
+        "focus": "料理制作入口：主界面→经营管理→餐厅→料理列表，逐道制作15道高价值料理",
+        "next": [
+            "Cook_EnterOperating",
+            "[JumpBack]StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -1221,
+                "y": 2720
+            }
+        }
+    },
+    "Cook_Back": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    89,
+                    4,
+                    180,
+                    68
+                ],
+                "template": [
+                    "COOK/cooking_back.png"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    113,
+                    33,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "focus": "",
+        "next": [
+            "Cook_ReturnHome"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2140,
+                "y": 2543
+            }
+        }
+    },
+    "Cook_Compete": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "COOK/cooking_back.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    113,
+                    32,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 3000,
+        "focus": "当前料理制作完成",
+        "next": [
+            "Cook_Result_Close"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2437,
+                "y": 2987
+            }
+        }
+    },
+    "Cook_EnterOperating": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    75,
+                    185,
+                    70,
+                    40
+                ],
+                "expected": [
+                    "经营",
+                    "管理"
+                ],
+                "threshold": 0.5
+            }
+        },
+        "pre_delay": 1500,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    110,
+                    170,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "post_delay": 4500,
+        "focus": "点击经营管理入口",
+        "next": [
+            "Cook_EnterRestaurant"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -1014,
+                "y": 3010
+            }
+        }
+    },
+    "Cook_EnterRestaurant": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    738,
+                    159,
+                    84,
+                    55
+                ],
+                "expected": [
+                    "立刻前往",
+                    "立刻",
+                    "前往"
+                ],
+                "threshold": 0.4
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 7500,
+        "focus": "点击立刻前往进入餐厅",
+        "next": [
+            "CHooseCrad_Cook",
+            "[JumpBack]魔兽赛季奖励确认_3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -759,
+                "y": 3001
+            }
+        }
+    },
+    "Cook_Make": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    827,
+                    630,
+                    95,
+                    71
+                ],
+                "expected": [
+                    "料",
+                    "理"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 2,
+        "post_delay": 6000,
+        "focus": "",
+        "next": [
+            "Cook_Compete"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2172,
+                "y": 3002
+            }
+        }
+    },
+    "Cook_Make_MAX": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    450,
+                    551,
+                    61,
+                    72
+                ],
+                "expected": [
+                    "MAX"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 2,
+        "post_delay": 800,
+        "focus": "MAX",
+        "next": [
+            "Cook_Make"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1880,
+                "y": 2858
+            }
+        }
+    },
+    "Cook_OpenCooking": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    0,
+                    0,
+                    1280,
+                    720
+                ],
+                "template": [
+                    "COOK/cooking_entry.png"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "post_delay": 2000,
+        "focus": "",
+        "next": [
+            "Cook_dish_01",
+            "Cook_dish_02",
+            "Cook_dish_03",
+            "Cook_dish_04",
+            "Cook_dish_05",
+            "Cook_dish_06",
+            "Cook_dish_07",
+            "Cook_dish_08",
+            "Cook_dish_09",
+            "Cook_dish_10",
+            "Cook_dish_11",
+            "Cook_dish_12",
+            "Cook_dish_13",
+            "Cook_dish_14",
+            "Cook_dish_15"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 584,
+                "y": 2798
+            }
+        }
+    },
+    "Cook_Result_Close": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    148,
+                    8,
+                    96,
+                    56
+                ],
+                "template": [
+                    "COOK/cooking_entry.png"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "post_delay": 1500,
+        "focus": "",
+        "next": [
+            "Cook_dish_01",
+            "Cook_dish_02",
+            "Cook_dish_03",
+            "Cook_dish_04",
+            "Cook_dish_05",
+            "Cook_dish_06",
+            "Cook_dish_07",
+            "Cook_dish_08",
+            "Cook_dish_09",
+            "Cook_dish_10",
+            "Cook_dish_11",
+            "Cook_dish_12",
+            "Cook_dish_13",
+            "Cook_dish_14",
+            "Cook_dish_15",
+            "Cook_Back"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 503,
+                "y": 3446
+            }
+        }
+    },
+    "Cook_ReturnHome": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    80,
+                    454,
+                    66,
+                    25
+                ],
+                "expected": [
+                    "天",
+                    "赋",
+                    "技能"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    113,
+                    33,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "focus": "返回广场。料理全部完成后进入高价售出：trader agent 按当日高价出售表自动售出（其进店子链以 SP_OnSquare 为广场起点候选，直接命中进店）",
+        "next": [
+            "SellPremium_Start"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2427,
+                "y": 2553
+            }
+        }
+    },
+    "Cook_dish_01": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    980,
+                    500,
+                    100,
+                    100
+                ],
+                "template": [
+                    "COOK/dish/dish_01.png"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1200,
+        "focus": "料理01：冰镇甜点（5星）材料：樱桃/巧克力/白糖/肉桂。图标模板待截图：COOK/dish/Cook_dish_01.png",
+        "next": [
+            "Cook_Make_MAX"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1366,
+                "y": 591
+            }
+        }
+    },
+    "Cook_dish_02": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    480,
+                    500,
+                    100,
+                    100
+                ],
+                "template": [
+                    "COOK/dish/dish_02.png"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1200,
+        "focus": "料理02：特瑞丝派（5星）材料：小麦/黄油(奶油)/白糖(糖)/牛奶/肉桂。图标模板待截图：COOK/dish/Cook_dish_02.png",
+        "next": [
+            "Cook_Make_MAX"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1380,
+                "y": 1131
+            }
+        }
+    },
+    "Cook_dish_03": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    909,
+                    504,
+                    100,
+                    100
+                ],
+                "template": [
+                    "COOK/dish/dish_03.png"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1200,
+        "focus": "料理03：香草牛排（5星）材料：兽肉/草藥(香草)/盐/黄油/胡椒。图标模板待截图：COOK/dish/Cook_dish_03.png",
+        "next": [
+            "Cook_Make_MAX"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1380,
+                "y": 1648
+            }
+        }
+    },
+    "Cook_dish_04": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    486,
+                    588,
+                    100,
+                    100
+                ],
+                "template": [
+                    "COOK/dish/dish_04.png"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1200,
+        "focus": "料理04：橄榄油意面（5星）材料：小麦/橄榄油/虾(淡水蝦)/大蒜/胡椒。图标模板待截图：COOK/dish/Cook_dish_04.png",
+        "next": [
+            "Cook_Make_MAX"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1380,
+                "y": 2165
+            }
+        }
+    },
+    "Cook_dish_05": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    568,
+                    501,
+                    100,
+                    100
+                ],
+                "template": [
+                    "COOK/dish/dish_05.png"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1200,
+        "focus": "料理05：三明治便当（5星）材料：吐司/鸡蛋/番茄/美乃滋/胡椒。图标模板待截图：COOK/dish/Cook_dish_05.png",
+        "next": [
+            "Cook_Make_MAX"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1380,
+                "y": 2682
+            }
+        }
+    },
+    "Cook_dish_06": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    819,
+                    499,
+                    100,
+                    100
+                ],
+                "template": [
+                    "COOK/dish/dish_06.png"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1200,
+        "focus": "料理06：街头烤鸡肉串（5星）材料：鸡胸肉袋/洋葱/甜椒/蘑菇/胡椒。图标模板待截图：COOK/dish/Cook_dish_06.png",
+        "next": [
+            "Cook_Make_MAX"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1380,
+                "y": 3199
+            }
+        }
+    },
+    "Cook_dish_07": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    647,
+                    408,
+                    100,
+                    100
+                ],
+                "template": [
+                    "COOK/dish/dish_07.png"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1200,
+        "focus": "料理07：卢戈山参烤串（5星）材料：兽肉/蘑菇/甜椒/甜辣酱(辣醬)/卢戈山参。图标模板待截图：COOK/dish/Cook_dish_07.png",
+        "next": [
+            "Cook_Make_MAX"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1375,
+                "y": 3656
+            }
+        }
+    },
+    "Cook_dish_08": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    730,
+                    408,
+                    100,
+                    100
+                ],
+                "template": [
+                    "COOK/dish/dish_08.png"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1200,
+        "focus": "料理08：煤炭饼干（5星）材料：黄油/白糖/小麦/鸡蛋/生命木炭。图标模板待截图：COOK/dish/Cook_dish_08.png",
+        "next": [
+            "Cook_Make_MAX"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1380,
+                "y": 4174
+            }
+        }
+    },
+    "Cook_dish_09": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    815,
+                    407,
+                    100,
+                    100
+                ],
+                "template": [
+                    "COOK/dish/dish_09.png"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1200,
+        "focus": "料理09：闪闪铁板虾（5星）材料：虾(淡水蝦)/蘑菇/番茄/橄榄油/闪光粉末。图标模板待截图：COOK/dish/Cook_dish_09.png",
+        "next": [
+            "Cook_Make_MAX"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1380,
+                "y": 4691
+            }
+        }
+    },
+    "Cook_dish_10": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    900,
+                    411,
+                    100,
+                    100
+                ],
+                "template": [
+                    "COOK/dish/dish_10.png"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1200,
+        "focus": "料理10：透明沙拉（5星）材料：豆子/洋葱/甜椒/橄榄油/透明蘑菇。图标模板待截图：COOK/dish/Cook_dish_10.png",
+        "next": [
+            "Cook_Make_MAX"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1380,
+                "y": 5208
+            }
+        }
+    },
+    "Cook_dish_11": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    983,
+                    409,
+                    100,
+                    100
+                ],
+                "template": [
+                    "COOK/dish/dish_11.png"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1200,
+        "focus": "料理11：地狱火紫菜包饭（5星）材料：吐司/辣椒/米/甜辣酱(辣醬)/包裝好的海苔。图标模板待截图：COOK/dish/Cook_dish_11.png",
+        "next": [
+            "Cook_Make_MAX"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1380,
+                "y": 5725
+            }
+        }
+    },
+    "Cook_dish_12": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1069,
+                    243,
+                    100,
+                    100
+                ],
+                "template": [
+                    "COOK/dish/dish_12.png"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1200,
+        "focus": "料理12：鱼子酱蛋包饭（3星）材料：鱼子酱罐头/鸡蛋/黄油。图标模板待截图：COOK/dish/Cook_dish_12.png",
+        "next": [
+            "Cook_Make_MAX"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1380,
+                "y": 6242
+            }
+        }
+    },
+    "Cook_dish_13": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    818,
+                    242,
+                    100,
+                    100
+                ],
+                "template": [
+                    "COOK/dish/dish_13.png"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1200,
+        "focus": "料理13：蜂蜜黄油杏仁（3星）材料：杏仁/蜂蜜/黄油。图标模板待截图：COOK/dish/Cook_dish_13.png",
+        "next": [
+            "Cook_Make_MAX"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1380,
+                "y": 6759
+            }
+        }
+    },
+    "Cook_dish_14": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    983,
+                    240,
+                    100,
+                    100
+                ],
+                "template": [
+                    "COOK/dish/dish_14.png"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1200,
+        "focus": "料理14：炙烤鱼板棒（3星）材料：辣椒/雷瓦汀火腿/辣椒素。图标模板待截图：COOK/dish/Cook_dish_14.png",
+        "next": [
+            "Cook_Make_MAX"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1380,
+                "y": 7276
+            }
+        }
+    },
+    "Cook_dish_15": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    732,
+                    158,
+                    100,
+                    100
+                ],
+                "template": [
+                    "COOK/dish/dish_15.png"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1200,
+        "focus": "料理15：巧克力鸡尾酒（2星）材料：巧克力/白糖。图标模板待截图：COOK/dish/Cook_dish_15.png",
+        "next": [
+            "Cook_Make_MAX"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1380,
+                "y": 97
+            }
+        }
+    },
+    "Coooooooook": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    110,
+                    605,
+                    1030,
+                    26
+                ],
+                "expected": [
+                    "料",
+                    "理"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "Cook_OpenCooking"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 285,
+                "y": 3253
+            }
+        }
+    },
+    "EnterSquare_Cook": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    152,
+                    604,
+                    131,
+                    81
+                ],
+                "template": [
+                    "Square/TheSquare3.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    35,
+                    7,
+                    -71,
+                    -32
+                ]
+            }
+        },
+        "repeat": 2,
+        "next": [
+            "OnSquare_Cook"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -253,
+                "y": 3041
+            }
+        }
+    },
+    "OnSquare_Cook": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    236,
+                    84,
+                    84,
+                    45
+                ],
+                "expected": [
+                    "招募",
+                    "情况"
+                ],
+                "threshold": 0.8
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    606,
+                    666,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "post_delay": 1500,
+        "focus": "",
+        "next": [
+            "Coooooooook",
+            "Ccok_Swipe"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 18,
+                "y": 2970
+            }
+        }
+    }
+}

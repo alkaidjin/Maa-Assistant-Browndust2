@@ -1,0 +1,379 @@
+{
+    "task": [
+        {
+            "name": "DailyAll",
+            "label": "一条龙日常",
+            "entry": "StartGame",
+            "description": "依次执行：每日抽抽乐 → 日常收菜（公会低保+小屋+经营管理+广场女神像）→ 镜中之战PVP → 快速狩猎 → 分解+精炼装备 → 赛季活动战斗关卡。",
+            "controller": [
+                "Win32",
+                "Win32-Window",
+                "Win32-Front"
+            ],
+            "option": [
+                "设置鸡尾酒倍数",
+                "ChooseRock",
+                "ChooseHuntStrategy",
+                "ChooseWood",
+                "开启自动战斗"
+            ],
+            "pipeline_override": {
+                "EnterGame": {
+                    "next": [
+                        "StartDraw",
+                        "StartSociaty",
+                        "StartPVP",
+                        "StartHunt",
+                        "StartBag",
+                        "StartWarcraft"
+                    ]
+                },
+                "StartDraw": {
+                    "max_hit": 1
+                },
+                "StartSociaty": {
+                    "max_hit": 1
+                },
+                "StartPVP": {
+                    "max_hit": 1
+                },
+                "StartHunt": {
+                    "max_hit": 1
+                },
+                "StartBag": {
+                    "max_hit": 1
+                },
+                "StartWarcraft": {
+                    "max_hit": 1
+                },
+                "EnterDraw": {
+                    "next": [
+                        "EnterDraw",
+                        "AllDraw",
+                        "Equipment",
+                        "StartGame"
+                    ]
+                },
+                "Equipment": {
+                    "next": [
+                        "AllDraw",
+                        "StartGame"
+                    ]
+                },
+                "DrawGoBack": {
+                    "next": [
+                        "Equipment",
+                        "StartGame"
+                    ]
+                },
+                "SquareEnd": {
+                    "next": [
+                        "StartGame"
+                    ]
+                },
+                "魔兽赛季奖励确认_1": {
+                    "next": [
+                        "StartGame"
+                    ]
+                },
+                "Finish": {
+                    "next": [
+                        "StartGame"
+                    ]
+                },
+                "FinishPVP": {
+                    "next": [
+                        "StartGame"
+                    ]
+                },
+                "MainHunt1_Max_2": {
+                    "next": [
+                        "REWARD_4",
+                        "StartGame"
+                    ]
+                },
+                "MainHunt2": {
+                    "next": [
+                        "REWARD_3",
+                        "StartGame"
+                    ]
+                },
+                "REWARD_3": {
+                    "next": [
+                        "StartGame"
+                    ]
+                },
+                "REWARD_4": {
+                    "next": [
+                        "StartGame"
+                    ]
+                },
+                "IntensifyMain": {
+                    "next": [
+                        "IntensifyMain",
+                        "StartGame"
+                    ]
+                },
+                "WarcraftBeginClick": {
+                    "next": [
+                        "WarcraftBeginClick",
+                        "StartGame"
+                    ]
+                },
+                "活动AP已使用_1": {
+                    "next": [
+                        "StartGame"
+                    ]
+                },
+                "返回活动主页1": {
+                    "next": [
+                        "StartGame"
+                    ]
+                },
+                "PVPBack": {
+                    "max_hit": 5,
+                    "next": [
+                        "Worship",
+                        "PVPBack",
+                        "FinishPVP"
+                    ]
+                }
+            }
+        }
+    ],
+    "option": {
+        "设置鸡尾酒倍数": {
+            "type": "select",
+            "label": "请选择鲜血鸡尾酒的消耗倍数",
+            "des": "",
+            "default_case": "40倍",
+            "cases": [
+                {
+                    "name": "1倍",
+                    "label": "1倍",
+                    "pipeline_override": {
+                        "消耗MIN": {
+                            "next": [
+                                "1倍"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "10倍",
+                    "label": "10倍",
+                    "pipeline_override": {
+                        "消耗MIN": {
+                            "next": [
+                                "10倍"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "40倍",
+                    "label": "40倍",
+                    "pipeline_override": {
+                        "消耗MIN": {
+                            "next": [
+                                "40倍"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "ChooseRock": {
+            "type": "select",
+            "label": "刷取的圣石属性",
+            "des": "",
+            "default_case": "FireRock",
+            "cases": [
+                {
+                    "name": "FireRock",
+                    "label": "火之石",
+                    "pipeline_override": {
+                        "GetRock": {
+                            "next": [
+                                "FireRock",
+                                "GetRock"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "WaterRock",
+                    "label": "水之石",
+                    "pipeline_override": {
+                        "GetRock": {
+                            "next": [
+                                "WaterRock",
+                                "GetRock"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "WindRock",
+                    "label": "风之石",
+                    "pipeline_override": {
+                        "GetRock": {
+                            "next": [
+                                "WindRock",
+                                "GetRock"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "LightRock",
+                    "label": "光之石",
+                    "pipeline_override": {
+                        "GetRock": {
+                            "next": [
+                                "LightRock",
+                                "GetRock"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "DarkRock",
+                    "label": "暗之石",
+                    "pipeline_override": {
+                        "GetRock": {
+                            "next": [
+                                "DarkRock",
+                                "GetRock"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "AutoLeastRock",
+                    "label": "自动：刷数量最少的圣石",
+                    "pipeline_override": {
+                        "GetRock": {
+                            "next": [
+                                "PickLeastRock"
+                            ],
+                            "timeout": 8000
+                        }
+                    }
+                }
+            ]
+        },
+        "ChooseHuntStrategy": {
+            "type": "select",
+            "label": "快速狩猎—刷图策略",
+            "des": "",
+            "default_case": "GoldOnBuff",
+            "cases": [
+                {
+                    "name": "SlimeOnBuff",
+                    "label": "刷取史莱姆（仅在有加成时）",
+                    "pipeline_override": {
+                        "ChooseWorO_Swipe": {
+                            "next": [
+                                "YESorNOSlimeUP"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "GoldOnBuff",
+                    "label": "刷取金币（仅在有加成时）",
+                    "pipeline_override": {
+                        "ChooseWorO_Swipe": {
+                            "next": [
+                                "YESorNOGoldUP"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "GoldOnly",
+                    "label": "只刷金币",
+                    "pipeline_override": {
+                        "ChooseWorO_Swipe": {
+                            "next": [
+                                "AllGold"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "MaterialOnly",
+                    "label": "只刷装备材料",
+                    "pipeline_override": {
+                        "ChooseWorO_Swipe": {
+                            "next": [
+                                "WoodOrOre"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "ChooseWood": {
+            "type": "select",
+            "label": "快速狩猎—装备材料刷取种类",
+            "des": "",
+            "default_case": "WoodHunt",
+            "cases": [
+                {
+                    "name": "WoodHunt",
+                    "label": "第九章原木",
+                    "pipeline_override": {
+                        "WoodOrOre": {
+                            "next": [
+                                "WoodHunt"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "OreHunt",
+                    "label": "第七章矿石",
+                    "pipeline_override": {
+                        "WoodOrOre": {
+                            "next": [
+                                "OreHunt"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "开启自动战斗": {
+            "type": "select",
+            "label": "请选择是否使用自动战斗推关",
+            "des": "",
+            "default_case": "不开启自动战斗",
+            "cases": [
+                {
+                    "name": "不开启自动战斗",
+                    "label": "不使用自动战斗",
+                    "pipeline_override": {
+                        "是否开启自动推关": {
+                            "next": [
+                                "不开启"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "开启自动战斗",
+                    "label": "使用自动战斗",
+                    "pipeline_override": {
+                        "是否开启自动推关": {
+                            "next": [
+                                "开启"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

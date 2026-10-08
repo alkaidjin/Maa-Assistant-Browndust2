@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790556495298,
+            "lastSyncTime": 1791269504475,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\Draw.json",
+            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\Draw.json",
             "savedViewport": {
-                "x": -265,
-                "y": 474,
-                "zoom": 0.76
+                "x": -1591,
+                "y": 507,
+                "zoom": 1
             },
             "filename": "Draw",
-            "version": "v2.0.3"
+            "version": "v2.0.6"
         }
     },
     "$__mpe_external_StartGame_Draw": {
@@ -176,7 +176,7 @@
                 ]
             }
         },
-        "post_delay": 5000,
+        "post_delay": 4500,
         "next": [
             "EnterDraw",
             "AllDraw",

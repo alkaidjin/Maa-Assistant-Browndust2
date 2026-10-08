@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790823466039,
+            "lastSyncTime": 1791270551112,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\PVP.json",
+            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\PVP.json",
             "savedViewport": {
-                "x": 1012,
-                "y": 63,
-                "zoom": 1.52
+                "x": -4997,
+                "y": -43,
+                "zoom": 0.87
             },
             "filename": "PVP",
-            "version": "v2.0.5"
+            "version": "v2.0.6"
         }
     },
     "$__mpe_external_StartGame_PVP": {
@@ -154,7 +154,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "CanclePVP",
             "PVPBack"
@@ -280,7 +280,7 @@
                 "threshold": 0.5
             }
         },
-        "pre_delay": 1000,
+        "pre_delay": 1500,
         "action": {
             "type": "Click",
             "param": {
@@ -293,7 +293,7 @@
             }
         },
         "repeat": 2,
-        "post_delay": 4000,
+        "post_delay": 4500,
         "next": [
             "EnterRestaurant_2",
             "EnterOperating_2"
@@ -429,8 +429,8 @@
     "FinishPVP": {
         "$__mpe_code": {
             "position": {
-                "x": 4172,
-                "y": 820
+                "x": 5964,
+                "y": 339
             }
         }
     },
@@ -528,7 +528,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 5000,
+        "post_delay": 4500,
         "next": [
             "GoOut",
             "CorrectPVP",
@@ -608,7 +608,7 @@
                 ]
             }
         },
-        "post_delay": 5000,
+        "post_delay": 4500,
         "next": [
             "Worship",
             "FinishPVP"
@@ -655,7 +655,7 @@
                 "threshold": 0.8
             }
         },
-        "post_delay": 2500,
+        "post_delay": 3000,
         "next": [
             "PVPWaiting",
             "GetDaily_1",
@@ -803,14 +803,14 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": -595,
-                "y": -28
+                "x": -687,
+                "y": -54
             }
         }
     },
     "WaitForPVP": {
         "pre_delay": 5000,
-        "post_delay": 5000,
+        "post_delay": 4500,
         "next": [
             "Quit",
             "WaitForPVP",

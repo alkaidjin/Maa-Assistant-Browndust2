@@ -1,0 +1,293 @@
+{
+    "$__mpe_config_MapTrade": {
+        "$__mpe_code": {
+            "prefix": "",
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 1791452448223,
+            "isModifiedExternally": false,
+            "isDeleted": false,
+            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\Trade\\MapTrade.json",
+            "savedViewport": {
+                "x": 129,
+                "y": 316,
+                "zoom": 0.65
+            },
+            "filename": "MapTrade",
+            "version": "v2.0.6"
+        }
+    },
+    "$__mpe_external_OnSquare_Cook_MapTrade": {
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "$__mpe_external_StartGame_MapTrade": {
+        "$__mpe_code": {
+            "position": {
+                "x": 1241,
+                "y": -484
+            }
+        }
+    },
+    "ReturnHome_TC_1": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "TRADE/RETURNHOME.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "focus": "【收尾1】买卖完成：连点右上角返回按钮回主界面（坐标可能要按实机调）",
+        "next": [
+            "ReturnHome_TC_2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1342,
+                "y": -193
+            }
+        }
+    },
+    "ReturnHome_TC_2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    662,
+                    395,
+                    72,
+                    62
+                ],
+                "expected": [
+                    "关闭",
+                    "商店"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 3000,
+        "next": [
+            "ReturnHome_TC_3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1608,
+                "y": -201
+            }
+        }
+    },
+    "ReturnHome_TC_3": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    53,
+                    484,
+                    230,
+                    216
+                ],
+                "template": [
+                    "TRADE/bargain.png"
+                ],
+                "threshold": 0.8
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    115,
+                    33,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 3000,
+        "focus": "",
+        "next": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1902,
+                "y": -242
+            }
+        }
+    },
+    "Trade_BuyAllConfirm": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    656,
+                    424,
+                    82,
+                    76
+                ],
+                "expected": [
+                    "确认"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "focus": "",
+        "next": [
+            "ReturnHome_TC_1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1851,
+                "y": 215
+            }
+        }
+    },
+    "Trade_BuyAllFavorites": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    853,
+                    618,
+                    209,
+                    87
+                ],
+                "expected": [
+                    "一键购买全部收藏",
+                    "购买全部",
+                    "全部收藏"
+                ],
+                "threshold": 0.8
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    961,
+                    669,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 600,
+        "focus": "",
+        "next": [
+            "Trade_BuyAllConfirm",
+            "Trade_NoGoodsToast"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1596,
+                "y": 217
+            }
+        }
+    },
+    "Trade_CookScheduleEnabled": {
+        "desc": "料理星期门控（Custom: ScheduleRecognition 读取 attach 的周几开关，游戏日本地时间04:00分界）：命中才进入料理分支，否则跳过料理直接回主界面。attach 由任务选项 MapTradeCookSchedule 的 checkbox 勾选写入",
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "ScheduleRecognition",
+                "custom_recognition_param": {}
+            }
+        },
+        "attach": {
+            "friday": false,
+            "monday": false,
+            "saturday": false,
+            "sunday": false,
+            "thursday": false,
+            "tuesday": false,
+            "wednesday": false
+        },
+        "next": [
+            "OnSquare_Cook"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2358,
+                "y": -210
+            }
+        }
+    },
+    "Trade_NoGoodsToast": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    490,
+                    130,
+                    290,
+                    50
+                ],
+                "expected": [
+                    "没有可以购买的商品",
+                    "没有可以购买",
+                    "可以购买的商品"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "focus": "Sold-out fallback: when favorites are already sold out the buy-all click only raises the upper-center toast; recognize it, skip buying and run the leave-shop chain.",
+        "next": [
+            "ReturnHome_TC_1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -7,
+                "y": -96
+            }
+        }
+    },
+    "魔兽赛季奖励确认_3": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    725,
+                    180,
+                    254,
+                    52
+                ],
+                "expected": [
+                    "魔兽",
+                    "追踪",
+                    "赛季",
+                    "奖励"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    836,
+                    556,
+                    20,
+                    8
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 274,
+                "y": -45
+            }
+        }
+    }
+}

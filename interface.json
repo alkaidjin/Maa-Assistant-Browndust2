@@ -91,23 +91,26 @@
             "timeout": 15000,
             "identifier": "mxu_browndust_fishing",
             "auto_reconnect": true
+        },
+        {
+            "child_exec": "agent/trader",
+            "child_args": [],
+            "timeout": 15000,
+            "identifier": "mxu_browndust_trader",
+            "auto_reconnect": true
         }
     ],
     "task": [],
     "import": [
-        "tasks/StartGame.json",
-        "tasks/Draw.json",
-        "tasks/DailyRoutine.json",
-        "tasks/PVP.json",
-        "tasks/HuntingArea.json",
-        "tasks/Bag.json",
-        "tasks/Warcraft.json",
-        "tasks/EvilCastle.json",
+        "tasks/DailyAll.json",
         "tasks/RewardRoutine.json",
+        "tasks/EvilCastle.json",
         "tasks/WarcraftShop.json",
         "tasks/AbsorpAssemble.json",
         "tasks/AbsorpAssembleRound2.json",
         "tasks/AutoFishing.json",
+        "tasks/MapTrade.json",
+        "tasks/WeeklyTasks.json",
         "tasks/pretasks/LaunchGame.json"
     ]
 }

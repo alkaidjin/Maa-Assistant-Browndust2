@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790557679078,
+            "lastSyncTime": 1791457948716,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\WarcraftShop.json",
+            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\WarcraftShop.json",
             "savedViewport": {
-                "x": -2702,
-                "y": -418,
-                "zoom": 0.66
+                "x": -4238,
+                "y": -1490,
+                "zoom": 1.09
             },
             "filename": "WarcraftShop",
-            "version": "v2.0.3"
+            "version": "v2.0.6"
         }
     },
     "$__mpe_external_StartGame_WarcraftShop": {
@@ -176,7 +176,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "BuySure_MS_1"
         ],
@@ -205,7 +205,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "BuySure_MS_2"
         ],
@@ -239,7 +239,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "$__mpe_code": {
             "position": {
                 "x": 6119,
@@ -268,7 +268,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "WarcraftShopDone"
         ],
@@ -364,6 +364,7 @@
         }
     },
     "EnterWarcraft_3": {
+        "max_hit": 3,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -398,6 +399,7 @@
         }
     },
     "EnterWarcraft_4": {
+        "max_hit": 3,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -951,7 +953,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "BuyIt_MS_1"
         ],
@@ -980,7 +982,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "BuyIt_MS_2"
         ],
@@ -1007,23 +1009,20 @@
     "WarcraftShopBuyLeft": {
         "desc": "剩余代币购买不限量物品选择",
         "timeout": 5000,
-        "next": [
-            "WarcraftShopDone"
-        ],
         "on_error": [
             "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 4111,
-                "y": 1425
+                "x": 3991,
+                "y": 1688
             }
         }
     },
     "WarcraftShopBuyLoop": {
         "desc": "购买循环：按顺序尝试每个商品节点。未勾选的商品 enabled=false 会被框架直接跳过；每个商品 max_hit=1 保证一次任务只买一次。全部无可买时走 on_error 收尾",
         "pre_delay": 0,
-        "post_delay": 0,
+        "post_delay": 500,
         "next": [
             "[JumpBack]DrawCard_MS",
             "[JumpBack]FireSeed_MS",
@@ -1049,7 +1048,7 @@
     "WarcraftShopDone": {
         "desc": "限量商店购买流程结束",
         "pre_delay": 0,
-        "post_delay": 0,
+        "post_delay": 500,
         "rate_limit": 0,
         "$__mpe_code": {
             "position": {
@@ -1061,7 +1060,7 @@
     "WarcraftShopSchedule": {
         "desc": "魔兽商店 执行周期门禁入口（MAAEND ScheduleRecognition 方案）",
         "pre_delay": 0,
-        "post_delay": 0,
+        "post_delay": 500,
         "rate_limit": 0,
         "next": [
             "WarcraftShopScheduleEnabled",
@@ -1084,7 +1083,7 @@
             }
         },
         "pre_delay": 0,
-        "post_delay": 0,
+        "post_delay": 500,
         "rate_limit": 0,
         "attach": {
             "friday": false,
@@ -1108,7 +1107,7 @@
     "WarcraftShopScheduleEnd": {
         "desc": "未命中执行周期（自动跳过），直接结束；无 next 保证任务正常收尾",
         "pre_delay": 0,
-        "post_delay": 0,
+        "post_delay": 500,
         "rate_limit": 0,
         "$__mpe_code": {
             "position": {
