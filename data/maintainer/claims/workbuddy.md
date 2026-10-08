@@ -479,3 +479,46 @@ MXU 实启 `1 个 task + 2 个 option`；旧配置值被自动丢弃并打一条
 2. `更新功能说明.md` / `Verlog.xlsx` / 版本号（`VERSION_ANCHORS`，现仍 v26.09.13）
 3. 迁移提示写给用户：首轮勾选自动迁移，**次轮周期需重选一次**（默认周二）
 4. `resource/image/Absorb/` 下 `tianfuQ.png`、`tancha1~6.png` 保留未删（用户决定），当前无引用
+
+---
+
+## 9. 与 main（`d5c9963` traecode 任务体系重构）rebase + 开 PR #8（2026-10-08 晚）
+
+**背景**：我 8 点前推的 `22c4b04/e19011c` 基于 `b2bb60f`，此后 main 前进两个提交
+（`72e18ce` 任务体系重构 DailyAll/MapTrade/WeeklyTasks + `d5c9963` Merge PR #7），用户要求改为**发 PR**。
+
+**rebase 结果**：`git rebase origin/main` → 只有 `resource/pipeline/DailyRoutine.json` 冲突，
+`interface.json` 自动合并成功。HEAD 重写为 `77b206e` / `06ee034`，落后 0 领先 2。
+
+**冲突两处（两侧都是用户手改，按"两边新增都不丢"取并集）**
+1. MPE 元信息块：取时间戳更新的 workbuddy 侧（`1791445757512` > traecode 的 `1791431948233`，约晚 3.8h）。
+   纯视图状态（`lastSyncTime` / `filePath` / `savedViewport`），无功能影响。
+2. `EnterRestaurant_3` 节点：main 把 `post_delay` 2500→3000；本分支加了 `repeat_delay: 200`、
+   post_delay 仍 2500。最终 **repeat:2（两侧共有）+ repeat_delay:200（本分支）+ post_delay:3000（main）**。
+   ⚠️ 若用户是有意把 post_delay 改回 2500，需改回——已在 PR 正文里标明待复核。
+
+**⚠️ 重要修正：check_refs.py 以前漏扫 `resource/pipeline/Trade/` 子目录**
+main 重构新增了 12 个 `Trade/RebuildTradeFavorites_*.json` + `CookMeals` / `MapTrade` / `SellPremium`，
+原脚本 `glob('resource/pipeline/*.json')` 非递归 → 只扫到 16 个文件，误报
+`[JumpBack]魔兽赛季奖励确认_3` 悬空（实际节点在 Trade 子目录里）。
+已改为 `glob('resource/pipeline/**/*.json', recursive=True)` → **33 文件 / 1041 节点**。
+（脚本在 `cache/_gatetest/`，不入仓；别的 wt 若要用记得同步这处改动。）
+
+**main 基线同口径对比（关键）**：把 `origin/main` 导出到 `cache/_basecheck/` 跑同一脚本，
+`RebuildTradeFavorites_*.json` 的约 480 处悬空引用（`RTF_LobbyEnd` 不存在）**在基线上完全相同**
+→ 非本 PR 引入，属 traecode 侧遗留，已在 PR 正文提示。
+
+**校验（rebase 后重跑）**
+- `check_refs.py`：1041 节点 / 33 文件 / 0 跨文件重名 / 合并卡悬空 0 / override 键 0 缺失
+- `check_task_merge.py`：入口可达 137 节点，「未发现问题」
+- `interface.json` import **9 条**（main 重构精简过）↔ `tasks/**` 完全对齐，合并卡在其中
+- 全仓 `RebuildTalent` / `AbsorpRebuildBackTown` / `AbsorpRunGate` / 旧卡文件名 = 0 残留
+- MXU 实启无 ERROR（唯一 WARN 是旧配置里 9 个被 main 重构删掉的旧卡名，预期）
+
+**PR**：#8 https://github.com/alkaidjin/Maa-Assistant-Browndust2/pull/8
+`mergeable: True` / `mergeable_state: clean` / 2 commits / 7 files / +485 -221
+（gh CLI 未登录、GitHub MCP 报 403 无建 PR 权限 → 用 `git credential fill` 取 token +
+GitHub REST API 兜底创建，脚本 `cache/_mk_pr.py`。）
+
+**合并后主控仍需处理**：retired 登记两条旧卡、`更新功能说明.md` / `Verlog.xlsx` / 版本号
+（仍 `v26.09.13`）、次轮周期需重选的迁移提示。
