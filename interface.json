@@ -110,6 +110,7 @@
         "tasks/AbsorpAssembleRound2.json",
         "tasks/AutoFishing.json",
         "tasks/MapTrade.json",
-        "tasks/WeeklyTasks.json"
+        "tasks/WeeklyTasks.json",
+        "tasks/pretasks/LaunchGame.json"
     ]
 }

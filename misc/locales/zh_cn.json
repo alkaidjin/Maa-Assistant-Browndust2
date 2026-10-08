@@ -5,5 +5,7 @@
     "controller.Win32-Window.label": "电脑端-备选",
     "controller.Win32-Front.label": "电脑端-前台",
     "controller.ADB.label": "安卓端",
-    "contact.file": "misc/locales/CONTACT/CONTACT.zh_cn.md"
+    "contact.file": "misc/locales/CONTACT/CONTACT.zh_cn.md",
+    "pretask.LaunchGame.label": "启动游戏",
+    "pretask.LaunchGame.description": "点开始后自动检索本机游戏安装路径并以窗口化 1920×1080 启动游戏；游戏已开着则直接绑定。首次使用需在「添加任务」面板添加一次本卡片，之后保持勾选即可。"
 }
