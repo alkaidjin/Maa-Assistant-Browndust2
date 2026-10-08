@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791431948233,
+            "lastSyncTime": 1791445757512,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\DailyRoutine.json",
+            "filePath": "F:\\MABd2-wt\\workbuddy-workspace\\resource\\pipeline\\DailyRoutine.json",
             "savedViewport": {
-                "x": 66,
-                "y": 162,
-                "zoom": 0.33
+                "x": 11,
+                "y": -369,
+                "zoom": 0.87
             },
             "filename": "DailyRoutine",
             "version": "v2.0.6"
@@ -206,6 +206,7 @@
             }
         },
         "repeat": 2,
+        "repeat_delay": 200,
         "post_delay": 3000,
         "next": [
             "EnterRestaurant_3",

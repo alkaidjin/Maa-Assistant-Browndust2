@@ -1,0 +1,48 @@
+{
+    "$__mpe_config_AbsorpAssembleCombined": {
+        "$__mpe_code": {
+            "prefix": "",
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 0,
+            "isModifiedExternally": false,
+            "isDeleted": false,
+            "filePath": "",
+            "savedViewport": {
+                "x": 0,
+                "y": 0,
+                "zoom": 1
+            },
+            "filename": "AbsorpAssembleCombined",
+            "version": "v1.10.1"
+        }
+    },
+    "AbsorpCombinedSchedule": {
+        "desc": "资源吸收和召集（首轮+次轮）合并入口：先判首轮周门禁，再判次轮周门禁，都不命中则直接结束",
+        "pre_delay": 0,
+        "post_delay": 0,
+        "rate_limit": 0,
+        "next": [
+            "AbsorpScheduleEnabled",
+            "AbsorpAssembleRound2ScheduleEnabled",
+            "AbsorpCombinedScheduleEnd"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -2400,
+                "y": -563
+            }
+        }
+    },
+    "AbsorpCombinedScheduleEnd": {
+        "desc": "首轮与次轮今天都不在各自的执行周期内，直接结束（自动跳过）",
+        "pre_delay": 0,
+        "post_delay": 0,
+        "rate_limit": 0,
+        "$__mpe_code": {
+            "position": {
+                "x": -1900,
+                "y": 100
+            }
+        }
+    }
+}
