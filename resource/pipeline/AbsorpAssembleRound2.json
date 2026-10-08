@@ -27,7 +27,7 @@
     "AbsorpAssembleRound2Schedule": {
         "desc": "资源吸收和召集次轮 执行周期门禁入口",
         "pre_delay": 0,
-        "post_delay": 0,
+        "post_delay": 500,
         "rate_limit": 0,
         "next": [
             "AbsorpAssembleRound2ScheduleEnabled",
@@ -50,7 +50,7 @@
             }
         },
         "pre_delay": 0,
-        "post_delay": 0,
+        "post_delay": 500,
         "rate_limit": 0,
         "attach": {
             "friday": false,
@@ -74,7 +74,7 @@
     "AbsorpAssembleRound2ScheduleEnd": {
         "desc": "未命中执行周期，直接结束（自动跳过）",
         "pre_delay": 0,
-        "post_delay": 0,
+        "post_delay": 500,
         "rate_limit": 0,
         "$__mpe_code": {
             "position": {
@@ -136,7 +136,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "Exploration2",
             "传送判定_2"
@@ -242,7 +242,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferMoveRight2"
         ],
@@ -336,7 +336,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 10000,
+        "post_delay": 9000,
         "next": [
             "传送阵2",
             "位置纠正_4",
@@ -414,7 +414,7 @@
                 ]
             }
         },
-        "post_delay": 10000,
+        "post_delay": 9000,
         "next": [
             "S15_1",
             "传送阵2"
@@ -484,7 +484,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferMoveRight2"
         ],
@@ -523,7 +523,7 @@
             }
         },
         "repeat": 2,
-        "post_delay": 5000,
+        "post_delay": 4500,
         "next": [
             "S1_2"
         ],
@@ -589,7 +589,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "S1_4"
         ],
@@ -665,7 +665,7 @@
                 ]
             }
         },
-        "post_delay": 10000,
+        "post_delay": 9000,
         "next": [
             "GetDaily_4",
             "传送阵2",
@@ -708,7 +708,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferMoveRight2"
         ],
@@ -747,7 +747,7 @@
                 ]
             }
         },
-        "post_delay": 10000,
+        "post_delay": 9000,
         "next": [
             "S2_1",
             "传送阵2",
@@ -790,7 +790,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferMoveRight2"
         ],
@@ -829,7 +829,7 @@
                 ]
             }
         },
-        "post_delay": 10000,
+        "post_delay": 9000,
         "next": [
             "S3_1",
             "传送阵2",
@@ -872,7 +872,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferMoveRight2"
         ],
@@ -911,7 +911,7 @@
                 ]
             }
         },
-        "post_delay": 10000,
+        "post_delay": 9000,
         "next": [
             "S4_1",
             "传送阵2",
@@ -954,7 +954,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferMoveRight2"
         ],
@@ -993,7 +993,7 @@
                 ]
             }
         },
-        "post_delay": 10000,
+        "post_delay": 9000,
         "next": [
             "S5_1",
             "传送阵2",
@@ -1036,7 +1036,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferMoveRight2"
         ],
@@ -1079,7 +1079,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 8000,
+        "post_delay": 7500,
         "next": [
             "Exploration2",
             "Absort2",
@@ -1113,7 +1113,7 @@
         },
         "repeat": 5,
         "repeat_delay": 600,
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferArray2"
         ],
@@ -1141,7 +1141,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferArray2"
         ],
@@ -1204,7 +1204,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferMoveLeft2",
             "BackTown2"
@@ -1300,7 +1300,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 7000,
+        "post_delay": 7500,
         "next": [
             "传送阵2"
         ],

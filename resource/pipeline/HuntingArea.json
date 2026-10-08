@@ -3,24 +3,24 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790561370223,
+            "lastSyncTime": 1791450562367,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\HuntingArea.json",
+            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\HuntingArea.json",
             "savedViewport": {
-                "x": -5854,
-                "y": 39,
-                "zoom": 0.87
+                "x": -4551,
+                "y": 160,
+                "zoom": 1
             },
             "filename": "HuntingArea",
-            "version": "v2.0.3"
+            "version": "v2.0.6"
         }
     },
     "$__mpe_external_StartGame_HuntingArea": {
         "$__mpe_code": {
             "position": {
-                "x": 7264,
-                "y": 640
+                "x": 7478,
+                "y": 638
             }
         }
     },
@@ -41,21 +41,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6471,
-                "y": 904
-            }
-        }
-    },
-    "ChooseGorS": {
-        "post_delay": 1500,
-        "next": [
-            "SlimeHunt",
-            "GoldHunt"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 6156,
-                "y": 14
+                "x": 6175,
+                "y": 754
             }
         }
     },
@@ -79,8 +66,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 4489,
-                "y": -216
+                "x": 4403,
+                "y": -273
             }
         }
     },
@@ -103,13 +90,10 @@
                 ]
             }
         },
-        "next": [
-            "WoodHunt"
-        ],
         "$__mpe_code": {
             "position": {
-                "x": 4689,
-                "y": 97
+                "x": 4663,
+                "y": -226
             }
         }
     },
@@ -204,7 +188,7 @@
         "post_delay": 1500,
         "next": [
             "FastHunt1",
-            "MainHunt1_Once"
+            "MainHunt1_Max"
         ],
         "$__mpe_code": {
             "position": {
@@ -360,8 +344,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6727,
-                "y": 480
+                "x": 6445,
+                "y": 137
             }
         }
     },
@@ -379,7 +363,7 @@
                     "Hunt/GoldDouble.png"
                 ],
                 "threshold": [
-                    0.8
+                    0.85
                 ]
             }
         },
@@ -399,36 +383,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6466,
-                "y": 434
-            }
-        }
-    },
-    "GoldHunt_2": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    76,
-                    134,
-                    81,
-                    74
-                ],
-                "template": [
-                    "Hunt/GoldDouble.png"
-                ],
-                "threshold": [
-                    0.8
-                ]
-            }
-        },
-        "next": [
-            "MainHunt1_Once"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 5346,
-                "y": 644
+                "x": 6099,
+                "y": -256
             }
         }
     },
@@ -485,8 +441,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5637,
-                "y": 294
+                "x": 5604,
+                "y": 201
             }
         }
     },
@@ -514,37 +470,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5892,
-                "y": 329
-            }
-        }
-    },
-    "MainHunt1_Once": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    655,
-                    505,
-                    40,
-                    25
-                ],
-                "expected": "狩猎",
-                "threshold": 0.6
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_delay": 1500,
-        "next": [
-            "REWARD",
-            "ChooseGorS"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 5627,
-                "y": 19
+                "x": 5840,
+                "y": 133
             }
         }
     },
@@ -601,8 +528,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 4213,
-                "y": 54
+                "x": 4011,
+                "y": -249
             }
         }
     },
@@ -633,8 +560,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 4946,
-                "y": 245
+                "x": 4996,
+                "y": -144
             }
         }
     },
@@ -709,44 +636,6 @@
             }
         }
     },
-    "REWARD": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    567,
-                    179,
-                    154,
-                    97
-                ],
-                "template": [
-                    "Hunt/REWARD.png"
-                ]
-            }
-        },
-        "pre_delay": 1500,
-        "action": {
-            "type": "Click",
-            "param": {
-                "target_offset": [
-                    61,
-                    288,
-                    -116,
-                    -40
-                ]
-            }
-        },
-        "post_delay": 1500,
-        "next": [
-            "ChooseGorS"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 5886,
-                "y": -64
-            }
-        }
-    },
     "REWARD_2": {
         "recognition": {
             "type": "TemplateMatch",
@@ -780,8 +669,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 4454,
-                "y": 196
+                "x": 4421,
+                "y": 186
             }
         }
     },
@@ -856,8 +745,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6171,
-                "y": 367
+                "x": 6152,
+                "y": 310
             }
         }
     },
@@ -935,8 +824,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6725,
-                "y": 87
+                "x": 6746,
+                "y": -256
             }
         }
     },
@@ -954,7 +843,7 @@
                     "Hunt/slimedouble.png"
                 ],
                 "threshold": [
-                    0.8
+                    0.85
                 ]
             }
         },
@@ -974,8 +863,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6461,
-                "y": -4
+                "x": 6435,
+                "y": -438
             }
         }
     },
@@ -1076,20 +965,40 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 4941,
-                "y": -79
+                "x": 5128,
+                "y": -548
+            }
+        }
+    },
+    "WoodOrOre": {
+        "$__mpe_code": {
+            "position": {
+                "x": 4741,
+                "y": -511
             }
         }
     },
     "YESorNOGoldUP": {
         "next": [
-            "GoldHunt_2",
-            "MainHunt1_Max"
+            "GoldHunt",
+            "WoodOrOre"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5075,
-                "y": 600
+                "x": 5555,
+                "y": -286
+            }
+        }
+    },
+    "YESorNOSlimeUP": {
+        "next": [
+            "SlimeHunt",
+            "WoodOrOre"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 6028,
+                "y": -467
             }
         }
     }

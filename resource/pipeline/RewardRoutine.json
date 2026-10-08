@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790818665979,
+            "lastSyncTime": 1791457865634,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "\\\\?\\F:\\MABd2v26.09.5\\resource\\pipeline\\RewardRoutine.json",
+            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\RewardRoutine.json",
             "savedViewport": {
-                "x": 152,
-                "y": -409,
-                "zoom": 1
+                "x": -2749,
+                "y": 100,
+                "zoom": 1.09
             },
             "filename": "RewardRoutine",
-            "version": "v2.0.5"
+            "version": "v2.0.6"
         }
     },
     "$__mpe_external_StartGame_RewardRoutine": {
@@ -54,6 +54,62 @@
             }
         }
     },
+    "Dragdown_1": {
+        "max_hit": 4,
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    280,
+                    530
+                ],
+                "end": [
+                    [
+                        280,
+                        350
+                    ]
+                ],
+                "end_hold": [
+                    1000
+                ]
+            }
+        },
+        "timeout": 5000,
+        "$__mpe_code": {
+            "position": {
+                "x": -739,
+                "y": 527
+            }
+        }
+    },
+    "Dragdown_2": {
+        "max_hit": 2,
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    280,
+                    530
+                ],
+                "end": [
+                    [
+                        280,
+                        350
+                    ]
+                ],
+                "end_hold": [
+                    1000
+                ]
+            }
+        },
+        "timeout": 5000,
+        "$__mpe_code": {
+            "position": {
+                "x": -729,
+                "y": 1596
+            }
+        }
+    },
     "EVENTSWIPE": {
         "max_hit": 10,
         "action": {
@@ -79,6 +135,30 @@
             "position": {
                 "x": 1726,
                 "y": 808
+            }
+        }
+    },
+    "EnterGame_RR": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    495,
+                    45,
+                    310,
+                    475
+                ],
+                "template": "StartGame/Shadow.png"
+            }
+        },
+        "post_delay": 1500,
+        "next": [
+            "InEvent_2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -452,
+                "y": 1213
             }
         }
     },
@@ -158,6 +238,8 @@
         "action": {
             "type": "Click"
         },
+        "repeat": 2,
+        "repeat_delay": 500,
         "post_delay": 2000,
         "next": [
             "PassportClick1"
@@ -171,21 +253,13 @@
     },
     "EventReward": {
         "next": [
-            "InEvent",
+            "InEvent_1",
             "[JumpBack]StartGame"
         ],
         "$__mpe_code": {
             "position": {
                 "x": 520,
                 "y": 260
-            }
-        }
-    },
-    "EventRewardDone": {
-        "$__mpe_code": {
-            "position": {
-                "x": 3550,
-                "y": 743
             }
         }
     },
@@ -242,7 +316,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 5000,
+        "post_delay": 4500,
         "next": [
             "RewardSure_3"
         ],
@@ -276,7 +350,7 @@
         },
         "repeat": 2,
         "repeat_delay": 200,
-        "post_delay": 5000,
+        "post_delay": 4500,
         "timeout": 10000,
         "next": [
             "RewardSure_1",
@@ -289,7 +363,38 @@
             }
         }
     },
-    "InEvent": {
+    "GoBack_RR": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    60,
+                    0,
+                    85,
+                    60
+                ],
+                "template": "StartGame/Back.png",
+                "threshold": 0.5
+            }
+        },
+        "pre_delay": 1500,
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 3000,
+        "next": [
+            "EnterGame_RR",
+            "GoBack_RR"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -730,
+                "y": 1163
+            }
+        }
+    },
+    "InEvent_1": {
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -311,18 +416,48 @@
         "timeout": 10000,
         "next": [
             "[JumpBack]检测感叹号",
-            "[JumpBack]往下滑动",
+            "[JumpBack]Dragdown_1",
             "[JumpBack]往上滑动",
+            "[JumpBack]GoBack_RR",
+            "[JumpBack]Dragdown_2",
             "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": -1301,
-                "y": 425
+                "x": -1278,
+                "y": 658
+            }
+        }
+    },
+    "InEvent_2": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    566,
+                    630,
+                    61,
+                    64
+                ],
+                "template": [
+                    "Event/InEvent.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 3000,
+        "timeout": 10000,
+        "$__mpe_code": {
+            "position": {
+                "x": -176,
+                "y": 1214
             }
         }
     },
     "MissionBack": {
+        "max_hit": 2,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -344,7 +479,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "MissionBack",
             "MissionMark",
@@ -381,28 +516,38 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1289,
-                "y": -34
+                "x": 1291,
+                "y": 14
             }
         }
     },
     "PassportClick1": {
         "recognition": {
-            "type": "TemplateMatch",
+            "type": "OCR",
             "param": {
                 "roi": [
-                    1040,
-                    429,
-                    45,
-                    49
+                    178,
+                    11,
+                    88,
+                    43
                 ],
-                "template": [
-                    "Passport/PassMission.png"
+                "expected": [
+                    "通",
+                    "行",
+                    "证"
                 ]
             }
         },
         "action": {
-            "type": "Click"
+            "type": "Click",
+            "param": {
+                "target": [
+                    1065,
+                    452,
+                    1,
+                    1
+                ]
+            }
         },
         "post_delay": 1500,
         "next": [
@@ -450,6 +595,7 @@
         }
     },
     "PassportClick3": {
+        "max_hit": 6,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -471,7 +617,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "PassportClick3",
             "ToPassport2",
@@ -643,7 +789,7 @@
                 ]
             }
         },
-        "post_delay": 25000,
+        "post_delay": 24000,
         "next": [
             "EVENTSWIPE"
         ],
@@ -736,11 +882,12 @@
                 "roi": [
                     215,
                     293,
-                    102,
+                    135,
                     24
                 ],
                 "expected": [
-                    "赛季通行证"
+                    "赛季",
+                    "通行证"
                 ]
             }
         },
@@ -868,7 +1015,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 5000,
+        "post_delay": 4500,
         "next": [
             "RewardSure_2",
             "EVENTSWIPE"
@@ -898,7 +1045,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 5000,
+        "post_delay": 4500,
         "next": [
             "RewardSure_2"
         ],
@@ -960,41 +1107,12 @@
         "timeout": 5000,
         "$__mpe_code": {
             "position": {
-                "x": -741,
-                "y": 995
-            }
-        }
-    },
-    "往下滑动": {
-        "max_hit": 4,
-        "action": {
-            "type": "Swipe",
-            "param": {
-                "begin": [
-                    280,
-                    530
-                ],
-                "end": [
-                    [
-                        280,
-                        350
-                    ]
-                ],
-                "end_hold": [
-                    1000
-                ]
-            }
-        },
-        "timeout": 5000,
-        "$__mpe_code": {
-            "position": {
-                "x": -765,
-                "y": 592
+                "x": -735,
+                "y": 839
             }
         }
     },
     "检测感叹号": {
-        "max_hit": 9,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -1030,8 +1148,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": -409,
-                "y": 319
+                "x": -489,
+                "y": 393
             }
         }
     }

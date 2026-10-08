@@ -1,0 +1,2419 @@
+{
+  "RTF_sel_S1": {
+    "focus": "Select cartridge S1 by OCR name: 血骑士 (tap recognized box, drift-proof)",
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "roi": [
+          55,
+          60,
+          305,
+          650
+        ],
+        "expected": [
+          "血骑士",
+          "血骑"
+        ],
+        "threshold": 0.3
+      }
+    },
+    "action": {
+      "type": "Click"
+    },
+    "post_delay": 1100,
+    "next": [
+      "RTF_r_S1_1",
+      "RTF_r_S1_2",
+      "RTF_r_S1_3",
+      "RTF_r_S1_4",
+      "RTF_r_S1_5",
+      "RTF_r_S1_6",
+      "RTF_r_S1_7",
+      "RTF_t_S1_1",
+      "RTF_t_S1_2",
+      "RTF_t_S1_3",
+      "RTF_t_S1_4",
+      "RTF_t_S1_5",
+      "RTF_t_S1_7",
+      "RTF_sel_S2",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_r_S1_1": {
+    "focus": "Reset S1 grid pos 1: tap only if gold (clear user favorite)",
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          371,
+          96,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          381,
+          106,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_r_S1_2",
+      "RTF_r_S1_3",
+      "RTF_r_S1_4",
+      "RTF_r_S1_5",
+      "RTF_r_S1_6",
+      "RTF_r_S1_7",
+      "RTF_t_S1_1",
+      "RTF_t_S1_2",
+      "RTF_t_S1_3",
+      "RTF_t_S1_4",
+      "RTF_t_S1_5",
+      "RTF_t_S1_7",
+      "RTF_sel_S2",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_r_S1_2": {
+    "focus": "Reset S1 grid pos 2: tap only if gold (clear user favorite)",
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          590,
+          96,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          600,
+          106,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_r_S1_3",
+      "RTF_r_S1_4",
+      "RTF_r_S1_5",
+      "RTF_r_S1_6",
+      "RTF_r_S1_7",
+      "RTF_t_S1_1",
+      "RTF_t_S1_2",
+      "RTF_t_S1_3",
+      "RTF_t_S1_4",
+      "RTF_t_S1_5",
+      "RTF_t_S1_7",
+      "RTF_sel_S2",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_r_S1_3": {
+    "focus": "Reset S1 grid pos 3: tap only if gold (clear user favorite)",
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          811,
+          96,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          821,
+          106,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_r_S1_4",
+      "RTF_r_S1_5",
+      "RTF_r_S1_6",
+      "RTF_r_S1_7",
+      "RTF_t_S1_1",
+      "RTF_t_S1_2",
+      "RTF_t_S1_3",
+      "RTF_t_S1_4",
+      "RTF_t_S1_5",
+      "RTF_t_S1_7",
+      "RTF_sel_S2",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_r_S1_4": {
+    "focus": "Reset S1 grid pos 4: tap only if gold (clear user favorite)",
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          1033,
+          96,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          1043,
+          106,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_r_S1_5",
+      "RTF_r_S1_6",
+      "RTF_r_S1_7",
+      "RTF_t_S1_1",
+      "RTF_t_S1_2",
+      "RTF_t_S1_3",
+      "RTF_t_S1_4",
+      "RTF_t_S1_5",
+      "RTF_t_S1_7",
+      "RTF_sel_S2",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_r_S1_5": {
+    "focus": "Reset S1 grid pos 5: tap only if gold (clear user favorite)",
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          371,
+          168,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          381,
+          178,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_r_S1_6",
+      "RTF_r_S1_7",
+      "RTF_t_S1_1",
+      "RTF_t_S1_2",
+      "RTF_t_S1_3",
+      "RTF_t_S1_4",
+      "RTF_t_S1_5",
+      "RTF_t_S1_7",
+      "RTF_sel_S2",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_r_S1_6": {
+    "focus": "Reset S1 grid pos 6: tap only if gold (clear user favorite)",
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          590,
+          168,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          600,
+          178,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_r_S1_7",
+      "RTF_t_S1_1",
+      "RTF_t_S1_2",
+      "RTF_t_S1_3",
+      "RTF_t_S1_4",
+      "RTF_t_S1_5",
+      "RTF_t_S1_7",
+      "RTF_sel_S2",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_r_S1_7": {
+    "focus": "Reset S1 grid pos 7: tap only if gold (clear user favorite)",
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          811,
+          168,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          821,
+          178,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_t_S1_1",
+      "RTF_t_S1_2",
+      "RTF_t_S1_3",
+      "RTF_t_S1_4",
+      "RTF_t_S1_5",
+      "RTF_t_S1_7",
+      "RTF_sel_S2",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_t_S1_1": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          371,
+          96,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "inverse": true,
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          381,
+          106,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_t_S1_2",
+      "RTF_t_S1_3",
+      "RTF_t_S1_4",
+      "RTF_t_S1_5",
+      "RTF_t_S1_7",
+      "RTF_sel_S2",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_t_S1_2": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          590,
+          96,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "inverse": true,
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          600,
+          106,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_t_S1_3",
+      "RTF_t_S1_4",
+      "RTF_t_S1_5",
+      "RTF_t_S1_7",
+      "RTF_sel_S2",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_t_S1_3": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          811,
+          96,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "inverse": true,
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          821,
+          106,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_t_S1_4",
+      "RTF_t_S1_5",
+      "RTF_t_S1_7",
+      "RTF_sel_S2",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_t_S1_4": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          1033,
+          96,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "inverse": true,
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          1043,
+          106,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_t_S1_5",
+      "RTF_t_S1_7",
+      "RTF_sel_S2",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_t_S1_5": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          371,
+          168,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "inverse": true,
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          381,
+          178,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_t_S1_7",
+      "RTF_sel_S2",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_t_S1_7": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          811,
+          168,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "inverse": true,
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          821,
+          178,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_sel_S2",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_sel_S2": {
+    "focus": "Select cartridge S2 by OCR name: 苍蓝魔女 (tap recognized box, drift-proof)",
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "roi": [
+          55,
+          60,
+          305,
+          650
+        ],
+        "expected": [
+          "苍蓝魔女",
+          "苍蓝"
+        ],
+        "threshold": 0.3
+      }
+    },
+    "action": {
+      "type": "Click"
+    },
+    "post_delay": 1100,
+    "next": [
+      "RTF_r_S2_1",
+      "RTF_r_S2_2",
+      "RTF_r_S2_3",
+      "RTF_r_S2_4",
+      "RTF_r_S2_5",
+      "RTF_r_S2_6",
+      "RTF_r_S2_7",
+      "RTF_r_S2_8",
+      "RTF_t_S2_2",
+      "RTF_t_S2_3",
+      "RTF_t_S2_4",
+      "RTF_t_S2_5",
+      "RTF_t_S2_6",
+      "RTF_t_S2_7",
+      "RTF_t_S2_8",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_r_S2_1": {
+    "focus": "Reset S2 grid pos 1: tap only if gold (clear user favorite)",
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          371,
+          96,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          381,
+          106,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_r_S2_2",
+      "RTF_r_S2_3",
+      "RTF_r_S2_4",
+      "RTF_r_S2_5",
+      "RTF_r_S2_6",
+      "RTF_r_S2_7",
+      "RTF_r_S2_8",
+      "RTF_t_S2_2",
+      "RTF_t_S2_3",
+      "RTF_t_S2_4",
+      "RTF_t_S2_5",
+      "RTF_t_S2_6",
+      "RTF_t_S2_7",
+      "RTF_t_S2_8",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_r_S2_2": {
+    "focus": "Reset S2 grid pos 2: tap only if gold (clear user favorite)",
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          590,
+          96,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          600,
+          106,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_r_S2_3",
+      "RTF_r_S2_4",
+      "RTF_r_S2_5",
+      "RTF_r_S2_6",
+      "RTF_r_S2_7",
+      "RTF_r_S2_8",
+      "RTF_t_S2_2",
+      "RTF_t_S2_3",
+      "RTF_t_S2_4",
+      "RTF_t_S2_5",
+      "RTF_t_S2_6",
+      "RTF_t_S2_7",
+      "RTF_t_S2_8",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_r_S2_3": {
+    "focus": "Reset S2 grid pos 3: tap only if gold (clear user favorite)",
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          811,
+          96,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          821,
+          106,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_r_S2_4",
+      "RTF_r_S2_5",
+      "RTF_r_S2_6",
+      "RTF_r_S2_7",
+      "RTF_r_S2_8",
+      "RTF_t_S2_2",
+      "RTF_t_S2_3",
+      "RTF_t_S2_4",
+      "RTF_t_S2_5",
+      "RTF_t_S2_6",
+      "RTF_t_S2_7",
+      "RTF_t_S2_8",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_r_S2_4": {
+    "focus": "Reset S2 grid pos 4: tap only if gold (clear user favorite)",
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          1033,
+          96,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          1043,
+          106,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_r_S2_5",
+      "RTF_r_S2_6",
+      "RTF_r_S2_7",
+      "RTF_r_S2_8",
+      "RTF_t_S2_2",
+      "RTF_t_S2_3",
+      "RTF_t_S2_4",
+      "RTF_t_S2_5",
+      "RTF_t_S2_6",
+      "RTF_t_S2_7",
+      "RTF_t_S2_8",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_r_S2_5": {
+    "focus": "Reset S2 grid pos 5: tap only if gold (clear user favorite)",
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          371,
+          168,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          381,
+          178,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_r_S2_6",
+      "RTF_r_S2_7",
+      "RTF_r_S2_8",
+      "RTF_t_S2_2",
+      "RTF_t_S2_3",
+      "RTF_t_S2_4",
+      "RTF_t_S2_5",
+      "RTF_t_S2_6",
+      "RTF_t_S2_7",
+      "RTF_t_S2_8",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_r_S2_6": {
+    "focus": "Reset S2 grid pos 6: tap only if gold (clear user favorite)",
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          590,
+          168,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          600,
+          178,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_r_S2_7",
+      "RTF_r_S2_8",
+      "RTF_t_S2_2",
+      "RTF_t_S2_3",
+      "RTF_t_S2_4",
+      "RTF_t_S2_5",
+      "RTF_t_S2_6",
+      "RTF_t_S2_7",
+      "RTF_t_S2_8",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_r_S2_7": {
+    "focus": "Reset S2 grid pos 7: tap only if gold (clear user favorite)",
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          811,
+          168,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          821,
+          178,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_r_S2_8",
+      "RTF_t_S2_2",
+      "RTF_t_S2_3",
+      "RTF_t_S2_4",
+      "RTF_t_S2_5",
+      "RTF_t_S2_6",
+      "RTF_t_S2_7",
+      "RTF_t_S2_8",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_r_S2_8": {
+    "focus": "Reset S2 grid pos 8: tap only if gold (clear user favorite)",
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          1033,
+          168,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          1043,
+          178,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_t_S2_2",
+      "RTF_t_S2_3",
+      "RTF_t_S2_4",
+      "RTF_t_S2_5",
+      "RTF_t_S2_6",
+      "RTF_t_S2_7",
+      "RTF_t_S2_8",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_t_S2_2": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          590,
+          96,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "inverse": true,
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          600,
+          106,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_t_S2_3",
+      "RTF_t_S2_4",
+      "RTF_t_S2_5",
+      "RTF_t_S2_6",
+      "RTF_t_S2_7",
+      "RTF_t_S2_8",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_t_S2_3": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          811,
+          96,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "inverse": true,
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          821,
+          106,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_t_S2_4",
+      "RTF_t_S2_5",
+      "RTF_t_S2_6",
+      "RTF_t_S2_7",
+      "RTF_t_S2_8",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_t_S2_4": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          1033,
+          96,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "inverse": true,
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          1043,
+          106,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_t_S2_5",
+      "RTF_t_S2_6",
+      "RTF_t_S2_7",
+      "RTF_t_S2_8",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_t_S2_5": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          371,
+          168,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "inverse": true,
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          381,
+          178,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_t_S2_6",
+      "RTF_t_S2_7",
+      "RTF_t_S2_8",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_t_S2_6": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          590,
+          168,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "inverse": true,
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          600,
+          178,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_t_S2_7",
+      "RTF_t_S2_8",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_t_S2_7": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          811,
+          168,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "inverse": true,
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          821,
+          178,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "RTF_t_S2_8",
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  },
+  "RTF_t_S2_8": {
+    "recognition": {
+      "type": "ColorMatch",
+      "param": {
+        "roi": [
+          1033,
+          168,
+          20,
+          20
+        ],
+        "lower": [
+          190,
+          150,
+          30
+        ],
+        "upper": [
+          245,
+          200,
+          90
+        ],
+        "count": 40
+      }
+    },
+    "inverse": true,
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": [
+          1043,
+          178,
+          1,
+          1
+        ]
+      }
+    },
+    "post_delay": 450,
+    "next": [
+      "[JumpBack]RTF_sel_S3",
+      "[JumpBack]RTF_sel_S4",
+      "[JumpBack]RTF_sel_S5",
+      "[JumpBack]RTF_sel_S6",
+      "[JumpBack]RTF_sel_S7",
+      "[JumpBack]RTF_swipe1",
+      "[JumpBack]RTF_sel_S8",
+      "[JumpBack]RTF_sel_S9",
+      "[JumpBack]RTF_sel_S10",
+      "[JumpBack]RTF_sel_S11",
+      "[JumpBack]RTF_sel_S12",
+      "[JumpBack]RTF_sel_S13",
+      "[JumpBack]RTF_sel_S14",
+      "[JumpBack]RTF_swipe2",
+      "[JumpBack]RTF_sel_S15",
+      "[JumpBack]RTF_sel_S16",
+      "[JumpBack]RTF_sel_S17",
+      "[JumpBack]RTF_sel_S18",
+      "[JumpBack]RTF_sel_S19",
+      "[JumpBack]RTF_sel_C1",
+      "[JumpBack]RTF_sel_C2",
+      "[JumpBack]RTF_swipe3",
+      "[JumpBack]RTF_sel_C3",
+      "[JumpBack]RTF_sel_C4",
+      "[JumpBack]RTF_sel_C5",
+      "[JumpBack]RTF_sel_C6",
+      "[JumpBack]RTF_sel_C7",
+      "[JumpBack]RTF_sel_E1",
+      "[JumpBack]RTF_sel_E2",
+      "[JumpBack]RTF_swipe4",
+      "[JumpBack]RTF_sel_E3",
+      "[JumpBack]RTF_sel_E5",
+      "[JumpBack]RTF_sel_E7",
+      "Trade_BuyAllFavorites",
+      "RTF_LobbyEnd"
+    ]
+  }
+}

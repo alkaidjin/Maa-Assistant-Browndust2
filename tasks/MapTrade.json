@@ -1,0 +1,170 @@
+{
+    "task": [
+        {
+            "name": "MapTrade",
+            "label": "每日跑商（砍价·购买收藏）",
+            "entry": "RTF_Start",
+            "description": "每日跑商：前往广场商人洛兹，砍价→一键购买全部收藏。\n可选「重建商店收藏清单」：选择重建时，会重置并完成205个商品的收藏。不重建则砍价进店后直接购买。\n可选「制作料理」：无论是否制作，购买后都会按当日高价出售表自动售出（无可售物品则直接回主界面结束）；选择制作时在广场直接制作15道高价值料理再出售，制作受「料理执行周期」星期门控，门控不满足时跳过料理制作、照常出售。",
+            "controller": [
+                "Win32",
+                "Win32-Window",
+                "Win32-Front"
+            ],
+            "option": [
+                "MapTradeRebuildFavorites",
+                "MapTradeCookMeals",
+                "MapTradeCookSchedule"
+            ]
+        }
+    ],
+    "option": {
+        "MapTradeRebuildFavorites": {
+            "type": "select",
+            "label": "是否先重建商店收藏清单？（首次使用或收藏表混乱时选择重建商品收藏清单）",
+            "description": "",
+            "default_case": "MapTradeRebuildNo",
+            "cases": [
+                {
+                    "name": "MapTradeRebuildNo",
+                    "label": "无需重建商品收藏清单",
+                    "pipeline_override": {
+                        "RTF_ShopArrive": {
+                            "next": [
+                                "Trade_BuyAllFavorites"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "MapTradeRebuildYes",
+                    "label": "重建商品收藏清单后再购买",
+                    "pipeline_override": {
+                        "RTF_ShopArrive": {
+                            "next": [
+                                "RTF_sel_S1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "MapTradeCookMeals": {
+            "type": "select",
+            "label": "购买后是否制作料理并出售高价品？",
+            "description": "两种选择购买后都会出售当日高价品（当日高价表无可售物品时直接回主界面结束）",
+            "default_case": "MapTradeCookNo",
+            "cases": [
+                {
+                    "name": "MapTradeCookNo",
+                    "label": "不制作料理，出售高价品",
+                    "pipeline_override": {
+                        "ReturnHome_TC_3": {
+                            "next": [
+                                "SellPremium_Start"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "MapTradeCookYes",
+                    "label": "制作料理，出售高价品",
+                    "pipeline_override": {
+                        "ReturnHome_TC_3": {
+                            "next": [
+                                "Trade_CookScheduleEnabled",
+                                "SellPremium_Start"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "MapTradeCookSchedule": {
+            "type": "checkbox",
+            "label": "料理执行星期门控",
+            "description": "勾选哪几天执行料理制作（可多选）",
+            "default_case": [
+                "MapTradeCookThursday"
+            ],
+            "cases": [
+                {
+                    "name": "MapTradeCookMonday",
+                    "label": "周一",
+                    "pipeline_override": {
+                        "Trade_CookScheduleEnabled": {
+                            "attach": {
+                                "monday": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "MapTradeCookTuesday",
+                    "label": "周二",
+                    "pipeline_override": {
+                        "Trade_CookScheduleEnabled": {
+                            "attach": {
+                                "tuesday": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "MapTradeCookWednesday",
+                    "label": "周三",
+                    "pipeline_override": {
+                        "Trade_CookScheduleEnabled": {
+                            "attach": {
+                                "wednesday": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "MapTradeCookThursday",
+                    "label": "周四",
+                    "pipeline_override": {
+                        "Trade_CookScheduleEnabled": {
+                            "attach": {
+                                "thursday": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "MapTradeCookFriday",
+                    "label": "周五",
+                    "pipeline_override": {
+                        "Trade_CookScheduleEnabled": {
+                            "attach": {
+                                "friday": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "MapTradeCookSaturday",
+                    "label": "周六",
+                    "pipeline_override": {
+                        "Trade_CookScheduleEnabled": {
+                            "attach": {
+                                "saturday": true
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "MapTradeCookSunday",
+                    "label": "周日",
+                    "pipeline_override": {
+                        "Trade_CookScheduleEnabled": {
+                            "attach": {
+                                "sunday": true
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,960 @@
+{
+    "$__mpe_config_WeeklyTasks": {
+        "$__mpe_code": {
+            "prefix": "",
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 1791452324008,
+            "isModifiedExternally": false,
+            "isDeleted": false,
+            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\WeeklyTasks.json",
+            "savedViewport": {
+                "x": -1631,
+                "y": 886,
+                "zoom": 0.86
+            },
+            "filename": "WeeklyTasks",
+            "version": "v2.0.6"
+        }
+    },
+    "$__mpe_external_StartGame_WeeklyTasks": {
+        "$__mpe_code": {
+            "position": {
+                "x": 46,
+                "y": -456
+            }
+        }
+    },
+    "CHooseCrad_WM": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    217,
+                    72,
+                    71,
+                    61
+                ],
+                "template": [
+                    "Absorb/P.png"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.6
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "FightGameCard_WM"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2131,
+                "y": -509
+            }
+        }
+    },
+    "EnterBag_WM": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    225,
+                    668,
+                    40,
+                    26
+                ],
+                "expected": [
+                    "背包"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "ToEquipment_WM"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4280,
+                "y": -457
+            }
+        }
+    },
+    "EnterOperating_WM": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    75,
+                    185,
+                    70,
+                    40
+                ],
+                "expected": [
+                    "经营",
+                    "管理"
+                ],
+                "threshold": 0.5
+            }
+        },
+        "pre_delay": 1500,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    110,
+                    170,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "post_delay": 4500,
+        "next": [
+            "EnterRestaurant_WM"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1665,
+                "y": -623
+            }
+        }
+    },
+    "EnterRestaurant_WM": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    738,
+                    159,
+                    84,
+                    55
+                ],
+                "expected": [
+                    "立刻前往",
+                    "立刻",
+                    "前往"
+                ],
+                "threshold": 0.4
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 7500,
+        "next": [
+            "CHooseCrad_WM",
+            "[JumpBack]魔兽赛季奖励确认_3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1872,
+                "y": -507
+            }
+        }
+    },
+    "FightGameCard_WM": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    566,
+                    567,
+                    98,
+                    33
+                ],
+                "expected": [
+                    "卡带",
+                    "游戏",
+                    "玩法",
+                    "战斗"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 2,
+        "next": [
+            "LASTNIRHT"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2399,
+                "y": -516
+            }
+        }
+    },
+    "Fight_LastNight": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1037,
+                    628,
+                    97,
+                    64
+                ],
+                "expected": [
+                    "去",
+                    "战",
+                    "斗"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 2,
+        "post_delay": 3000,
+        "next": [
+            "Skip_LastNight"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3449,
+                "y": -520
+            }
+        }
+    },
+    "LASTNIRHT": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    30,
+                    587,
+                    762,
+                    116
+                ],
+                "template": [
+                    "Mission/MORI.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    33,
+                    22,
+                    -55,
+                    -48
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 500,
+        "next": [
+            "Loading_LN"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2669,
+                "y": -518
+            }
+        }
+    },
+    "Leave_LastNight": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1119,
+                    649,
+                    65,
+                    48
+                ],
+                "expected": [
+                    "离",
+                    "开"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 2,
+        "repeat_delay": 500,
+        "post_delay": 3000,
+        "next": [
+            "EnterBag_WM",
+            "[JumpBack]StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3969,
+                "y": -520
+            }
+        }
+    },
+    "Loading_LN": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    20,
+                    9,
+                    517,
+                    193
+                ],
+                "template": [
+                    "Mission/LASTNIRHT.png"
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "focus": "",
+        "next": [
+            "Loading_LN",
+            "MoveLastNight",
+            "[JumpBack]魔兽赛季奖励确认_3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2913,
+                "y": -585
+            }
+        }
+    },
+    "MoveLastNight": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    90,
+                    485,
+                    216,
+                    196
+                ],
+                "template": [
+                    "Mission/fangxiangjian_LN.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    194,
+                    586,
+                    1,
+                    1
+                ],
+                "end": [
+                    [
+                        250,
+                        557,
+                        1,
+                        1
+                    ]
+                ],
+                "end_hold": [
+                    1000
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "next": [
+            "Fight_LastNight"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3199,
+                "y": -525
+            }
+        }
+    },
+    "Skip_LastNight": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1036,
+                    14,
+                    51,
+                    40
+                ],
+                "template": [
+                    "Mission/skip.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 3,
+        "repeat_delay": 200,
+        "next": [
+            "Leave_LastNight",
+            "Skip_LastNight"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3715,
+                "y": -521
+            }
+        }
+    },
+    "ToEquipment_WM": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    90,
+                    140,
+                    50,
+                    50
+                ],
+                "template": "Bag/Equipment.png"
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "装备制作"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4542,
+                "y": -461
+            }
+        }
+    },
+    "WeeklyTask_ScheduleEnabled": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "ScheduleRecognition",
+                "custom_recognition_param": {}
+            }
+        },
+        "focus": "星期门控（Custom: ScheduleRecognition 读取 attach 的周几开关，游戏日本地时间04:00分界）：命中才执行本周任务，否则跳到 RTF_LobbyEnd 死端直接结束。attach 由任务选项 WeeklyTaskSchedule 的单选 case 写入（仅一天为 true）",
+        "attach": {
+            "friday": false,
+            "monday": false,
+            "saturday": false,
+            "sunday": false,
+            "thursday": false,
+            "tuesday": false,
+            "wednesday": false
+        },
+        "next": [
+            "进入我的小屋",
+            "[JumpBack]StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -114,
+                "y": -250
+            }
+        }
+    },
+    "WeeklyTask_Start": {
+        "focus": "每周任务（小屋点赞+街机游戏+末日之书+装备制作）入口：请在游戏主界面开始。受 WeeklyTaskSchedule 星期门控控制，仅选定星期执行，其余日子直接结束。",
+        "next": [
+            "WeeklyTask_ScheduleEnabled"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -399,
+                "y": -235
+            }
+        }
+    },
+    "一键制作": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    666,
+                    512,
+                    65,
+                    79
+                ],
+                "expected": [
+                    "强",
+                    "化"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "制作并分解完成"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 6113,
+                "y": -462
+            }
+        }
+    },
+    "切换小屋": {
+        "max_hit": 3,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1057,
+                    628,
+                    107,
+                    75
+                ],
+                "expected": [
+                    "再次",
+                    "探查"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 2,
+        "post_delay": 3000,
+        "next": [
+            "小屋点赞"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1033,
+                "y": -209
+            }
+        }
+    },
+    "制作佣兵剑": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    469,
+                    530,
+                    102,
+                    98
+                ],
+                "template": [
+                    "Mission/yongbingjian.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "强化设置"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5333,
+                "y": -462
+            }
+        }
+    },
+    "制作并分解完成": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    594,
+                    507,
+                    98,
+                    54
+                ],
+                "expected": [
+                    "确",
+                    "认"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 2,
+        "next": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 6373,
+                "y": -462
+            }
+        }
+    },
+    "小屋点赞": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "Mission/xiaowudianzan.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1167,
+                    79,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "post_delay": 3000,
+        "next": [
+            "切换小屋",
+            "进入街机游戏",
+            "[JumpBack]StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 999,
+                "y": -652
+            }
+        }
+    },
+    "强化设置": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    705,
+                    633,
+                    97,
+                    78
+                ],
+                "expected": [
+                    "强化",
+                    "设置"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 3000,
+        "next": [
+            "自动分解"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5593,
+                "y": -462
+            }
+        }
+    },
+    "滑到N级装备": {
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    1159,
+                    673,
+                    1,
+                    1
+                ],
+                "end": [
+                    [
+                        1159,
+                        104,
+                        1,
+                        1
+                    ]
+                ],
+                "end_hold": [
+                    500
+                ]
+            }
+        },
+        "next": [
+            "制作佣兵剑"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5073,
+                "y": -462
+            }
+        }
+    },
+    "点击拜访": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    181,
+                    14,
+                    103,
+                    38
+                ],
+                "expected": [
+                    "我",
+                    "的",
+                    "小",
+                    "屋"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    116,
+                    164,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 3000,
+        "next": [
+            "点击随机拜访"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 441,
+                "y": -294
+            }
+        }
+    },
+    "点击随机拜访": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    150,
+                    126,
+                    58,
+                    40
+                ],
+                "expected": [
+                    "随",
+                    "机"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 2,
+        "post_delay": 3000,
+        "next": [
+            "小屋点赞"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 723,
+                "y": -580
+            }
+        }
+    },
+    "离开街机游戏": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    182,
+                    15,
+                    103,
+                    40
+                ],
+                "expected": [
+                    "街机",
+                    "游戏"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    112,
+                    33,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 3000,
+        "next": [
+            "EnterOperating_WM"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1403,
+                "y": -448
+            }
+        }
+    },
+    "自动分解": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    395,
+                    452,
+                    212,
+                    58
+                ],
+                "expected": [
+                    "制作并",
+                    "强化后",
+                    "装备将",
+                    "自动",
+                    "分解"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    864,
+                    472,
+                    1,
+                    1
+                ]
+            }
+        },
+        "next": [
+            "一键制作"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 5853,
+                "y": -462
+            }
+        }
+    },
+    "装备制作": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    806,
+                    638,
+                    85,
+                    57
+                ],
+                "expected": [
+                    "装备",
+                    "制作",
+                    "装备制作"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 2,
+        "next": [
+            "滑到N级装备"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4818,
+                "y": -463
+            }
+        }
+    },
+    "进入我的小屋": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    72,
+                    105,
+                    79,
+                    48
+                ],
+                "expected": [
+                    "我",
+                    "的",
+                    "小",
+                    "屋"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    110,
+                    103,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "post_delay": 3000,
+        "next": [
+            "点击拜访"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 177,
+                "y": -282
+            }
+        }
+    },
+    "进入街机游戏": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    271,
+                    174,
+                    77,
+                    51
+                ],
+                "expected": [
+                    "街",
+                    "机",
+                    "游",
+                    "戏"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    307,
+                    172,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 4500,
+        "next": [
+            "离开街机游戏"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1250,
+                "y": -788
+            }
+        }
+    },
+    "$__mpe_external_魔兽赛季奖励确认_3_WeeklyTasks": {
+        "$__mpe_code": {
+            "position": {
+                "x": 2268,
+                "y": -873
+            }
+        }
+    }
+}

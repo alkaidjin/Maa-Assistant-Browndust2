@@ -51,7 +51,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "AutoFishEnd_2"
         ],
@@ -199,7 +199,7 @@
             }
         },
         "repeat": 2,
-        "post_delay": 4000,
+        "post_delay": 4500,
         "focus": "",
         "next": [
             "AutoFishingEnter_2",
@@ -272,7 +272,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "focus": "",
         "next": [
             "AutoFishingEnter_Map",
@@ -322,7 +322,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 800,
+        "post_delay": 1500,
         "focus": "",
         "next": [
             "AutoFishing_Depart_Wait"
@@ -336,7 +336,7 @@
     },
     "AutoFishing_Depart_Wait": {
         "max_hit": 4,
-        "post_delay": 2500,
+        "post_delay": 3000,
         "next": [
             "AutoFishing_Move",
             "AutoFishing_Depart_Wait"
@@ -768,7 +768,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "focus": "",
         "next": [
             "SellAllFish_2",
@@ -846,7 +846,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "focus": "",
         "next": [
             "SellAllFish_4"

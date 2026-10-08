@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790186776093,
+            "lastSyncTime": 1791457578974,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\AbsorpAssemble.json",
+            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\AbsorpAssemble.json",
             "savedViewport": {
-                "x": -274,
-                "y": 608,
-                "zoom": 0.57
+                "x": 408,
+                "y": -1905,
+                "zoom": 1.21
             },
             "filename": "AbsorpAssemble",
-            "version": "v1.10.1"
+            "version": "v2.0.6"
         }
     },
     "$__mpe_external_StartGame_AbsorpAssemble": {
@@ -52,7 +52,7 @@
                 ]
             }
         },
-        "post_delay": 10000,
+        "post_delay": 9000,
         "next": [
             "13章",
             "传送阵"
@@ -91,7 +91,7 @@
                 ]
             }
         },
-        "post_delay": 10000,
+        "post_delay": 9000,
         "next": [
             "16章",
             "传送阵"
@@ -130,7 +130,7 @@
                 ]
             }
         },
-        "post_delay": 10000,
+        "post_delay": 9000,
         "next": [
             "17章",
             "传送阵"
@@ -145,7 +145,7 @@
     "AbsorpSchedule": {
         "desc": "资源吸收和召集 执行周期门禁入口",
         "pre_delay": 0,
-        "post_delay": 0,
+        "post_delay": 500,
         "rate_limit": 0,
         "next": [
             "AbsorpScheduleEnabled",
@@ -168,7 +168,7 @@
             }
         },
         "pre_delay": 0,
-        "post_delay": 0,
+        "post_delay": 500,
         "rate_limit": 0,
         "attach": {
             "friday": false,
@@ -192,7 +192,7 @@
     "AbsorpScheduleEnd": {
         "desc": "未命中执行周期，直接结束（自动跳过）",
         "pre_delay": 0,
-        "post_delay": 0,
+        "post_delay": 500,
         "rate_limit": 0,
         "$__mpe_code": {
             "position": {
@@ -254,7 +254,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "Exploration",
             "传送判定"
@@ -349,7 +349,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 10000,
+        "post_delay": 9000,
         "next": [
             "传送阵",
             "位置纠正1",
@@ -398,13 +398,13 @@
     },
     "StartAbsorpAssemble": {
         "next": [
-            "第七章1",
+            "EnterOperating_AA",
             "[JumpBack]StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": -1674,
-                "y": -568
+                "x": -1735,
+                "y": -730
             }
         }
     },
@@ -426,7 +426,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 8000,
+        "post_delay": 7500,
         "next": [
             "Exploration",
             "Absort",
@@ -460,7 +460,7 @@
         },
         "repeat": 5,
         "repeat_delay": 600,
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferArray"
         ],
@@ -488,7 +488,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferArray"
         ],
@@ -551,7 +551,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferMoveLeft",
             "BackTown"
@@ -647,7 +647,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 7000,
+        "post_delay": 7500,
         "next": [
             "传送阵"
         ],
@@ -659,6 +659,7 @@
         }
     },
     "切外传": {
+        "max_hit": 2,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -676,15 +677,15 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "火片",
             "切外传"
         ],
         "$__mpe_code": {
             "position": {
-                "x": -152,
-                "y": 1784
+                "x": -134,
+                "y": 1782
             }
         }
     },
@@ -717,7 +718,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferMoveRight"
         ],
@@ -757,7 +758,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferMoveRight"
         ],
@@ -797,7 +798,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferMoveRight"
         ],
@@ -829,7 +830,7 @@
         },
         "repeat": 2,
         "repeat_delay": 500,
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "13章",
             "16章",
@@ -924,7 +925,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "换卡_3",
             "右滑卡带栏两次"
@@ -956,7 +957,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "换卡_4",
             "右滑卡带栏两次"
@@ -988,7 +989,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "换卡_5",
             "右滑卡带栏两次"
@@ -1020,7 +1021,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "切外传",
             "换卡_6"
@@ -1059,7 +1060,7 @@
                 ]
             }
         },
-        "post_delay": 10000,
+        "post_delay": 9000,
         "next": [
             "火片",
             "传送阵"
@@ -1100,7 +1101,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferMoveRight"
         ],
@@ -1139,7 +1140,7 @@
                 ]
             }
         },
-        "post_delay": 10000,
+        "post_delay": 9000,
         "next": [
             "第9章",
             "传送阵",
@@ -1150,114 +1151,6 @@
             "position": {
                 "x": 214,
                 "y": 111
-            }
-        }
-    },
-    "第七章1": {
-        "max_hit": 2,
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    80,
-                    185,
-                    62,
-                    30
-                ],
-                "expected": [
-                    "经营管理"
-                ],
-                "threshold": 0.6
-            }
-        },
-        "pre_delay": 1500,
-        "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    110,
-                    175
-                ]
-            }
-        },
-        "repeat": 2,
-        "post_delay": 5000,
-        "next": [
-            "第七章2",
-            "第七章1"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": -1402,
-                "y": -931
-            }
-        }
-    },
-    "第七章2": {
-        "max_hit": 2,
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    745,
-                    175,
-                    73,
-                    27
-                ],
-                "expected": [
-                    "立刻前往"
-                ],
-                "threshold": 0.6
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "timeout": 10000,
-        "next": [
-            "第七章2",
-            "第七章3"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": -1126,
-                "y": -926
-            }
-        }
-    },
-    "第七章3": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    77,
-                    23,
-                    75,
-                    30
-                ],
-                "expected": [
-                    "格鲁菲"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    253,
-                    105
-                ]
-            }
-        },
-        "post_delay": 1000,
-        "next": [
-            "第七章3",
-            "第七章4"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": -823,
-                "y": -915
             }
         }
     },
@@ -1285,6 +1178,8 @@
                 ]
             }
         },
+        "repeat": 2,
+        "repeat_delay": 500,
         "post_delay": 2000,
         "next": [
             "第七章5"
@@ -1318,7 +1213,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 10000,
+        "post_delay": 9000,
         "next": [
             "GetDaily_2",
             "传送阵",
@@ -1361,7 +1256,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferMoveRight"
         ],
@@ -1401,7 +1296,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferMoveRight"
         ],
@@ -1440,7 +1335,7 @@
                 ]
             }
         },
-        "post_delay": 10000,
+        "post_delay": 9000,
         "next": [
             "第八章",
             "传送阵",
@@ -1483,7 +1378,7 @@
                 ]
             }
         },
-        "post_delay": 1000,
+        "post_delay": 1500,
         "next": [
             "TransferMoveRight"
         ],
@@ -1491,6 +1386,131 @@
             "position": {
                 "x": 3305,
                 "y": -714
+            }
+        }
+    },
+    "CHooseCrad_副本1": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    217,
+                    72,
+                    71,
+                    61
+                ],
+                "template": [
+                    "Absorb/P.png"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.6
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "第七章4"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -856,
+                "y": -833
+            }
+        }
+    },
+    "EnterOperating_AA": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    75,
+                    185,
+                    70,
+                    40
+                ],
+                "expected": [
+                    "经营",
+                    "管理"
+                ],
+                "threshold": 0.5
+            }
+        },
+        "pre_delay": 1500,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    110,
+                    170,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "post_delay": 4500,
+        "next": [
+            "EnterRestaurant_AA"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -1450,
+                "y": -804
+            }
+        }
+    },
+    "EnterRestaurant_AA": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    738,
+                    159,
+                    84,
+                    55
+                ],
+                "expected": [
+                    "立刻前往",
+                    "立刻",
+                    "前往"
+                ],
+                "threshold": 0.4
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    774,
+                    187,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "timeout": 10000,
+        "next": [
+            "[JumpBack]魔兽赛季奖励确认_3",
+            "CHooseCrad_副本1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -1169,
+                "y": -854
+            }
+        }
+    },
+    "$__mpe_external_魔兽赛季奖励确认_3_AbsorpAssemble": {
+        "$__mpe_code": {
+            "position": {
+                "x": -841,
+                "y": -936
             }
         }
     }

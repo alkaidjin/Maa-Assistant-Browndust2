@@ -100,6 +100,9 @@ EXCLUDE_DIRS  = {'.git', '.workbuddy', 'cache', 'config', 'debug', 'updates', '_
                  # 第三个 agent（钓鱼小游戏 FishingMinigame）的 Go 源码，同上：
                  # 只有 agent/fishing.exe 进包，源码只入仓库。
                  'fishing',
+                 # 第四个 agent（每日跑商 TradeRun）的 Go 源码，同上：
+                 # 只有 agent/trader.exe 进包，源码只入仓库。
+                 'trader',
                  # go-service 守护进程的裁剪 fork 源码（v26.09.14 起入仓，住在
                  # data/maintainer/agent/go-service/，已被 'maintainer' 整目录排除）。
                  # 本条同 rock-picker/fishing 是护栏：挪回 agent/ 也不会把源码扫进包，
@@ -319,6 +322,12 @@ REQUIRED_FILES = [
     # （resource/pipeline/AutoFishing.json 的 Fishing_Minigame 节点）。
     # child_exec = agent/fishing（CreateProcess 自动补 .exe）。
     'agent/fishing.exe',
+    # 第四个 agent：每日跑商（商店套利）。提供 custom action TradeRun
+    # （resource/pipeline/MapTrade.json 的 Trade_Start 节点）。
+    # child_exec = agent/trader（CreateProcess 自动补 .exe）。
+    'agent/trader.exe',
+    # 跑商价表：trader agent 启动时读取，缺文件则任务直接中止（不瞎卖）。
+    'resource/price_calendar.v1.json',
     # MXU 直接按 interface.json 的路径读取：icon / license / languages
     'misc/MaaEnd-Tiny.png',
     'misc/LICENSE_SHORT.md',

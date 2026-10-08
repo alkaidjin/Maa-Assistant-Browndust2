@@ -1,0 +1,310 @@
+{
+    "schema_version": 1,
+    "updated_at": "2026-10-06T23:30:00+08:00",
+    "timezone": "Asia/Shanghai",
+    "source_note": "Curated sell list: (a) peak-price ingredients NOT used by any of the 15 high-value cooking recipes (zero overlap verified against CookMeals dish material lists), and (b) the 15 cooked dishes themselves at their peak-price days/shops per the 2026-07-03 guide image. Dishes display in Simplified Chinese in game; item/aliases carry both name variants where they differ. Shops whitelist extended to 19 carts (guide uses cart numbers S1/S5/S14/S17/S18, C2/C5/C7, E1). Days absent from this file have nothing to sell. Selling all stock (sell_mode=max in SellPremium pipeline).",
+    "source_url": "https://browndust2-db.souseha.com/cn/market-data",
+    "shops": [
+        "被遗忘的战争",
+        "苍蓝魔女",
+        "愤怒天使",
+        "黑羽毛",
+        "霍尔蒙克斯",
+        "救赎",
+        "鲁的迷宫",
+        "美丽无望",
+        "迷雾神射手",
+        "三国同盟",
+        "血骑士",
+        "异教塔",
+        "御剑传",
+        "沙漠之花",
+        "神圣审判",
+        "试炼之路",
+        "火晶片",
+        "合约之战",
+        "夏日骑士"
+    ],
+    "days": {
+        "2": [
+            {
+                "item": "水果罐頭",
+                "shop": "苍蓝魔女",
+                "aliases": [
+                    "Canned Fruit",
+                    "水果罐头"
+                ],
+                "reserve": 0
+            }
+        ],
+        "3": [
+            {
+                "item": "火烤鱼板棒",
+                "shop": "试炼之路",
+                "aliases": [
+                    "炙烤鱼板棒"
+                ],
+                "reserve": 0
+            },
+            {
+                "item": "橄榄油意面",
+                "shop": "救赎",
+                "aliases": [],
+                "reserve": 0
+            }
+        ],
+        "4": [
+            {
+                "item": "大麥",
+                "shop": "救赎",
+                "aliases": [
+                    "Barley",
+                    "大麦"
+                ],
+                "reserve": 0
+            }
+        ],
+        "5": [
+            {
+                "item": "鱼子酱蛋包饭",
+                "shop": "合约之战",
+                "aliases": [],
+                "reserve": 0
+            }
+        ],
+        "6": [
+            {
+                "item": "闪闪铁板虾",
+                "shop": "沙漠之花",
+                "aliases": [],
+                "reserve": 0
+            }
+        ],
+        "7": [
+            {
+                "item": "咖啡豆",
+                "shop": "血骑士",
+                "aliases": [
+                    "Coffee Bean"
+                ],
+                "reserve": 0
+            },
+            {
+                "item": "街头烤鸡肉串",
+                "shop": "沙漠之花",
+                "aliases": [],
+                "reserve": 0
+            }
+        ],
+        "10": [
+            {
+                "item": "玉米",
+                "shop": "黑羽毛",
+                "aliases": [
+                    "Corn"
+                ],
+                "reserve": 0
+            },
+            {
+                "item": "冰镇甜点",
+                "shop": "血骑士",
+                "aliases": [],
+                "reserve": 0
+            }
+        ],
+        "12": [
+            {
+                "item": "卢戈山参烤串",
+                "shop": "神圣审判",
+                "aliases": [],
+                "reserve": 0
+            }
+        ],
+        "13": [
+            {
+                "item": "鮭魚",
+                "shop": "愤怒天使",
+                "aliases": [
+                    "Salmon",
+                    "三文鱼",
+                    "鲑鱼"
+                ],
+                "reserve": 0
+            },
+            {
+                "item": "巧克力鸡尾酒",
+                "shop": "鲁的迷宫",
+                "aliases": [],
+                "reserve": 0
+            }
+        ],
+        "14": [
+            {
+                "item": "紅蘿蔔",
+                "shop": "愤怒天使",
+                "aliases": [
+                    "Carrot",
+                    "红萝卜",
+                    "胡萝卜"
+                ],
+                "reserve": 0
+            },
+            {
+                "item": "芥末",
+                "shop": "三国同盟",
+                "aliases": [
+                    "Wasabi"
+                ],
+                "reserve": 0
+            }
+        ],
+        "15": [
+            {
+                "item": "葡萄",
+                "shop": "迷雾神射手",
+                "aliases": [
+                    "Grape"
+                ],
+                "reserve": 0
+            },
+            {
+                "item": "起司",
+                "shop": "被遗忘的战争",
+                "aliases": [
+                    "Cheese",
+                    "奶酪",
+                    "芝士"
+                ],
+                "reserve": 0
+            }
+        ],
+        "16": [
+            {
+                "item": "煤炭饼干",
+                "shop": "合约之战",
+                "aliases": [],
+                "reserve": 0
+            }
+        ],
+        "17": [
+            {
+                "item": "泰丽丝派",
+                "shop": "血骑士",
+                "aliases": [
+                    "特瑞丝派"
+                ],
+                "reserve": 0
+            }
+        ],
+        "18": [
+            {
+                "item": "番紅花",
+                "shop": "霍尔蒙克斯",
+                "aliases": [
+                    "Saffron",
+                    "番红花",
+                    "藏红花"
+                ],
+                "reserve": 0
+            },
+            {
+                "item": "蘿蔔嬰",
+                "shop": "美丽无望",
+                "aliases": [
+                    "Radish",
+                    "萝卜婴"
+                ],
+                "reserve": 0
+            }
+        ],
+        "19": [
+            {
+                "item": "哈密瓜",
+                "shop": "御剑传",
+                "aliases": [
+                    "Melon"
+                ],
+                "reserve": 0
+            }
+        ],
+        "21": [
+            {
+                "item": "香草牛排",
+                "shop": "火晶片",
+                "aliases": [],
+                "reserve": 0
+            }
+        ],
+        "22": [
+            {
+                "item": "料酒",
+                "shop": "鲁的迷宫",
+                "aliases": [
+                    "Cooking Wine"
+                ],
+                "reserve": 0
+            }
+        ],
+        "23": [
+            {
+                "item": "地狱火紫菜包饭",
+                "shop": "鲁的迷宫",
+                "aliases": [],
+                "reserve": 0
+            }
+        ],
+        "24": [
+            {
+                "item": "啤酒花",
+                "shop": "被遗忘的战争",
+                "aliases": [
+                    "Hop"
+                ],
+                "reserve": 0
+            }
+        ],
+        "25": [
+            {
+                "item": "蜂蜜黄油杏仁",
+                "shop": "神圣审判",
+                "aliases": [],
+                "reserve": 0
+            }
+        ],
+        "26": [
+            {
+                "item": "鮪魚罐頭",
+                "shop": "黑羽毛",
+                "aliases": [
+                    "Canned Tuna",
+                    "金枪鱼罐头",
+                    "鲔鱼罐头"
+                ],
+                "reserve": 0
+            },
+            {
+                "item": "透明沙拉",
+                "shop": "夏日骑士",
+                "aliases": [],
+                "reserve": 0
+            },
+            {
+                "item": "三明治便当",
+                "shop": "合约之战",
+                "aliases": [],
+                "reserve": 0
+            }
+        ],
+        "27": [
+            {
+                "item": "蘋果",
+                "shop": "异教塔",
+                "aliases": [
+                    "Apple",
+                    "苹果"
+                ],
+                "reserve": 0
+            }
+        ]
+    }
+}
