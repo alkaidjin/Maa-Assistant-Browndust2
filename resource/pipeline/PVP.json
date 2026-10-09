@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791536015804,
+            "lastSyncTime": 1791558658382,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\PVP.json",
             "savedViewport": {
-                "x": -4675,
-                "y": 63,
-                "zoom": 0.86
+                "x": -4734,
+                "y": -398,
+                "zoom": 0.95
             },
             "filename": "PVP",
             "version": "v2.0.6"
@@ -19,8 +19,16 @@
     "$__mpe_external_StartGame_PVP": {
         "$__mpe_code": {
             "position": {
-                "x": 6432,
-                "y": 439
+                "x": 5770,
+                "y": 611
+            }
+        }
+    },
+    "$__mpe_external_魔兽赛季奖励确认_3_PVP": {
+        "$__mpe_code": {
+            "position": {
+                "x": 824,
+                "y": -79
             }
         }
     },
@@ -98,6 +106,7 @@
         }
     },
     "CHooseCrad": {
+        "max_hit": 2,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -126,8 +135,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 469,
-                "y": 272
+                "x": 285,
+                "y": 362
             }
         }
     },
@@ -161,8 +170,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3532,
-                "y": 772
+                "x": 3286,
+                "y": 797
             }
         }
     },
@@ -300,7 +309,7 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": -363,
+                "x": -385,
                 "y": 228
             }
         }
@@ -334,16 +343,18 @@
         "repeat": 2,
         "repeat_delay": 1500,
         "next": [
-            "PVPWaiting"
+            "PVPWaiting",
+            "EnterPVP"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 982,
-                "y": 240
+                "x": 887,
+                "y": 224
             }
         }
     },
     "EnterRestaurant_2": {
+        "max_hit": 2,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -376,7 +387,8 @@
         "timeout": 10000,
         "next": [
             "CHooseCrad",
-            "魔兽赛季奖励确认_2"
+            "EnterRestaurant_2",
+            "[JumpBack]魔兽赛季奖励确认_3"
         ],
         "$__mpe_code": {
             "position": {
@@ -407,14 +419,15 @@
             "type": "Click"
         },
         "repeat": 2,
+        "post_delay": 500,
         "next": [
             "EnterPVP",
             "FightGameCard"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 739,
-                "y": 218
+                "x": 603,
+                "y": 252
             }
         }
     },
@@ -432,17 +445,22 @@
                 "threshold": 0.5
             }
         },
+        "timeout": 6000,
         "next": [
             "CanclePVP"
         ],
+        "on_error": [
+            "StartGame"
+        ],
         "$__mpe_code": {
             "position": {
-                "x": 2810,
-                "y": 775
+                "x": 2787,
+                "y": 871
             }
         }
     },
     "FreeYes": {
+        "max_hit": 2,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -456,13 +474,18 @@
                 "threshold": 0.9
             }
         },
+        "timeout": 6000,
         "next": [
-            "鸡尾酒倍数"
+            "鸡尾酒倍数",
+            "FreeYes"
+        ],
+        "on_error": [
+            "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2811,
-                "y": 478
+                "x": 2786,
+                "y": 463
             }
         }
     },
@@ -564,8 +587,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1937,
-                "y": 398
+                "x": 1943,
+                "y": 426
             }
         }
     },
@@ -626,8 +649,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3929,
-                "y": 422
+                "x": 3889,
+                "y": 437
             }
         }
     },
@@ -642,6 +665,7 @@
         "post_delay": 3000,
         "next": [
             "PVPWaiting",
+            "[JumpBack]魔兽赛季奖励确认_3",
             "GetDaily_1",
             "MovePVP",
             "SeasonReward",
@@ -649,8 +673,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1168,
-                "y": -341
+                "x": 1138,
+                "y": -300
             }
         }
     },
@@ -713,8 +737,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1296,
-                "y": 323
+                "x": 1290,
+                "y": 307
             }
         }
     },
@@ -818,7 +842,9 @@
                     150
                 ],
                 "template": "PVP/Worship.png",
-                "threshold": 0.3
+                "threshold": [
+                    0.3
+                ]
             }
         },
         "des": "每周膜拜大佬拿金币那个",
@@ -827,8 +853,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5442,
-                "y": 828
+                "x": 5420,
+                "y": 821
             }
         }
     },
@@ -950,13 +976,20 @@
                 ]
             }
         },
+        "repeat": 2,
+        "repeat_delay": 200,
+        "timeout": 9000,
         "next": [
-            "FightGameCard"
+            "FightGameCard",
+            "广场跳转镜中之战"
+        ],
+        "on_error": [
+            "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 174,
-                "y": -92
+                "x": 212,
+                "y": -276
             }
         }
     },
@@ -987,45 +1020,6 @@
             "position": {
                 "x": 3033,
                 "y": 108
-            }
-        }
-    },
-    "魔兽赛季奖励确认_2": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    725,
-                    180,
-                    254,
-                    52
-                ],
-                "expected": [
-                    "魔兽",
-                    "追踪",
-                    "赛季",
-                    "奖励"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    836,
-                    556,
-                    20,
-                    8
-                ]
-            }
-        },
-        "next": [
-            "CHooseCrad"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 191,
-                "y": 456
             }
         }
     },

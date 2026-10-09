@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791536403205,
+            "lastSyncTime": 1791560783399,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Warcraft.json",
             "savedViewport": {
-                "x": -2755,
-                "y": 138,
-                "zoom": 1.5
+                "x": -655,
+                "y": 423,
+                "zoom": 0.82
             },
             "filename": "Warcraft",
             "version": "v2.0.6"
@@ -136,8 +136,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 401,
-                "y": 512
+                "x": 400,
+                "y": 485
             }
         }
     },
@@ -190,8 +190,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 869,
-                "y": 412
+                "x": 880,
+                "y": 351
             }
         }
     },
@@ -223,8 +223,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 630,
-                "y": 457
+                "x": 659,
+                "y": 406
             }
         }
     },
@@ -239,7 +239,7 @@
                     40
                 ],
                 "expected": "战斗",
-                "threshold": 0.8
+                "threshold": 0.6
             }
         },
         "action": {
@@ -251,8 +251,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1618,
-                "y": 569
+                "x": 1620,
+                "y": 564
             }
         }
     },
@@ -308,7 +308,8 @@
                 ],
                 "expected": [
                     "快速",
-                    "战斗"
+                    "战斗",
+                    "快速战斗"
                 ],
                 "threshold": 0.8
             }
@@ -392,7 +393,8 @@
                 ],
                 "expected": [
                     "战斗"
-                ]
+                ],
+                "threshold": 0.6
             }
         },
         "action": {
@@ -449,7 +451,8 @@
                 ],
                 "expected": [
                     "MAX"
-                ]
+                ],
+                "threshold": 0.6
             }
         },
         "action": {
@@ -460,8 +463,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 828,
-                "y": -132
+                "x": 820,
+                "y": -138
             }
         }
     },
@@ -544,13 +547,10 @@
         }
     },
     "是否开启自动推关": {
-        "next": [
-            "不开启"
-        ],
         "$__mpe_code": {
             "position": {
                 "x": -451,
-                "y": 475
+                "y": 302
             }
         }
     },

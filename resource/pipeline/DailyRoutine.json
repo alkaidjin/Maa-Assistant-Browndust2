@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791535991408,
+            "lastSyncTime": 1791558549037,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\DailyRoutine.json",
             "savedViewport": {
-                "x": -1076,
-                "y": -335,
-                "zoom": 0.86
+                "x": -379,
+                "y": -400,
+                "zoom": 0.63
             },
             "filename": "DailyRoutine",
             "version": "v2.0.6"
@@ -19,8 +19,8 @@
     "$__mpe_external_StartGame_DailyRoutine": {
         "$__mpe_code": {
             "position": {
-                "x": 2256,
-                "y": 852
+                "x": 2648,
+                "y": 687
             }
         }
     },
@@ -54,6 +54,7 @@
         "action": {
             "type": "Click"
         },
+        "repeat": 2,
         "post_delay": 1500,
         "next": [
             "EnterSquare",
@@ -61,8 +62,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 796,
-                "y": 937
+                "x": 1087,
+                "y": 867
             }
         }
     },
@@ -282,16 +283,15 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 9000,
+        "post_delay": 500,
         "next": [
-            "CHooseCrad_2",
             "EnterRestaurant_3",
-            "[JumpBack]魔兽赛季奖励确认_3"
+            "RestaurantLoading_1"
         ],
         "$__mpe_code": {
             "position": {
                 "x": 520,
-                "y": 1040
+                "y": 1032
             }
         }
     },
@@ -323,12 +323,13 @@
         },
         "repeat": 2,
         "next": [
-            "Loading_Square"
+            "Loading_Square",
+            "EnterSquare"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1034,
-                "y": 1255
+                "x": 996,
+                "y": 1330
             }
         }
     },
@@ -363,8 +364,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2496,
-                "y": 290
+                "x": 2379,
+                "y": 237
             }
         }
     },
@@ -389,18 +390,19 @@
         },
         "post_delay": 1500,
         "next": [
+            "MoveSquare",
             "GetSquare",
-            "GetDaily_3",
             "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1310,
-                "y": 761
+                "x": 1392,
+                "y": 788
             }
         }
     },
     "GetSquare": {
+        "max_hit": 2,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -426,8 +428,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1664,
-                "y": 812
+                "x": 1920,
+                "y": 761
             }
         }
     },
@@ -531,8 +533,8 @@
         "repeat": 2,
         "post_delay": 3000,
         "next": [
-            "ClickSecond",
-            "InSociaty_2"
+            "InSociaty_2",
+            "ClickSecond"
         ],
         "$__mpe_code": {
             "position": {
@@ -567,6 +569,7 @@
         "repeat": 2,
         "post_delay": 3000,
         "next": [
+            "InSociaty_3",
             "ClickSecond"
         ],
         "$__mpe_code": {
@@ -594,12 +597,15 @@
         "post_delay": 1500,
         "next": [
             "Loading_Square",
-            "MoveSquare"
+            "MoveSquare",
+            "GetDaily_3",
+            "GetSquare",
+            "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1287,
-                "y": 1259
+                "x": 1280,
+                "y": 1336
             }
         }
     },
@@ -610,9 +616,9 @@
             "param": {
                 "roi": [
                     1023,
-                    141,
+                    110,
                     214,
-                    99
+                    120
                 ],
                 "expected": [
                     "每日",
@@ -637,8 +643,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1572,
-                "y": 1265
+                "x": 1631,
+                "y": 1218
             }
         }
     },
@@ -701,6 +707,34 @@
             "position": {
                 "x": 1820,
                 "y": 260
+            }
+        }
+    },
+    "RestaurantLoading_1": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    90,
+                    400,
+                    450,
+                    300
+                ],
+                "template": [
+                    "Operate/Loading_res.png"
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "next": [
+            "RestaurantLoading_1",
+            "CHooseCrad_2",
+            "[JumpBack]魔兽赛季奖励确认_3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 775,
+                "y": 993
             }
         }
     },

@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791540041714,
+            "lastSyncTime": 1791560617067,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Bag.json",
             "savedViewport": {
-                "x": -458,
-                "y": -857,
-                "zoom": 2.3
+                "x": -3925,
+                "y": -590,
+                "zoom": 1.09
             },
             "filename": "Bag",
             "version": "v2.0.6"
@@ -35,7 +35,9 @@
                     25
                 ],
                 "expected": [
-                    "确认"
+                    "确认",
+                    "确",
+                    "认"
                 ]
             }
         },
@@ -425,7 +427,10 @@
                     70,
                     30
                 ],
-                "expected": "一键分解",
+                "expected": [
+                    "一键",
+                    "分解"
+                ],
                 "threshold": 0.6
             }
         },
@@ -538,7 +543,8 @@
                 ],
                 "expected": [
                     "精",
-                    "炼"
+                    "炼",
+                    "精炼"
                 ]
             }
         },
@@ -728,7 +734,9 @@
                     25
                 ],
                 "expected": [
-                    "取消"
+                    "取消",
+                    "取",
+                    "消"
                 ]
             }
         },
@@ -740,8 +748,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2998,
-                "y": 1307
+                "x": 2981,
+                "y": 1242
             }
         }
     }

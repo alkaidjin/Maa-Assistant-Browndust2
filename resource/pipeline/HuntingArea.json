@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791536279535,
+            "lastSyncTime": 1791559537788,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\HuntingArea.json",
             "savedViewport": {
-                "x": -8673,
-                "y": -356,
-                "zoom": 1.5
+                "x": -3858,
+                "y": 390,
+                "zoom": 0.95
             },
             "filename": "HuntingArea",
             "version": "v2.0.6"
@@ -19,8 +19,8 @@
     "$__mpe_external_StartGame_HuntingArea": {
         "$__mpe_code": {
             "position": {
-                "x": 7478,
-                "y": 638
+                "x": 7040,
+                "y": -51
             }
         }
     },
@@ -66,8 +66,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 4403,
-                "y": -273
+                "x": 4556,
+                "y": 49
             }
         }
     },
@@ -92,8 +92,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 4663,
-                "y": -226
+                "x": 4794,
+                "y": -240
             }
         }
     },
@@ -177,7 +177,9 @@
                 ],
                 "expected": [
                     "快速狩猎",
-                    "快速狩"
+                    "快速狩",
+                    "快速",
+                    "狩猎"
                 ],
                 "threshold": 0.6
             }
@@ -192,8 +194,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5347,
-                "y": 91
+                "x": 5329,
+                "y": -69
             }
         }
     },
@@ -209,7 +211,9 @@
                 ],
                 "expected": [
                     "快速狩猎",
-                    "快速狩"
+                    "快速狩",
+                    "快速",
+                    "狩猎"
                 ],
                 "threshold": 0.6
             }
@@ -344,12 +348,13 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6445,
-                "y": 137
+                "x": 6486,
+                "y": 118
             }
         }
     },
     "GoldHunt": {
+        "max_hit": 2,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -378,13 +383,18 @@
         },
         "repeat": 2,
         "repeat_delay": 1000,
+        "timeout": 9000,
         "next": [
-            "GoldConfirm"
+            "GoldConfirm",
+            "GoldHunt"
+        ],
+        "on_error": [
+            "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6099,
-                "y": -256
+                "x": 6074,
+                "y": -241
             }
         }
     },
@@ -470,8 +480,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5840,
-                "y": 133
+                "x": 5839,
+                "y": 198
             }
         }
     },
@@ -544,7 +554,7 @@
                     30
                 ],
                 "expected": [
-                    "7.蜥锡人祭坛",
+                    "蜥锡人祭坛",
                     "蜥锡人",
                     "祭坛"
                 ]
@@ -669,8 +679,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 4421,
-                "y": 186
+                "x": 4257,
+                "y": 153
             }
         }
     },
@@ -830,6 +840,7 @@
         }
     },
     "SlimeHunt": {
+        "max_hit": 2,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -858,8 +869,13 @@
         },
         "repeat": 2,
         "repeat_delay": 1000,
+        "timeout": 9000,
         "next": [
-            "SlimeConfirm"
+            "SlimeConfirm",
+            "SlimeHunt"
+        ],
+        "on_error": [
+            "StartGame"
         ],
         "$__mpe_code": {
             "position": {
@@ -949,7 +965,7 @@
                     33
                 ],
                 "expected": [
-                    "9.守山人休息处",
+                    "守山人休息处",
                     "守山人",
                     "休息处"
                 ]
