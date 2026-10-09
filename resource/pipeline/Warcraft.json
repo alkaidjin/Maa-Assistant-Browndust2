@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791370199325,
+            "lastSyncTime": 1791536403205,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\Warcraft.json",
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Warcraft.json",
             "savedViewport": {
-                "x": -1359,
-                "y": -12,
-                "zoom": 1
+                "x": -2755,
+                "y": 138,
+                "zoom": 1.5
             },
             "filename": "Warcraft",
             "version": "v2.0.6"
@@ -19,8 +19,8 @@
     "$__mpe_external_StartGame_Warcraft": {
         "$__mpe_code": {
             "position": {
-                "x": 2252,
-                "y": 279
+                "x": 2275,
+                "y": 282
             }
         }
     },
@@ -43,8 +43,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 2485,
-                "y": 126
+                "x": 2548,
+                "y": 182
             }
         }
     },
@@ -110,6 +110,34 @@
             "position": {
                 "x": -738,
                 "y": 229
+            }
+        }
+    },
+    "Loadingcompete_TZZD": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    182,
+                    18,
+                    94,
+                    31
+                ],
+                "expected": [
+                    "挑战",
+                    "战斗",
+                    "挑战战斗"
+                ]
+            }
+        },
+        "post_delay": 500,
+        "next": [
+            "WarcraftBattleSwipe"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 401,
+                "y": 512
             }
         }
     },
@@ -185,14 +213,18 @@
                 "end_hold": 1000
             }
         },
+        "timeout": 9000,
         "next": [
             "WarcraftBattleSwipe",
             "WarcraftBattleChoose"
         ],
+        "on_error": [
+            "StartGame"
+        ],
         "$__mpe_code": {
             "position": {
-                "x": 598,
-                "y": 458
+                "x": 630,
+                "y": 457
             }
         }
     },
@@ -287,7 +319,8 @@
         "post_delay": 1500,
         "next": [
             "WarcraftSetMax",
-            "活动AP已使用_1"
+            "活动AP已使用_WC",
+            "快速战斗未解锁_WC"
         ],
         "$__mpe_code": {
             "position": {
@@ -376,6 +409,34 @@
             }
         }
     },
+    "快速战斗未解锁_WC": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    492,
+                    147,
+                    274,
+                    22
+                ],
+                "expected": [
+                    "完成所有",
+                    "挑战任务后",
+                    "可以进行",
+                    "快速战斗"
+                ]
+            }
+        },
+        "next": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1435,
+                "y": 286
+            }
+        }
+    },
     "战斗倍率MAX": {
         "recognition": {
             "type": "OCR",
@@ -434,7 +495,7 @@
         "next": [
             "挑战战斗推关_1",
             "自动战斗入口",
-            "WarcraftBattleSwipe"
+            "Loadingcompete_TZZD"
         ],
         "$__mpe_code": {
             "position": {
@@ -473,7 +534,7 @@
         "next": [
             "挑战战斗推关_2",
             "自动战斗入口",
-            "WarcraftBattleSwipe"
+            "Loadingcompete_TZZD"
         ],
         "$__mpe_code": {
             "position": {
@@ -570,7 +631,7 @@
             }
         }
     },
-    "活动AP已使用_1": {
+    "活动AP已使用_WC": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -604,8 +665,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1684,
-                "y": 194
+                "x": 1683,
+                "y": 158
             }
         }
     },
@@ -658,7 +719,7 @@
         },
         "next": [
             "战斗倍率MAX",
-            "活动AP已使用_1"
+            "活动AP已使用_WC"
         ],
         "$__mpe_code": {
             "position": {

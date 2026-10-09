@@ -1,8 +1,8 @@
 {
-  "_readme": "旧版随包派发、如今已改名或删除的文件清单（相对软件根目录的路径）。v26.09.14 起由 **MXU 自带软件内更新**负责清理：打包器会把这份清单写进包内的 changes.json（deleted 字段），MXU 走增量安装时先把清单里的文件移进 cache/old 再覆盖新包 —— 用户升级后不会同时留着新旧两份说明文档 / 教学视频（既占体积，又让人不知道该看哪一份）。此前负责这件事的维护器（BD2MAA-Maintainer.ps1）已退役，存档在 data/maintainer/legacy/。v26.09.14：`mxu.exe` 改名 `MaaBd2.exe`（旧名登记在此，老用户升级时自动移进 cache/old）；`version.json` 搬进 `data/`（老用户根级残留由本清单清掉）；教学视频永久下架（注意事项 docx 内有截图替代）；`mxu.ico` / `mxu_icon.png` 收进 `data/maintainer/tools/` 不再派发。⚠️ `resource` / `tasks` / `misc` / `agent` 最终仍留在根目录（MXU 按 interface.json 的相对路径找它们），**不要**把目录名加进本清单 —— 否则每次更新都会把它们整目录搬进 cache/old 再解压回来，白白搬运 60 MB 且一旦复制失败就丢资源。",
+  "_readme": "旧版随包派发、如今已改名或删除的文件清单（相对软件根目录的路径）。v26.10.1 起由 **MXU 自带软件内更新**负责清理：打包器会把这份清单写进包内的 changes.json（deleted 字段），MXU 走增量安装时先把清单里的文件移进 cache/old 再覆盖新包 —— 用户升级后不会同时留着新旧两份说明文档 / 教学视频（既占体积，又让人不知道该看哪一份）。此前负责这件事的维护器（BD2MAA-Maintainer.ps1）已退役，存档在 data/maintainer/legacy/。v26.10.1：`mxu.exe` 改名 `MaaBd2.exe`（旧名登记在此，老用户升级时自动移进 cache/old）；`version.json` 搬进 `data/`（老用户根级残留由本清单清掉）；教学视频永久下架（注意事项 docx 内有截图替代）；`mxu.ico` / `mxu_icon.png` 收进 `data/maintainer/tools/` 不再派发。⚠️ `resource` / `tasks` / `misc` / `agent` 最终仍留在根目录（MXU 按 interface.json 的相对路径找它们），**不要**把目录名加进本清单 —— 否则每次更新都会把它们整目录搬进 cache/old 再解压回来，白白搬运 60 MB 且一旦复制失败就丢资源。",
   "_rules": "只放「以前发给过用户、现在不再派发」的文件。新版本里要改某个随包文件的名字、或下架某个随包文件时，只需把旧名字加到这里 —— 打包器会读同一份清单自动排除（maintainer/tools/build_release_zip.py 的 EXCLUDE_FILES |= load_retired），不必再手工抄进排除表。只删清单里的显式相对路径，不动 config/ 等受保护目录，也不会碰用户自己加的文件；开发树（存在 .git）整体跳过。`files` 里的条目会一直生效（幂等，删过就跳过）；只想让它在某个版本生效一次，改用 `versioned_files`。",
   "_caution": "例外：如果被下架的是「会被 MaaFramework 当管线加载」的文件（resource/pipeline/*.json），就不能只靠本清单 —— 更新器只覆盖不删除，老用户目录里那份旧文件会一直加载着，一旦它与新文件存在同名节点，框架会直接判定整个资源加载失败（日志 key already exists）。这种情况要改为「发一个同名的空壳文件」覆盖过去，等下个版本老用户目录里已是空壳、再登记删除 —— v26.09.11 的 Dailyrewards/EventReward/Operate/Sociaty/Square.json 就是这么做的（发空壳），本轮的 versioned_files.v26.09.13 是第二步（收壳）。tasks/*.json 只由 interface.json 的 import 驱动、不参与管线加载，不在这个例外里。",
-  "_updated": "2026-10-02",
+  "_updated": "2026-10-09",
   "files": [
     "launcher.bat",
     "BD2MAA-Updater.ps1",
@@ -28,9 +28,19 @@
     "tasks/EventReward.json",
     "tasks/Operate.json",
     "tasks/Sociaty.json",
-    "tasks/Square.json"
+    "tasks/Square.json",
+    "tasks/AbsorpAssemble.json",
+    "tasks/AbsorpAssembleRound2.json",
+    "tasks/Bag.json",
+    "tasks/DailyRoutine.json",
+    "tasks/Draw.json",
+    "tasks/HuntingArea.json",
+    "tasks/PVP.json",
+    "tasks/StartGame.json",
+    "tasks/Warcraft.json",
+    "tasks/WarcraftRerunQuickBattle.json"
   ],
-  "_versioned_readme": "`versioned_files` 是「只在指定版本生效一次」的一次性清理：键 = 软件版本号（写满，如 v26.09.13），值 = 相对路径数组。v26.09.14 起由打包器在生成 changes.json 时决定：**键 <= 本次发布版本**的一律收进来**（这比原先运行时「相等才删」更稳 —— 用户跳版升级时中间那版的一次性清理不会再被漏掉）。适合用在「这一版刚换掉、下一版之后用户不可能再有这个文件」的场景 —— 条目不必像 files 那样长期挂着。版本号写错（比如和实际发布的版本对不上）没有任何破坏性，只会让清理不发生：文件继续躺在用户目录里，下一版再补。打包器同样把这里所有版本的文件都兜底排除出发布包（EXCLUDE_FILES |= load_retired）。",
+  "_versioned_readme": "`versioned_files` 是「只在指定版本生效一次」的一次性清理：键 = 软件版本号（写满，如 v26.09.13），值 = 相对路径数组。v26.10.1 起由打包器在生成 changes.json 时决定：**键 <= 本次发布版本**的一律收进来**（这比原先运行时「相等才删」更稳 —— 用户跳版升级时中间那版的一次性清理不会再被漏掉）。适合用在「这一版刚换掉、下一版之后用户不可能再有这个文件」的场景 —— 条目不必像 files 那样长期挂着。版本号写错（比如和实际发布的版本对不上）没有任何破坏性，只会让清理不发生：文件继续躺在用户目录里，下一版再补。打包器同样把这里所有版本的文件都兜底排除出发布包（EXCLUDE_FILES |= load_retired）。",
   "versioned_files": {
     "v26.09.13": [
       "resource/pipeline/Dailyrewards.json",
@@ -39,7 +49,7 @@
       "resource/pipeline/Sociaty.json",
       "resource/pipeline/Square.json"
     ],
-    "v26.09.14": [
+    "v26.10.1": [
       "misc/locales/zh_tw.json",
       "misc/locales/en_us.json",
       "misc/locales/ja_jp.json",

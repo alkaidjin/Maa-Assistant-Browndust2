@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791270551112,
+            "lastSyncTime": 1791536015804,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\PVP.json",
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\PVP.json",
             "savedViewport": {
-                "x": -4997,
-                "y": -43,
-                "zoom": 0.87
+                "x": -4675,
+                "y": 63,
+                "zoom": 0.86
             },
             "filename": "PVP",
             "version": "v2.0.6"
@@ -19,8 +19,8 @@
     "$__mpe_external_StartGame_PVP": {
         "$__mpe_code": {
             "position": {
-                "x": 54,
-                "y": -250
+                "x": 6432,
+                "y": 439
             }
         }
     },
@@ -253,12 +253,12 @@
         "next": [
             "CorrectPVP",
             "Worship",
-            "Finish"
+            "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5050,
-                "y": 758
+                "x": 5049,
+                "y": 832
             }
         }
     },
@@ -418,22 +418,6 @@
             }
         }
     },
-    "Finish": {
-        "$__mpe_code": {
-            "position": {
-                "x": 6403,
-                "y": 638
-            }
-        }
-    },
-    "FinishPVP": {
-        "$__mpe_code": {
-            "position": {
-                "x": 5964,
-                "y": 339
-            }
-        }
-    },
     "FreeNO": {
         "recognition": {
             "type": "TemplateMatch",
@@ -533,12 +517,12 @@
             "GoOut",
             "CorrectPVP",
             "Worship",
-            "Finish"
+            "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 4797,
-                "y": 476
+                "x": 4820,
+                "y": 331
             }
         }
     },
@@ -611,12 +595,12 @@
         "post_delay": 4500,
         "next": [
             "Worship",
-            "FinishPVP"
+            "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3852,
-                "y": 750
+                "x": 4701,
+                "y": 824
             }
         }
     },
@@ -893,12 +877,12 @@
             }
         },
         "next": [
-            "Finish"
+            "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6092,
-                "y": 824
+                "x": 6105,
+                "y": 829
             }
         }
     },

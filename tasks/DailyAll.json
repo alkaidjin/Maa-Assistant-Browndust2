@@ -25,7 +25,8 @@
                         "StartPVP",
                         "StartHunt",
                         "StartBag",
-                        "StartWarcraft"
+                        "StartWarcraft",
+                        "DailyAllEnd"
                     ]
                 },
                 "StartDraw": {
@@ -46,105 +47,14 @@
                 "StartWarcraft": {
                     "max_hit": 1
                 },
-                "EnterDraw": {
-                    "next": [
-                        "EnterDraw",
-                        "AllDraw",
-                        "Equipment",
-                        "StartGame"
-                    ]
-                },
-                "Equipment": {
-                    "next": [
-                        "AllDraw",
-                        "StartGame"
-                    ]
-                },
-                "DrawGoBack": {
-                    "next": [
-                        "Equipment",
-                        "StartGame"
-                    ]
-                },
-                "SquareEnd": {
-                    "next": [
-                        "StartGame"
-                    ]
-                },
-                "魔兽赛季奖励确认_1": {
-                    "next": [
-                        "StartGame"
-                    ]
-                },
-                "Finish": {
-                    "next": [
-                        "StartGame"
-                    ]
-                },
-                "FinishPVP": {
-                    "next": [
-                        "StartGame"
-                    ]
-                },
-                "MainHunt1_Max_2": {
-                    "next": [
-                        "REWARD_4",
-                        "StartGame"
-                    ]
-                },
-                "MainHunt2": {
-                    "next": [
-                        "REWARD_3",
-                        "StartGame"
-                    ]
-                },
-                "REWARD_3": {
-                    "next": [
-                        "StartGame"
-                    ]
-                },
-                "REWARD_4": {
-                    "next": [
-                        "StartGame"
-                    ]
-                },
-                "IntensifyMain": {
-                    "next": [
-                        "IntensifyMain",
-                        "StartGame"
-                    ]
-                },
-                "WarcraftBeginClick": {
-                    "next": [
-                        "WarcraftBeginClick",
-                        "StartGame"
-                    ]
-                },
-                "活动AP已使用_1": {
-                    "next": [
-                        "StartGame"
-                    ]
-                },
-                "返回活动主页1": {
-                    "next": [
-                        "StartGame"
-                    ]
-                },
-                "PVPBack": {
-                    "max_hit": 5,
-                    "next": [
-                        "Worship",
-                        "PVPBack",
-                        "FinishPVP"
-                    ]
-                }
+                "DailyAllEnd": {}
             }
         }
     ],
     "option": {
         "设置鸡尾酒倍数": {
             "type": "select",
-            "label": "请选择鲜血鸡尾酒的消耗倍数",
+            "label": "镜中之战—请选择鲜血鸡尾酒的消耗倍数",
             "des": "",
             "default_case": "40倍",
             "cases": [
@@ -185,7 +95,7 @@
         },
         "ChooseRock": {
             "type": "select",
-            "label": "刷取的圣石属性",
+            "label": "快速狩猎—刷取的圣石属性",
             "des": "",
             "default_case": "FireRock",
             "cases": [

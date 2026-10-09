@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791457865634,
+            "lastSyncTime": 1791540105051,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\RewardRoutine.json",
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\RewardRoutine.json",
             "savedViewport": {
-                "x": -2749,
-                "y": 100,
-                "zoom": 1.09
+                "x": -5150,
+                "y": 113,
+                "zoom": 1.32
             },
             "filename": "RewardRoutine",
             "version": "v2.0.6"
@@ -43,7 +43,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 2000,
+        "post_delay": 3000,
         "next": [
             "RewardStage2_Event"
         ],
@@ -181,7 +181,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1500,
+        "post_delay": 4500,
         "next": [
             "AllGat"
         ],

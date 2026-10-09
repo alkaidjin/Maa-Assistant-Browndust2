@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791450562367,
+            "lastSyncTime": 1791536279535,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\HuntingArea.json",
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\HuntingArea.json",
             "savedViewport": {
-                "x": -4551,
-                "y": 160,
-                "zoom": 1
+                "x": -8673,
+                "y": -356,
+                "zoom": 1.5
             },
             "filename": "HuntingArea",
             "version": "v2.0.6"

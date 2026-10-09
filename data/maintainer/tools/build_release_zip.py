@@ -812,7 +812,11 @@ def collect(base):
     """按排除规则收集要打包的文件，返回 [(绝对路径, 包内相对路径)]"""
     out = []
     for root, dirs, fnames in os.walk(base):
-        dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS]
+        # EXCLUDE_DIRS 按目录名匹配任何层级；'go-service' 护栏（防 agent 源码入包）
+        # 会误杀运行时必需的 locales/go-service/（i18n + 告警 HTML，REQUIRED_FILES 逐个点名），
+        # 故父目录是 locales 时豁免 —— agent/go-service（假设挪回）父目录是 agent，照旧排除。
+        dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS
+                   or (d == 'go-service' and os.path.basename(root) == 'locales')]
         for fn in fnames:
             full = os.path.join(root, fn)
             rel = os.path.relpath(full, base).replace('\\', '/')

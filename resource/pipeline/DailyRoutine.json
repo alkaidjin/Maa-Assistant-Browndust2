@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791445757512,
+            "lastSyncTime": 1791535991408,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2-wt\\workbuddy-workspace\\resource\\pipeline\\DailyRoutine.json",
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\DailyRoutine.json",
             "savedViewport": {
-                "x": 11,
-                "y": -369,
-                "zoom": 0.87
+                "x": -1076,
+                "y": -335,
+                "zoom": 0.86
             },
             "filename": "DailyRoutine",
             "version": "v2.0.6"
@@ -19,8 +19,16 @@
     "$__mpe_external_StartGame_DailyRoutine": {
         "$__mpe_code": {
             "position": {
-                "x": 2100,
-                "y": 892
+                "x": 2256,
+                "y": 852
+            }
+        }
+    },
+    "$__mpe_external_魔兽赛季奖励确认_3_DailyRoutine": {
+        "$__mpe_code": {
+            "position": {
+                "x": 1627,
+                "y": -78
             }
         }
     },
@@ -277,8 +285,8 @@
         "post_delay": 9000,
         "next": [
             "CHooseCrad_2",
-            "[JumpBack]魔兽赛季奖励确认_1",
-            "EnterRestaurant_3"
+            "EnterRestaurant_3",
+            "[JumpBack]魔兽赛季奖励确认_3"
         ],
         "$__mpe_code": {
             "position": {
@@ -383,7 +391,7 @@
         "next": [
             "GetSquare",
             "GetDaily_3",
-            "SquareEnd"
+            "StartGame"
         ],
         "$__mpe_code": {
             "position": {
@@ -414,7 +422,7 @@
         "next": [
             "GetDaily_3",
             "GetSquare",
-            "SquareEnd"
+            "StartGame"
         ],
         "$__mpe_code": {
             "position": {
@@ -696,14 +704,6 @@
             }
         }
     },
-    "SquareEnd": {
-        "$__mpe_code": {
-            "position": {
-                "x": 2058,
-                "y": 1438
-            }
-        }
-    },
     "StartOperate": {
         "next": [
             "ClickMyHouse",
@@ -740,50 +740,6 @@
             "position": {
                 "x": 271,
                 "y": 664
-            }
-        }
-    },
-    "魔兽赛季奖励确认_1": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    725,
-                    180,
-                    254,
-                    52
-                ],
-                "expected": [
-                    "魔兽",
-                    "追踪",
-                    "赛季",
-                    "奖励"
-                ]
-            }
-        },
-        "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    836,
-                    556,
-                    20,
-                    8
-                ]
-            }
-        },
-        "$__mpe_code": {
-            "position": {
-                "x": 1052,
-                "y": 967
-            }
-        }
-    },
-    "$__mpe_external_魔兽赛季奖励确认_3_DailyRoutine": {
-        "$__mpe_code": {
-            "position": {
-                "x": 2391,
-                "y": 140
             }
         }
     }

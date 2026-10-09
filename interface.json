@@ -2,7 +2,7 @@
     "interface_version": 2,
     "name": "MaaBrownDust2",
     "description": "MaaBrownDust2",
-    "version": "v26.09.13",
+    "version": "v26.10.1",
     "license": "misc/LICENSE_SHORT.md",
     "welcome": "README.md",
     "icon": "misc/MaaEnd-Tiny.png",
@@ -102,14 +102,14 @@
     ],
     "task": [],
     "import": [
+        "tasks/pretasks/LaunchGame.json",
         "tasks/DailyAll.json",
         "tasks/RewardRoutine.json",
+        "tasks/WeeklyTasks.json",
         "tasks/EvilCastle.json",
         "tasks/WarcraftShop.json",
         "tasks/AbsorpAssembleCombined.json",
-        "tasks/AutoFishing.json",
         "tasks/MapTrade.json",
-        "tasks/WeeklyTasks.json",
-        "tasks/pretasks/LaunchGame.json"
+        "tasks/AutoFishing.json"
     ]
 }

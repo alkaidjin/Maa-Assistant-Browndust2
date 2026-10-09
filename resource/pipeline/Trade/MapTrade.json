@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791452448223,
+            "lastSyncTime": 1791472753644,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\Trade\\MapTrade.json",
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Trade\\MapTrade.json",
             "savedViewport": {
-                "x": 129,
-                "y": 316,
-                "zoom": 0.65
+                "x": -290,
+                "y": 601,
+                "zoom": 0.86
             },
             "filename": "MapTrade",
             "version": "v2.0.6"
@@ -19,8 +19,8 @@
     "$__mpe_external_OnSquare_Cook_MapTrade": {
         "$__mpe_code": {
             "position": {
-                "x": 0,
-                "y": 0
+                "x": 614,
+                "y": 355
             }
         }
     },
@@ -249,8 +249,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": -7,
-                "y": -96
+                "x": 523,
+                "y": -43
             }
         }
     },
@@ -285,8 +285,26 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 274,
-                "y": -45
+                "x": 977,
+                "y": -483
+            }
+        }
+    },
+    "RTF_LobbyEnd": {
+        "focus": "Lobby terminator: on the main lobby every shop-phase candidate fails and this node ends the unwound task cleanly. marker: 付费商店",
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    695,
+                    672,
+                    80,
+                    34
+                ],
+                "expected": [
+                    "付费商店"
+                ],
+                "threshold": 0.6
             }
         }
     }

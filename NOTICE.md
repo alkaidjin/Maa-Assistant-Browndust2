@@ -52,7 +52,7 @@
 提供桌面 GUI（Tauri / 前端 TypeScript）、设备连接管理、实例配置读写、GitHub Release 检测与下载、`maafw` 子进程（`go-service.exe`）的拉起。
 
 ### 在本项目中的位置
-单二进制：根目录 `MaaBd2.exe`（MXU v2.5.3 内核，v26.09.14 起改名并固化图标）
+单二进制：根目录 `MaaBd2.exe`（MXU v2.5.3 内核，v26.10.1 起改名并固化图标）
 
 ### AGPL 履约
 MXU 与本项目**均为 AGPL-3.0**，因此在 §13 「Remote Network Interaction」的范围内：
@@ -62,7 +62,7 @@ MXU 与本项目**均为 AGPL-3.0**，因此在 §13 「Remote Network Interacti
 
 ### 启动与更新
 用户直接运行 `MaaBd2.exe`（MXU 前端）打开软件；更新走 **MXU 自带的软件内更新**（「设置 - 更新」），
-无需任何外置启动器 —— v26.09.14 起原先的 `launcher.bat` / `BD2MAA-Updater.ps1` 已退役并停止派发。
+无需任何外置启动器 —— v26.10.1 起原先的 `launcher.bat` / `BD2MAA-Updater.ps1` 已退役并停止派发。
 
 **更新不会修改你的 `config/`**（该目录根本不在发布包里）。用法与故障排查见 [`更新功能说明.md`](更新功能说明.md)。
 
@@ -92,7 +92,7 @@ MaaEnd（工程骨架）
 - 本项目的 AGPL-3.0 许可证与 MaaEnd 同源，**合规继承无缺口**：继承文件与本项目新增文件统一适用 AGPL-3.0
 - MaaEnd 上游仍在活跃更新（与本项目无关）；本项目**不跟踪**其后续变更，骨架之外的改动均为自研
 - `agent/go-service.exe` 原为 MaaEnd v2 分支 commit `64fac11`（2026-09-14）的预编译黑盒产物；
-  自 v26.09.14 起，其裁剪后源码（棕 2 实际使用的 6 个组件及依赖闭包，40 个 Go 文件）已入仓于
+  自 v26.10.1 起，其裁剪后源码（棕 2 实际使用的 6 个组件及依赖闭包，40 个 Go 文件）已入仓于
   `data/maintainer/agent/go-service/`，源文件版权头与许可证原样保留，裁剪清单、构建与等价性验证见该目录 README
 
 ---
@@ -147,7 +147,7 @@ MaaEnd（工程骨架）
 ## 6. electron/rcedit — MIT
 
 ### 用途
-给 `MaaBd2.exe` 写入项目图标（v26.09.14 起图标已固化，且打包器每次打包前自动复核补打；
+给 `MaaBd2.exe` 写入项目图标（v26.10.1 起图标已固化，且打包器每次打包前自动复核补打；
 `data/maintainer/tools/apply_icon.ps1` 是手动兜底）。普通用户不需要它。
 
 ### 在本项目中的位置

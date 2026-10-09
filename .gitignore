@@ -75,7 +75,7 @@ resource.zip
 # tools/bootstrap_assets.py 拉取（见 data/maintainer/README.md）。
 # ─────────────────────────────────────────────────────────────
 
-# GUI 主程序本体（自带固化图标，v26.09.14 起入库）
+# GUI 主程序本体（自带固化图标，v26.10.1 起入库）
 !MaaBd2.exe
 
 # 四个 agent 子进程（源码分别在 data/maintainer/agent/{go-service,rock-picker,fishing,trader}/）

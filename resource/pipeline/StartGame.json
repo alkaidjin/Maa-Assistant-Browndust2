@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791440750521,
+            "lastSyncTime": 1791536620651,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\StartGame.json",
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\StartGame.json",
             "savedViewport": {
-                "x": 39,
-                "y": -6309,
-                "zoom": 1.5
+                "x": -2988,
+                "y": 636,
+                "zoom": 2.3
             },
             "filename": "StartGame",
             "version": "v2.0.6"
@@ -218,6 +218,7 @@
                 "template": "StartGame/Shadow.png"
             }
         },
+        "post_delay": 3000,
         "$__mpe_code": {
             "position": {
                 "x": 1305,
