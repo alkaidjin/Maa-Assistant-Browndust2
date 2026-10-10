@@ -28,6 +28,12 @@ Thumbs.db
 # 否则会冲掉每个用户的真实实例 —— maa_option.json / maa_pi_config.json 曾漏网）
 config/
 
+# B站评论区机器人（本机工具，不进仓、不进包）：
+# config.json 里存着真实的 SESSDATA / bili_jct 登录态，public 仓库绝不能提交；
+# 打包器已用 EXCLUDE_DIRS 挡在包外，这里再挡一次 git。
+# 要保留模板就单独放 config.example.json，并用 -f 显式 add。
+bilibili_comment_bot/
+
 # OCR 模型（约 20 MB）：不随仓库跟踪，只随 Release zip 派发；
 # clone / 新建 worktree 后由 data/maintainer/tools/bootstrap_assets.py 拉取
 # （worktree 场景也可直接 junction 主工作区，见 wt_new.bat）。

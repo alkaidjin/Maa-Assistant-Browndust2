@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791452324008,
+            "lastSyncTime": 1791625331620,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\WeeklyTasks.json",
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\WeeklyTasks.json",
             "savedViewport": {
-                "x": -1631,
-                "y": 886,
-                "zoom": 0.86
+                "x": -5201,
+                "y": 1116,
+                "zoom": 1.25
             },
             "filename": "WeeklyTasks",
             "version": "v2.0.6"
@@ -24,7 +24,16 @@
             }
         }
     },
+    "$__mpe_external_魔兽赛季奖励确认_3_WeeklyTasks": {
+        "$__mpe_code": {
+            "position": {
+                "x": 3188,
+                "y": -789
+            }
+        }
+    },
     "CHooseCrad_WM": {
+        "max_hit": 2,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -48,7 +57,8 @@
         },
         "post_delay": 1500,
         "next": [
-            "FightGameCard_WM"
+            "FightGameCard_WM",
+            "CHooseCrad_WM"
         ],
         "$__mpe_code": {
             "position": {
@@ -220,8 +230,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3449,
-                "y": -520
+                "x": 3465,
+                "y": -504
             }
         }
     },
@@ -315,13 +325,13 @@
         "focus": "",
         "next": [
             "Loading_LN",
-            "MoveLastNight",
-            "[JumpBack]魔兽赛季奖励确认_3"
+            "[JumpBack]魔兽赛季奖励确认_3",
+            "点击屏幕中间两次"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2913,
-                "y": -585
+                "x": 2920,
+                "y": -526
             }
         }
     },
@@ -368,8 +378,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3199,
-                "y": -525
+                "x": 3472,
+                "y": -958
             }
         }
     },
@@ -656,6 +666,7 @@
         }
     },
     "滑到N级装备": {
+        "max_hit": 3,
         "action": {
             "type": "Swipe",
             "param": {
@@ -679,12 +690,38 @@
             }
         },
         "next": [
-            "制作佣兵剑"
+            "制作佣兵剑",
+            "滑到N级装备"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5073,
-                "y": -462
+                "x": 5074,
+                "y": -457
+            }
+        }
+    },
+    "点击屏幕中间两次": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    640,
+                    360,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 3,
+        "repeat_delay": 1500,
+        "next": [
+            "MoveLastNight",
+            "[JumpBack]魔兽赛季奖励确认_3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3182,
+                "y": -676
             }
         }
     },
@@ -858,7 +895,9 @@
             "type": "Click"
         },
         "repeat": 2,
+        "post_delay": 6000,
         "next": [
+            "装备制作",
             "滑到N级装备"
         ],
         "$__mpe_code": {
@@ -946,14 +985,6 @@
             "position": {
                 "x": 1250,
                 "y": -788
-            }
-        }
-    },
-    "$__mpe_external_魔兽赛季奖励确认_3_WeeklyTasks": {
-        "$__mpe_code": {
-            "position": {
-                "x": 2268,
-                "y": -873
             }
         }
     }

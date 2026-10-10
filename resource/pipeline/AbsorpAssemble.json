@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791457578974,
+            "lastSyncTime": 1791625526496,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\AbsorpAssemble.json",
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\AbsorpAssemble.json",
             "savedViewport": {
-                "x": 408,
-                "y": -1905,
-                "zoom": 1.21
+                "x": 2137,
+                "y": 1406,
+                "zoom": 1.5
             },
             "filename": "AbsorpAssemble",
             "version": "v2.0.6"
@@ -21,6 +21,14 @@
             "position": {
                 "x": 3046,
                 "y": 952
+            }
+        }
+    },
+    "$__mpe_external_魔兽赛季奖励确认_3_AbsorpAssemble": {
+        "$__mpe_code": {
+            "position": {
+                "x": -841,
+                "y": -936
             }
         }
     },
@@ -266,6 +274,41 @@
             }
         }
     },
+    "CHooseCrad_AA": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    217,
+                    72,
+                    71,
+                    61
+                ],
+                "template": [
+                    "Absorb/P.png"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.6
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "第七章4",
+            "CHooseCrad_AA"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -856,
+                "y": -833
+            }
+        }
+    },
     "Call": {
         "recognition": {
             "type": "TemplateMatch",
@@ -296,6 +339,90 @@
             "position": {
                 "x": 2708,
                 "y": -327
+            }
+        }
+    },
+    "EnterOperating_AA": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    75,
+                    185,
+                    70,
+                    40
+                ],
+                "expected": [
+                    "经营",
+                    "管理"
+                ],
+                "threshold": 0.5
+            }
+        },
+        "pre_delay": 1500,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    110,
+                    170,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "post_delay": 4500,
+        "next": [
+            "EnterRestaurant_AA"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -1450,
+                "y": -804
+            }
+        }
+    },
+    "EnterRestaurant_AA": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    738,
+                    159,
+                    84,
+                    55
+                ],
+                "expected": [
+                    "立刻前往",
+                    "立刻",
+                    "前往"
+                ],
+                "threshold": 0.4
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    774,
+                    187,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "timeout": 12000,
+        "next": [
+            "[JumpBack]魔兽赛季奖励确认_3",
+            "CHooseCrad_AA"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -1169,
+                "y": -854
             }
         }
     },
@@ -1386,131 +1513,6 @@
             "position": {
                 "x": 3305,
                 "y": -714
-            }
-        }
-    },
-    "CHooseCrad_副本1": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    217,
-                    72,
-                    71,
-                    61
-                ],
-                "template": [
-                    "Absorb/P.png"
-                ],
-                "green_mask": true,
-                "threshold": [
-                    0.6
-                ]
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_delay": 1500,
-        "next": [
-            "第七章4"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": -856,
-                "y": -833
-            }
-        }
-    },
-    "EnterOperating_AA": {
-        "max_hit": 2,
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    75,
-                    185,
-                    70,
-                    40
-                ],
-                "expected": [
-                    "经营",
-                    "管理"
-                ],
-                "threshold": 0.5
-            }
-        },
-        "pre_delay": 1500,
-        "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    110,
-                    170,
-                    1,
-                    1
-                ]
-            }
-        },
-        "repeat": 2,
-        "post_delay": 4500,
-        "next": [
-            "EnterRestaurant_AA"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": -1450,
-                "y": -804
-            }
-        }
-    },
-    "EnterRestaurant_AA": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    738,
-                    159,
-                    84,
-                    55
-                ],
-                "expected": [
-                    "立刻前往",
-                    "立刻",
-                    "前往"
-                ],
-                "threshold": 0.4
-            }
-        },
-        "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    774,
-                    187,
-                    1,
-                    1
-                ]
-            }
-        },
-        "repeat": 2,
-        "timeout": 10000,
-        "next": [
-            "[JumpBack]魔兽赛季奖励确认_3",
-            "CHooseCrad_副本1"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": -1169,
-                "y": -854
-            }
-        }
-    },
-    "$__mpe_external_魔兽赛季奖励确认_3_AbsorpAssemble": {
-        "$__mpe_code": {
-            "position": {
-                "x": -841,
-                "y": -936
             }
         }
     }

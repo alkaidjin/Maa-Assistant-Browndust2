@@ -62,6 +62,16 @@
                             "next": [
                                 "SellPremium_Start"
                             ]
+                        },
+                        "Trade_BuyAllConfirm": {
+                            "next": [
+                                "SellPremium_Start"
+                            ]
+                        },
+                        "Trade_NoGoodsToast": {
+                            "next": [
+                                "SellPremium_Start"
+                            ]
                         }
                     }
                 },

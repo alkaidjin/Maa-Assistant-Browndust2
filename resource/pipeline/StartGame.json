@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791536620651,
+            "lastSyncTime": 1791637132953,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\StartGame.json",
             "savedViewport": {
-                "x": -2988,
-                "y": 636,
-                "zoom": 2.3
+                "x": 1254,
+                "y": -2634,
+                "zoom": 1
             },
             "filename": "StartGame",
             "version": "v2.0.6"
@@ -739,6 +739,14 @@
             "position": {
                 "x": 1264,
                 "y": 2613
+            }
+        }
+    },
+    "DailyAllEnd": {
+        "$__mpe_code": {
+            "position": {
+                "x": -949,
+                "y": 2946
             }
         }
     }

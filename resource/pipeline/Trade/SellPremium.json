@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791452725686,
+            "lastSyncTime": 1791623156340,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\Trade\\SellPremium.json",
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Trade\\SellPremium.json",
             "savedViewport": {
-                "x": -955,
-                "y": -127,
-                "zoom": 0.61
+                "x": -2011,
+                "y": -342,
+                "zoom": 0.82
             },
             "filename": "SellPremium",
             "version": "v2.0.6"
@@ -217,10 +217,10 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    236,
-                    84,
-                    84,
-                    45
+                    245,
+                    92,
+                    180,
+                    30
                 ],
                 "expected": [
                     "招募情况",
@@ -265,15 +265,17 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1500,
+        "post_delay": 3000,
+        "timeout": 8000,
         "focus": "",
         "next": [
-            "SP_ReturnHome_2"
+            "SP_ReturnHome_2",
+            "Trade_BackHome_Done"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 320,
-                "y": 253
+                "x": 260,
+                "y": 237
             }
         }
     },
@@ -296,15 +298,15 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1500,
+        "post_delay": 3000,
         "focus": "",
         "next": [
             "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 640,
-                "y": 263
+                "x": 601,
+                "y": 571
             }
         }
     },
@@ -337,10 +339,52 @@
         },
         "post_delay": 2000,
         "focus": "",
+        "next": [
+            "SP_跳过砍价进入商店页",
+            "SP_ZiLuo"
+        ],
         "$__mpe_code": {
             "position": {
                 "x": 2829,
                 "y": 727
+            }
+        }
+    },
+    "SP_跳过砍价进入商店页": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    53,
+                    484,
+                    230,
+                    216
+                ],
+                "template": [
+                    "TRADE/bargain.png"
+                ],
+                "threshold": [
+                    0.3
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1150,
+                    560,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 3000,
+        "focus": "",
+        "$__mpe_code": {
+            "position": {
+                "x": 3117,
+                "y": 713
             }
         }
     },
@@ -362,14 +406,84 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 278,
-                "y": -78
+                "x": 430,
+                "y": -113
+            }
+        }
+    },
+    "Trade_AlreadyInShop": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    61,
+                    1,
+                    405,
+                    252
+                ],
+                "template": [
+                    "TRADE/BUYTITLE.png",
+                    "TRADE/SHOPPAGE.png"
+                ],
+                "threshold": 0.85
+            }
+        },
+        "focus": "",
+        "$__mpe_code": {
+            "position": {
+                "x": 654,
+                "y": 991
+            }
+        }
+    },
+    "Trade_BackHome_Done": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    569,
+                    161,
+                    146,
+                    161
+                ],
+                "expected": [
+                    "欢迎光临",
+                    "对话",
+                    "商店",
+                    "洛",
+                    "兹"
+                ],
+                "threshold": 0.7
+            }
+        },
+        "pre_delay": 1500,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    112,
+                    30,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 3000,
+        "focus": "",
+        "next": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 596,
+                "y": 165
             }
         }
     },
     "Trade_EnterMerchant": {
         "focus": "",
         "next": [
+            "Trade_AlreadyInShop",
             "SP_EnterOperating",
             "[JumpBack]StartGame",
             "SP_OnSquare"

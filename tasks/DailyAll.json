@@ -22,6 +22,8 @@
                     "next": [
                         "StartDraw",
                         "StartSociaty",
+                        "StartOperate",
+                        "StartSquare",
                         "StartPVP",
                         "StartHunt",
                         "StartBag",
@@ -35,6 +37,12 @@
                 "StartSociaty": {
                     "max_hit": 1
                 },
+                "StartOperate": {
+                    "max_hit": 1
+                },
+                "StartSquare": {
+                    "max_hit": 1
+                },
                 "StartPVP": {
                     "max_hit": 1
                 },
@@ -46,8 +54,7 @@
                 },
                 "StartWarcraft": {
                     "max_hit": 1
-                },
-                "DailyAllEnd": {}
+                }
             }
         }
     ],

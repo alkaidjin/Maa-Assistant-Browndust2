@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791451917948,
+            "lastSyncTime": 1791623184224,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\Trade\\RebuildTradeFavorites_Entry.json",
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Trade\\RebuildTradeFavorites_Entry.json",
             "savedViewport": {
-                "x": -712,
-                "y": -611,
-                "zoom": 1.31
+                "x": -2107,
+                "y": -98,
+                "zoom": 0.95
             },
             "filename": "RebuildTradeFavorites_Entry",
             "version": "v2.0.6"
@@ -84,7 +84,9 @@
                 "template": [
                     "TRADE/bargain.png"
                 ],
-                "threshold": 0.8
+                "threshold": [
+                    0.3
+                ]
             }
         },
         "action": {
@@ -274,7 +276,6 @@
                 ]
             }
         },
-        "repeat": 2,
         "next": [
             "GetDaily_RTF",
             "RTF_OnSquare"
@@ -323,14 +324,15 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    236,
-                    84,
-                    84,
-                    45
+                    245,
+                    92,
+                    180,
+                    30
                 ],
                 "expected": [
                     "招募",
-                    "情况"
+                    "情况",
+                    "招募情况"
                 ],
                 "threshold": 0.8
             }
@@ -415,7 +417,8 @@
         "post_delay": 1500,
         "focus": "",
         "next": [
-            "RTF_Bargain1"
+            "RTF_Bargain1",
+            "RTF_ZiLuo"
         ],
         "$__mpe_code": {
             "position": {

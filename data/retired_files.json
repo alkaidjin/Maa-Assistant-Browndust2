@@ -44,10 +44,7 @@
   "versioned_files": {
     "v26.09.13": [
       "resource/pipeline/Dailyrewards.json",
-      "resource/pipeline/EventReward.json",
-      "resource/pipeline/Operate.json",
-      "resource/pipeline/Sociaty.json",
-      "resource/pipeline/Square.json"
+      "resource/pipeline/EventReward.json"
     ],
     "v26.10.1": [
       "misc/locales/zh_tw.json",

@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791472753644,
+            "lastSyncTime": 1791623146160,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Trade\\MapTrade.json",
             "savedViewport": {
-                "x": -290,
-                "y": 601,
-                "zoom": 0.86
+                "x": -2910,
+                "y": 659,
+                "zoom": 1.65
             },
             "filename": "MapTrade",
             "version": "v2.0.6"
@@ -29,6 +29,30 @@
             "position": {
                 "x": 1241,
                 "y": -484
+            }
+        }
+    },
+    "RTF_LobbyEnd": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    695,
+                    672,
+                    80,
+                    34
+                ],
+                "expected": [
+                    "付费商店"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "focus": "Lobby terminator: on the main lobby every shop-phase candidate fails and this node ends the unwound task cleanly. marker: 付费商店",
+        "$__mpe_code": {
+            "position": {
+                "x": 0,
+                "y": 0
             }
         }
     },
@@ -51,8 +75,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1342,
-                "y": -193
+                "x": 1261,
+                "y": -192
             }
         }
     },
@@ -81,8 +105,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1608,
-                "y": -201
+                "x": 1613,
+                "y": -237
             }
         }
     },
@@ -99,7 +123,9 @@
                 "template": [
                     "TRADE/bargain.png"
                 ],
-                "threshold": 0.8
+                "threshold": [
+                    0.3
+                ]
             }
         },
         "action": {
@@ -120,8 +146,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1902,
-                "y": -242
+                "x": 1908,
+                "y": -368
             }
         }
     },
@@ -150,8 +176,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1851,
-                "y": 215
+                "x": 1795,
+                "y": 236
             }
         }
     },
@@ -192,8 +218,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1596,
-                "y": 217
+                "x": 1516,
+                "y": 235
             }
         }
     },
@@ -287,24 +313,6 @@
             "position": {
                 "x": 977,
                 "y": -483
-            }
-        }
-    },
-    "RTF_LobbyEnd": {
-        "focus": "Lobby terminator: on the main lobby every shop-phase candidate fails and this node ends the unwound task cleanly. marker: 付费商店",
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    695,
-                    672,
-                    80,
-                    34
-                ],
-                "expected": [
-                    "付费商店"
-                ],
-                "threshold": 0.6
             }
         }
     }

@@ -1,0 +1,399 @@
+{
+    "$__mpe_config_Square": {
+        "$__mpe_code": {
+            "prefix": "",
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 1791625516685,
+            "isModifiedExternally": false,
+            "isDeleted": false,
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Square.json",
+            "savedViewport": {
+                "x": 233,
+                "y": -175,
+                "zoom": 0.82
+            },
+            "filename": "Square",
+            "version": "v2.0.6"
+        }
+    },
+    "$__mpe_external_StartGame_Square": {
+        "$__mpe_code": {
+            "position": {
+                "x": 2906,
+                "y": 499
+            }
+        }
+    },
+    "$__mpe_external_魔兽赛季奖励确认_3_Square": {
+        "$__mpe_code": {
+            "position": {
+                "x": 750,
+                "y": 472
+            }
+        }
+    },
+    "CHooseCrad_2": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    217,
+                    72,
+                    71,
+                    61
+                ],
+                "template": [
+                    "Absorb/P.png"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.6
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "EnterSquare",
+            "CHooseCrad_2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 744,
+                "y": 573
+            }
+        }
+    },
+    "EnterOperating_3": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    75,
+                    185,
+                    70,
+                    40
+                ],
+                "expected": [
+                    "经营",
+                    "管理"
+                ],
+                "threshold": 0.5
+            }
+        },
+        "pre_delay": 1500,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    110,
+                    181
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 200,
+        "post_delay": 3000,
+        "next": [
+            "EnterOperating_3",
+            "EnterRestaurant_3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -104,
+                "y": 566
+            }
+        }
+    },
+    "EnterRestaurant_3": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    738,
+                    159,
+                    84,
+                    55
+                ],
+                "expected": [
+                    "立刻前往",
+                    "立刻",
+                    "前往"
+                ],
+                "threshold": 0.4
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "timeout": 12000,
+        "next": [
+            "[JumpBack]魔兽赛季奖励确认_3",
+            "CHooseCrad_2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 309,
+                "y": 604
+            }
+        }
+    },
+    "EnterSquare": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    152,
+                    604,
+                    131,
+                    81
+                ],
+                "template": [
+                    "Square/TheSquare3.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    35,
+                    7,
+                    -71,
+                    -32
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "next": [
+            "Loading_Square",
+            "EnterSquare"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1187,
+                "y": 520
+            }
+        }
+    },
+    "GetDaily2": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    900,
+                    555,
+                    85,
+                    85
+                ],
+                "template": "PVP/GetDaily.png",
+                "green_mask": true,
+                "threshold": 0.8
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "GetSquare",
+            "GetDaily2",
+            "MoveSquare",
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2213,
+                "y": 597
+            }
+        }
+    },
+    "GetSquare": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    910,
+                    560,
+                    70,
+                    70
+                ],
+                "template": "Square/Get.png",
+                "green_mask": true,
+                "threshold": 0.8
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "GetDaily2",
+            "GetSquare",
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2216,
+                "y": 80
+            }
+        }
+    },
+    "Liveplay": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    700,
+                    570,
+                    99,
+                    25
+                ],
+                "expected": [
+                    "生活",
+                    "玩法",
+                    "游戏",
+                    "卡带"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "EnterSquare"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 918,
+                "y": -19
+            }
+        }
+    },
+    "Loading_Square": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    435,
+                    57,
+                    422,
+                    262
+                ],
+                "template": [
+                    "Square/Loading.png"
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "next": [
+            "Loading_Square",
+            "GetDaily2",
+            "GetSquare",
+            "MoveSquare"
+        ],
+        "on_error": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1563,
+                "y": 733
+            }
+        }
+    },
+    "MoveSquare": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1023,
+                    110,
+                    214,
+                    120
+                ],
+                "expected": [
+                    "每日",
+                    "移动",
+                    "艾",
+                    "力",
+                    "克",
+                    "史",
+                    "温",
+                    "女"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 7500,
+        "next": [
+            "GetSquare",
+            "GetDaily2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1770,
+                "y": 246
+            }
+        }
+    },
+    "StartSquare": {
+        "next": [
+            "竞技场跳转广场",
+            "CHooseCrad_2",
+            "MoveSquare",
+            "EnterOperating_3",
+            "[JumpBack]StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": -136,
+                "y": 192
+            }
+        }
+    },
+    "竞技场跳转广场": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    540,
+                    633,
+                    59,
+                    78
+                ],
+                "template": [
+                    "Absorb/P.png"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.6
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1500,
+        "next": [
+            "Liveplay"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 597,
+                "y": -36
+            }
+        }
+    }
+}

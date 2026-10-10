@@ -1,0 +1,300 @@
+{
+    "$__mpe_config_Operate": {
+        "$__mpe_code": {
+            "prefix": "",
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 1791625544308,
+            "isModifiedExternally": false,
+            "isDeleted": false,
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Operate.json",
+            "savedViewport": {
+                "x": -2283,
+                "y": -76,
+                "zoom": 1.5
+            },
+            "filename": "Operate",
+            "version": "v2.0.6"
+        }
+    },
+    "$__mpe_external_StartGame_Operate": {
+        "$__mpe_code": {
+            "position": {
+                "x": 2230,
+                "y": 23
+            }
+        }
+    },
+    "$__mpe_external_魔兽赛季奖励确认_3_Operate": {
+        "$__mpe_code": {
+            "position": {
+                "x": 1927,
+                "y": -65
+            }
+        }
+    },
+    "ClickMyHouse": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    81,
+                    120,
+                    60,
+                    23
+                ],
+                "expected": [
+                    "我的小屋",
+                    "我",
+                    "小",
+                    "屋",
+                    "的"
+                ],
+                "threshold": 0.5
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    110,
+                    100,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 200,
+        "post_delay": 4500,
+        "next": [
+            "ClickMyHouse",
+            "MyhouseBack"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 70,
+                "y": 25
+            }
+        }
+    },
+    "EnterOperating": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    75,
+                    185,
+                    70,
+                    40
+                ],
+                "expected": [
+                    "经营",
+                    "管理"
+                ],
+                "threshold": 0.5
+            }
+        },
+        "pre_delay": 1500,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    110,
+                    181
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 200,
+        "post_delay": 3000,
+        "next": [
+            "GetWithOneClick",
+            "EnterOperating"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 713,
+                "y": 52
+            }
+        }
+    },
+    "EnterRestaurant": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    738,
+                    159,
+                    84,
+                    55
+                ],
+                "expected": [
+                    "立刻前往",
+                    "立刻",
+                    "前往"
+                ],
+                "threshold": 0.4
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "timeout": 12000,
+        "next": [
+            "EnterRestaurant",
+            "FrequentCaller",
+            "[JumpBack]魔兽赛季奖励确认_3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1635,
+                "y": 191
+            }
+        }
+    },
+    "FrequentCaller": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    80,
+                    23,
+                    114,
+                    36
+                ],
+                "template": [
+                    "Operate/RES.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    183,
+                    196,
+                    1,
+                    1
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 1500,
+        "next": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1942,
+                "y": 194
+            }
+        }
+    },
+    "GetWithOneClick": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    693,
+                    499,
+                    64,
+                    85
+                ],
+                "expected": [
+                    "一键",
+                    "获得"
+                ],
+                "threshold": 0.5
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 2000,
+        "next": [
+            "OperateClick",
+            "EnterRestaurant"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1045,
+                "y": 219
+            }
+        }
+    },
+    "MyhouseBack": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    99,
+                    8,
+                    43,
+                    48
+                ],
+                "template": "Operate/back.png",
+                "threshold": 0.5
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 4500,
+        "next": [
+            "EnterOperating",
+            "[JumpBack]StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 370,
+                "y": 33
+            }
+        }
+    },
+    "OperateClick": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    566,
+                    640,
+                    136,
+                    37
+                ],
+                "expected": [
+                    "点击",
+                    "画面",
+                    "即可",
+                    "返回"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "OperateClick",
+            "EnterRestaurant"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1340,
+                "y": 351
+            }
+        }
+    },
+    "StartOperate": {
+        "next": [
+            "ClickMyHouse",
+            "[JumpBack]StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 45,
+                "y": -251
+            }
+        }
+    }
+}

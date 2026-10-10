@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791433101145,
+            "lastSyncTime": 1791625447645,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\Trade\\CookMeals.json",
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Trade\\CookMeals.json",
             "savedViewport": {
-                "x": 151,
-                "y": -1461,
-                "zoom": 0.57
+                "x": 1369,
+                "y": -3724,
+                "zoom": 1.31
             },
             "filename": "CookMeals",
             "version": "v2.0.6"
@@ -41,6 +41,7 @@
         }
     },
     "CHooseCrad_Cook": {
+        "max_hit": 2,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -64,7 +65,8 @@
         },
         "post_delay": 1500,
         "next": [
-            "EnterSquare_Cook"
+            "EnterSquare_Cook",
+            "CHooseCrad_Cook"
         ],
         "$__mpe_code": {
             "position": {
@@ -272,7 +274,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 7500,
+        "timeout": 12000,
         "focus": "点击立刻前往进入餐厅",
         "next": [
             "CHooseCrad_Cook",

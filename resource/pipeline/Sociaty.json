@@ -1,0 +1,186 @@
+{
+    "$__mpe_config_Sociaty": {
+        "$__mpe_code": {
+            "prefix": "",
+            "coordinateMode": "absolute-v1",
+            "lastSyncTime": 1791624227076,
+            "isModifiedExternally": false,
+            "isDeleted": false,
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Sociaty.json",
+            "savedViewport": {
+                "x": 289,
+                "y": 420,
+                "zoom": 0.95
+            },
+            "filename": "Sociaty",
+            "version": "v2.0.6"
+        }
+    },
+    "$__mpe_external_StartGame_Sociaty": {
+        "$__mpe_code": {
+            "position": {
+                "x": 1159,
+                "y": 396
+            }
+        }
+    },
+    "ClickSecond": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    141,
+                    2,
+                    131,
+                    69
+                ],
+                "template": [
+                    "Sociaty/GONGHUI.png"
+                ]
+            }
+        },
+        "next": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1031,
+                "y": -54
+            }
+        }
+    },
+    "InSociaty_1": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    214,
+                    77,
+                    53,
+                    66
+                ],
+                "template": [
+                    "Sociaty/GONGHUI2.png"
+                ],
+                "green_mask": true
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    237,
+                    99,
+                    7,
+                    5
+                ]
+            }
+        },
+        "repeat": 2,
+        "post_delay": 3000,
+        "next": [
+            "ClickSecond",
+            "InSociaty_1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 693,
+                "y": -19
+            }
+        }
+    },
+    "InSociaty_2": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    204,
+                    119,
+                    76,
+                    23
+                ],
+                "expected": [
+                    "公会",
+                    "联合战"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    237,
+                    99,
+                    7,
+                    5
+                ]
+            }
+        },
+        "repeat": 2,
+        "post_delay": 3000,
+        "next": [
+            "ClickSecond",
+            "InSociaty_2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 372,
+                "y": 279
+            }
+        }
+    },
+    "InSociaty_3": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "Sociaty/GONGHUI3.png"
+                ],
+                "green_mask": true,
+                "threshold": [
+                    0.6
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    237,
+                    99,
+                    7,
+                    5
+                ]
+            }
+        },
+        "repeat": 2,
+        "post_delay": 3000,
+        "next": [
+            "ClickSecond",
+            "InSociaty_3"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 376,
+                "y": -276
+            }
+        }
+    },
+    "StartSociaty": {
+        "next": [
+            "InSociaty_1",
+            "InSociaty_2",
+            "InSociaty_3",
+            "[JumpBack]StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 28,
+                "y": 151
+            }
+        }
+    }
+}
