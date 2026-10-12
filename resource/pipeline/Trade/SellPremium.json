@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791623156340,
+            "lastSyncTime": 1791797757812,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Trade\\SellPremium.json",
             "savedViewport": {
-                "x": -2011,
-                "y": -342,
-                "zoom": 0.82
+                "x": -2719,
+                "y": -506,
+                "zoom": 1
             },
             "filename": "SellPremium",
             "version": "v2.0.6"
@@ -352,20 +352,21 @@
     },
     "SP_跳过砍价进入商店页": {
         "recognition": {
-            "type": "TemplateMatch",
+            "type": "OCR",
             "param": {
                 "roi": [
-                    53,
-                    484,
-                    230,
-                    216
+                    104,
+                    607,
+                    43,
+                    40
                 ],
-                "template": [
-                    "TRADE/bargain.png"
+                "expected": [
+                    "砍",
+                    "价",
+                    "选",
+                    "择"
                 ],
-                "threshold": [
-                    0.3
-                ]
+                "threshold": 0.6
             }
         },
         "action": {

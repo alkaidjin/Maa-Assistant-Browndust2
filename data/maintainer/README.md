@@ -20,8 +20,6 @@ MXU 的软件内更新（`apply_full_update`）走**全量覆盖**：它遍历�
 | 路径 | 内容 |
 |---|---|
 | `tools/build_release_zip.py` | **发布包构建器**（版本号锚点同步、排除表、V1–V10 校验、`changes.json` 生成） |
-| `tools/backup_maintainer.ps1` | 维护版备份（git bundle + 未跟踪文件打包到带时间戳目录） |
-| `tools/install_backup_task.ps1` | 把上面那个备份注册成计划任务 |
 | `tools/build_release_zip.bat` | **打包双击入口**（自己找 Python，见下） |
 | `tools/apply_icon.ps1` | 给 `MaaBd2.exe` 打图标（rcedit 包装；打包器 ensure_icon 每次打包自动复核，本脚本是手动兜底） |
 | `tools/make_icon.py` | 由源图生成 `mxu.ico` / `mxu_icon.png` |
@@ -29,7 +27,6 @@ MXU 的软件内更新（`apply_full_update`）走**全量覆盖**：它遍历�
 | `tools/compact_log.ps1` | 把 `maa.log` 压成任务时间线 |
 | `tools/rcedit-x64.exe` | 打图标用的第三方工具（electron/rcedit，MIT） |
 | `Verlog.xlsx` | **版本发布日志表**（维护者文档，v26.09.14 起不再派发给用户；打包器仍会读它提醒「本版有没有记录」） |
-| `备份维护版.bat` | 双击备份入口 |
 | `agent/start.bat` / `agent/start.py` | agent 开发辅助（**写死了作者本机游戏路径**，仅本机可用） |
 | `agent/rock-picker/` | 第二个 agent（圣石洞穴「刷数量最少的圣石」）的**Go 源码**；运行件是 `agent/rock-picker.exe` |
 | `legacy/` | **退役件存档** —— 万一要重写时照着改，不要再直接拿去用 |
@@ -44,6 +41,7 @@ MXU 的软件内更新（`apply_full_update`）走**全量覆盖**：它遍历�
 | `maintainer.bat` | 维护器的双击入口 | 同上 |
 | `updater_config.json` | 启动器 / 维护器的配置（repo、镜像源、资产关键字） | 随二者一起退役，已登记进 `retired_files.json`，老用户升级时自动清掉 |
 | `resource-model.gitignore` | `resource/model/.gitignore`（内容只是 `ocr`） | 根 `.gitignore` 第 29 行的 `resource/model/ocr/` 已覆盖；留在 `resource/` 下会被 MXU 更新删掉 |
+| `备份方案退役说明.md` | **不是文件，是一份记录**：2026-10-12 停用「维护版每日备份」的原因体检、设计要点与复活清单 | 夸克客户端取消开机自启，备份链最后一环没了。实测该方案**从未成功产出过备份**：任务参数里的 `-File` 路径在 09-30 目录搬家后就失效了（退出码一直是非 0 的 `0xFFFD0000`），落点目录 `E:\夸克备份` 在磁盘上压根不存在。停用动作 + 原始任务定义 + 复活前必查清单见该文件 |
 
 > 这些文件的**能力**若将来要复活（比如要做离线镜像下载、完整性自检），
 > 优先看 `BD2MAA-Maintainer.ps1` 的 `-Verify` / `-Repair` 实现 —— 三道校验（装前包身份 / 装中逐文件重试 /

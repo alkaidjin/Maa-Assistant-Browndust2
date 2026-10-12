@@ -1064,6 +1064,7 @@
         "rate_limit": 0,
         "next": [
             "WarcraftShopScheduleEnabled",
+            "WarcraftShopScheduleEnabled",
             "WarcraftShopScheduleEnd"
         ],
         "$__mpe_code": {

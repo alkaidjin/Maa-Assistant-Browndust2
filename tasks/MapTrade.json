@@ -82,6 +82,7 @@
                         "ReturnHome_TC_3": {
                             "next": [
                                 "Trade_CookScheduleEnabled",
+                                "Trade_CookScheduleEnabled",
                                 "SellPremium_Start"
                             ]
                         }

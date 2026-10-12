@@ -128,14 +128,10 @@ EXCLUDE_FILES = {
     # 全部搬进 data/。旧根级文件名登记进 retired_files.json（老用户升级时由 changes.json
     # 自动清掉），这里只留护栏。
     'mxu.exe',
-    # 打包器 / 备份器的双击入口与本体：纯维护者工具，用户侧毫无用处
-    # （还会暴露本机解释器路径）。它们**入仓库**，但绝不进用户包。
-    # v26.09.14 起全部搬进 maintainer/（由 EXCLUDE_DIRS 整目录排除），
-    # 这里保留逐条路径当护栏 —— 双保险，挪出来也进不了包。
-    # （打包入口 .bat 已于 v26.09.14 删除：打包交给 agent，或直接用绝对路径调 python）
-    '备份维护版.bat',
-    'maintainer/tools/backup_maintainer.ps1',
-    'maintainer/tools/install_backup_task.ps1',
+    # ---- v26.10.4 起：维护版每日备份已退役（夸克客户端取消开机自启）----
+    # backup_maintainer.ps1 / install_backup_task.ps1 / 备份维护版.bat 三个文件
+    # 已删除，对应的计划任务与环境变量也已注销/清除，因此不再需要护栏条目。
+    # 设计与体检结论归档在 maintainer/legacy/备份方案退役说明.md，若要复活照那份清单走。
     # ---- v26.09.8 起：非维护者不需要的文件（用户侧无用，且 start.py 写死了作者本机游戏路径）----
     'agent/start.bat', 'agent/start.py',   # agent 开发辅助脚本（写死 C:\Neowiz\... 本机游戏路径）
     'maintainer/tools/make_icon.py',        # 生成 mxu.ico / mxu_icon.png 的开发脚本

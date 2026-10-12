@@ -157,6 +157,7 @@
         "rate_limit": 0,
         "next": [
             "AbsorpScheduleEnabled",
+            "AbsorpScheduleEnabled",
             "AbsorpScheduleEnd"
         ],
         "$__mpe_code": {

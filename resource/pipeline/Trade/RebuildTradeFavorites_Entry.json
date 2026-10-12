@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791623184224,
+            "lastSyncTime": 1791804273986,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Trade\\RebuildTradeFavorites_Entry.json",
             "savedViewport": {
-                "x": -2107,
-                "y": -98,
-                "zoom": 0.95
+                "x": -1790,
+                "y": -26,
+                "zoom": 0.87
             },
             "filename": "RebuildTradeFavorites_Entry",
             "version": "v2.0.6"
@@ -73,20 +73,21 @@
     },
     "RTF_Bargain1": {
         "recognition": {
-            "type": "TemplateMatch",
+            "type": "OCR",
             "param": {
                 "roi": [
-                    53,
-                    484,
-                    230,
-                    216
+                    104,
+                    607,
+                    43,
+                    40
                 ],
-                "template": [
-                    "TRADE/bargain.png"
+                "expected": [
+                    "砍",
+                    "价",
+                    "选",
+                    "择"
                 ],
-                "threshold": [
-                    0.3
-                ]
+                "threshold": 0.6
             }
         },
         "action": {

@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791623146160,
+            "lastSyncTime": 1791804281486,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Trade\\MapTrade.json",
             "savedViewport": {
-                "x": -2910,
-                "y": 659,
-                "zoom": 1.65
+                "x": -1262,
+                "y": 417,
+                "zoom": 1
             },
             "filename": "MapTrade",
             "version": "v2.0.6"
@@ -112,20 +112,21 @@
     },
     "ReturnHome_TC_3": {
         "recognition": {
-            "type": "TemplateMatch",
+            "type": "OCR",
             "param": {
                 "roi": [
-                    53,
-                    484,
-                    230,
-                    216
+                    104,
+                    607,
+                    43,
+                    40
                 ],
-                "template": [
-                    "TRADE/bargain.png"
+                "expected": [
+                    "砍",
+                    "价",
+                    "选",
+                    "择"
                 ],
-                "threshold": [
-                    0.3
-                ]
+                "threshold": 0.6
             }
         },
         "action": {
@@ -224,7 +225,7 @@
         }
     },
     "Trade_CookScheduleEnabled": {
-        "desc": "料理星期门控（Custom: ScheduleRecognition 读取 attach 的周几开关，游戏日本地时间04:00分界）：命中才进入料理分支，否则跳过料理直接回主界面。attach 由任务选项 MapTradeCookSchedule 的 checkbox 勾选写入",
+        "desc": "料理星期门控（Custom: ScheduleRecognition 读取 attach 的周几开关，游戏日本地时间04:00分界）：命中才进入料理分支；不命中时由 ReturnHome_TC_3 的 next 兜底（连查两次，仍不命中→SellPremium_Start 直接出售，不结束跑商任务）。attach 由任务选项 MapTradeCookSchedule 的 checkbox 勾选写入",
         "recognition": {
             "type": "Custom",
             "param": {

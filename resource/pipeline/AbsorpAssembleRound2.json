@@ -31,6 +31,7 @@
         "rate_limit": 0,
         "next": [
             "AbsorpAssembleRound2ScheduleEnabled",
+            "AbsorpAssembleRound2ScheduleEnabled",
             "AbsorpAssembleRound2ScheduleEnd"
         ],
         "$__mpe_code": {

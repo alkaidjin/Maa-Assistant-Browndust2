@@ -3,13 +3,13 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791559537788,
+            "lastSyncTime": 1791681448495,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\HuntingArea.json",
             "savedViewport": {
-                "x": -3858,
-                "y": 390,
+                "x": -3145,
+                "y": 290,
                 "zoom": 0.95
             },
             "filename": "HuntingArea",
@@ -92,8 +92,8 @@
         },
         "$__mpe_code": {
             "position": {
-                "x": 4794,
-                "y": -240
+                "x": 4554,
+                "y": -311
             }
         }
     },
@@ -177,7 +177,6 @@
                 ],
                 "expected": [
                     "快速狩猎",
-                    "快速狩",
                     "快速",
                     "狩猎"
                 ],
@@ -189,13 +188,12 @@
         },
         "post_delay": 1500,
         "next": [
-            "FastHunt1",
             "MainHunt1_Max"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5329,
-                "y": -69
+                "x": 5372,
+                "y": -26
             }
         }
     },
@@ -211,7 +209,6 @@
                 ],
                 "expected": [
                     "快速狩猎",
-                    "快速狩",
                     "快速",
                     "狩猎"
                 ],
@@ -223,13 +220,12 @@
         },
         "post_delay": 1500,
         "next": [
-            "SetMax2",
-            "FastHunt2"
+            "SetMax2"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 6991,
-                "y": 88
+                "x": 6854,
+                "y": 76
             }
         }
     },
@@ -245,7 +241,8 @@
                 ],
                 "expected": [
                     "快速狩猎",
-                    "快速狩"
+                    "快速",
+                    "狩猎"
                 ],
                 "threshold": 0.6
             }
@@ -255,8 +252,7 @@
         },
         "post_delay": 1500,
         "next": [
-            "SetMax3",
-            "FastHunt3"
+            "SetMax3"
         ],
         "$__mpe_code": {
             "position": {
@@ -432,15 +428,15 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    743,
-                    300,
-                    80,
-                    80
+                    761,
+                    332,
+                    39,
+                    17
                 ],
                 "expected": [
                     "MAX"
                 ],
-                "threshold": 0.6
+                "threshold": 0.5
             }
         },
         "action": {
@@ -451,8 +447,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5604,
-                "y": 201
+                "x": 5600,
+                "y": 169
             }
         }
     },
@@ -570,8 +566,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 4996,
-                "y": -144
+                "x": 5007,
+                "y": -91
             }
         }
     },
@@ -765,13 +761,13 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    740,
-                    300,
-                    80,
-                    80
+                    761,
+                    332,
+                    39,
+                    17
                 ],
                 "expected": "MAX",
-                "threshold": 0.6
+                "threshold": 0.5
             }
         },
         "action": {
@@ -792,13 +788,15 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    740,
-                    300,
-                    80,
-                    80
+                    761,
+                    332,
+                    39,
+                    17
                 ],
-                "expected": "MAX",
-                "threshold": 0.6
+                "expected": [
+                    "MAX"
+                ],
+                "threshold": 0.5
             }
         },
         "action": {
@@ -809,8 +807,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3965,
-                "y": 89
+                "x": 3961,
+                "y": 114
             }
         }
     },
@@ -981,8 +979,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5128,
-                "y": -548
+                "x": 5041,
+                "y": -477
             }
         }
     },
