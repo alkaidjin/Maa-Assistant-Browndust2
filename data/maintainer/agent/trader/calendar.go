@@ -265,17 +265,42 @@ func describePlan(cal *PriceCalendar, day int, sell []SellItem) string {
 }
 
 // matchName reports whether the OCR text matches the item (by primary name or
-// any alias, case-insensitive substring).
+// any alias, case-insensitive substring). It also tolerates OCR dropping
+// trailing characters: if the OCR text (>=2 chars) is contained in the item
+// name, e.g. "胡萝" for "胡萝卜", it still matches. Reverse matching only
+// applies to CJK text — ASCII noise like "A" must never reverse-match
+// English aliases such as "Carrot".
 func (it SellItem) matchName(ocrText string) bool {
 	text := strings.ToLower(strings.TrimSpace(ocrText))
 	if text == "" {
 		return false
 	}
-	if strings.Contains(text, strings.ToLower(it.Item)) {
+	hasCJK := func(s string) bool {
+		for _, r := range s {
+			if r >= 0x4E00 && r <= 0x9FFF {
+				return true
+			}
+		}
+		return false
+	}
+	runeCount := len([]rune(text))
+	name := strings.ToLower(it.Item)
+	if strings.Contains(text, name) {
+		return true
+	}
+	// Reverse containment: OCR dropped trailing chars (e.g. 胡萝卜 → 胡萝).
+	if hasCJK(text) && runeCount >= 2 && strings.Contains(name, text) {
 		return true
 	}
 	for _, alias := range it.Aliases {
-		if alias != "" && strings.Contains(text, strings.ToLower(alias)) {
+		a := strings.ToLower(alias)
+		if alias == "" {
+			continue
+		}
+		if strings.Contains(text, a) {
+			return true
+		}
+		if hasCJK(text) && hasCJK(a) && runeCount >= 2 && strings.Contains(a, text) {
 			return true
 		}
 	}

@@ -449,7 +449,7 @@
                 "custom_recognition_param": {}
             }
         },
-        "focus": "星期门控（Custom: ScheduleRecognition 读取 attach 的周几开关，游戏日本地时间04:00分界）：命中才执行本周任务；不命中则由 WeeklyTask_Start 的 next 兜底（再查一次，仍不命中→WeeklyTask_End 空节点绿色结束）。attach 由任务选项 WeeklyTaskSchedule 的单选 case 写入（仅一天为 true）",
+        "focus": "星期门控（Custom: ScheduleRecognition 读取 attach 的周几开关，游戏日本地时间04:00分界）：命中才执行本周任务；不命中则由 WeeklyTask_Start 的 next 兜底（→WeeklyTask_End 空节点绿色结束）。attach 由任务选项 WeeklyTaskSchedule 的单选 case 写入（仅一天为 true）",
         "attach": {
             "friday": false,
             "monday": false,
@@ -472,9 +472,8 @@
     },
     "WeeklyTask_End": {},
     "WeeklyTask_Start": {
-        "focus": "每周任务（小屋点赞+街机游戏+末日之书+装备制作）入口：请在游戏主界面开始。受 WeeklyTaskSchedule 星期门控控制，门控连续检查两次，仅选定星期执行，其余日子落到 WeeklyTask_End 空节点绿色结束。",
+        "focus": "每周任务（小屋点赞+街机游戏+末日之书+装备制作）入口：请在游戏主界面开始。受 WeeklyTaskSchedule 星期门控控制，仅选定星期执行，其余日子落到 WeeklyTask_End 空节点绿色结束。",
         "next": [
-            "WeeklyTask_ScheduleEnabled",
             "WeeklyTask_ScheduleEnabled",
             "WeeklyTask_End"
         ],

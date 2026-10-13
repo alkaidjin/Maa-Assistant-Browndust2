@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791560783399,
+            "lastSyncTime": 1791915524849,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Warcraft.json",
             "savedViewport": {
-                "x": -655,
-                "y": 423,
-                "zoom": 0.82
+                "x": 1412,
+                "y": 676,
+                "zoom": 1
             },
             "filename": "Warcraft",
-            "version": "v2.0.6"
+            "version": "v2.1.0"
         }
     },
     "$__mpe_external_StartGame_Warcraft": {
@@ -48,52 +48,23 @@
             }
         }
     },
-    "EnterWarcraft": {
+    "EnterWarcraft_W": {
         "recognition": {
             "type": "OCR",
             "param": {
                 "roi": [
-                    1000,
-                    300,
-                    260,
-                    300
-                ],
-                "expected": [
-                    "魔兽",
-                    "追踪者",
-                    "解锁"
-                ],
-                "threshold": 0.6
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_delay": 2000,
-        "next": [
-            "EnterWarcraft",
-            "是否开启自动推关"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": -748,
-                "y": 584
-            }
-        }
-    },
-    "EnterWarcraft2": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    1080,
-                    400,
-                    80,
-                    300
+                    1020,
+                    340,
+                    220,
+                    250
                 ],
                 "expected": [
                     "剧情",
-                    "解锁"
+                    "解锁",
+                    "普通",
+                    "战斗",
+                    "魔兽",
+                    "追踪者"
                 ],
                 "threshold": 0.6
             }
@@ -103,13 +74,13 @@
         },
         "post_delay": 2000,
         "next": [
-            "EnterWarcraft2",
+            "EnterWarcraft_W",
             "是否开启自动推关"
         ],
         "$__mpe_code": {
             "position": {
-                "x": -738,
-                "y": 229
+                "x": -769,
+                "y": 195
             }
         }
     },
@@ -143,8 +114,7 @@
     },
     "StartWarcraft": {
         "next": [
-            "EnterWarcraft",
-            "EnterWarcraft2",
+            "EnterWarcraft_W",
             "[JumpBack]StartGame"
         ],
         "$__mpe_code": {
@@ -406,8 +376,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1108,
-                "y": -152
+                "x": 1095,
+                "y": -232
             }
         }
     },
@@ -686,15 +656,16 @@
                 ]
             }
         },
-        "post_delay": 9000,
+        "post_delay": 15000,
         "next": [
             "返回战斗关表",
-            "自动战斗保持"
+            "自动战斗保持",
+            "自动战斗失败"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1390,
-                "y": -161
+                "x": 1358,
+                "y": -268
             }
         }
     },
@@ -725,6 +696,54 @@
             "position": {
                 "x": 548,
                 "y": -131
+            }
+        }
+    },
+    "自动战斗失败": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    561,
+                    652,
+                    43,
+                    22
+                ],
+                "expected": [
+                    "返",
+                    "回"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    584,
+                    663,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "focus": {
+            "Node.Action.Starting": {
+                "content": "赛季活动自动战斗失败，请手动挑战关卡",
+                "display": [
+                    "log",
+                    "toast",
+                    "notification"
+                ]
+            }
+        },
+        "next": [
+            "返回活动主页1"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1702,
+                "y": -173
             }
         }
     },
@@ -759,8 +778,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1677,
-                "y": -175
+                "x": 1699,
+                "y": -508
             }
         }
     },
@@ -798,8 +817,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1968,
-                "y": -144
+                "x": 1988,
+                "y": -314
             }
         }
     },

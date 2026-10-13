@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791681448495,
+            "lastSyncTime": 1791911344677,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\HuntingArea.json",
             "savedViewport": {
-                "x": -3145,
-                "y": 290,
-                "zoom": 0.95
+                "x": -4475,
+                "y": 586,
+                "zoom": 1
             },
             "filename": "HuntingArea",
             "version": "v2.0.6"
@@ -192,8 +192,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5372,
-                "y": -26
+                "x": 5293,
+                "y": -20
             }
         }
     },
@@ -447,8 +447,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5600,
-                "y": 169
+                "x": 5576,
+                "y": 79
             }
         }
     },
@@ -560,14 +560,15 @@
             "type": "Click"
         },
         "repeat": 2,
-        "repeat_delay": 500,
+        "repeat_delay": 1500,
+        "post_delay": 1500,
         "next": [
             "FastHunt1"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 5007,
-                "y": -91
+                "x": 4980,
+                "y": -80
             }
         }
     },
@@ -973,7 +974,8 @@
             "type": "Click"
         },
         "repeat": 2,
-        "repeat_delay": 500,
+        "repeat_delay": 1500,
+        "post_delay": 1500,
         "next": [
             "FastHunt1"
         ],

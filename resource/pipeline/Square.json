@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791625516685,
+            "lastSyncTime": 1791915355298,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Square.json",
             "savedViewport": {
-                "x": 233,
-                "y": -175,
-                "zoom": 0.82
+                "x": -931,
+                "y": 127,
+                "zoom": 1
             },
             "filename": "Square",
             "version": "v2.0.6"
@@ -202,20 +202,18 @@
         },
         "post_delay": 1500,
         "next": [
-            "GetSquare",
             "GetDaily2",
-            "MoveSquare",
             "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2213,
-                "y": 597
+                "x": 2512,
+                "y": 549
             }
         }
     },
     "GetSquare": {
-        "max_hit": 2,
+        "max_hit": 1,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -233,16 +231,17 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 1500,
+        "post_delay": 3000,
         "next": [
-            "GetDaily2",
             "GetSquare",
+            "GetDaily2",
+            "MoveSquare",
             "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2216,
-                "y": 80
+                "x": 2057,
+                "y": 190
             }
         }
     },
@@ -295,56 +294,17 @@
         "post_delay": 1500,
         "next": [
             "Loading_Square",
-            "GetDaily2",
             "GetSquare",
-            "MoveSquare"
+            "MoveSquare",
+            "GetDaily2"
         ],
         "on_error": [
             "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1563,
-                "y": 733
-            }
-        }
-    },
-    "MoveSquare": {
-        "max_hit": 1,
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    1023,
-                    110,
-                    214,
-                    120
-                ],
-                "expected": [
-                    "每日",
-                    "移动",
-                    "艾",
-                    "力",
-                    "克",
-                    "史",
-                    "温",
-                    "女"
-                ],
-                "threshold": 0.6
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_delay": 7500,
-        "next": [
-            "GetSquare",
-            "GetDaily2"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 1770,
-                "y": 246
+                "x": 1451,
+                "y": 554
             }
         }
     },
@@ -352,8 +312,8 @@
         "next": [
             "竞技场跳转广场",
             "CHooseCrad_2",
-            "MoveSquare",
             "EnterOperating_3",
+            "MoveSquare",
             "[JumpBack]StartGame"
         ],
         "$__mpe_code": {
@@ -393,6 +353,45 @@
             "position": {
                 "x": 597,
                 "y": -36
+            }
+        }
+    },
+    "MoveSquare": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1023,
+                    110,
+                    214,
+                    120
+                ],
+                "expected": [
+                    "每日",
+                    "移动",
+                    "艾",
+                    "力",
+                    "克",
+                    "史",
+                    "温",
+                    "女"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 9000,
+        "next": [
+            "GetSquare",
+            "GetDaily2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1746,
+                "y": 614
             }
         }
     }

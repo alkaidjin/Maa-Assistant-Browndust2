@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791457948716,
+            "lastSyncTime": 1791915519370,
             "isModifiedExternally": false,
             "isDeleted": false,
-            "filePath": "F:\\MABd2-wt\\traecode-workspace\\resource\\pipeline\\WarcraftShop.json",
+            "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\WarcraftShop.json",
             "savedViewport": {
-                "x": -4238,
-                "y": -1490,
-                "zoom": 1.09
+                "x": -1980,
+                "y": 638,
+                "zoom": 1
             },
             "filename": "WarcraftShop",
-            "version": "v2.0.6"
+            "version": "v2.1.0"
         }
     },
     "$__mpe_external_StartGame_WarcraftShop": {
@@ -363,55 +363,23 @@
             }
         }
     },
-    "EnterWarcraft_3": {
-        "max_hit": 3,
+    "EnterWarcraft_WS": {
         "recognition": {
             "type": "OCR",
             "param": {
                 "roi": [
-                    1024,
-                    343,
-                    198,
-                    262
-                ],
-                "expected": [
-                    "魔兽",
-                    "追踪者",
-                    "解锁"
-                ],
-                "threshold": 0.6
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_delay": 2000,
-        "next": [
-            "EnterWarcraft_4",
-            "EnterWarcraft_3",
-            "InWarcraftShop"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 3485,
-                "y": 473
-            }
-        }
-    },
-    "EnterWarcraft_4": {
-        "max_hit": 3,
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    1064,
-                    400,
-                    109,
-                    218
+                    1020,
+                    340,
+                    220,
+                    250
                 ],
                 "expected": [
                     "剧情",
-                    "解锁"
+                    "解锁",
+                    "普通",
+                    "战斗",
+                    "魔兽",
+                    "追踪者"
                 ],
                 "threshold": 0.6
             }
@@ -421,14 +389,13 @@
         },
         "post_delay": 2000,
         "next": [
-            "EnterWarcraft_4",
-            "EnterWarcraft_3",
-            "InWarcraftShop"
+            "InWarcraftShop_1",
+            "InWarcraftShop_2"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3488,
-                "y": 93
+                "x": 3472,
+                "y": 363
             }
         }
     },
@@ -642,7 +609,7 @@
             }
         }
     },
-    "InWarcraftShop": {
+    "InWarcraftShop_1": {
         "max_hit": 2,
         "recognition": {
             "type": "OCR",
@@ -650,8 +617,8 @@
                 "roi": [
                     767,
                     622,
-                    94,
-                    37
+                    123,
+                    36
                 ],
                 "expected": [
                     "活动",
@@ -663,13 +630,44 @@
             "type": "Click"
         },
         "next": [
-            "InWarcraftShop",
+            "InWarcraftShop_1",
             "WarcraftShopBuyLoop"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3747,
-                "y": 354
+                "x": 3740,
+                "y": 207
+            }
+        }
+    },
+    "InWarcraftShop_2": {
+        "max_hit": 2,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    901,
+                    626,
+                    109,
+                    28
+                ],
+                "expected": [
+                    "活动",
+                    "商店"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "InWarcraftShop_2",
+            "WarcraftShopBuyLoop"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3737,
+                "y": 518
             }
         }
     },
@@ -995,8 +993,7 @@
     },
     "WarcraftShop": {
         "next": [
-            "EnterWarcraft_3",
-            "EnterWarcraft_4",
+            "EnterWarcraft_WS",
             "[JumpBack]StartGame"
         ],
         "$__mpe_code": {
@@ -1040,8 +1037,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3991,
-                "y": 321
+                "x": 4010,
+                "y": 207
             }
         }
     },
@@ -1063,7 +1060,6 @@
         "post_delay": 500,
         "rate_limit": 0,
         "next": [
-            "WarcraftShopScheduleEnabled",
             "WarcraftShopScheduleEnabled",
             "WarcraftShopScheduleEnd"
         ],
@@ -1112,8 +1108,8 @@
         "rate_limit": 0,
         "$__mpe_code": {
             "position": {
-                "x": 2941,
-                "y": 28
+                "x": 2917,
+                "y": 33
             }
         }
     },

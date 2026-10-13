@@ -36,8 +36,8 @@ var (
 	// itemListROI covers the 4-column item grid.
 	itemListROI = maa.Rect{255, 70, 760, 555}
 	// popupTitleROI covers the item name in the sell confirmation popup.
-	// Title text sits at 720P y≈205..235 (popup top is y≈158).
-	popupTitleROI = maa.Rect{260, 198, 170, 45}
+	// Title ROI measured by the user from a real popup screenshot.
+	popupTitleROI = maa.Rect{326, 222, 134, 29}
 	// popupContentROI covers the 拥有/可购买 count line and the price row.
 	popupContentROI = maa.Rect{255, 270, 480, 150}
 	// minButton / maxButton / confirmButton / closeButton (popup).
@@ -48,8 +48,9 @@ var (
 	// sliderRect is the quantity slider track in the popup.
 	sliderRect = maa.Rect{295, 348, 192, 14}
 
-	ownedPattern     = regexp.MustCompile(`拥有\s*([0-9]+)`)
-	availablePattern = regexp.MustCompile(`可购买\s*([0-9]+)`)
+	// Patterns tolerate thousands separators (e.g. 拥有1,940个).
+	ownedPattern     = regexp.MustCompile(`拥有\s*([0-9,，]+)`)
+	availablePattern = regexp.MustCompile(`可购买\s*([0-9,，]+)`)
 )
 
 // shopGroup batches one shop's sell candidates so each shop is entered once.
@@ -188,6 +189,11 @@ func matchRemainingShop(groups []shopGroup, text string) int {
 // name or any alias (case-insensitive substring). Returns the first match.
 func findSellItem(results []*maa.OCRResult, it SellItem) *maa.OCRResult {
 	for _, r := range results {
+		// Skip noise boxes: tiny boxes (e.g. 10x10 decorative marks misread
+		// as single characters) are never real item-name labels.
+		if r.Box.Width() < 15 || r.Box.Height() < 12 {
+			continue
+		}
 		if it.matchName(r.Text) {
 			return r
 		}
@@ -476,7 +482,7 @@ func sellOneItem(ctx *maa.Context, ctrl *maa.Controller, it SellItem, p tradePar
 func readOwnedCount(boxes []*maa.OCRResult) int {
 	for _, b := range boxes {
 		if m := ownedPattern.FindStringSubmatch(b.Text); m != nil {
-			if n, err := strconv.Atoi(m[1]); err == nil {
+			if n, err := strconv.Atoi(strings.ReplaceAll(strings.ReplaceAll(m[1], ",", ""), "，", "")); err == nil {
 				return n
 			}
 		}

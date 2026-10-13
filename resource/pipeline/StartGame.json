@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791777804514,
+            "lastSyncTime": 1791900122250,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\StartGame.json",
             "savedViewport": {
-                "x": -285,
-                "y": -1681,
-                "zoom": 0.72
+                "x": 507,
+                "y": 603,
+                "zoom": 0.2
             },
             "filename": "StartGame",
             "version": "v2.0.6"
@@ -28,7 +28,7 @@
         "$__mpe_code": {
             "position": {
                 "x": 342,
-                "y": 3406
+                "y": 3059
             }
         }
     },
@@ -43,16 +43,16 @@
     "$__mpe_external_Quit_StartGame": {
         "$__mpe_code": {
             "position": {
-                "x": 342,
-                "y": 4991
+                "x": 343,
+                "y": 2754
             }
         }
     },
     "$__mpe_external_SeasonReward_StartGame": {
         "$__mpe_code": {
             "position": {
-                "x": 342,
-                "y": 387
+                "x": 343,
+                "y": 2835
             }
         }
     },
@@ -77,8 +77,8 @@
         "post_delay": 2000,
         "$__mpe_code": {
             "position": {
-                "x": 1011,
-                "y": 1347
+                "x": 1005,
+                "y": 1305
             }
         }
     },
@@ -101,8 +101,8 @@
         "post_delay": 2000,
         "$__mpe_code": {
             "position": {
-                "x": 1013,
-                "y": 1705
+                "x": 999,
+                "y": 1693
             }
         }
     },
@@ -229,8 +229,8 @@
         "post_delay": 3000,
         "$__mpe_code": {
             "position": {
-                "x": 1305,
-                "y": -291
+                "x": 1314,
+                "y": -347
             }
         }
     },
@@ -255,8 +255,8 @@
         "post_delay": 2000,
         "$__mpe_code": {
             "position": {
-                "x": 1012,
-                "y": 3002
+                "x": 761,
+                "y": 3271
             }
         }
     },
@@ -281,8 +281,8 @@
         "post_delay": 2000,
         "$__mpe_code": {
             "position": {
-                "x": 339,
-                "y": 3874
+                "x": 1009,
+                "y": 3271
             }
         }
     },
@@ -312,13 +312,13 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1175,
-                "y": 3466
+                "x": 1117,
+                "y": 3868
             }
         }
     },
     "InShadow": {
-        "max_hit": 2,
+        "max_hit": 3,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -344,15 +344,18 @@
             }
         },
         "post_delay": 1500,
+        "timeout": 4500,
         "next": [
-            "EnterGame",
             "Setting",
-            "InShadow"
+            "EnterGame"
+        ],
+        "on_error": [
+            "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 344,
-                "y": 4268
+                "x": 322,
+                "y": 3877
             }
         }
     },
@@ -369,8 +372,8 @@
         "post_delay": 2000,
         "$__mpe_code": {
             "position": {
-                "x": 342,
-                "y": 3127
+                "x": 1010,
+                "y": 3002
             }
         }
     },
@@ -394,8 +397,8 @@
         "post_delay": 2000,
         "$__mpe_code": {
             "position": {
-                "x": 1014,
-                "y": 2276
+                "x": 1008,
+                "y": 2266
             }
         }
     },
@@ -419,8 +422,8 @@
         "post_delay": 2000,
         "$__mpe_code": {
             "position": {
-                "x": 1016,
-                "y": 1949
+                "x": 1006,
+                "y": 1936
             }
         }
     },
@@ -448,8 +451,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 945,
-                "y": 3854
+                "x": 868,
+                "y": 4308
             }
         }
     },
@@ -477,8 +480,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 622,
-                "y": 3831
+                "x": 605,
+                "y": 4301
             }
         }
     },
@@ -506,8 +509,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 624,
-                "y": 3501
+                "x": 611,
+                "y": 3874
             }
         }
     },
@@ -547,20 +550,20 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1011,
-                "y": 2604
+                "x": 1012,
+                "y": 2596
             }
         }
     },
     "StartGame": {
         "next": [
-            "EnterGame",
             "[JumpBack]DownloadNewver",
             "[JumpBack]DownLoading",
             "[JumpBack]StartWaiting1",
             "[JumpBack]StartWaiting2",
             "[JumpBack]ClickContinue",
             "[JumpBack]ClickContinue2",
+            "EnterGame",
             "[JumpBack]BackHome",
             "[JumpBack]Cancle",
             "[JumpBack]RejectAward",
@@ -661,8 +664,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 904,
-                "y": 3475
+                "x": 866,
+                "y": 3871
             }
         }
     },
@@ -691,8 +694,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1769,
-                "y": 3574
+                "x": 1617,
+                "y": 3871
             }
         }
     },
@@ -719,8 +722,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1451,
-                "y": 3552
+                "x": 1359,
+                "y": 3870
             }
         }
     },
@@ -750,8 +753,8 @@
         "post_delay": 1500,
         "$__mpe_code": {
             "position": {
-                "x": 1264,
-                "y": 2613
+                "x": 1286,
+                "y": 2602
             }
         }
     }
