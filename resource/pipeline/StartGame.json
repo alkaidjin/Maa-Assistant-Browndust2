@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791900122250,
+            "lastSyncTime": 1791987357646,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\StartGame.json",
             "savedViewport": {
-                "x": 507,
-                "y": 603,
-                "zoom": 0.2
+                "x": -164,
+                "y": -1491,
+                "zoom": 0.66
             },
             "filename": "StartGame",
-            "version": "v2.0.6"
+            "version": "v2.1.0"
         }
     },
     "$__mpe_external_CorrectPVP_StartGame": {
@@ -318,7 +318,6 @@
         }
     },
     "InShadow": {
-        "max_hit": 3,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -344,7 +343,7 @@
             }
         },
         "post_delay": 1500,
-        "timeout": 4500,
+        "timeout": 3000,
         "next": [
             "Setting",
             "EnterGame"
@@ -564,11 +563,11 @@
             "[JumpBack]ClickContinue",
             "[JumpBack]ClickContinue2",
             "EnterGame",
-            "[JumpBack]BackHome",
             "[JumpBack]Cancle",
             "[JumpBack]RejectAward",
             "[JumpBack]RejectAnnouncement",
             "[JumpBack]SevenDays",
+            "[JumpBack]BackHome",
             "[JumpBack]InShadow",
             "[JumpBack]GoBack",
             "[JumpBack]GoBack2",
