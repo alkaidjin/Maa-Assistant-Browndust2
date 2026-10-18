@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791625447645,
+            "lastSyncTime": 1792216581531,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Trade\\CookMeals.json",
             "savedViewport": {
-                "x": 1369,
-                "y": -3724,
-                "zoom": 1.31
+                "x": 174,
+                "y": -4239,
+                "zoom": 1.39
             },
             "filename": "CookMeals",
-            "version": "v2.0.6"
+            "version": "v2.1.0"
         }
     },
     "$__mpe_external_SellPremium_Start_CookMeals": {
@@ -115,7 +115,7 @@
                 ]
             }
         },
-        "post_delay": 2000,
+        "post_delay": 3000,
         "next": [
             "Coooooooook"
         ],
@@ -483,10 +483,10 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    980,
-                    500,
-                    100,
-                    100
+                    480,
+                    80,
+                    700,
+                    600
                 ],
                 "template": [
                     "COOK/dish/dish_01.png"
@@ -516,9 +516,9 @@
             "param": {
                 "roi": [
                     480,
-                    500,
-                    100,
-                    100
+                    80,
+                    700,
+                    600
                 ],
                 "template": [
                     "COOK/dish/dish_02.png"
@@ -547,10 +547,10 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    909,
-                    504,
-                    100,
-                    100
+                    480,
+                    80,
+                    700,
+                    600
                 ],
                 "template": [
                     "COOK/dish/dish_03.png"
@@ -579,10 +579,10 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    486,
-                    588,
-                    100,
-                    100
+                    480,
+                    80,
+                    700,
+                    600
                 ],
                 "template": [
                     "COOK/dish/dish_04.png"
@@ -611,10 +611,10 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    568,
-                    501,
-                    100,
-                    100
+                    480,
+                    80,
+                    700,
+                    600
                 ],
                 "template": [
                     "COOK/dish/dish_05.png"
@@ -643,10 +643,10 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    819,
-                    499,
-                    100,
-                    100
+                    480,
+                    80,
+                    700,
+                    600
                 ],
                 "template": [
                     "COOK/dish/dish_06.png"
@@ -675,10 +675,10 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    647,
-                    408,
-                    100,
-                    100
+                    480,
+                    80,
+                    700,
+                    600
                 ],
                 "template": [
                     "COOK/dish/dish_07.png"
@@ -707,15 +707,17 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    730,
-                    408,
-                    100,
-                    100
+                    480,
+                    80,
+                    700,
+                    600
                 ],
                 "template": [
                     "COOK/dish/dish_08.png"
                 ],
-                "threshold": 0.7
+                "threshold": [
+                    0.8
+                ]
             }
         },
         "action": {
@@ -739,10 +741,10 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    815,
-                    407,
-                    100,
-                    100
+                    480,
+                    80,
+                    700,
+                    600
                 ],
                 "template": [
                     "COOK/dish/dish_09.png"
@@ -771,10 +773,10 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    900,
-                    411,
-                    100,
-                    100
+                    480,
+                    80,
+                    700,
+                    600
                 ],
                 "template": [
                     "COOK/dish/dish_10.png"
@@ -803,10 +805,10 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    983,
-                    409,
-                    100,
-                    100
+                    480,
+                    80,
+                    700,
+                    600
                 ],
                 "template": [
                     "COOK/dish/dish_11.png"
@@ -835,10 +837,10 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    1069,
-                    243,
-                    100,
-                    100
+                    480,
+                    80,
+                    700,
+                    600
                 ],
                 "template": [
                     "COOK/dish/dish_12.png"
@@ -867,10 +869,10 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    818,
-                    242,
-                    100,
-                    100
+                    480,
+                    80,
+                    700,
+                    600
                 ],
                 "template": [
                     "COOK/dish/dish_13.png"
@@ -899,10 +901,10 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    983,
-                    240,
-                    100,
-                    100
+                    480,
+                    80,
+                    700,
+                    600
                 ],
                 "template": [
                     "COOK/dish/dish_14.png"
@@ -931,10 +933,10 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    732,
-                    158,
-                    100,
-                    100
+                    480,
+                    80,
+                    700,
+                    600
                 ],
                 "template": [
                     "COOK/dish/dish_15.png"
@@ -968,8 +970,7 @@
                     26
                 ],
                 "expected": [
-                    "料",
-                    "理"
+                    "料理"
                 ]
             }
         },
@@ -981,8 +982,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 285,
-                "y": 3253
+                "x": 277,
+                "y": 3272
             }
         }
     },

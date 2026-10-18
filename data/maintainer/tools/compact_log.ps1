@@ -1,6 +1,6 @@
 ﻿<#
 .SYNOPSIS
-    精简 MaaFramework 生成的 debug 日志（debug\maa.log / debug\maa.bak.log）。
+    精简 MaaFramework 生成的 debug 日志（debug\maafw.log / debug\maafw.bak.*.log）。
 
 .DESCRIPTION
     为什么需要这个脚本：
@@ -28,7 +28,7 @@
     （实测 8.9 MB 的原始日志压缩后约 380 KB）。
 
 .PARAMETER Root
-    项目根目录。默认取本脚本的上一级目录。
+    项目根目录。默认取脚本所在目录的上三级（<项目根>/data/maintainer/tools/）。
 
 .PARAMETER RetainDays
     debug\archive\ 下归档文件的保留天数，默认 7。设为 0 或负数表示不清理。
@@ -47,23 +47,23 @@
     把本次统计结果写到指定文件，方便自动化流程读取。
 
 .EXAMPLE
-    .\maintainer\tools\compact_log.ps1 -DryRun
+    .\data\maintainer\tools\compact_log.ps1 -DryRun
     先看一眼能压掉多少，不动文件。
 
 .EXAMPLE
-    .\maintainer\tools\compact_log.ps1 -IncludeRecognition
+    .\data\maintainer\tools\compact_log.ps1 -IncludeRecognition
     精简时保留识别结果行，适合正在调识别参数的时候。
 
 .NOTES
-    必须在 mxu.exe 未运行时执行——日志文件被占用时改写会破坏文件。
-    脚本检测到 mxu.exe 在跑会直接跳过（不报错，保证启动流程不被阻断）。
+    必须在 MaaBd2.exe 未运行时执行——日志文件被占用时改写会破坏文件。
+    脚本检测到 MaaBd2.exe 在跑会直接跳过（不报错，保证启动流程不被阻断）。
 
     文件必须以 UTF-8 with BOM 保存，否则 Windows PowerShell 5.1 会按 ANSI 代码页
     解析本文件里的中文注释而报语法错误。
 #>
 [CmdletBinding()]
 param(
-    [string] $Root = (Split-Path -Parent (Split-Path -Parent $PSScriptRoot)),
+    [string] $Root,
     [int]    $RetainDays = 7,
     [switch] $IncludeRecognition,
     [switch] $NoArchive,
@@ -74,6 +74,10 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+
+# 脚本住在 <项目根>/data/maintainer/tools/ 下（维护者档案目录，不入用户包），
+# 所以项目根 = 脚本所在目录的**上三级**。放在脚本体里算，避免 param 默认值中 $PSScriptRoot 为空。
+if (-not $Root) { $Root = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $PSScriptRoot)) }
 
 # ---------------------------------------------------------------------------
 # 匹配规则
@@ -134,15 +138,15 @@ $DedupWindowMs = 20
 # 辅助函数
 # ---------------------------------------------------------------------------
 
-function Test-MxuRunning {
-    return [bool](Get-Process -Name 'mxu' -ErrorAction SilentlyContinue)
+function Test-ClientRunning {
+    return [bool](Get-Process -Name 'MaaBd2' -ErrorAction SilentlyContinue)
 }
 
 function Test-FileWritable {
     <#
         判断日志文件当前能不能安全改写。
-        比"看进程在不在"更准：MaaFramework 只在运行期间持有 maa.log 的写句柄，
-        轮转出来的 maa.bak.log 是已关闭的，即使 mxu 在跑也可以安全精简。
+        比"看进程在不在"更准：MaaFramework 只在运行期间持有 maafw.log 的写句柄，
+        轮转出来的 maafw.bak.*.log 是已关闭的，即使 MaaBd2 在跑也可以安全精简。
     #>
     param([string] $Path)
     try {
@@ -338,8 +342,8 @@ Say ("参数      : DryRun={0}  IncludeRecognition={1}  NoArchive={2}  RetainDay
         [bool]$DryRun, [bool]$IncludeRecognition, [bool]$NoArchive, $RetainDays)
 Say ''
 
-if (Test-MxuRunning) {
-    Say '[提示] 检测到 mxu.exe 正在运行。'
+if (Test-ClientRunning) {
+    Say '[提示] 检测到 MaaBd2.exe 正在运行。'
     Say '       正在被写入的日志会自动跳过，轮转出来的备份日志照常精简。'
     Say ''
 }
@@ -350,13 +354,13 @@ if ($true) {
     }
     else {
         $targets = @()
-        foreach ($n in @('maa.log', 'maa.bak.log')) {
-            $p = Join-Path $debugDir $n
-            if (Test-Path -LiteralPath $p -PathType Leaf) { $targets += $p }
-        }
+        $current = Join-Path $debugDir 'maafw.log'
+        if (Test-Path -LiteralPath $current -PathType Leaf) { $targets += $current }
+        $targets += @(Get-ChildItem -LiteralPath $debugDir -Filter 'maafw.bak*.log' -File -ErrorAction SilentlyContinue |
+                      Select-Object -ExpandProperty FullName)
 
         if ($targets.Count -eq 0) {
-            Say '[跳过] 没有找到 maa.log / maa.bak.log。'
+            Say '[跳过] 没有找到 maafw.log / maafw.bak.*.log。'
         }
 
         foreach ($path in $targets) {
@@ -366,7 +370,7 @@ if ($true) {
 
             if (-not $SkipLockCheck -and -not (Test-FileWritable $path)) {
                 Say ("  原始    : {0,12:N0} 字节" -f $before)
-                Say '  [跳过]  文件正被占用（MXU 或本次运行仍在写日志）。'
+                Say '  [跳过]  文件正被占用（MaaBd2 或本次运行仍在写日志）。'
                 Say '          等下次启动时会被自动精简。'
                 Say ''
                 continue
@@ -413,7 +417,7 @@ if ($true) {
                 # 结果所有元素被空格拼成一个字符串。每个元素都要单独加括号。
                 $header = @(
                     ('# ' + ('=' * 61)),
-                    ('# BD2MAA 精简日志   (maintainer\tools\compact_log.ps1 生成)'),
+                    ('# BD2MAA 精简日志   (data\maintainer\tools\compact_log.ps1 生成)'),
                     ("# 生成时间  : {0}" -f (Get-Date).ToString('yyyy-MM-dd HH:mm:ss')),
                     ("# 原始      : {0:N0} 字节 / {1:N0} 行" -f $before, $r.RawLines),
                     ("# 精简后    : {0:N0} 字节 / {1:N0} 行" -f $after, $r.NewLines),
