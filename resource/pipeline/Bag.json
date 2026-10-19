@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791560617067,
+            "lastSyncTime": 1792034904076,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Bag.json",
             "savedViewport": {
-                "x": -3925,
-                "y": -590,
-                "zoom": 1.09
+                "x": -2285,
+                "y": -330,
+                "zoom": 0.8
             },
             "filename": "Bag",
-            "version": "v2.0.6"
+            "version": "v2.1.0"
         }
     },
     "$__mpe_external_StartGame_Bag": {
@@ -434,15 +434,19 @@
                 "threshold": 0.6
             }
         },
+        "timeout": 6000,
         "next": [
             "IntensifyChoose18",
             "IntensifyChoose19",
             "IntensifyChoose20"
         ],
+        "on_error": [
+            "StartGame"
+        ],
         "$__mpe_code": {
             "position": {
-                "x": 3299,
-                "y": 851
+                "x": 3297,
+                "y": 795
             }
         }
     },

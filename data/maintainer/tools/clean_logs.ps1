@@ -2,9 +2,9 @@
 # ---------------------------------------------------------------------------
 # BD2MAA log housekeeping: keep only the most recent N days of debug/ logs.
 #
-# MXU / MaaFramework write a steady stream of logs into <root>\debug:
-#   - mxu-web-YYYY-MM-DD.log   (rotated daily by MXU itself)
-#   - mxu-agent.log, mxu-tauri.log, maa.log, go-service.log  (rolling)
+# MaaBd2 / MaaFramework write a steady stream of logs into <root>\debug:
+#   - maafw.log / maafw.bak.<stamp>.log   (framework log, rotated per run)
+#   - mxu-agent-*.log, go-service.log, on_error\*.png  (rolling / accumulated)
 # Left alone they grow without bound. This script trims anything whose
 # LastWriteTime is older than the retention window (default 7 days).
 #
@@ -12,9 +12,9 @@
 # any file outside <root>\debug.
 #
 # Usage:
-#   powershell -NoProfile -ExecutionPolicy Bypass -File maintainer\tools\clean_logs.ps1
-#   powershell -NoProfile -ExecutionPolicy Bypass -File maintainer\tools\clean_logs.ps1 -Days 14
-#   powershell -NoProfile -ExecutionPolicy Bypass -File maintainer\tools\clean_logs.ps1 -DryRun
+#   powershell -NoProfile -ExecutionPolicy Bypass -File data\maintainer\tools\clean_logs.ps1
+#   powershell -NoProfile -ExecutionPolicy Bypass -File data\maintainer\tools\clean_logs.ps1 -Days 14
+#   powershell -NoProfile -ExecutionPolicy Bypass -File data\maintainer\tools\clean_logs.ps1 -DryRun
 # ---------------------------------------------------------------------------
 param(
     [string]$Root,
@@ -24,9 +24,9 @@ param(
 
 $ErrorActionPreference = 'SilentlyContinue'
 
-# 脚本住在 <项目根>/maintainer/tools/ 下（维护者档案目录，不入用户包），
-# 所以项目根 = 脚本所在目录的**上两级**。
-if (-not $Root) { $Root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot) }
+# 脚本住在 <项目根>/data/maintainer/tools/ 下（维护者档案目录，不入用户包），
+# 所以项目根 = 脚本所在目录的**上三级**。
+if (-not $Root) { $Root = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $PSScriptRoot)) }
 
 $debugDir = Join-Path $Root 'debug'
 if (-not (Test-Path -LiteralPath $debugDir)) {
