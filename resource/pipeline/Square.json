@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791915355298,
+            "lastSyncTime": 1792500261426,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Square.json",
             "savedViewport": {
-                "x": -931,
-                "y": 127,
-                "zoom": 1
+                "x": 416,
+                "y": -143,
+                "zoom": 0.92
             },
             "filename": "Square",
-            "version": "v2.0.6"
+            "version": "v2.1.0"
         }
     },
     "$__mpe_external_StartGame_Square": {
@@ -68,7 +68,7 @@
         }
     },
     "EnterOperating_3": {
-        "max_hit": 2,
+        "max_hit": 3,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -85,7 +85,7 @@
                 "threshold": 0.5
             }
         },
-        "pre_delay": 1500,
+        "pre_delay": 3000,
         "action": {
             "type": "Click",
             "param": {
@@ -308,6 +308,45 @@
             }
         }
     },
+    "MoveSquare": {
+        "max_hit": 1,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1023,
+                    110,
+                    214,
+                    120
+                ],
+                "expected": [
+                    "每日",
+                    "移动",
+                    "艾",
+                    "力",
+                    "克",
+                    "史",
+                    "温",
+                    "女"
+                ],
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 9000,
+        "next": [
+            "GetSquare",
+            "GetDaily2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1746,
+                "y": 614
+            }
+        }
+    },
     "StartSquare": {
         "next": [
             "竞技场跳转广场",
@@ -353,45 +392,6 @@
             "position": {
                 "x": 597,
                 "y": -36
-            }
-        }
-    },
-    "MoveSquare": {
-        "max_hit": 1,
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    1023,
-                    110,
-                    214,
-                    120
-                ],
-                "expected": [
-                    "每日",
-                    "移动",
-                    "艾",
-                    "力",
-                    "克",
-                    "史",
-                    "温",
-                    "女"
-                ],
-                "threshold": 0.6
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_delay": 9000,
-        "next": [
-            "GetSquare",
-            "GetDaily2"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 1746,
-                "y": 614
             }
         }
     }

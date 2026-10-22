@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791797757812,
+            "lastSyncTime": 1792500191226,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Trade\\SellPremium.json",
             "savedViewport": {
-                "x": -2719,
-                "y": -506,
-                "zoom": 1
+                "x": -971,
+                "y": -898,
+                "zoom": 1.39
             },
             "filename": "SellPremium",
-            "version": "v2.0.6"
+            "version": "v2.1.0"
         }
     },
     "$__mpe_external_StartGame_SellPremium": {
@@ -67,7 +67,7 @@
         }
     },
     "SP_EnterOperating": {
-        "max_hit": 2,
+        "max_hit": 3,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -84,7 +84,7 @@
                 "threshold": 0.5
             }
         },
-        "pre_delay": 1500,
+        "pre_delay": 3000,
         "action": {
             "type": "Click",
             "param": {

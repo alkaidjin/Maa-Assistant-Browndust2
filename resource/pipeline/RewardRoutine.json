@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791540105051,
+            "lastSyncTime": 1792649961769,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\RewardRoutine.json",
             "savedViewport": {
-                "x": -5150,
-                "y": 113,
-                "zoom": 1.32
+                "x": 133,
+                "y": -13,
+                "zoom": 0.92
             },
             "filename": "RewardRoutine",
-            "version": "v2.0.6"
+            "version": "v2.1.0"
         }
     },
     "$__mpe_external_StartGame_RewardRoutine": {
@@ -133,8 +133,8 @@
         "timeout": 5000,
         "$__mpe_code": {
             "position": {
-                "x": 1726,
-                "y": 808
+                "x": 1797,
+                "y": 694
             }
         }
     },
@@ -293,8 +293,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 643,
-                "y": 853
+                "x": 443,
+                "y": 905
             }
         }
     },
@@ -358,8 +358,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 644,
-                "y": 442
+                "x": 475,
+                "y": 450
             }
         }
     },
@@ -685,8 +685,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1344,
-                "y": 441
+                "x": 1335,
+                "y": 465
             }
         }
     },
@@ -795,8 +795,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 665,
-                "y": 1490
+                "x": 435,
+                "y": 1540
             }
         }
     },
@@ -1051,8 +1051,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 653,
-                "y": 1187
+                "x": 447,
+                "y": 1244
             }
         }
     },
@@ -1144,12 +1144,48 @@
             "GetAllrewards",
             "ExChange100_1",
             "免费次数",
-            "RollTheDice"
+            "RollTheDice",
+            "GetAllrewards2"
         ],
         "$__mpe_code": {
             "position": {
                 "x": -489,
                 "y": 393
+            }
+        }
+    },
+    "GetAllrewards2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    562,
+                    490,
+                    78,
+                    26
+                ],
+                "expected": [
+                    "全部解锁",
+                    "全部",
+                    "解锁"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 2,
+        "repeat_delay": 200,
+        "post_delay": 4500,
+        "timeout": 10000,
+        "next": [
+            "RewardSure_1",
+            "EVENTSWIPE"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 757,
+                "y": 474
             }
         }
     }

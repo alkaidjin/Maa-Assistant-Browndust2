@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1792216581531,
+            "lastSyncTime": 1792499379893,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Trade\\CookMeals.json",
             "savedViewport": {
-                "x": 174,
-                "y": -4239,
-                "zoom": 1.39
+                "x": 1613,
+                "y": -3064,
+                "zoom": 1.05
             },
             "filename": "CookMeals",
             "version": "v2.1.0"
@@ -211,7 +211,7 @@
         }
     },
     "Cook_EnterOperating": {
-        "max_hit": 2,
+        "max_hit": 3,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -228,7 +228,7 @@
                 "threshold": 0.5
             }
         },
-        "pre_delay": 1500,
+        "pre_delay": 3000,
         "action": {
             "type": "Click",
             "param": {

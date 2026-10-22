@@ -3,24 +3,24 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791625331620,
+            "lastSyncTime": 1792499983748,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\WeeklyTasks.json",
             "savedViewport": {
-                "x": -5201,
-                "y": 1116,
-                "zoom": 1.25
+                "x": -4752,
+                "y": 850,
+                "zoom": 1.05
             },
             "filename": "WeeklyTasks",
-            "version": "v2.0.6"
+            "version": "v2.1.0"
         }
     },
     "$__mpe_external_StartGame_WeeklyTasks": {
         "$__mpe_code": {
             "position": {
-                "x": 46,
-                "y": -456
+                "x": 6643,
+                "y": -834
             }
         }
     },
@@ -97,7 +97,7 @@
         }
     },
     "EnterOperating_WM": {
-        "max_hit": 2,
+        "max_hit": 3,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -114,7 +114,7 @@
                 "threshold": 0.5
             }
         },
-        "pre_delay": 1500,
+        "pre_delay": 3000,
         "action": {
             "type": "Click",
             "param": {
@@ -441,6 +441,14 @@
             }
         }
     },
+    "WeeklyTask_End": {
+        "$__mpe_code": {
+            "position": {
+                "x": -140,
+                "y": 8
+            }
+        }
+    },
     "WeeklyTask_ScheduleEnabled": {
         "recognition": {
             "type": "Custom",
@@ -465,12 +473,11 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": -114,
-                "y": -250
+                "x": -149,
+                "y": -367
             }
         }
     },
-    "WeeklyTask_End": {},
     "WeeklyTask_Start": {
         "focus": "每周任务（小屋点赞+街机游戏+末日之书+装备制作）入口：请在游戏主界面开始。受 WeeklyTaskSchedule 星期门控控制，仅选定星期执行，其余日子落到 WeeklyTask_End 空节点绿色结束。",
         "next": [

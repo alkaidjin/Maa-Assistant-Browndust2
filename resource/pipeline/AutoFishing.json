@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1790927416216,
+            "lastSyncTime": 1792500433410,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\AutoFishing.json",
             "savedViewport": {
-                "x": -2172,
-                "y": -335,
-                "zoom": 1.14
+                "x": 2,
+                "y": -89,
+                "zoom": 1.39
             },
             "filename": "AutoFishing",
-            "version": "v2.0.6"
+            "version": "v2.1.0"
         }
     },
     "$__mpe_external_StartGame_AutoFishing": {
@@ -169,7 +169,7 @@
         }
     },
     "AutoFishingEnter_1": {
-        "max_hit": 2,
+        "max_hit": 3,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -186,7 +186,7 @@
                 "threshold": 0.5
             }
         },
-        "pre_delay": 1000,
+        "pre_delay": 3000,
         "action": {
             "type": "Click",
             "param": {

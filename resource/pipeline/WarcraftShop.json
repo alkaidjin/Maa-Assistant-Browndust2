@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791915519370,
+            "lastSyncTime": 1792503924689,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\WarcraftShop.json",
             "savedViewport": {
-                "x": -1980,
-                "y": 638,
-                "zoom": 1
+                "x": -2202,
+                "y": 22,
+                "zoom": 0.61
             },
             "filename": "WarcraftShop",
             "version": "v2.1.0"
@@ -387,10 +387,11 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 2000,
+        "post_delay": 6000,
         "next": [
             "InWarcraftShop_1",
-            "InWarcraftShop_2"
+            "InWarcraftShop_2",
+            "EnterWarcraft_WS"
         ],
         "$__mpe_code": {
             "position": {
@@ -627,16 +628,25 @@
             }
         },
         "action": {
-            "type": "Click"
+            "type": "Click",
+            "param": {
+                "target": [
+                    824,
+                    640,
+                    1,
+                    1
+                ]
+            }
         },
+        "post_delay": 3000,
         "next": [
             "InWarcraftShop_1",
             "WarcraftShopBuyLoop"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3740,
-                "y": 207
+                "x": 3730,
+                "y": 139
             }
         }
     },
@@ -658,16 +668,25 @@
             }
         },
         "action": {
-            "type": "Click"
+            "type": "Click",
+            "param": {
+                "target": [
+                    952,
+                    640,
+                    1,
+                    1
+                ]
+            }
         },
+        "post_delay": 3000,
         "next": [
             "InWarcraftShop_2",
             "WarcraftShopBuyLoop"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3737,
-                "y": 518
+                "x": 3742,
+                "y": 563
             }
         }
     },
@@ -686,7 +705,7 @@
                     "SHOP/LeftGold_MS.png"
                 ],
                 "threshold": [
-                    0.93
+                    0.9
                 ]
             }
         },
@@ -694,8 +713,10 @@
             "type": "Click",
             "param": {
                 "target_offset": [
-                    23,
-                    18
+                    29,
+                    37,
+                    -77,
+                    -124
                 ]
             }
         },
@@ -733,8 +754,10 @@
             "type": "Click",
             "param": {
                 "target_offset": [
-                    25,
-                    28
+                    24,
+                    37,
+                    -73,
+                    -125
                 ]
             }
         },
@@ -907,7 +930,7 @@
                     "SHOP/RefinedCrystal_MS.png"
                 ],
                 "threshold": [
-                    0.8
+                    0.7
                 ]
             }
         },
@@ -1019,7 +1042,7 @@
     "WarcraftShopBuyLoop": {
         "desc": "购买循环：按顺序尝试每个商品节点。未勾选的商品 enabled=false 会被框架直接跳过；每个商品 max_hit=1 保证一次任务只买一次。全部无可买时走 on_error 收尾",
         "pre_delay": 0,
-        "post_delay": 500,
+        "post_delay": 2000,
         "next": [
             "[JumpBack]DrawCard_MS",
             "[JumpBack]FireSeed_MS",

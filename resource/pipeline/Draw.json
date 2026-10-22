@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1792288232246,
+            "lastSyncTime": 1792456997015,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Draw.json",
             "savedViewport": {
-                "x": -678,
-                "y": 628,
-                "zoom": 1.39
+                "x": 529,
+                "y": 648,
+                "zoom": 0.8
             },
             "filename": "Draw",
             "version": "v2.1.0"
@@ -158,6 +158,7 @@
         }
     },
     "EnterDraw": {
+        "max_hit": 3,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -185,12 +186,15 @@
             "EnterDraw",
             "AllDraw",
             "Equipment",
+            "[JumpBack]RejectAward",
+            "[JumpBack]RejectAnnouncement",
+            "[JumpBack]SevenDays",
             "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 339,
-                "y": -288
+                "x": 120,
+                "y": -490
             }
         }
     },
@@ -228,8 +232,32 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": -4,
-                "y": -44
+                "x": -241,
+                "y": -99
+            }
+        }
+    },
+    "$__mpe_external_RejectAward_Draw": {
+        "$__mpe_code": {
+            "position": {
+                "x": 259,
+                "y": 54
+            }
+        }
+    },
+    "$__mpe_external_RejectAnnouncement_Draw": {
+        "$__mpe_code": {
+            "position": {
+                "x": 260,
+                "y": 138
+            }
+        }
+    },
+    "$__mpe_external_SevenDays_Draw": {
+        "$__mpe_code": {
+            "position": {
+                "x": 264,
+                "y": 224
             }
         }
     }
