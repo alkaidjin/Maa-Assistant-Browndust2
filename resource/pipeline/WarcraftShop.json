@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1792503924689,
+            "lastSyncTime": 1792652256327,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\WarcraftShop.json",
             "savedViewport": {
-                "x": -2202,
-                "y": 22,
-                "zoom": 0.61
+                "x": -2627,
+                "y": 25,
+                "zoom": 0.84
             },
             "filename": "WarcraftShop",
             "version": "v2.1.0"

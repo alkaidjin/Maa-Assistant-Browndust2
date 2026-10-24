@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1792457188069,
+            "lastSyncTime": 1792857246082,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\StartGame.json",
             "savedViewport": {
-                "x": -1599,
-                "y": 984,
-                "zoom": 1.83
+                "x": -140,
+                "y": -1620,
+                "zoom": 0.64
             },
             "filename": "StartGame",
             "version": "v2.1.0"
@@ -70,11 +70,11 @@
                 "threshold": 0.4
             }
         },
-        "pre_delay": 2000,
+        "pre_delay": 1500,
         "action": {
             "type": "Click"
         },
-        "post_delay": 2000,
+        "post_delay": 1500,
         "$__mpe_code": {
             "position": {
                 "x": 1005,
@@ -98,11 +98,11 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 2000,
+        "post_delay": 3000,
         "$__mpe_code": {
             "position": {
-                "x": 999,
-                "y": 1693
+                "x": 1005,
+                "y": 1688
             }
         }
     },
@@ -147,6 +147,7 @@
         "action": {
             "type": "Click"
         },
+        "post_delay": 9000,
         "$__mpe_code": {
             "position": {
                 "x": 1329,
@@ -252,7 +253,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 2000,
+        "post_delay": 3000,
         "$__mpe_code": {
             "position": {
                 "x": 761,
@@ -278,7 +279,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 2000,
+        "post_delay": 3000,
         "$__mpe_code": {
             "position": {
                 "x": 1009,
@@ -368,7 +369,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 2000,
+        "post_delay": 3000,
         "$__mpe_code": {
             "position": {
                 "x": 1010,
@@ -393,7 +394,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 2000,
+        "post_delay": 3000,
         "$__mpe_code": {
             "position": {
                 "x": 1008,
@@ -418,7 +419,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 2000,
+        "post_delay": 3000,
         "$__mpe_code": {
             "position": {
                 "x": 1006,
@@ -542,7 +543,7 @@
                 ]
             }
         },
-        "post_delay": 2000,
+        "post_delay": 1500,
         "next": [
             "WhetherSevenDaysTick",
             "SevenDays"
@@ -749,7 +750,7 @@
                 ]
             }
         },
-        "post_delay": 1500,
+        "post_delay": 3000,
         "$__mpe_code": {
             "position": {
                 "x": 1286,

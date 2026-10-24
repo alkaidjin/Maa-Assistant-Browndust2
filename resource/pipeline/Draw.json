@@ -3,17 +3,41 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1792456997015,
+            "lastSyncTime": 1792857226269,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Draw.json",
             "savedViewport": {
-                "x": 529,
-                "y": 648,
-                "zoom": 0.8
+                "x": 262,
+                "y": 517,
+                "zoom": 0.64
             },
             "filename": "Draw",
             "version": "v2.1.0"
+        }
+    },
+    "$__mpe_external_RejectAnnouncement_Draw": {
+        "$__mpe_code": {
+            "position": {
+                "x": 260,
+                "y": 138
+            }
+        }
+    },
+    "$__mpe_external_RejectAward_Draw": {
+        "$__mpe_code": {
+            "position": {
+                "x": 259,
+                "y": 54
+            }
+        }
+    },
+    "$__mpe_external_SevenDays_Draw": {
+        "$__mpe_code": {
+            "position": {
+                "x": 264,
+                "y": 224
+            }
         }
     },
     "$__mpe_external_StartGame_Draw": {
@@ -183,12 +207,12 @@
         },
         "post_delay": 4500,
         "next": [
-            "EnterDraw",
-            "AllDraw",
-            "Equipment",
             "[JumpBack]RejectAward",
             "[JumpBack]RejectAnnouncement",
             "[JumpBack]SevenDays",
+            "EnterDraw",
+            "AllDraw",
+            "Equipment",
             "StartGame"
         ],
         "$__mpe_code": {
@@ -232,32 +256,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": -241,
-                "y": -99
-            }
-        }
-    },
-    "$__mpe_external_RejectAward_Draw": {
-        "$__mpe_code": {
-            "position": {
-                "x": 259,
-                "y": 54
-            }
-        }
-    },
-    "$__mpe_external_RejectAnnouncement_Draw": {
-        "$__mpe_code": {
-            "position": {
-                "x": 260,
-                "y": 138
-            }
-        }
-    },
-    "$__mpe_external_SevenDays_Draw": {
-        "$__mpe_code": {
-            "position": {
-                "x": 264,
-                "y": 224
+                "x": -240,
+                "y": -195
             }
         }
     }

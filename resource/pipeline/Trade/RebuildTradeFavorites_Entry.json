@@ -3,17 +3,17 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791804273986,
+            "lastSyncTime": 1792858579600,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Trade\\RebuildTradeFavorites_Entry.json",
             "savedViewport": {
-                "x": -1790,
-                "y": -26,
-                "zoom": 0.87
+                "x": -881,
+                "y": 76,
+                "zoom": 0.73
             },
             "filename": "RebuildTradeFavorites_Entry",
-            "version": "v2.0.6"
+            "version": "v2.1.0"
         }
     },
     "$__mpe_external_RTF_sel_S1_RebuildTradeFavorites_Entry": {
@@ -62,12 +62,13 @@
         "post_delay": 1500,
         "next": [
             "RTF_ZiLuo",
-            "RTF_OnSquare"
+            "RTF_OnSquare_1",
+            "RTF_OnSquare_2"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1882,
-                "y": 688
+                "x": 1897,
+                "y": 968
             }
         }
     },
@@ -279,24 +280,25 @@
         },
         "next": [
             "GetDaily_RTF",
-            "RTF_OnSquare"
+            "RTF_OnSquare_1",
+            "RTF_OnSquare_2"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1280,
-                "y": 301
+                "x": 1255,
+                "y": 282
             }
         }
     },
-    "RTF_GOshop": {
+    "RTF_GOshop_1": {
         "recognition": {
             "type": "OCR",
             "param": {
                 "roi": [
-                    225,
-                    216,
-                    69,
-                    49
+                    231,
+                    226,
+                    57,
+                    29
                 ],
                 "expected": [
                     "商店"
@@ -315,20 +317,20 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1920,
-                "y": 327
+                "x": 2033,
+                "y": 125
             }
         }
     },
-    "RTF_OnSquare": {
+    "RTF_OnSquare_1": {
         "recognition": {
             "type": "OCR",
             "param": {
                 "roi": [
                     245,
-                    92,
-                    180,
-                    30
+                    94,
+                    66,
+                    27
                 ],
                 "expected": [
                     "招募",
@@ -352,12 +354,55 @@
         "post_delay": 1500,
         "focus": "",
         "next": [
-            "RTF_GOshop"
+            "RTF_GOshop_1",
+            "RTF_OnSquare_1"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1659,
-                "y": 45
+                "x": 1670,
+                "y": 87
+            }
+        }
+    },
+    "RTF_OnSquare_2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    358,
+                    95,
+                    60,
+                    24
+                ],
+                "expected": [
+                    "招募",
+                    "情况",
+                    "招募情况"
+                ],
+                "threshold": 0.8
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    304,
+                    74,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "focus": "",
+        "next": [
+            "RTF_GOshop_2",
+            "RTF_OnSquare_2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1677,
+                "y": 469
             }
         }
     },
@@ -378,7 +423,8 @@
         "focus": "Entry: rebuild 48 resale-item favorites, every cartridge (inverse color click).",
         "next": [
             "RTF_EnterOperating",
-            "RTF_OnSquare",
+            "RTF_OnSquare_1",
+            "RTF_OnSquare_2",
             "[JumpBack]StartGame"
         ],
         "$__mpe_code": {
@@ -423,8 +469,40 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2240,
-                "y": 327
+                "x": 2538,
+                "y": 371
+            }
+        }
+    },
+    "RTF_GOshop_2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    345,
+                    228,
+                    51,
+                    26
+                ],
+                "expected": [
+                    "商店"
+                ],
+                "threshold": 0.8
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 3000,
+        "focus": "",
+        "next": [
+            "RTF_ZiLuo",
+            "GetDaily_RTF"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2035,
+                "y": 465
             }
         }
     }
