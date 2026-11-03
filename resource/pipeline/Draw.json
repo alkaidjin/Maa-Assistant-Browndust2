@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1792857226269,
+            "lastSyncTime": 1793674281936,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Draw.json",
             "savedViewport": {
-                "x": 262,
-                "y": 517,
-                "zoom": 0.64
+                "x": 58,
+                "y": 722,
+                "zoom": 1.72
             },
             "filename": "Draw",
             "version": "v2.1.0"
@@ -182,7 +182,7 @@
         }
     },
     "EnterDraw": {
-        "max_hit": 3,
+        "max_hit": 6,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -205,7 +205,7 @@
                 ]
             }
         },
-        "post_delay": 4500,
+        "post_delay": 6000,
         "next": [
             "[JumpBack]RejectAward",
             "[JumpBack]RejectAnnouncement",
