@@ -3,24 +3,24 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791804281486,
+            "lastSyncTime": 1793671403546,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Trade\\MapTrade.json",
             "savedViewport": {
-                "x": -1262,
-                "y": 417,
-                "zoom": 1
+                "x": -2237,
+                "y": 501,
+                "zoom": 1.06
             },
             "filename": "MapTrade",
-            "version": "v2.0.6"
+            "version": "v2.1.0"
         }
     },
-    "$__mpe_external_OnSquare_Cook_MapTrade": {
+    "$__mpe_external_OnSquare_Cook1_MapTrade": {
         "$__mpe_code": {
             "position": {
-                "x": 614,
-                "y": 355
+                "x": 2734,
+                "y": -137
             }
         }
     },
@@ -243,7 +243,8 @@
             "wednesday": false
         },
         "next": [
-            "OnSquare_Cook"
+            "OnSquare_Cook1",
+            "OnSquare_Cook2"
         ],
         "$__mpe_code": {
             "position": {
@@ -314,6 +315,14 @@
             "position": {
                 "x": 977,
                 "y": -483
+            }
+        }
+    },
+    "$__mpe_external_OnSquare_Cook2_MapTrade": {
+        "$__mpe_code": {
+            "position": {
+                "x": 2731,
+                "y": -32
             }
         }
     }

@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1792858579600,
+            "lastSyncTime": 1793670521771,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Trade\\RebuildTradeFavorites_Entry.json",
             "savedViewport": {
-                "x": -881,
-                "y": 76,
-                "zoom": 0.73
+                "x": -1031,
+                "y": 190,
+                "zoom": 1.11
             },
             "filename": "RebuildTradeFavorites_Entry",
             "version": "v2.1.0"
@@ -322,6 +322,38 @@
             }
         }
     },
+    "RTF_GOshop_2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    345,
+                    228,
+                    51,
+                    26
+                ],
+                "expected": [
+                    "商店"
+                ],
+                "threshold": 0.8
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 3000,
+        "focus": "",
+        "next": [
+            "RTF_ZiLuo",
+            "GetDaily_RTF"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2035,
+                "y": 465
+            }
+        }
+    },
     "RTF_OnSquare_1": {
         "recognition": {
             "type": "OCR",
@@ -471,38 +503,6 @@
             "position": {
                 "x": 2538,
                 "y": 371
-            }
-        }
-    },
-    "RTF_GOshop_2": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    345,
-                    228,
-                    51,
-                    26
-                ],
-                "expected": [
-                    "商店"
-                ],
-                "threshold": 0.8
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "post_delay": 3000,
-        "focus": "",
-        "next": [
-            "RTF_ZiLuo",
-            "GetDaily_RTF"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 2035,
-                "y": 465
             }
         }
     }

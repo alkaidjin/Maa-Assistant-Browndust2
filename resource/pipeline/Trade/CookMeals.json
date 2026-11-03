@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1792499379893,
+            "lastSyncTime": 1793673541820,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Trade\\CookMeals.json",
             "savedViewport": {
-                "x": 1613,
-                "y": -3064,
-                "zoom": 1.05
+                "x": -451,
+                "y": -8038,
+                "zoom": 2.5
             },
             "filename": "CookMeals",
             "version": "v2.1.0"
@@ -954,23 +954,26 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1380,
-                "y": 97
+                "x": 1343,
+                "y": 120
             }
         }
     },
     "Coooooooook": {
         "recognition": {
-            "type": "OCR",
+            "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    110,
-                    605,
-                    1030,
-                    26
+                    85,
+                    594,
+                    1110,
+                    59
                 ],
-                "expected": [
-                    "料理"
+                "template": [
+                    "COOK/cooook.png"
+                ],
+                "threshold": [
+                    0.8
                 ]
             }
         },
@@ -982,8 +985,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 277,
-                "y": 3272
+                "x": 268,
+                "y": 3271
             }
         }
     },
@@ -1015,7 +1018,8 @@
         },
         "repeat": 2,
         "next": [
-            "OnSquare_Cook"
+            "OnSquare_Cook1",
+            "OnSquare_Cook2"
         ],
         "$__mpe_code": {
             "position": {
@@ -1024,19 +1028,20 @@
             }
         }
     },
-    "OnSquare_Cook": {
+    "OnSquare_Cook1": {
         "recognition": {
             "type": "OCR",
             "param": {
                 "roi": [
-                    236,
-                    84,
-                    84,
-                    45
+                    245,
+                    94,
+                    66,
+                    27
                 ],
                 "expected": [
                     "招募",
-                    "情况"
+                    "情况",
+                    "招募情况"
                 ],
                 "threshold": 0.8
             }
@@ -1052,7 +1057,6 @@
                 ]
             }
         },
-        "repeat": 2,
         "post_delay": 1500,
         "focus": "",
         "next": [
@@ -1061,8 +1065,50 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 18,
-                "y": 2970
+                "x": 4,
+                "y": 2896
+            }
+        }
+    },
+    "OnSquare_Cook2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    358,
+                    95,
+                    60,
+                    24
+                ],
+                "expected": [
+                    "招募",
+                    "情况",
+                    "招募情况"
+                ],
+                "threshold": 0.8
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    606,
+                    666,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "focus": "",
+        "next": [
+            "Coooooooook",
+            "Ccok_Swipe"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 11,
+                "y": 3298
             }
         }
     }

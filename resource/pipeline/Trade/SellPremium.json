@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1792500191226,
+            "lastSyncTime": 1793673622603,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Trade\\SellPremium.json",
             "savedViewport": {
-                "x": -971,
-                "y": -898,
-                "zoom": 1.39
+                "x": -342,
+                "y": -874,
+                "zoom": 1.5
             },
             "filename": "SellPremium",
             "version": "v2.1.0"
@@ -172,7 +172,8 @@
         "repeat": 2,
         "focus": "",
         "next": [
-            "SP_OnSquare"
+            "SP_OnSquare_1",
+            "SP_OnSquare_2"
         ],
         "$__mpe_code": {
             "position": {
@@ -181,15 +182,15 @@
             }
         }
     },
-    "SP_GOshop": {
+    "SP_GOshop_1": {
         "recognition": {
             "type": "OCR",
             "param": {
                 "roi": [
-                    225,
-                    216,
-                    69,
-                    49
+                    231,
+                    226,
+                    57,
+                    29
                 ],
                 "expected": [
                     "商店"
@@ -207,25 +208,56 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2535,
-                "y": 740
+                "x": 2567,
+                "y": 586
             }
         }
     },
-    "SP_OnSquare": {
+    "SP_GOshop_2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    345,
+                    228,
+                    51,
+                    26
+                ],
+                "expected": [
+                    "商店"
+                ],
+                "threshold": 0.8
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 3000,
+        "focus": "",
+        "next": [
+            "SP_ZiLuo"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2573,
+                "y": 981
+            }
+        }
+    },
+    "SP_OnSquare_1": {
         "recognition": {
             "type": "OCR",
             "param": {
                 "roi": [
                     245,
-                    92,
-                    180,
-                    30
+                    94,
+                    66,
+                    27
                 ],
                 "expected": [
-                    "招募情况",
                     "招募",
-                    "情况"
+                    "情况",
+                    "招募情况"
                 ],
                 "threshold": 0.8
             }
@@ -244,12 +276,53 @@
         "post_delay": 1500,
         "focus": "",
         "next": [
-            "SP_GOshop"
+            "SP_GOshop_1"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2225,
-                "y": 717
+                "x": 2207,
+                "y": 546
+            }
+        }
+    },
+    "SP_OnSquare_2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    358,
+                    95,
+                    60,
+                    24
+                ],
+                "expected": [
+                    "招募",
+                    "情况",
+                    "招募情况"
+                ],
+                "threshold": 0.8
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    304,
+                    74,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 1500,
+        "focus": "",
+        "next": [
+            "SP_GOshop_2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2188,
+                "y": 979
             }
         }
     },
@@ -486,13 +559,14 @@
         "next": [
             "Trade_AlreadyInShop",
             "SP_EnterOperating",
-            "[JumpBack]StartGame",
-            "SP_OnSquare"
+            "SP_OnSquare_1",
+            "SP_OnSquare_2",
+            "[JumpBack]StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 618,
-                "y": 771
+                "x": 598,
+                "y": 753
             }
         }
     },
