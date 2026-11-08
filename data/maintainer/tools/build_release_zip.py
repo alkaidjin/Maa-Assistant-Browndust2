@@ -170,8 +170,19 @@ EXCLUDE_FILES = {
 #     ⇒ ADB / 手柄 / 自定义 / 录制 / 回放五种控制器永远不会被创建，DLL 也就永远不会被加载。
 #   * MaaNode.node / MaaNodeServer.node 是 **Node.js** 的 native addon；MXU 是 Tauri(Rust)，
 #     包里也没有 node 运行时 → 无人加载（反查：除它们自己外无任何二进制引用这两个名字）。
-#   * MaaPiCli.exe 是命令行调试器，MXU 不调它。
-# 合计 ≈ 5.1 MiB（未压缩）；这些文件**仍在 git 里**（维护者随时可放回），只是不派发。
+#   * ~~MaaPiCli.exe 是命令行调试器，MXU 不调它。~~ **MaaFramework 5.15.0 起上游不再发布
+#     该文件**（zip 里已没有 bin/MaaPiCli.exe），条目保留仅为「老目录里残留也不再派发」的护栏。
+#   * dxcompiler.dll / dxil.dll（v26.11.x 新增，来自 MaaFramework 5.15.0 的 bin/）：
+#     只服务「WebGPU → D3D12 着色器编译」这条**永远进不去**的路径 ——
+#     ① MXU 没有 WebGPU 开关（2.9.0 的 mxu.exe 字符串扫描：WebGPU/webgpu/DirectML 均 0 命中）；
+#     ② MaaInferenceDevice 默认 Auto → 有 GPU 时走 DirectML、否则 CPU。
+#     实测依据：删掉这两个后，`go test -run TestRock`（真实 OCR + pipeline，见
+#     data/maintainer/agent/rock-picker/integration_test.go）在 5.15.0 上仍 PASS。
+#     ⛔ 但同批新增的 webgpu_dawn_maa.dll **不能剪** —— onnxruntime_maa.dll 静态导入它，
+#        缺了连 MaaFramework.dll 都加载不出来（实测：直接 "specified module could not be found"）。
+#     若将来 MXU 开放 WebGPU 选项，把这两个从 zip 的 bin/ 补回、并从本集合移除即可。
+# 合计 ≈ 5.1 MiB（旧集）+ 18.6 MiB（dxcompiler+dxil）= 23.7 MiB（未压缩）；除 dxcompiler/dxil 外，
+# 其余文件**仍在 git 里**（维护者随时可放回），只是不派发。
 # ⚠️ 不要顺手加 `maafw/DirectML.dll`（17.7 MiB，看起来最肥）：
 #    MaaInferenceDevice 默认 **Auto**，而 Ort::GetAvailableProviders() 是否含
 #    DmlExecutionProvider 是**编译期**决定的（本仓 onnxruntime_maa.dll 里确实编译进去了），
@@ -183,6 +194,7 @@ PRUNED_BINARIES = {
     'maafw/ViGEmClient.dll',            # 手柄控制器 ViGEm 的客户端，随 Gamepad 一起无用
     'maafw/MaaCustomControlUnit.dll', 'maafw/MaaRecordControlUnit.dll',
     'maafw/MaaReplayControlUnit.dll',
+    'maafw/dxcompiler.dll', 'maafw/dxil.dll',   # 5.15 新增，只服务 WebGPU，见上方说明
 }
 EXCLUDE_FILES |= PRUNED_BINARIES
 
@@ -365,6 +377,10 @@ REQUIRED_FILES = [
     'resource/model/ocr/det.onnx', 'resource/model/ocr/rec.onnx', 'resource/model/ocr/keys.txt',
     # 核心运行库（MaaBd2.exe 依赖；整目录 maafw/ 其余文件由 REQUIRED_DIRS 兜底）
     'maafw/MaaFramework.dll',
+    # MaaFramework 5.15.0 起 onnxruntime_maa.dll **静态导入** webgpu_dawn_maa.dll，
+    # 缺这一个文件 → MaaFramework.dll 整个加载失败（不是降级，是直接起不来）。
+    # 必须在硬校验里点名，否则「别人 clone 出来按 5.15 的 zip 少拷一个文件」也能出包。
+    'maafw/webgpu_dawn_maa.dll',
 ]
 # v26.09.14：tools/ 已移出（维护器退役，见上方 REQUIRED_FILES 注释）
 # v26.09.14 最终布局：resource/tasks/misc/agent **留在根目录**（interface.json 的
