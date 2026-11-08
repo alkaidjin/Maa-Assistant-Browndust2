@@ -117,7 +117,16 @@ EXCLUDE_DIRS  = {'.git', '.workbuddy', 'cache', 'config', 'debug', 'updates', '_
                  # B 站评论区维护机器人（config.json 含登录凭证，还有运行日志）：
                  # 纯本机工具，与用户包无关，绝不能外发。v26.10.2 发版时它被进程占用、
                  # 无法临时改名，靠打包时内存过滤绕过 —— 本条是永久护栏。
-                 'bilibili_comment_bot'}
+                 'bilibili_comment_bot',
+                 # ---- v26.11.x：出包泄漏护栏（2026-11-08 实测补上）----
+                 # logs/ 是**维护者本机**的排障工作区：bd2cli 的 diagnose 包、游戏截图、
+                 # 配置快照、报告 HTML。.gitignore 里已忽略它，但 collect() 是 os.walk 读磁盘
+                 # → 照样会被扫进包。实测一次出包里混进了 107 个文件 / 34.35 MiB
+                 # （含本人游戏画面截图与 config-before-*.json），必须整目录排除。
+                 'logs',
+                 # assets/ 与 docs/ 同理：分别是给 AI Agent 用的技能包（assets/agent/skills/…）
+                 # 与设计文档（docs/agent-cli-design.md），维护者侧物料，用户包用不到。
+                 'assets', 'docs'}
 # 注意：EXCLUDE_DIRS 是**按目录名**（不是按相对路径）匹配的 —— 任何层级下叫这些名字的
 # 目录都会被整体跳过。当前无副作用；但若将来在 resource/ 等目录下新建名为 config / cache /
 # debug 的**合法**子目录，会被静默吞掉、不进包。新增此类目录名时请先确认这里。
@@ -134,6 +143,9 @@ EXCLUDE_FILES = {
     # 设计与体检结论随 legacy/ 目录一并移除（v26.11.1 清理），不再保留归档。
     # ---- v26.09.8 起：非维护者不需要的文件（用户侧无用，且 start.py 写死了作者本机游戏路径）----
     'agent/start.bat', 'agent/start.py',   # agent 开发辅助脚本（写死 C:\Neowiz\... 本机游戏路径）
+    # v26.11.x：bd2cli 是给 AI Agent 用的命令行外壳（查状态 / 跑任务 / 改配置 / 读日志），
+    # 不在 interface.json 的 agent 列表里，MXU 永远不启动它 → 不进包（省 ≈10 MiB）。
+    'agent/bd2cli.exe',
     'maintainer/tools/make_icon.py',        # 生成 mxu.ico / mxu_icon.png 的开发脚本
     'maintainer/tools/apply_icon.ps1',      # 手动打图标工具（打包器内嵌 ensure_icon，不依赖它）
     # 打包双击入口（v26.09.14 重建）：只对维护者有意义，且写死了本机 Python 探测顺序

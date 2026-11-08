@@ -4,8 +4,8 @@
 
 | # | 项目 | 许可证 | 在本项目中的角色 |
 |---|---|---|---|
-| 1 | [MaaXYZ/MaaFramework](https://github.com/MaaXYZ/MaaFramework)（v5.13.0）| **LGPL-3.0** | 运行时核心（C++ 库 + Node 绑定） |
-| 2 | [MistEO/MXU](https://github.com/MistEO/MXU)（v2.5.3） | **AGPL-3.0** | GUI 前端 + Go Agent 子进程 + 实例/设置/自动更新 |
+| 1 | [MaaXYZ/MaaFramework](https://github.com/MaaXYZ/MaaFramework)（v5.15.0）| **LGPL-3.0** | 运行时核心（C++ 库 + Node 绑定） |
+| 2 | [MaaXYZ/MXU](https://github.com/MaaXYZ/MXU)（v2.9.0） | **AGPL-3.0** | GUI 前端 + Go Agent 子进程 + 实例/设置/自动更新 |
 | 3 | [MaaEnd/MaaEnd](https://github.com/MaaEnd/MaaEnd) | **AGPL-3.0** | 最初提供**工程骨架**（目录约定、`interface.json` 结构、多语言键）；该仓库是《明日方舟：终末地》工具，**不含《棕色尘埃2》任何内容** |
 | 4 | [essinn-1/maa-assistant](https://github.com/essinn-1/maa-assistant) | **AGPL-3.0** | **本项目的直接上游**：《棕色尘埃2》PC 端早期适配、最初一批 pipeline 编排与图像素材 |
 | 5 | [PaddlePaddle/PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR)（PP-OCRv5 移动端）| **Apache-2.0** | OCR 模型（`resource/model/ocr/det.onnx`、`rec.onnx`、`keys.txt`） |
@@ -37,7 +37,7 @@
 4. **工程加密 / 闭源修改**：本项目对 MaaFramework 库的源码**未做任何修改**，因此 LGPL §6 的「提供源码供用户重新链接」义务不存在
 
 ### 版本固定
-本仓库当前锁定的 MaaFramework 版本为 `v5.13.0`。升级到新版本时需要同步维护两处：
+本仓库当前锁定的 MaaFramework 版本为 `v5.15.0`（2026-11-02 发布）。升级到新版本时需要同步维护两处：
 
 1. 本文件上方表格中的版本号（版本指纹核对方法见 [`更新功能说明.md`](更新功能说明.md) 第十一节）；
 2. **`version.json`** —— 它记录包内依赖指纹（`maafw` / `mxu` 各自的上游 tag），是打包器 `tools/build_release_zip.py` 在发布计划阶段校验的对象（`check_version_json()` 会提示版本是否与磁盘实际一致，但**不会自动改写**，需要人工确认）。
@@ -46,13 +46,16 @@
 
 ---
 
-## 2. MistEO/MXU — AGPL-3.0
+## 2. MaaXYZ/MXU — AGPL-3.0
+
+> 上游仓库已从 `MistEO/MXU` 迁到组织仓 **`MaaXYZ/MXU`**（旧地址 302 跳转，issue / release 链接仍可用）。
+> 本项目一律以新地址为准。
 
 ### 用途
 提供桌面 GUI（Tauri / 前端 TypeScript）、设备连接管理、实例配置读写、GitHub Release 检测与下载、`maafw` 子进程（`go-service.exe`）的拉起。
 
 ### 在本项目中的位置
-单二进制：根目录 `MaaBd2.exe`（MXU v2.5.3 内核，v26.10.1 起改名并固化图标）
+单二进制：根目录 `MaaBd2.exe`（MXU v2.9.0 内核，v26.10.1 起改名并固化图标）
 
 ### AGPL 履约
 MXU 与本项目**均为 AGPL-3.0**，因此在 §13 「Remote Network Interaction」的范围内：
@@ -167,15 +170,20 @@ MIT 许可要求保留版权声明与许可声明。本项目以**未经修改**
 ### MaaFramework（LGPL）
 ```bash
 # 仅当你需要替换 maafw/* 时执行；本项目默认随 release zip 派发预编译版本
-curl -L -O https://github.com/MaaXYZ/MaaFramework/releases/download/v5.13.0/MAA-win-x86_64-v5.13.0.zip
+curl -L -O https://github.com/MaaXYZ/MaaFramework/releases/download/v5.15.0/MAA-win-x86_64-v5.15.0.zip
 # 解压后取 bin/* + share/MaaAgentBinary/*，覆盖到 <BD2MAA>/maafw/
+# ⛔ 5.15.0 起 bin/ 里的 webgpu_dawn_maa.dll 必须一起拷（onnxruntime_maa.dll 静态导入它，
+#    缺了 MaaFramework.dll 直接加载失败）；dxcompiler.dll / dxil.dll 不派发（只服务 WebGPU，
+#    见 data/maintainer/tools/build_release_zip.py 的 PRUNED_BINARIES 说明），
+#    bin/MaaPiCli.exe 上游自 5.15.0 起已不再发布。
 ```
 
 ### MXU（AGPL）
 ```bash
-git clone https://github.com/MistEO/MXU.git
+git clone https://github.com/MaaXYZ/MXU.git      # 上游已从 MistEO/MXU 迁到 MaaXYZ/MXU
 # 按 MXU 仓库 README 中 AGPL 源的编译说明构建
-# 替换 <BD2MAA>/MaaBd2.exe
+# 取 zip 里的 mxu.exe 单文件 → 改名 MaaBd2.exe 放到根目录，
+# 再跑 data/maintainer/tools/apply_icon.ps1 把图标写进 PE（打包器每次打包前也会自动复核补打）
 ```
 
 ### PaddleOCR（Apache-2.0）
@@ -187,4 +195,4 @@ git clone https://github.com/MistEO/MXU.git
 
 ---
 
-最后更新：2026-09-24
+最后更新：2026-11-08（底层升级：MaaFramework v5.13.0 → v5.15.0、MXU v2.5.3 → v2.9.0）
