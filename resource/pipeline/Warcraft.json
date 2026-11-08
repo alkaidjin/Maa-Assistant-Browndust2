@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791915524849,
+            "lastSyncTime": 1794105855792,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Warcraft.json",
             "savedViewport": {
-                "x": 1412,
-                "y": 676,
-                "zoom": 1
+                "x": -1221,
+                "y": 239,
+                "zoom": 0.7
             },
             "filename": "Warcraft",
             "version": "v2.1.0"
@@ -19,32 +19,8 @@
     "$__mpe_external_StartGame_Warcraft": {
         "$__mpe_code": {
             "position": {
-                "x": 2275,
-                "y": 282
-            }
-        }
-    },
-    "CorrectWarcraft": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    750,
-                    500,
-                    250,
-                    100
-                ],
-                "expected": ".*奖励.*",
-                "threshold": 0.7
-            }
-        },
-        "action": {
-            "type": "Click"
-        },
-        "$__mpe_code": {
-            "position": {
-                "x": 2548,
-                "y": 182
+                "x": 3080,
+                "y": 180
             }
         }
     },
@@ -257,6 +233,7 @@
         "post_delay": 1500,
         "next": [
             "WarcraftBeginClick",
+            "赛季活动战斗完成",
             "StartGame"
         ],
         "$__mpe_code": {
@@ -400,6 +377,7 @@
             }
         },
         "next": [
+            "赛季活动战斗完成",
             "StartGame"
         ],
         "$__mpe_code": {
@@ -631,6 +609,7 @@
         },
         "post_delay": 1500,
         "next": [
+            "赛季活动战斗完成",
             "StartGame"
         ],
         "$__mpe_code": {
@@ -813,6 +792,7 @@
         },
         "post_delay": 1500,
         "next": [
+            "赛季活动战斗完成",
             "StartGame"
         ],
         "$__mpe_code": {
@@ -859,6 +839,17 @@
             "position": {
                 "x": 251,
                 "y": -159
+            }
+        }
+    },
+    "赛季活动战斗完成": {
+        "next": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 2730,
+                "y": 389
             }
         }
     }

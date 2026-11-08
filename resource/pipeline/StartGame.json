@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1792857246082,
+            "lastSyncTime": 1794105767967,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\StartGame.json",
             "savedViewport": {
-                "x": -140,
-                "y": -1620,
-                "zoom": 0.64
+                "x": 45,
+                "y": -933,
+                "zoom": 0.4
             },
             "filename": "StartGame",
             "version": "v2.1.0"
@@ -21,14 +21,6 @@
             "position": {
                 "x": 342,
                 "y": 2987
-            }
-        }
-    },
-    "$__mpe_external_CorrectWarcraft_StartGame": {
-        "$__mpe_code": {
-            "position": {
-                "x": 342,
-                "y": 3059
             }
         }
     },
@@ -557,6 +549,7 @@
     },
     "StartGame": {
         "next": [
+            "游戏维护公告",
             "[JumpBack]DownloadNewver",
             "[JumpBack]DownLoading",
             "[JumpBack]StartWaiting1",
@@ -755,6 +748,56 @@
             "position": {
                 "x": 1286,
                 "y": 2602
+            }
+        }
+    },
+    "游戏维护公告": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    475,
+                    171,
+                    336,
+                    377
+                ],
+                "expected": [
+                    "定期维护",
+                    "棕色尘埃",
+                    "维护内容",
+                    "无法登入",
+                    "使用游戏"
+                ]
+            }
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 1289,
+                "y": 3011
+            }
+        }
+    },
+    "CorrectWarcraft": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    750,
+                    500,
+                    250,
+                    100
+                ],
+                "expected": ".*奖励.*",
+                "threshold": 0.7
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 1529,
+                "y": 3423
             }
         }
     }

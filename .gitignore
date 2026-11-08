@@ -98,3 +98,6 @@ resource.zip
 
 # 维护者工具：PE 图标固化器（data/maintainer/tools/，不进用户包）
 !data/maintainer/tools/rcedit-x64.exe
+
+# 运行时产物（运行记录 / 看板 / 证据包 / 诊断包）
+logs/

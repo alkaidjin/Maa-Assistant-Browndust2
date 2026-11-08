@@ -131,7 +131,7 @@ EXCLUDE_FILES = {
     # ---- v26.10.4 起：维护版每日备份已退役（夸克客户端取消开机自启）----
     # backup_maintainer.ps1 / install_backup_task.ps1 / 备份维护版.bat 三个文件
     # 已删除，对应的计划任务与环境变量也已注销/清除，因此不再需要护栏条目。
-    # 设计与体检结论归档在 maintainer/legacy/备份方案退役说明.md，若要复活照那份清单走。
+    # 设计与体检结论随 legacy/ 目录一并移除（v26.11.1 清理），不再保留归档。
     # ---- v26.09.8 起：非维护者不需要的文件（用户侧无用，且 start.py 写死了作者本机游戏路径）----
     'agent/start.bat', 'agent/start.py',   # agent 开发辅助脚本（写死 C:\Neowiz\... 本机游戏路径）
     'maintainer/tools/make_icon.py',        # 生成 mxu.ico / mxu_icon.png 的开发脚本

@@ -3,17 +3,45 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1792649961769,
+            "lastSyncTime": 1794107195762,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\RewardRoutine.json",
             "savedViewport": {
-                "x": 133,
-                "y": -13,
-                "zoom": 0.92
+                "x": -2001,
+                "y": 625,
+                "zoom": 0.7
             },
             "filename": "RewardRoutine",
             "version": "v2.1.0"
+        }
+    },
+    "解锁1000钻档位奖励_2": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    621,
+                    419,
+                    178,
+                    65
+                ],
+                "template": [
+                    "Passport/2000.png"
+                ],
+                "threshold": [
+                    0.8
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "$__mpe_code": {
+            "position": {
+                "x": 3894,
+                "y": -360
+            }
         }
     },
     "$__mpe_external_StartGame_RewardRoutine": {
@@ -363,8 +391,43 @@
             }
         }
     },
+    "GetAllrewards2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    562,
+                    490,
+                    78,
+                    26
+                ],
+                "expected": [
+                    "全部解锁",
+                    "全部",
+                    "解锁"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "repeat": 2,
+        "repeat_delay": 200,
+        "post_delay": 4500,
+        "timeout": 10000,
+        "next": [
+            "RewardSure_1",
+            "EVENTSWIPE"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 757,
+                "y": 474
+            }
+        }
+    },
     "GoBack_RR": {
-        "max_hit": 1,
+        "max_hit": 2,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -420,6 +483,7 @@
             "[JumpBack]往上滑动",
             "[JumpBack]GoBack_RR",
             "[JumpBack]Dragdown_2",
+            "活动奖励领取完成",
             "StartGame"
         ],
         "$__mpe_code": {
@@ -483,12 +547,13 @@
         "next": [
             "MissionBack",
             "MissionMark",
+            "每日任务奖励领取",
             "StartPassport"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1560,
-                "y": 0
+                "x": 1375,
+                "y": 44
             }
         }
     },
@@ -516,8 +581,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1291,
-                "y": 14
+                "x": 1097,
+                "y": 20
             }
         }
     },
@@ -585,6 +650,7 @@
             "ToPassport2",
             "ToPassport3",
             "ToPassport4",
+            "通行证领取完成节点",
             "StartMail"
         ],
         "$__mpe_code": {
@@ -623,6 +689,7 @@
             "ToPassport2",
             "ToPassport3",
             "ToPassport4",
+            "通行证领取完成节点",
             "StartMail"
         ],
         "$__mpe_code": {
@@ -834,8 +901,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3864,
-                "y": 21
+                "x": 4156,
+                "y": 380
             }
         }
     },
@@ -858,8 +925,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1820,
-                "y": 0
+                "x": 1817,
+                "y": -2
             }
         }
     },
@@ -905,6 +972,7 @@
         "repeat": 2,
         "repeat_delay": 1000,
         "next": [
+            "[JumpBack]解锁1000钻档位奖励_1",
             "PassportClick1"
         ],
         "$__mpe_code": {
@@ -945,6 +1013,7 @@
         "repeat": 2,
         "repeat_delay": 1000,
         "next": [
+            "[JumpBack]解锁1000钻档位奖励_1",
             "PassportClick1"
         ],
         "$__mpe_code": {
@@ -985,6 +1054,7 @@
         "repeat": 2,
         "repeat_delay": 1000,
         "next": [
+            "[JumpBack]解锁1000钻档位奖励_1",
             "PassportClick1"
         ],
         "$__mpe_code": {
@@ -1154,38 +1224,67 @@
             }
         }
     },
-    "GetAllrewards2": {
+    "每日任务奖励领取": {
+        "next": [
+            "StartPassport"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1651,
+                "y": 211
+            }
+        }
+    },
+    "活动奖励领取完成": {
+        "next": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1616,
+                "y": 1235
+            }
+        }
+    },
+    "解锁1000钻档位奖励_1": {
         "recognition": {
-            "type": "OCR",
+            "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    562,
-                    490,
-                    78,
-                    26
+                    844,
+                    218,
+                    184,
+                    97
                 ],
-                "expected": [
-                    "全部解锁",
-                    "全部",
-                    "解锁"
+                "template": [
+                    "Passport/1000.png"
+                ],
+                "threshold": [
+                    0.8
                 ]
             }
         },
         "action": {
             "type": "Click"
         },
-        "repeat": 2,
-        "repeat_delay": 200,
-        "post_delay": 4500,
-        "timeout": 10000,
         "next": [
-            "RewardSure_1",
-            "EVENTSWIPE"
+            "解锁1000钻档位奖励_2"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 757,
-                "y": 474
+                "x": 3634,
+                "y": -360
+            }
+        }
+    },
+    "通行证领取完成节点": {
+        "next": [
+            "StartMail"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 3731,
+                "y": 488
             }
         }
     }

@@ -54,6 +54,86 @@
                 },
                 "StartWarcraft": {
                     "max_hit": 1
+                },
+                "抽卡任务结束": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】每日抽抽乐",
+                            "display": ["log"]
+                        }
+                    }
+                },
+                "ClickSecond": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】公会低保",
+                            "display": ["log"]
+                        }
+                    }
+                },
+                "MyhouseBack": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】我的小屋",
+                            "display": ["log"]
+                        }
+                    }
+                },
+                "FrequentCaller": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】日常经营收菜",
+                            "display": ["log"]
+                        }
+                    }
+                },
+                "GetSquare": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】广场女神像",
+                            "display": ["log"]
+                        }
+                    }
+                },
+                "WaitForPVP": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【战斗进行中】镜中之战",
+                            "display": ["log"]
+                        }
+                    }
+                },
+                "快速狩猎完成": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】快速狩猎",
+                            "display": ["log"]
+                        }
+                    }
+                },
+                "AnalysisLast": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】分解装备",
+                            "display": ["log"]
+                        }
+                    }
+                },
+                "IntensifyMain": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】精炼装备",
+                            "display": ["log"]
+                        }
+                    }
+                },
+                "赛季活动战斗完成": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】赛季活动",
+                            "display": ["log"]
+                        }
+                    }
                 }
             }
         }

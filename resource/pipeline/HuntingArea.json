@@ -3,24 +3,24 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791911344677,
+            "lastSyncTime": 1794105392753,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\HuntingArea.json",
             "savedViewport": {
-                "x": -4475,
-                "y": 586,
-                "zoom": 1
+                "x": -8640,
+                "y": 675,
+                "zoom": 1.21
             },
             "filename": "HuntingArea",
-            "version": "v2.0.6"
+            "version": "v2.1.0"
         }
     },
     "$__mpe_external_StartGame_HuntingArea": {
         "$__mpe_code": {
             "position": {
-                "x": 7040,
-                "y": -51
+                "x": 7864,
+                "y": -440
             }
         }
     },
@@ -472,6 +472,7 @@
         "post_delay": 1500,
         "next": [
             "REWARD_4",
+            "快速狩猎完成",
             "StartGame"
         ],
         "$__mpe_code": {
@@ -501,6 +502,7 @@
         "post_delay": 1500,
         "next": [
             "REWARD_3",
+            "快速狩猎完成",
             "StartGame"
         ],
         "$__mpe_code": {
@@ -710,6 +712,7 @@
         },
         "post_delay": 1500,
         "next": [
+            "快速狩猎完成",
             "StartGame"
         ],
         "$__mpe_code": {
@@ -748,6 +751,7 @@
         },
         "post_delay": 1500,
         "next": [
+            "快速狩猎完成",
             "StartGame"
         ],
         "$__mpe_code": {
@@ -779,8 +783,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 7240,
-                "y": 85
+                "x": 7187,
+                "y": 84
             }
         }
     },
@@ -1015,6 +1019,17 @@
             "position": {
                 "x": 6028,
                 "y": -467
+            }
+        }
+    },
+    "快速狩猎完成": {
+        "next": [
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 7537,
+                "y": -268
             }
         }
     }

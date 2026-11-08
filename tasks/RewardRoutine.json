@@ -9,7 +9,41 @@
                 "Win32",
                 "Win32-Window",
                 "Win32-Front"
-            ]
+            ],
+            "pipeline_override": {
+                "每日任务奖励领取": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】每日任务",
+                            "display": ["log"]
+                        }
+                    }
+                },
+                "通行证领取完成节点": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】通行证",
+                            "display": ["log"]
+                        }
+                    }
+                },
+                "RewardStage2_Event": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】邮箱",
+                            "display": ["log"]
+                        }
+                    }
+                },
+                "活动奖励领取完成": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】活动奖励",
+                            "display": ["log"]
+                        }
+                    }
+                }
+            }
         }
     ],
     "option": {}
