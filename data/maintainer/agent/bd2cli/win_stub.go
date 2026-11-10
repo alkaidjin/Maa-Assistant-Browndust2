@@ -25,3 +25,6 @@ func rawClick(int, int) (bool, syscall.Errno) { return false, 0 }
 
 // hiddenWindowAttr 在非 Windows 上无意义。
 func hiddenWindowAttr() *syscall.SysProcAttr { return &syscall.SysProcAttr{} }
+
+// openFile 在非 Windows 上不做任何事。
+func openFile(string) {}

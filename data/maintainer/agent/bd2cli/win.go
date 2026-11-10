@@ -72,6 +72,11 @@ func findWindowPtr(class, title string) unsafe.Pointer {
 	return *(*unsafe.Pointer)(unsafe.Pointer(&h))
 }
 
+// openFile 用系统默认程序打开（计划任务里也能用）。
+func openFile(path string) {
+	_ = exec.Command("cmd", "/c", "start", "", path).Start()
+}
+
 func portOpen(port int) bool {
 	conn, err := net.DialTimeout("tcp", fmt.Sprintf("127.0.0.1:%d", port), 300*time.Millisecond)
 	if err != nil {

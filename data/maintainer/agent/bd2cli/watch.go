@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -38,6 +39,8 @@ type mxuOutcome struct {
 	Err     error
 	// reachedEnd 记录本轮命中的完成标志节点（便于排查）
 	reachedEnd []string
+	// stoppedByMxu 表示 MXU 打印了「停止任务」（被 go-service 或用户中止）
+	stoppedByMxu bool
 }
 
 // runMXUAndWait 启动 MXU 并**等整批任务真正结束**，再按需要关窗口。
@@ -57,7 +60,10 @@ func runMXUAndWait(root, exe, instanceID, entry string, plan []taskPlan, timeout
 
 	cmd := exec.Command(exe, "--autostart", "-i", instanceID, "--quit-after-run")
 	cmd.Dir = root
-	cmd.Stdout = out
+	// 同时把 MXU 的 stdout 收进内存：它自己会打印「任务开始 / 任务完成 / 任务失败」，
+	// 这是最权威的逐任务结果（比按节点名推断可靠）。
+	var stdBuf bytes.Buffer
+	cmd.Stdout = io.MultiWriter(out, &stdBuf)
 	cmd.Stderr = out
 	if err := cmd.Start(); err != nil {
 		res.Code, res.Status, res.Err = exitPreflight, "failed", fmt.Errorf("启动 MXU 失败: %w", err)
@@ -130,7 +136,35 @@ func runMXUAndWait(root, exe, instanceID, entry string, plan []taskPlan, timeout
 		}
 	}
 
-	if len(submitted) > 0 {
+	// 优先用 MXU 自己打印的「任务完成 / 任务失败」作为逐任务结果
+	if done, failedNames, mxuStopped := parseTaskLines(stdBuf.String()); len(done)+len(failedNames) > 0 || mxuStopped {
+		res.stoppedByMxu = mxuStopped
+		labelOf := func(name string) (string, string) {
+			for _, p := range plan {
+				if p.Label == name || p.TaskName == name {
+					return p.TaskName, p.Label
+				}
+			}
+			return name, name
+		}
+		seen := map[string]bool{}
+		for _, n := range done {
+			tn, lb := labelOf(n)
+			if seen[tn] {
+				continue
+			}
+			seen[tn] = true
+			res.Tasks = append(res.Tasks, taskResult{TaskName: tn, Label: lb, OK: true})
+		}
+		for _, n := range failedNames {
+			tn, lb := labelOf(n)
+			if seen[tn] {
+				continue
+			}
+			seen[tn] = true
+			res.Tasks = append(res.Tasks, taskResult{TaskName: tn, Label: lb, OK: false})
+		}
+	} else if len(submitted) > 0 {
 		ran := executedEntries(logPath, submitted)
 		idx := loadPipelines(root)
 		autoEnds := idx.TaskEnds(submitted)
@@ -195,9 +229,13 @@ func runMXUAndWait(root, exe, instanceID, entry string, plan []taskPlan, timeout
 	}
 
 	switch {
-	case stopped:
+	case stopped || res.stoppedByMxu:
 		res.Code, res.Status = exitAborted, "aborted"
-		res.Reason = "用户请求停止（bdcli control stop）"
+		if res.stoppedByMxu {
+			res.Reason = "MXU 打印了「停止任务」：任务被中止（常见原因：go-service 分辨率检查不通过，或用户手动停止）"
+		} else {
+			res.Reason = "用户请求停止（bdcli control stop）"
+		}
 	case !completed:
 		res.Code, res.Status = exitFailed, "timeout"
 		if res.Reason == "" {
@@ -242,6 +280,10 @@ func runMXUAndWait(root, exe, instanceID, entry string, plan []taskPlan, timeout
 		if !closed {
 			res.Reason = joinReason(res.Reason, "窗口没能关闭：权限不足（执行 bd2cli elevate install 授权一次即可）")
 		}
+		// 等 MXU 真正退出再返回：它退出时会写回自己的配置（会把临时打开的开关覆盖回去）
+		for i := 0; i < 15 && processRunning("mxu.exe"); i++ {
+			time.Sleep(time.Second)
+		}
 	}
 	return res
 }
@@ -252,6 +294,28 @@ func joinReason(a, b string) string {
 		return b
 	}
 	return a + "；" + b
+}
+
+// parseTaskLines 解析 MXU 打印的「任务完成: X」「任务失败: X」以及「停止任务」。
+func parseTaskLines(text string) (done, failed []string, stopped bool) {
+	for _, ln := range strings.Split(text, "\n") {
+		if strings.Contains(ln, "停止任务") {
+			stopped = true
+		}
+		if i := strings.Index(ln, "任务完成: "); i >= 0 {
+			name := strings.TrimSpace(ln[i+len("任务完成: "):])
+			if name == "停止任务" {
+				stopped = true
+				continue
+			}
+			done = append(done, name)
+			continue
+		}
+		if i := strings.Index(ln, "任务失败: "); i >= 0 {
+			failed = append(failed, strings.TrimSpace(ln[i+len("任务失败: "):]))
+		}
+	}
+	return
 }
 
 // loadNoRetry 读取"失败也不重试"的任务名（例如救赎之塔：快速战斗次数用完/层未解锁，重试无意义）。

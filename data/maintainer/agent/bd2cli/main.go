@@ -280,7 +280,7 @@ func cmdList(args []string) int {
 
 func cmdRun(args []string) int {
 	var task, instance, notifyPath, rootFlag, mxuFlag, runnerFlag string
-	var js, dryRun, waitMode, closeAfter, keepGame, noNotify, noRetry bool
+	var js, dryRun, waitMode, closeAfter, keepGame, noNotify, noRetry, noOpen, keepAutoRun bool
 	waitMode, closeAfter = true, true
 	var waitGame time.Duration
 	timeout := 30 * time.Minute
@@ -300,6 +300,10 @@ func cmdRun(args []string) int {
 			noNotify = true
 		case "--no-retry":
 			noRetry = true
+		case "--no-open":
+			noOpen = true
+		case "--keep-auto-run":
+			keepAutoRun = true
 		case "--wait-game":
 			if i+1 >= len(args) {
 				return fail(fmt.Errorf("--wait-game 缺参数（例如 5m）"), exitUsage)
@@ -367,6 +371,12 @@ func cmdRun(args []string) int {
 	}
 	if instance == "" && inst != nil {
 		instance = inst.Name
+	}
+
+	// 先记下用户对「启动后自动执行」的原始偏好（后面要还原），必须早于任何写入
+	prevAutoOn, autoHad := false, false
+	if cfg != nil {
+		prevAutoOn, autoHad = cfg.AutoRunOnLaunch()
 	}
 
 	if task == "" {
@@ -541,6 +551,48 @@ func cmdRun(args []string) int {
 			displayTask = automationName(root)
 		}
 		rec.Task = displayTask
+
+		// 「启动后自动执行」是 MXU 跑任务的总开关，但它同时也让"手动打开 MXU"自动跑。
+		// 所以：跑前临时打开，跑完还原成用户原来的值。
+		var restoreAuto func()
+		if cfg != nil {
+			instID := instance
+			if inst != nil {
+				instID = inst.ID
+			}
+			if err := cfg.EnsureAutoRun(instID); err != nil {
+				fmt.Fprintf(os.Stderr, "[bdcli] 警告：写自动执行开关失败: %v\n", err)
+			}
+			if autoHad && !prevAutoOn && !keepAutoRun {
+				restoreAuto = func() {
+					// MXU 退出时会用内存里的旧值写回配置，所以要"写入 → 等 → 复核"，必要时重写
+					for attempt := 0; attempt < 3; attempt++ {
+						c2, err := mxucfg.Load(cfg.Path())
+						if err != nil {
+							return
+						}
+						c2.SetAutoRunOnLaunch(false)
+						if err := c2.Save(); err != nil {
+							continue
+						}
+						time.Sleep(1500 * time.Millisecond)
+						if c3, err := mxucfg.Load(cfg.Path()); err == nil {
+							if v, _ := c3.AutoRunOnLaunch(); !v {
+								fmt.Fprintf(os.Stderr, "[bdcli] 已把「启动后自动执行」关回去\n")
+								return
+							}
+						}
+					}
+					fmt.Fprintf(os.Stderr, "[bdcli] 警告：还原「启动后自动执行」失败，请在 MXU 设置里手动关闭\n")
+				}
+			}
+		}
+		defer func() {
+			if restoreAuto != nil {
+				restoreAuto()
+			}
+		}()
+
 		attempts := 1
 		if !noRetry {
 			attempts = 2 // 失败自动重试一次
@@ -624,6 +676,10 @@ func cmdRun(args []string) int {
 	}
 	if reportPath, rerr := emitReport(root, rec, nodes); rerr == nil {
 		fmt.Fprintf(os.Stderr, "[bdcli] 看板: %s\n", reportPath)
+		// 跑完直接把卡片打开，用户不用去翻目录（计划任务里同样有效）
+		if !noOpen {
+			openFile(reportPath)
+		}
 	}
 	writeLatest(root, taskLabel(root, rec.Task), rec)
 

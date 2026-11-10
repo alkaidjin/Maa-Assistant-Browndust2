@@ -114,6 +114,27 @@ func (c *Config) InstanceByName(name string) *Instance {
 	return nil
 }
 
+// AutoRunOnLaunch 读取"启动后自动执行"开关及其是否存在。
+func (c *Config) AutoRunOnLaunch() (value bool, exists bool) {
+	settings, ok := c.raw["settings"].(map[string]any)
+	if !ok {
+		return false, false
+	}
+	v, ok := settings["autoRunOnLaunch"].(bool)
+	return v, ok
+}
+
+// SetAutoRunOnLaunch 改写"启动后自动执行"开关（不碰其它字段）。
+func (c *Config) SetAutoRunOnLaunch(v bool) {
+	settings, ok := c.raw["settings"].(map[string]any)
+	if !ok {
+		settings = map[string]any{}
+		c.raw["settings"] = settings
+	}
+	settings["autoRunOnLaunch"] = v
+	c.Settings.AutoRunOnLaunch = v
+}
+
 // EnsureAutoRun 确保 MXU 的"启动后自动执行"指向 instID，并打开总开关。
 //
 // 实测：`--autostart` 只有同时满足
