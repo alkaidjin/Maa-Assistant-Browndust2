@@ -36,15 +36,34 @@
         },
         "repeat": 2,
         "repeat_delay": 1000,
-        "next": [
-            "FastHunt2"
-        ],
+        "next": ["FastHunt2"],
         "$__mpe_code": {
             "position": {
                 "x": 6175,
                 "y": 754
             }
         }
+    },
+    "AllSlime": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    116,
+                    237
+                ]
+            }
+        },
+        "repeat": 2,
+        "repeat_delay": 1000,
+        "next": ["FastHunt2"],
+        "$__mpe_code": {
+            "position": {
+                "x": 6175,
+                "y": 900
+            }
+        },
+        "desc": "全刷史莱姆（不看加成）：点史莱姆关卡入口后直接快速狩猎，与 AllGold 对称"
     },
     "ChooseWorO": {
         "action": {
@@ -61,9 +80,7 @@
         "repeat": 2,
         "repeat_delay": 1000,
         "post_delay": 1500,
-        "next": [
-            "ChooseWorO_Swipe"
-        ],
+        "next": ["ChooseWorO_Swipe"],
         "$__mpe_code": {
             "position": {
                 "x": 4556,
@@ -95,7 +112,28 @@
                 "x": 4554,
                 "y": -311
             }
-        }
+        },
+        "next": ["HuntOnBuff"]
+    },
+    "HuntAll": {
+        "next": ["AllGold"],
+        "$__mpe_code": {
+            "position": {
+                "x": 4900,
+                "y": 300
+            }
+        },
+        "desc": "米饭策略=全刷金币/史莱姆：由「刷哪个副本」选项改写 next（[AllGold] 或 [AllSlime]），不看双倍加成"
+    },
+    "HuntOnBuff": {
+        "next": ["YESorNOGoldUP"],
+        "$__mpe_code": {
+            "position": {
+                "x": 5300,
+                "y": 300
+            }
+        },
+        "desc": "米饭策略=有加成时刷、无加成时刷材料：由「刷哪个副本」选项改写 next（[YESorNOGoldUP] 或 [YESorNOSlimeUP]），命中双倍才刷，否则落回 WoodOrOre"
     },
     "DarkRock": {
         "recognition": {
@@ -187,9 +225,7 @@
             "type": "Click"
         },
         "post_delay": 1500,
-        "next": [
-            "MainHunt1_Max"
-        ],
+        "next": ["MainHunt1_Max"],
         "$__mpe_code": {
             "position": {
                 "x": 5293,
@@ -219,9 +255,7 @@
             "type": "Click"
         },
         "post_delay": 1500,
-        "next": [
-            "SetMax2"
-        ],
+        "next": ["SetMax2"],
         "$__mpe_code": {
             "position": {
                 "x": 6854,
@@ -251,9 +285,7 @@
             "type": "Click"
         },
         "post_delay": 1500,
-        "next": [
-            "SetMax3"
-        ],
+        "next": ["SetMax3"],
         "$__mpe_code": {
             "position": {
                 "x": 3699,
@@ -339,9 +371,7 @@
                 ]
             }
         },
-        "next": [
-            "FastHunt2"
-        ],
+        "next": ["FastHunt2"],
         "$__mpe_code": {
             "position": {
                 "x": 6486,
@@ -442,9 +472,7 @@
         "action": {
             "type": "Click"
         },
-        "next": [
-            "MainHunt1_Max_2"
-        ],
+        "next": ["MainHunt1_Max_2"],
         "$__mpe_code": {
             "position": {
                 "x": 5576,
@@ -564,9 +592,7 @@
         "repeat": 2,
         "repeat_delay": 1500,
         "post_delay": 1500,
-        "next": [
-            "FastHunt1"
-        ],
+        "next": ["FastHunt1"],
         "$__mpe_code": {
             "position": {
                 "x": 4980,
@@ -673,9 +699,7 @@
             }
         },
         "post_delay": 1500,
-        "next": [
-            "ChooseWorO"
-        ],
+        "next": ["ChooseWorO"],
         "$__mpe_code": {
             "position": {
                 "x": 4257,
@@ -778,9 +802,7 @@
         "action": {
             "type": "Click"
         },
-        "next": [
-            "MainHunt2"
-        ],
+        "next": ["MainHunt2"],
         "$__mpe_code": {
             "position": {
                 "x": 7187,
@@ -807,9 +829,7 @@
         "action": {
             "type": "Click"
         },
-        "next": [
-            "MainHunt3"
-        ],
+        "next": ["MainHunt3"],
         "$__mpe_code": {
             "position": {
                 "x": 3961,
@@ -832,9 +852,7 @@
                 ]
             }
         },
-        "next": [
-            "FastHunt2"
-        ],
+        "next": ["FastHunt2"],
         "$__mpe_code": {
             "position": {
                 "x": 6746,
@@ -980,9 +998,7 @@
         "repeat": 2,
         "repeat_delay": 1500,
         "post_delay": 1500,
-        "next": [
-            "FastHunt1"
-        ],
+        "next": ["FastHunt1"],
         "$__mpe_code": {
             "position": {
                 "x": 5041,
@@ -1023,9 +1039,7 @@
         }
     },
     "快速狩猎完成": {
-        "next": [
-            "StartGame"
-        ],
+        "next": ["StartGame"],
         "$__mpe_code": {
             "position": {
                 "x": 7537,

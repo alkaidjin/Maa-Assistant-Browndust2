@@ -4,7 +4,7 @@
             "name": "QuickHunt",
             "label": "日常-快速狩猎",
             "entry": "StartGame",
-            "description": "按选项刷取：指定属性的圣石（或自动挑数量最少的）、指定刷图策略（史莱姆/金币/装备材料）、装备材料种类（第9章原木/第7章矿石）。\n由原「一条龙日常」按任务类型拆出，可与其余四个日常任务独立勾选、互不连坐。",
+            "description": "圣石部分：按选项刷指定属性（或自动挑数量最少的）。米饭部分由三个必选二选一决定：\n①米饭使用策略＝全刷金币/史莱姆（不看加成）｜有加成时刷金币/史莱姆、无加成时刷装备材料；\n②刷哪个副本＝金币（哥布林遗迹）｜史莱姆（史莱姆王国）；\n③材料副本＝第 7 章矿石（蜥锡人祭坛）｜第 9 章原木（守山人休息处）。\n由原「一条龙日常」按任务类型拆出，可与其余四个日常任务独立勾选、互不连坐。",
             "controller": [
                 "Win32",
                 "Win32-Window",
@@ -13,6 +13,7 @@
             "option": [
                 "ChooseRock",
                 "ChooseHuntStrategy",
+                "ChooseHuntTarget",
                 "ChooseWood"
             ],
             "pipeline_override": {
@@ -117,73 +118,87 @@
         },
         "ChooseHuntStrategy": {
             "type": "select",
-            "label": "快速狩猎—刷图策略",
-            "default_case": "GoldOnly",
+            "label": "快速狩猎—米饭使用策略（二选一）",
+            "description": "决定当天米饭怎么花：要么无论有没有双倍加成都刷金币/史莱姆；要么只在有双倍加成时刷，没加成时改刷下面选的装备材料副本。",
+            "default_case": "BuffOrMaterial",
             "cases": [
                 {
-                    "name": "SlimeOnBuff",
-                    "label": "刷取史莱姆（仅在有加成时）",
+                    "name": "FarmAll",
+                    "label": "全刷金币/史莱姆（不看有没有加成）",
                     "pipeline_override": {
                         "ChooseWorO_Swipe": {
-                            "next": ["YESorNOSlimeUP"]
+                            "next": ["HuntAll"]
                         }
                     }
                 },
                 {
-                    "name": "GoldOnBuff",
-                    "label": "刷取金币（仅在有加成时）",
+                    "name": "BuffOrMaterial",
+                    "label": "有加成时刷金币/史莱姆，无加成时刷装备材料",
                     "pipeline_override": {
                         "ChooseWorO_Swipe": {
+                            "next": ["HuntOnBuff"]
+                        }
+                    }
+                }
+            ]
+        },
+        "ChooseHuntTarget": {
+            "type": "select",
+            "label": "快速狩猎—刷金币或史莱姆（二选一）",
+            "description": "米饭要刷的那类副本：金币关或史莱姆关。策略选「有加成时刷」时，这一项同时决定「判断哪个副本的双倍加成」。",
+            "default_case": "HuntGold",
+            "cases": [
+                {
+                    "name": "HuntGold",
+                    "label": "刷金币（哥布林遗迹）",
+                    "pipeline_override": {
+                        "HuntAll": {
+                            "next": ["AllGold"]
+                        },
+                        "HuntOnBuff": {
                             "next": ["YESorNOGoldUP"]
                         }
                     }
                 },
                 {
-                    "name": "GoldOnly",
-                    "label": "只刷金币",
+                    "name": "HuntSlime",
+                    "label": "刷史莱姆（史莱姆王国）",
                     "pipeline_override": {
-                        "ChooseWorO_Swipe": {
-                            "next": ["AllGold"]
-                        }
-                    }
-                },
-                {
-                    "name": "MaterialOnly",
-                    "label": "只刷装备材料",
-                    "pipeline_override": {
-                        "ChooseWorO_Swipe": {
-                            "next": ["WoodOrOre"]
+                        "HuntAll": {
+                            "next": ["AllSlime"]
+                        },
+                        "HuntOnBuff": {
+                            "next": ["YESorNOSlimeUP"]
                         }
                     }
                 }
-            ],
-            "description": "刷图策略：刷史莱姆/刷金币只在当日有加成时才刷；也可只刷金币或只刷装备材料。"
+            ]
         },
         "ChooseWood": {
             "type": "select",
-            "label": "快速狩猎—装备材料刷取种类",
-            "default_case": "WoodHunt",
+            "label": "快速狩猎—材料副本（二选一）",
+            "description": "策略选「有加成时刷…无加成时刷装备材料」时，无加成的部分去哪个材料副本。",
+            "default_case": "OreHunt",
             "cases": [
                 {
-                    "name": "WoodHunt",
-                    "label": "第九章原木",
-                    "pipeline_override": {
-                        "WoodOrOre": {
-                            "next": ["WoodHunt"]
-                        }
-                    }
-                },
-                {
                     "name": "OreHunt",
-                    "label": "第七章矿石",
+                    "label": "刷第七章矿石（蜥锡人祭坛）",
                     "pipeline_override": {
                         "WoodOrOre": {
                             "next": ["OreHunt"]
                         }
                     }
+                },
+                {
+                    "name": "WoodHunt",
+                    "label": "刷第九章原木（守山人休息处）",
+                    "pipeline_override": {
+                        "WoodOrOre": {
+                            "next": ["WoodHunt"]
+                        }
+                    }
                 }
-            ],
-            "description": "只刷装备材料时用哪种：第 9 章原木 / 第 7 章矿石。"
+            ]
         }
     }
 }
