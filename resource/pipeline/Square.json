@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1792500261426,
+            "lastSyncTime": 1795623275935,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Square.json",
             "savedViewport": {
-                "x": 416,
-                "y": -143,
-                "zoom": 0.92
+                "x": -1216,
+                "y": 118,
+                "zoom": 0.83
             },
             "filename": "Square",
             "version": "v2.1.0"
@@ -19,8 +19,8 @@
     "$__mpe_external_StartGame_Square": {
         "$__mpe_code": {
             "position": {
-                "x": 2906,
-                "y": 499
+                "x": 3391,
+                "y": 669
             }
         }
     },
@@ -85,7 +85,6 @@
                 "threshold": 0.5
             }
         },
-        "pre_delay": 3000,
         "action": {
             "type": "Click",
             "param": {
@@ -104,8 +103,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": -104,
-                "y": 566
+                "x": -32,
+                "y": 551
             }
         }
     },
@@ -203,12 +202,12 @@
         "post_delay": 1500,
         "next": [
             "GetDaily2",
-            "StartGame"
+            "MoveSquare"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2512,
-                "y": 549
+                "x": 1785,
+                "y": 83
             }
         }
     },
@@ -234,14 +233,12 @@
         "post_delay": 3000,
         "next": [
             "GetSquare",
-            "GetDaily2",
-            "MoveSquare",
             "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 2057,
-                "y": 190
+                "x": 2688,
+                "y": 294
             }
         }
     },
@@ -292,24 +289,24 @@
             }
         },
         "post_delay": 1500,
+        "timeout": 10000,
         "next": [
             "Loading_Square",
-            "GetSquare",
-            "MoveSquare",
-            "GetDaily2"
+            "GetDaily2",
+            "MoveSquare"
         ],
         "on_error": [
             "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1451,
-                "y": 554
+                "x": 1463,
+                "y": 520
             }
         }
     },
     "MoveSquare": {
-        "max_hit": 1,
+        "max_hit": 5,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -322,12 +319,10 @@
                 "expected": [
                     "每日",
                     "移动",
-                    "艾",
-                    "力",
-                    "克",
-                    "史",
-                    "温",
-                    "女"
+                    "艾力",
+                    "克史",
+                    "温女",
+                    "奖励"
                 ],
                 "threshold": 0.6
             }
@@ -335,15 +330,19 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 9000,
+        "post_delay": 6000,
+        "timeout": 10000,
         "next": [
             "GetSquare",
-            "GetDaily2"
+            "MoveSquare"
+        ],
+        "on_error": [
+            "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1746,
-                "y": 614
+                "x": 2157,
+                "y": 407
             }
         }
     },
@@ -357,8 +356,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": -136,
-                "y": 192
+                "x": -305,
+                "y": 194
             }
         }
     },

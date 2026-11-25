@@ -1,0 +1,75 @@
+{
+    "task": [
+        {
+            "name": "DailyHarvest",
+            "label": "日常-收菜（公会低保·我的小屋·餐厅经营·广场女神像）",
+            "entry": "StartGame",
+            "description": "依次执行：公会低保 → 我的小屋 → 经营管理收菜 → 广场女神像每日奖励。\n由原「一条龙日常」按任务类型拆出，可与其余四个日常任务独立勾选、互不连坐。\n广场段收尾到女神像即结束（镜中之战已拆成独立任务卡「日常-镜中之战PVP」，本卡不再顺带执行）。",
+            "controller": [
+                "Win32",
+                "Win32-Window",
+                "Win32-Front"
+            ],
+            "pipeline_override": {
+                "EnterGame_2": {
+                    "next": [
+                        "StartSociaty",
+                        "StartOperate",
+                        "StartSquare",
+                        "DailyAllEnd"
+                    ]
+                },
+                "StartSociaty": {
+                    "max_hit": 1
+                },
+                "StartOperate": {
+                    "max_hit": 1
+                },
+                "StartSquare": {
+                    "max_hit": 1
+                },
+                "ClickSecond": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】公会低保",
+                            "display": ["log"]
+                        }
+                    }
+                },
+                "MyhouseBack": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】我的小屋",
+                            "display": ["log"]
+                        }
+                    }
+                },
+                "FrequentCaller": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】日常经营收菜",
+                            "display": ["log"]
+                        }
+                    }
+                },
+                "GetSquare": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】广场女神像",
+                            "display": ["log"]
+                        }
+                    }
+                },
+                "WaitForPVP": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【战斗进行中】镜中之战",
+                            "display": ["log"]
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "option": {}
+}

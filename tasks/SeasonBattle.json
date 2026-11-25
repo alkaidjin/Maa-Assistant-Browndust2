@@ -1,0 +1,65 @@
+{
+    "task": [
+        {
+            "name": "SeasonBattle",
+            "label": "日常-赛季活动关卡战斗/扫荡",
+            "entry": "StartGame",
+            "description": "赛季活动：自动推关 / 快速战斗，可选用自动战斗推关。\n⚠ 自动推关仅推荐阵容完备的玩家开启，请自行配置默认出战队伍的阵容、装备和站位！\n由原「一条龙日常」按任务类型拆出，可与其余四个日常任务独立勾选、互不连坐。",
+            "controller": [
+                "Win32",
+                "Win32-Window",
+                "Win32-Front"
+            ],
+            "option": [
+                "开启自动战斗"
+            ],
+            "pipeline_override": {
+                "EnterGame_2": {
+                    "next": [
+                        "StartWarcraft",
+                        "DailyAllEnd"
+                    ]
+                },
+                "StartWarcraft": {
+                    "max_hit": 1
+                },
+                "赛季活动战斗完成": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】赛季活动",
+                            "display": ["log"]
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "option": {
+        "开启自动战斗": {
+            "type": "select",
+            "label": "赛季活动战斗关卡—请选择是否使用自动战斗推关",
+            "default_case": "不开启自动战斗",
+            "cases": [
+                {
+                    "name": "不开启自动战斗",
+                    "label": "不使用自动战斗",
+                    "pipeline_override": {
+                        "是否开启自动推关": {
+                            "next": ["不开启"]
+                        }
+                    }
+                },
+                {
+                    "name": "开启自动战斗",
+                    "label": "使用自动战斗",
+                    "pipeline_override": {
+                        "是否开启自动推关": {
+                            "next": ["开启"]
+                        }
+                    }
+                }
+            ],
+            "description": "是否用自动战斗推关。自动推关仅推荐阵容完备的玩家开启。"
+        }
+    }
+}

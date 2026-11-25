@@ -10,6 +10,7 @@ package main
 import (
 	"github.com/rs/zerolog/log"
 	"go-service/common/schedule"
+	"go-service/common/stopall"
 	"go-service/pkg/resource"
 	"go-service/taskersink/aspectratio"
 	"go-service/taskersink/cursormove"
@@ -31,6 +32,9 @@ func registerAll() {
 
 	// Business Custom —— pipeline 经 custom_recognition 引用
 	schedule.Register() // ScheduleRecognition：星期门控（WarcraftShop / 吸收召集）
+
+	// Business Custom —— pipeline 经 custom_action 引用
+	stopall.Register() // StopAll：终止当前任务并清空排队任务（维护公告 / 致命状态用）
 
 	log.Info().
 		Msg("BD2MAA custom components and sinks registered")

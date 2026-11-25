@@ -92,12 +92,19 @@ resource.zip
 !agent/fishing.exe
 !agent/trader.exe
 
-# MaaFramework 运行时：MaaPiCli + 17 个 DLL（v5.13.0，整套入库以保证 clone 可运行）
-!maafw/MaaPiCli.exe
+# MaaFramework 运行时：17 个 DLL（v5.15.0，整套入库以保证 clone 可运行）
+# MaaPiCli.exe 上游 v5.15 起不再发布，已从仓库与发布包移除（见 data/retired_files.json）
 !maafw/*.dll
 
 # 维护者工具：PE 图标固化器（data/maintainer/tools/，不进用户包）
 !data/maintainer/tools/rcedit-x64.exe
 
+# 会话交接文档（内部工作记录，含本机路径）：留在本机、不入库、不进包
+data/maintainer/交接文档.md
+
 # 运行时产物（运行记录 / 看板 / 证据包 / 诊断包）
 logs/
+
+# 手工备份（*.bak / *.bak-<日期>）：不入库、不进包（打包器 collect() 也按模式排除）
+*.bak
+*.bak-*

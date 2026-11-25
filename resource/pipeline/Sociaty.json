@@ -3,24 +3,24 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1791624227076,
+            "lastSyncTime": 1794368924668,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Sociaty.json",
             "savedViewport": {
-                "x": 289,
-                "y": 420,
-                "zoom": 0.95
+                "x": 52,
+                "y": 346,
+                "zoom": 0.61
             },
             "filename": "Sociaty",
-            "version": "v2.0.6"
+            "version": "v2.1.0"
         }
     },
     "$__mpe_external_StartGame_Sociaty": {
         "$__mpe_code": {
             "position": {
-                "x": 1159,
-                "y": 396
+                "x": 998,
+                "y": 335
             }
         }
     },
@@ -44,8 +44,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 1031,
-                "y": -54
+                "x": 992,
+                "y": -49
             }
         }
     },
@@ -85,8 +85,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 693,
-                "y": -19
+                "x": 670,
+                "y": -14
             }
         }
     },

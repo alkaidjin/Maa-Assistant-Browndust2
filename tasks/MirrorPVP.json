@@ -1,0 +1,74 @@
+{
+    "task": [
+        {
+            "name": "MirrorPVP",
+            "label": "日常-镜中之战PVP",
+            "entry": "StartGame",
+            "description": "镜中之战：进入竞技场 → 自动战斗 → 领取每日奖励 → 膜拜，直到战斗结束。鲜血鸡尾酒的消耗倍数由选项决定。\n由原「一条龙日常」按任务类型拆出，可与其余四个日常任务独立勾选、互不连坐。",
+            "controller": [
+                "Win32",
+                "Win32-Window",
+                "Win32-Front"
+            ],
+            "option": [
+                "设置鸡尾酒倍数"
+            ],
+            "pipeline_override": {
+                "EnterGame_2": {
+                    "next": [
+                        "StartPVP",
+                        "DailyAllEnd"
+                    ]
+                },
+                "StartPVP": {
+                    "max_hit": 1
+                },
+                "WaitForPVP": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【战斗进行中】镜中之战",
+                            "display": ["log"]
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "option": {
+        "设置鸡尾酒倍数": {
+            "type": "select",
+            "label": "镜中之战—请选择鲜血鸡尾酒的消耗倍数",
+            "default_case": "10倍",
+            "cases": [
+                {
+                    "name": "1倍",
+                    "label": "1倍",
+                    "pipeline_override": {
+                        "消耗MIN": {
+                            "next": ["1倍"]
+                        }
+                    }
+                },
+                {
+                    "name": "10倍",
+                    "label": "10倍",
+                    "pipeline_override": {
+                        "消耗MIN": {
+                            "next": ["10倍"]
+                        }
+                    }
+                },
+                {
+                    "name": "40倍",
+                    "label": "40倍",
+                    "pipeline_override": {
+                        "消耗MIN": {
+                            "next": ["40倍"]
+                        }
+                    }
+                }
+            ],
+            "description": "每次镜中之战消耗的鲜血鸡尾酒倍数（1 / 10 / 40 倍）。"
+        }
+    }
+}

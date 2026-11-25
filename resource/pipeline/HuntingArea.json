@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1794105392753,
+            "lastSyncTime": 1794420894904,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\HuntingArea.json",
             "savedViewport": {
-                "x": -8640,
-                "y": 675,
-                "zoom": 1.21
+                "x": -2427,
+                "y": 411,
+                "zoom": 0.61
             },
             "filename": "HuntingArea",
             "version": "v2.1.0"
@@ -993,8 +993,8 @@
     "WoodOrOre": {
         "$__mpe_code": {
             "position": {
-                "x": 4741,
-                "y": -511
+                "x": 4762,
+                "y": -580
             }
         }
     },

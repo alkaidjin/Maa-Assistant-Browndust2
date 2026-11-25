@@ -3,17 +3,48 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1792500275020,
+            "lastSyncTime": 1794798019319,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\PVP.json",
             "savedViewport": {
-                "x": 750,
-                "y": -79,
-                "zoom": 1.05
+                "x": -4595,
+                "y": -303,
+                "zoom": 0.86
             },
             "filename": "PVP",
             "version": "v2.1.0"
+        }
+    },
+    "GoOut2": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    657,
+                    649,
+                    94,
+                    28
+                ],
+                "expected": "离开",
+                "threshold": 0.6
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 4500,
+        "next": [
+            "GoOut2",
+            "CorrectPVP",
+            "Worship",
+            "StartGame"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 4794,
+                "y": 514
+            }
         }
     },
     "$__mpe_external_StartGame_PVP": {
@@ -170,8 +201,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 3286,
-                "y": 797
+                "x": 3293,
+                "y": 998
             }
         }
     },
@@ -455,7 +486,7 @@
         "$__mpe_code": {
             "position": {
                 "x": 2787,
-                "y": 871
+                "y": 916
             }
         }
     },
@@ -518,18 +549,18 @@
             }
         }
     },
-    "GoOut": {
+    "GoOut1": {
         "recognition": {
             "type": "OCR",
             "param": {
                 "roi": [
-                    640,
-                    600,
-                    600,
-                    110
+                    1088,
+                    659,
+                    117,
+                    28
                 ],
                 "expected": "离开",
-                "threshold": 0.4
+                "threshold": 0.6
             }
         },
         "action": {
@@ -537,15 +568,15 @@
         },
         "post_delay": 4500,
         "next": [
-            "GoOut",
+            "GoOut1",
             "CorrectPVP",
             "Worship",
             "StartGame"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 4820,
-                "y": 331
+                "x": 4785,
+                "y": 168
             }
         }
     },
@@ -683,26 +714,30 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    770,
-                    187,
-                    42,
-                    40
+                    778,
+                    188,
+                    32,
+                    32
                 ],
                 "template": "PVP/X.png",
-                "threshold": 0.5
+                "threshold": [
+                    0.8
+                ]
             }
         },
         "action": {
             "type": "Click"
         },
         "next": [
+            "WaitForPVP",
             "Quit",
-            "GoOut"
+            "GoOut1",
+            "GoOut2"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 4492,
-                "y": 412
+                "x": 4491,
+                "y": 407
             }
         }
     },
@@ -805,7 +840,7 @@
     },
     "StartPVP": {
         "next": [
-            "广场跳转镜中之战",
+            "FightGameCard",
             "EnterOperating_2",
             "[JumpBack]StartGame"
         ],
@@ -817,17 +852,33 @@
         }
     },
     "WaitForPVP": {
-        "pre_delay": 5000,
-        "post_delay": 4500,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    47,
+                    611,
+                    168,
+                    75
+                ],
+                "expected": [
+                    "正在",
+                    "进行",
+                    "中的"
+                ]
+            }
+        },
+        "post_delay": 12000,
         "next": [
-            "Quit",
             "WaitForPVP",
-            "GoOut"
+            "Quit",
+            "GoOut1",
+            "GoOut2"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 4201,
-                "y": 438
+                "x": 4200,
+                "y": 410
             }
         }
     },
@@ -946,50 +997,6 @@
             "position": {
                 "x": 3553,
                 "y": 108
-            }
-        }
-    },
-    "广场跳转镜中之战": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    484,
-                    620,
-                    87,
-                    100
-                ],
-                "template": [
-                    "Square/PP.png"
-                ],
-                "green_mask": true
-            }
-        },
-        "action": {
-            "type": "Click",
-            "param": {
-                "target": [
-                    528,
-                    666,
-                    1,
-                    1
-                ]
-            }
-        },
-        "repeat": 2,
-        "repeat_delay": 200,
-        "timeout": 9000,
-        "next": [
-            "FightGameCard",
-            "广场跳转镜中之战"
-        ],
-        "on_error": [
-            "StartGame"
-        ],
-        "$__mpe_code": {
-            "position": {
-                "x": 212,
-                "y": -276
             }
         }
     },

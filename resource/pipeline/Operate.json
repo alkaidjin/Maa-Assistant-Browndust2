@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1792499333219,
+            "lastSyncTime": 1794396265896,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\Operate.json",
             "savedViewport": {
-                "x": -303,
-                "y": 193,
-                "zoom": 0.69
+                "x": -243,
+                "y": 177,
+                "zoom": 0.92
             },
             "filename": "Operate",
             "version": "v2.1.0"
@@ -65,7 +65,7 @@
         },
         "repeat": 2,
         "repeat_delay": 200,
-        "post_delay": 4500,
+        "post_delay": 1500,
         "next": [
             "ClickMyHouse",
             "MyhouseBack"
@@ -95,7 +95,6 @@
                 "threshold": 0.5
             }
         },
-        "pre_delay": 3000,
         "action": {
             "type": "Click",
             "param": {
@@ -140,10 +139,10 @@
         "action": {
             "type": "Click"
         },
-        "timeout": 12000,
+        "timeout": 10000,
         "next": [
-            "EnterRestaurant",
             "FrequentCaller",
+            "EnterRestaurant",
             "[JumpBack]魔兽赛季奖励确认_3"
         ],
         "$__mpe_code": {
@@ -155,16 +154,17 @@
     },
     "FrequentCaller": {
         "recognition": {
-            "type": "TemplateMatch",
+            "type": "OCR",
             "param": {
                 "roi": [
-                    80,
-                    23,
-                    114,
-                    36
+                    81,
+                    25,
+                    108,
+                    26
                 ],
-                "template": [
-                    "Operate/RES.png"
+                "expected": [
+                    "格鲁菲",
+                    "餐厅"
                 ]
             }
         },
@@ -211,7 +211,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 2000,
+        "post_delay": 1500,
         "next": [
             "OperateClick",
             "EnterRestaurant"
@@ -240,7 +240,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 4500,
+        "post_delay": 3000,
         "next": [
             "EnterOperating",
             "[JumpBack]StartGame"
@@ -292,8 +292,8 @@
         ],
         "$__mpe_code": {
             "position": {
-                "x": 45,
-                "y": -251
+                "x": -190,
+                "y": -213
             }
         }
     }

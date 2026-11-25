@@ -3,14 +3,14 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1792652256327,
+            "lastSyncTime": 1795624886984,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\WarcraftShop.json",
             "savedViewport": {
-                "x": -2627,
-                "y": 25,
-                "zoom": 0.84
+                "x": -3012,
+                "y": 617,
+                "zoom": 0.83
             },
             "filename": "WarcraftShop",
             "version": "v2.1.0"
@@ -41,7 +41,8 @@
                 ],
                 "threshold": [
                     0.8
-                ]
+                ],
+                "order_by": "Score"
             }
         },
         "action": {
@@ -80,7 +81,8 @@
                 ],
                 "template": [
                     "SHOP/AncientCrystal_MS.png"
-                ]
+                ],
+                "order_by": "Score"
             }
         },
         "action": {
@@ -296,7 +298,8 @@
                 ],
                 "threshold": [
                     0.8
-                ]
+                ],
+                "order_by": "Score"
             }
         },
         "action": {
@@ -338,7 +341,8 @@
                 ],
                 "threshold": [
                     0.8
-                ]
+                ],
+                "order_by": "Score"
             }
         },
         "action": {
@@ -417,7 +421,8 @@
                 ],
                 "threshold": [
                     0.8
-                ]
+                ],
+                "order_by": "Score"
             }
         },
         "action": {
@@ -459,7 +464,8 @@
                 ],
                 "threshold": [
                     0.8
-                ]
+                ],
+                "order_by": "Score"
             }
         },
         "action": {
@@ -501,7 +507,8 @@
                 ],
                 "threshold": [
                     0.8
-                ]
+                ],
+                "order_by": "Score"
             }
         },
         "action": {
@@ -543,7 +550,8 @@
                 ],
                 "threshold": [
                     0.8
-                ]
+                ],
+                "order_by": "Score"
             }
         },
         "action": {
@@ -585,7 +593,8 @@
                 ],
                 "threshold": [
                     0.93
-                ]
+                ],
+                "order_by": "Score"
             }
         },
         "action": {
@@ -706,7 +715,8 @@
                 ],
                 "threshold": [
                     0.9
-                ]
+                ],
+                "order_by": "Score"
             }
         },
         "action": {
@@ -747,7 +757,8 @@
                 ],
                 "threshold": [
                     0.9
-                ]
+                ],
+                "order_by": "Score"
             }
         },
         "action": {
@@ -889,7 +900,8 @@
                 ],
                 "threshold": [
                     0.8
-                ]
+                ],
+                "order_by": "Score"
             }
         },
         "action": {
@@ -930,8 +942,9 @@
                     "SHOP/RefinedCrystal_MS.png"
                 ],
                 "threshold": [
-                    0.7
-                ]
+                    0.8
+                ],
+                "order_by": "Score"
             }
         },
         "action": {
@@ -1153,7 +1166,8 @@
                 ],
                 "threshold": [
                     0.8
-                ]
+                ],
+                "order_by": "Score"
             }
         },
         "action": {

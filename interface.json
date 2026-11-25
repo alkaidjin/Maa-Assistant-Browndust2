@@ -103,7 +103,11 @@
     "task": [],
     "import": [
         "tasks/pretasks/LaunchGame.json",
-        "tasks/DailyAll.json",
+        "tasks/DailyDrawBag.json",
+        "tasks/DailyHarvest.json",
+        "tasks/QuickHunt.json",
+        "tasks/MirrorPVP.json",
+        "tasks/SeasonBattle.json",
         "tasks/RewardRoutine.json",
         "tasks/WeeklyTasks.json",
         "tasks/EvilCastle.json",

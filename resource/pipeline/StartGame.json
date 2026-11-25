@@ -3,48 +3,24 @@
         "$__mpe_code": {
             "prefix": "",
             "coordinateMode": "absolute-v1",
-            "lastSyncTime": 1794105767967,
+            "lastSyncTime": 1794797892686,
             "isModifiedExternally": false,
             "isDeleted": false,
             "filePath": "F:\\MABd2v26.09.5\\resource\\pipeline\\StartGame.json",
             "savedViewport": {
-                "x": 45,
-                "y": -933,
-                "zoom": 0.4
+                "x": 86,
+                "y": -1097,
+                "zoom": 0.58
             },
             "filename": "StartGame",
             "version": "v2.1.0"
         }
     },
-    "$__mpe_external_CorrectPVP_StartGame": {
-        "$__mpe_code": {
-            "position": {
-                "x": 342,
-                "y": 2987
-            }
-        }
-    },
-    "$__mpe_external_GoOut_StartGame": {
-        "$__mpe_code": {
-            "position": {
-                "x": 344,
-                "y": 2917
-            }
-        }
-    },
-    "$__mpe_external_Quit_StartGame": {
-        "$__mpe_code": {
-            "position": {
-                "x": 343,
-                "y": 2754
-            }
-        }
-    },
     "$__mpe_external_SeasonReward_StartGame": {
         "$__mpe_code": {
             "position": {
-                "x": 343,
-                "y": 2835
+                "x": 1300,
+                "y": 2534
             }
         }
     },
@@ -109,12 +85,13 @@
                     135
                 ],
                 "expected": ".*[SＳ][TＴ][AＡ].*",
-                "threshold": 0.4
+                "threshold": 0.6
             }
         },
         "action": {
             "type": "Click"
         },
+        "post_delay": 3000,
         "$__mpe_code": {
             "position": {
                 "x": 1328,
@@ -122,28 +99,27 @@
             }
         }
     },
-    "ClickContinue2": {
+    "CorrectWarcraft": {
         "recognition": {
-            "type": "TemplateMatch",
+            "type": "OCR",
             "param": {
                 "roi": [
-                    780,
-                    399,
-                    308,
-                    135
+                    750,
+                    500,
+                    250,
+                    100
                 ],
-                "template": "StartGame/continue.png",
-                "threshold": 0.4
+                "expected": ".*奖励.*",
+                "threshold": 0.7
             }
         },
         "action": {
             "type": "Click"
         },
-        "post_delay": 9000,
         "$__mpe_code": {
             "position": {
-                "x": 1329,
-                "y": 1335
+                "x": 1260,
+                "y": 3407
             }
         }
     },
@@ -198,7 +174,7 @@
         "action": {
             "type": "Click"
         },
-        "post_delay": 2000,
+        "post_delay": 3000,
         "$__mpe_code": {
             "position": {
                 "x": 1313,
@@ -219,11 +195,36 @@
                 "template": "StartGame/Shadow.png"
             }
         },
-        "post_delay": 6000,
+        "post_delay": 500,
+        "next": [
+            "PopupGuard1",
+            "EnterGame_2"
+        ],
         "$__mpe_code": {
             "position": {
-                "x": 1314,
-                "y": -347
+                "x": 1329,
+                "y": 1781
+            }
+        }
+    },
+    "EnterGame_2": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    495,
+                    45,
+                    310,
+                    475
+                ],
+                "template": "StartGame/Shadow.png"
+            }
+        },
+        "post_delay": 1500,
+        "$__mpe_code": {
+            "position": {
+                "x": 2140,
+                "y": 2035
             }
         }
     },
@@ -241,11 +242,11 @@
                 "threshold": 0.5
             }
         },
-        "pre_delay": 1500,
+        "pre_delay": 500,
         "action": {
             "type": "Click"
         },
-        "post_delay": 3000,
+        "post_delay": 1500,
         "$__mpe_code": {
             "position": {
                 "x": 761,
@@ -364,12 +365,45 @@
         "post_delay": 3000,
         "$__mpe_code": {
             "position": {
-                "x": 1010,
-                "y": 3002
+                "x": 1008,
+                "y": 3025
             }
         }
     },
-    "RejectAnnouncement": {
+    "PopupGuard1": {
+        "max_hit": 1,
+        "post_delay": 500,
+        "next": [
+            "[JumpBack]Cancle",
+            "[JumpBack]RejectAward_1",
+            "[JumpBack]RejectAnnouncement_1",
+            "[JumpBack]SevenDays_1",
+            "PopupGuard2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1612,
+                "y": 1778
+            }
+        }
+    },
+    "PopupGuard2": {
+        "post_delay": 500,
+        "next": [
+            "[JumpBack]Cancle",
+            "[JumpBack]RejectAward_1",
+            "[JumpBack]RejectAnnouncement_1",
+            "[JumpBack]SevenDays_1",
+            "EnterGame_2"
+        ],
+        "$__mpe_code": {
+            "position": {
+                "x": 1892,
+                "y": 1791
+            }
+        }
+    },
+    "RejectAnnouncement_1": {
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -380,7 +414,9 @@
                     20
                 ],
                 "template": "StartGame/AnnouncementRejectBottom.png",
-                "threshold": 0.5
+                "threshold": [
+                    0.6
+                ]
             }
         },
         "action": {
@@ -394,7 +430,7 @@
             }
         }
     },
-    "RejectAward": {
+    "RejectAward_1": {
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -405,7 +441,9 @@
                     30
                 ],
                 "template": "StartGame/AwardRejectBottom.png",
-                "threshold": 0.5
+                "threshold": [
+                    0.6
+                ]
             }
         },
         "action": {
@@ -506,8 +544,7 @@
             }
         }
     },
-    "SevenDays": {
-        "max_hit": 3,
+    "SevenDays_1": {
         "recognition": {
             "type": "OCR",
             "param": {
@@ -520,10 +557,9 @@
                 "expected": [
                     "7天内",
                     "不再",
-                    "显示",
-                    "7天内不再显示"
+                    "显示"
                 ],
-                "threshold": 0.5
+                "threshold": 0.6
             }
         },
         "action": {
@@ -535,39 +571,35 @@
                 ]
             }
         },
-        "post_delay": 1500,
+        "post_delay": 3000,
         "next": [
-            "WhetherSevenDaysTick",
-            "SevenDays"
+            "WhetherSevenDaysTick_1",
+            "SevenDays_1"
         ],
         "$__mpe_code": {
             "position": {
-                "x": 999,
-                "y": 2599
+                "x": 1005,
+                "y": 2635
             }
         }
     },
     "StartGame": {
         "next": [
-            "游戏维护公告",
             "[JumpBack]DownloadNewver",
             "[JumpBack]DownLoading",
             "[JumpBack]StartWaiting1",
             "[JumpBack]StartWaiting2",
-            "[JumpBack]ClickContinue",
-            "[JumpBack]ClickContinue2",
-            "EnterGame",
             "[JumpBack]Cancle",
-            "[JumpBack]RejectAward",
-            "[JumpBack]RejectAnnouncement",
-            "[JumpBack]SevenDays",
+            "[JumpBack]RejectAward_1",
+            "[JumpBack]RejectAnnouncement_1",
+            "[JumpBack]SevenDays_1",
+            "游戏维护公告",
+            "[JumpBack]ClickContinue",
+            "EnterGame",
             "[JumpBack]BackHome",
             "[JumpBack]InShadow",
             "[JumpBack]GoBack",
             "[JumpBack]GoBack2",
-            "[JumpBack]Quit",
-            "[JumpBack]GoOut",
-            "[JumpBack]CorrectPVP",
             "[JumpBack]PVPAward",
             "[JumpBack]SeasonReward",
             "[JumpBack]CorrectWarcraft"
@@ -598,7 +630,7 @@
                 "threshold": 0.5
             }
         },
-        "post_delay": 2000,
+        "post_delay": 3000,
         "$__mpe_code": {
             "position": {
                 "x": 1320,
@@ -623,7 +655,7 @@
                 "threshold": 0.5
             }
         },
-        "post_delay": 2000,
+        "post_delay": 3000,
         "$__mpe_code": {
             "position": {
                 "x": 1321,
@@ -720,7 +752,7 @@
             }
         }
     },
-    "WhetherSevenDaysTick": {
+    "WhetherSevenDaysTick_1": {
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -731,7 +763,9 @@
                     30
                 ],
                 "template": "StartGame/Tick.png",
-                "threshold": 0.5
+                "threshold": [
+                    0.6
+                ]
             }
         },
         "action": {
@@ -746,8 +780,8 @@
         "post_delay": 3000,
         "$__mpe_code": {
             "position": {
-                "x": 1286,
-                "y": 2602
+                "x": 1289,
+                "y": 2630
             }
         }
     },
@@ -763,41 +797,21 @@
                 ],
                 "expected": [
                     "定期维护",
-                    "棕色尘埃",
-                    "维护内容",
                     "无法登入",
                     "使用游戏"
                 ]
             }
         },
-        "$__mpe_code": {
-            "position": {
-                "x": 1289,
-                "y": 3011
-            }
-        }
-    },
-    "CorrectWarcraft": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    750,
-                    500,
-                    250,
-                    100
-                ],
-                "expected": ".*奖励.*",
-                "threshold": 0.7
-            }
-        },
         "action": {
-            "type": "Click"
+            "type": "Custom",
+            "param": {
+                "custom_action": "StopAll"
+            }
         },
         "$__mpe_code": {
             "position": {
-                "x": 1529,
-                "y": 3423
+                "x": 1320,
+                "y": 3032
             }
         }
     }

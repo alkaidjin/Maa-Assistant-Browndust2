@@ -62,7 +62,7 @@ BD2MAA 发布包构建工具
                见下方 check_version_json）；updater_cache.json（运行时缓存）；
                各文档正文里的历史叙述（v26.09.7 / v26.09.6 … 是事实，改了就是篡改历史）。
 """
-import os, sys, json, time, re, zipfile, hashlib, argparse, subprocess
+import os, sys, json, time, re, zipfile, hashlib, argparse, subprocess, html
 
 def _find_base():
     """定位项目根：从脚本所在目录逐级向上找「同时含 interface.json 与 MaaBd2.exe」的目录。
@@ -626,8 +626,19 @@ def check_verlog(base, version):
         return
     try:
         with zipfile.ZipFile(p) as z:
-            xml = z.read('xl/sharedStrings.xml').decode('utf-8', 'replace')
+            names = z.namelist()
+            xml = ''
+            if 'xl/sharedStrings.xml' in names:
+                xml += z.read('xl/sharedStrings.xml').decode('utf-8', 'replace')
+            # 有些 Excel / openpyxl 存的是「内联字符串」（工作表里的 <is><t>…</t></is>），
+            # 根本不生成 sharedStrings.xml。老实现只读 sharedStrings，于是这类表永远报
+            # 「There is no item named 'xl/sharedStrings.xml'」——检查形同虚设。
+            # 这里把工作表 XML 也一起扫，两种存法都能读出文本。
+            for n in names:
+                if n.startswith('xl/worksheets/') and n.endswith('.xml'):
+                    xml += z.read(n).decode('utf-8', 'replace')
         vals = re.findall(r'<t[^>]*>(.*?)</t>', xml, re.S)
+        vals = [html.unescape(v) for v in vals]
         vers = [v.strip() for v in vals if re.match(r'^v\d+\.\d+\.\d+', v.strip(), re.I)]
         latest = vers[-1] if vers else '（无）'
         if any(re.match(r'^v%s\b' % re.escape(version[1:]), v, re.I) for v in vers):
@@ -755,14 +766,22 @@ def check_retired(base, version=None):
             vgroups[str(key)] = paths
             rels += paths
     shipped = {r for _, r in collect(base)}
+    # 明确「永不派发」的路径（EXCLUDE_FILES 双匹配 + 裁剪的运行时二进制）：
+    # 这些文件即使还躺在维护者磁盘上，也不会被任何一个用户拿到，
+    # 因此 [R1] 的「一边派发一边删除」并不成立，不该报 [!]（否则每次打包都要人肉确认一遍）。
+    never_shipped = set(EXCLUDE_FILES) | set(PRUNED_BINARIES)
     problems = []
     log('  retired_files.json：常驻 %d 项%s（启动器会从用户目录里删掉这些）'
         % (len(rels) - sum(len(v) for v in vgroups.values()),
            ''.join(' + %s 一次性 %d 项' % (k, len(v)) for k, v in sorted(vgroups.items()))))
     for rel in rels:
         why = []
+        excl = rel in never_shipped or os.path.basename(rel) in never_shipped
         if os.path.exists(os.path.join(base, rel)):
-            why.append('磁盘上仍存在 → 会一边派发一边删除')
+            if excl:
+                log('    ..  %s：本机仍留有旧副本，但它被排除在包外（不会派发），无需处理' % rel)
+            else:
+                why.append('磁盘上仍存在 → 会一边派发一边删除')
         if rel in shipped:
             why.append('仍在打包清单里')
         rc, out = _git(base, 'log', '--all', '--diff-filter=A', '--format=%h', '--', rel)
@@ -861,6 +880,13 @@ def collect(base):
             # 隐藏状态文件，用户侧毫无用处；写死的名字清单挡不住它（打开哪个文档就生成哪个），
             # 所以按前缀统一排除。
             if fn.startswith('~$'):
+                continue
+            # 备份 / 临时文件一律不派发：维护者做破坏性改动前习惯 `cp` 一份
+            # （如 agent/go-service.exe.bak-20261112、resource/pipeline/StartGame.json.bak-20261112），
+            # 落在工作区里就会被 os.walk 原样扫进包 —— 实测 8.56 MB 的旧 exe 差点随包发布。
+            # 写死名字的排除清单挡不住它们（备份名带日期），所以按模式统一排除。
+            _low = fn.lower()
+            if '.bak' in _low or _low.endswith(('.orig', '.rej', '.tmp', '.swp', '.old')):
                 continue
             if os.path.splitext(fn)[1].lower() in EXCLUDE_EXT:
                 continue

@@ -1,0 +1,55 @@
+{
+    "task": [
+        {
+            "name": "DailyDrawBag",
+            "label": "日常-免费抽抽乐·分解装备·精炼装备",
+            "entry": "StartGame",
+            "description": "依次执行：每日免费抽抽乐（含装备抽）→ 分解装备 → 精炼装备。\n分解 = 一键强化 N/R/SR 未锁定装备并自动分解；精炼 = 精炼一次 18/19/20 分的装备（需装备仓库第一页可见）。\n由原「一条龙日常」按任务类型拆出，可与其余四个日常任务独立勾选、互不连坐。",
+            "controller": [
+                "Win32",
+                "Win32-Window",
+                "Win32-Front"
+            ],
+            "pipeline_override": {
+                "EnterGame_2": {
+                    "next": [
+                        "StartDraw",
+                        "StartBag",
+                        "DailyAllEnd"
+                    ]
+                },
+                "StartDraw": {
+                    "max_hit": 1
+                },
+                "StartBag": {
+                    "max_hit": 1
+                },
+                "抽卡任务结束": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】每日抽抽乐",
+                            "display": ["log"]
+                        }
+                    }
+                },
+                "AnalysisLast": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】分解装备",
+                            "display": ["log"]
+                        }
+                    }
+                },
+                "IntensifyMain": {
+                    "focus": {
+                        "Node.Action.Starting": {
+                            "content": "【完成】精炼装备",
+                            "display": ["log"]
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "option": {}
+}

@@ -2,7 +2,7 @@
     "task": [
         {
             "name": "赛季活动商店",
-            "label": "赛季活动商店购买",
+            "label": "赛季活动商店自动购买",
             "entry": "WarcraftShopSchedule",
             "description": "魔兽追踪者活动的商店购买。",
             "controller": [
